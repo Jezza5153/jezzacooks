@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CheckCircle } from 'lucide-react';
+import FreeDiagnosisForm from '@/components/free-diagnosis-form';
 
 const consultingTiers = [
   {
@@ -161,6 +162,19 @@ export default function PricingPage() {
           </TabsContent>
         </Tabs>
       </div>
+      <section className="py-16 md:py-24 bg-card">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+              <h2 className="font-headline text-3xl md:text-4xl font-bold">Free AI-Powered Diagnosis</h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                  Not sure where to start? Upload a photo of a dish, your menu, or even your storefront. Our AI will give you a quick analysis and three actionable suggestions to improve.
+              </p>
+          </div>
+          <div className="max-w-2xl mx-auto mt-12">
+              <FreeDiagnosisForm />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
