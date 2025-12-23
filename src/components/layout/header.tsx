@@ -13,7 +13,14 @@ import {
   BarChart3,
   MessageCircle,
   Home,
+  ChevronDown,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 type NavItem = {
   label: string;
@@ -26,7 +33,13 @@ const nav: NavItem[] = [
   { label: "Pricing", href: "/pricing", icon: BadgeEuro },
   { label: "Results", href: "/results", icon: BarChart3 },
   { label: "Insights", href: "/insights", icon: FileText },
-  { label: "Contact", href: "/contact", icon: MessageCircle },
+];
+
+const dropdownNav: NavItem[] = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
@@ -75,6 +88,23 @@ export default function Header() {
               </Link>
             );
           })}
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger className={cn(
+                  "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "hover:bg-card hover:text-foreground text-muted-foreground"
+                )}>
+              More
+              <ChevronDown className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {dropdownNav.map(item => (
+                <DropdownMenuItem key={item.href} asChild>
+                  <Link href={item.href}>{item.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
         {/* CTA */}
