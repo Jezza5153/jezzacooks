@@ -7,6 +7,7 @@ import PageHeader from "@/components/page-header";
 import { cn } from "@/lib/utils";
 
 export default function PricingPage() {
+
     const pricingTiers = [
         {
           title: "Quick Scan",
