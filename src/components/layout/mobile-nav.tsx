@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "next-intl";
-import { usePathname } from 'next-intl/client';
+import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import { Menu, X } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {

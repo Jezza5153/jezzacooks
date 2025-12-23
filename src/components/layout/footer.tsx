@@ -1,4 +1,4 @@
-import { Link } from "next-intl";
+import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { WHATSAPP_LINK } from "@/lib/config";
 import { useTranslations } from "next-intl";

@@ -1,5 +1,5 @@
 // app/pricing/page.tsx
-import { Link } from "next-intl";
+import Link from "next/link";
 import PageHeader from "@/components/page-header";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {

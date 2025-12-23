@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "next-intl";
+import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { WHATSAPP_LINK } from "@/lib/config";
 import { useIsMobile } from "@/hooks/use-mobile";
