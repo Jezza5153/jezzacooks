@@ -1,5 +1,5 @@
 import {getRequestConfig} from 'next-intl/server';
-
+ 
 // A list of all locales that are supported
 export const locales = ['en', 'nl'] as const;
 export type AppLocale = (typeof locales)[number];
