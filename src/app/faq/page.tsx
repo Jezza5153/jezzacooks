@@ -1,5 +1,5 @@
 import PageHeader from "@/components/page-header";
-import Link from "next/link";
+import { Link } from "next-intl";
 import {
   Accordion,
   AccordionContent,

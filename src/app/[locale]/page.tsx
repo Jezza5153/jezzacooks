@@ -6,11 +6,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { cn } from "@/lib/utils";
 
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-home');
 
@@ -110,12 +111,12 @@ export default function Home() {
             {t('heroSubtitle')}
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="font-semibold">
-              <Link href="/contact">{t('bookCall')}</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="font-semibold border-2">
-              <Link href="/pricing">{t('viewPricing')}</Link>
-            </Button>
+            <Link href="/contact" className={cn(buttonVariants({ size: "lg" }), "font-semibold")}>
+              {t('bookCall')}
+            </Link>
+            <Link href="/pricing" className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold border-2")}>
+              {t('viewPricing')}
+            </Link>
           </div>
         </div>
       </section>
@@ -146,11 +147,9 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">{service.description}</p>
-                  <Button variant="link" asChild className="p-0 font-semibold text-primary">
-                    <Link href={service.link}>
-                      {t('learnMore')} <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <Link href={service.link} className={cn(buttonVariants({ variant: "link" }), "p-0 font-semibold text-primary")}>
+                    {t('learnMore')} <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -198,9 +197,9 @@ export default function Home() {
                     <p className="text-sm text-muted-foreground/50">{t('directBookingNote')}</p>
                 </div>
             </div>
-            <Button asChild className="mt-12" variant="outline">
-                <Link href="/results">{t('seeMoreResults')}</Link>
-            </Button>
+            <Link href="/results" className={cn(buttonVariants({ variant: "outline" }), "mt-12")}>
+              {t('seeMoreResults')}
+            </Link>
         </div>
       </section>
 
@@ -229,17 +228,17 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <Button asChild className="w-full mt-6 font-semibold" variant={tier.price === 'Custom' ? 'default' : 'outline'}>
-                    <Link href={tier.href}>{tier.cta}</Link>
-                  </Button>
+                  <Link href={tier.href} className={cn(buttonVariants({ variant: tier.price === 'Custom' ? 'default' : 'outline' }), "w-full mt-6 font-semibold")}>
+                    {tier.cta}
+                  </Link>
                 </CardContent>
               </Card>
             ))}
           </div>
            <div className="text-center mt-8">
-            <Button variant="link" asChild>
-                <Link href="/pricing">{t('seeAllPackages')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
+            <Link href="/pricing" className={cn(buttonVariants({ variant: "link" }))}>
+              {t('seeAllPackages')} <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -249,9 +248,9 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">{t('ctaTitle')}</h2>
             <p className="mt-2 text-lg text-primary-foreground/80 max-w-2xl mx-auto">{t('ctaSubtitle')}</p>
-            <Button asChild size="lg" variant="secondary" className="mt-8 bg-foreground text-background hover:bg-foreground/80 font-bold">
-                <Link href="/contact">{t('getInTouch')}</Link>
-            </Button>
+            <Link href="/contact" className={cn(buttonVariants({ size: "lg", variant: "secondary" }), "mt-8 bg-foreground text-background hover:bg-foreground/80 font-bold")}>
+              {t('getInTouch')}
+            </Link>
         </div>
       </section>
 
@@ -274,9 +273,9 @@ export default function Home() {
             ))}
           </Accordion>
           <div className="text-center mt-8">
-            <Button variant="link" asChild>
-                <Link href="/faq">{t('moreQuestions')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
+            <Link href="/faq" className={cn(buttonVariants({ variant: "link" }))}>
+              {t('moreQuestions')} <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

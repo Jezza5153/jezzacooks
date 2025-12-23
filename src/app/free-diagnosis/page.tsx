@@ -1,9 +1,10 @@
 // app/free-diagnosis/page.tsx
 import { Link } from "next-intl";
 import PageHeader from "@/components/page-header";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import FreeDiagnosisForm from "@/components/free-diagnosis-form";
+import { cn } from "@/lib/utils";
 
 export default function FreeDiagnosisPage() {
   return (
@@ -34,9 +35,9 @@ export default function FreeDiagnosisPage() {
               </p>
 
               <div className="mt-5 flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg" className="font-semibold">
-                  <Link href="/contact?service=diagnosis">Book the Free Call</Link>
-                </Button>
+                <Link href="/contact?service=diagnosis" className={cn(buttonVariants({ size: "lg" }), "font-semibold")}>
+                  Book the Free Call
+                </Link>
                 <p className="sm:hidden text-center text-xs text-muted-foreground py-2">or fill the form below</p>
               </div>
 

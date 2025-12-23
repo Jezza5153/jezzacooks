@@ -1,9 +1,10 @@
 "use client";
 
 import { Link } from "next-intl";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { WHATSAPP_LINK } from "@/lib/config";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 const WhatsAppIcon = () => (
     <svg
@@ -29,11 +30,9 @@ export default function WhatsAppFAB() {
   }
 
   return (
-    <Button asChild size="icon" className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg md:hidden z-40 bg-green-500 hover:bg-green-600 text-white">
-      <Link href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-        <WhatsAppIcon />
-        <span className="sr-only">Chat on WhatsApp</span>
-      </Link>
-    </Button>
+    <Link href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ size: "icon" }), "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg md:hidden z-40 bg-green-500 hover:bg-green-600 text-white")}>
+      <WhatsAppIcon />
+      <span className="sr-only">Chat on WhatsApp</span>
+    </Link>
   );
 }

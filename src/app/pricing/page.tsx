@@ -1,7 +1,7 @@
 // app/pricing/page.tsx
 import { Link } from "next-intl";
 import PageHeader from "@/components/page-header";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Tier = {
   title: string;
@@ -218,21 +219,16 @@ function PricingGrid({ tiers }: { tiers: Tier[] }) {
           </CardContent>
 
           <CardFooter className="flex flex-col gap-3">
-            <Button
-              asChild
-              className="w-full font-semibold"
-              variant={tier.popular ? "default" : "outline"}
+            <Link
+              href={tier.href}
+              className={cn(buttonVariants({ variant: tier.popular ? 'default' : 'outline' }), "w-full font-semibold")}
             >
-              <Link href={tier.href}>{tier.cta}</Link>
-            </Button>
+              {tier.cta}
+            </Link>
             
-            <Button
-              asChild
-              className="w-full font-semibold"
-              variant={"link"}
-            >
-              <Link href="/free-diagnosis">Or start with a free diagnosis</Link>
-            </Button>
+            <Link href="/free-diagnosis" className={cn(buttonVariants({ variant: "link" }), "w-full font-semibold")}>
+              Or start with a free diagnosis
+            </Link>
 
           </CardFooter>
         </Card>

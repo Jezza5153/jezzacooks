@@ -1,6 +1,7 @@
 import { Link } from 'next-intl'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import PageHeader from '@/components/page-header'
+import { cn } from '@/lib/utils'
 
 export default function NotFound() {
   return (
@@ -11,9 +12,9 @@ export default function NotFound() {
         />
         <div className="container mx-auto px-4 py-16 md:py-24 text-center">
             <p className="text-lg text-muted-foreground mb-8">Let's get you back on track.</p>
-            <Button asChild size="lg">
-                <Link href="/">Return to Homepage</Link>
-            </Button>
+            <Link href="/" className={cn(buttonVariants({ size: "lg" }))}>
+              Return to Homepage
+            </Link>
         </div>
     </div>
   )

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { Link } from "next-intl";
+import { usePathname } from 'next-intl/client';
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -13,6 +14,7 @@ import {
 import { Logo } from "@/components/logo";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "../locale-switcher";
+import { cn } from "@/lib/utils";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,9 +61,9 @@ export function MobileNav() {
             </nav>
             <div className="flex flex-col gap-4">
             <LocaleSwitcher />
-            <Button asChild size="lg" className="w-full font-semibold" onClick={() => setIsOpen(false)}>
-                <Link href="/contact">{t('bookCall')}</Link>
-            </Button>
+            <Link href="/contact" className={cn(buttonVariants({ size: "lg" }), "w-full font-semibold")} onClick={() => setIsOpen(false)}>
+                {t('bookCall')}
+            </Link>
             </div>
         </div>
       </SheetContent>

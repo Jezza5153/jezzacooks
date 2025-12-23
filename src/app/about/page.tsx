@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Link } from "next-intl";
 import PageHeader from "@/components/page-header";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { cn } from "@/lib/utils";
 
 const aboutImage = PlaceHolderImages.find((p) => p.id === "about-jezza");
 
@@ -209,15 +210,9 @@ export default function AboutPage() {
             Book a free 15-minute call. If I can help, I’ll tell you exactly
             what I’d fix first.
           </p>
-
-          <Button
-            asChild
-            size="lg"
-            variant="secondary"
-            className="mt-8 bg-foreground text-background hover:bg-foreground/80 font-bold"
-          >
-            <Link href="/contact">Book Your Free Call</Link>
-          </Button>
+          <Link href="/contact" className={cn(buttonVariants({size: "lg", variant: "secondary"}), "mt-8 bg-foreground text-background hover:bg-foreground/80 font-bold")}>
+            Book Your Free Call
+          </Link>
 
           <p className="mt-4 text-sm text-primary-foreground/70">
             Prefer DM? Message me “SCAN” on Instagram and I’ll send you 3 quick
