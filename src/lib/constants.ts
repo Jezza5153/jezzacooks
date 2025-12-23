@@ -5,6 +5,7 @@ export const NAV_LINKS = [
   { href: "/results", label: "Results" },
   { href: "/insights", label: "Insights" },
   { href: "/about", label: "About" },
+  { href: "/free-diagnosis", label: "Free Diagnosis" },
 ];
 
 export const FOOTER_LINKS = {
@@ -13,6 +14,7 @@ export const FOOTER_LINKS = {
         { href: "/results", label: "Results" },
         { href: "/insights", label: "Insights" },
         { href: "/contact", label: "Contact" },
+        { href: "/free-diagnosis", label: "Free Diagnosis" },
     ],
     services: [
         { href: "/services/consulting", label: "Consulting" },
