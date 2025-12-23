@@ -2,6 +2,26 @@ import PageHeader from "@/components/page-header";
 import { ContactForm } from "@/components/contact-form";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, MessageSquare, Clock } from "lucide-react";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function ContactFormSkeleton() {
+  return (
+    <div className="space-y-6">
+      <Skeleton className="h-10 w-full" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+      </div>
+      <Skeleton className="h-36 w-full" />
+      <Skeleton className="h-10 w-24" />
+    </div>
+  )
+}
 
 export default function ContactPage() {
   return (
@@ -86,8 +106,9 @@ export default function ContactPage() {
                   include it in the form.
                 </p>
               </div>
-
-              <ContactForm />
+              <Suspense fallback={<ContactFormSkeleton />}>
+                <ContactForm />
+              </Suspense>
             </div>
 
             <p className="mt-4 text-xs text-muted-foreground text-center">
