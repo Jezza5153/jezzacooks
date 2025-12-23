@@ -1,37 +1,100 @@
-import { NextResponse } from 'next/server';
+// app/api/diagnosis/route.ts
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
-export async function POST(request: Request) {
-  try {
-    // In a real application, you would:
-    // 1. Get the form data, including the image file.
-    // const formData = await request.formData();
-    // const imageFile = formData.get('image') as File | null;
+export const runtime = "nodejs";
 
-    // if (!imageFile) {
-    //   return NextResponse.json({ error: 'No image file provided.' }, { status: 400 });
-    // }
+type Payload = {
+  name: string;
+  businessName: string;
+  city: string;
+  email: string;
+  phone?: string;
+  website?: string;
+  instagram?: string;
+  stage?: string;
+  biggestPain?: string;
+  revenueRange?: string;
+  menuLink?: string;
+  message: string;
+};
 
-    // 2. Convert the image to a format Genkit can use (e.g., base64 data URI).
-    // const imageBuffer = await imageFile.arrayBuffer();
-    // const imageBase64 = Buffer.from(imageBuffer).toString('base64');
-    // const imageDataUri = `data:${imageFile.type};base64,${imageBase64}`;
+function escapeHtml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
-    // 3. Call your Genkit flow with the image data.
-    // const analysisResult = await yourDiagnosisFlow({ photoDataUri: imageDataUri, description: "Restaurant asset" });
+export async function POST(req: Request) {
+  const body = (await req.json()) as Payload;
 
-    // 4. Return the analysis from the flow.
-    // return NextResponse.json({ analysis: analysisResult.diagnosis });
-
-    // For now, we return a placeholder response.
-    const mockAnalysis = "Based on the uploaded image, here are three suggestions:\n1. Improve lighting to make the dish look more appealing.\n2. Add a contrasting garnish to create more visual interest.\n3. Simplify the background to make the main subject stand out.";
-
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    return NextResponse.json({ analysis: mockAnalysis });
-
-  } catch (error) {
-    console.error('Diagnosis API error:', error);
-    return NextResponse.json({ error: 'Failed to process the diagnosis request.' }, { status: 500 });
+  if (!body?.name || !body?.businessName || !body?.city || !body?.email || !body?.message) {
+    return new NextResponse("Missing required fields", { status: 400 });
   }
+
+  const {
+    SMTP_HOST,
+    SMTP_PORT,
+    SMTP_USER,
+    SMTP_PASS,
+    TO_EMAIL,
+    FROM_EMAIL,
+  } = process.env;
+
+  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !TO_EMAIL) {
+    return new NextResponse(
+      "Email server not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, TO_EMAIL.",
+      { status: 500 }
+    );
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: Number(SMTP_PORT),
+    secure: Number(SMTP_PORT) === 465, // true for 465, false for 587/others
+    auth: {
+      user: SMTP_USER,
+      pass: SMTP_PASS,
+    },
+  });
+
+  const subject = `Free Diagnosis Request — ${body.businessName} (${body.city})`;
+
+  const html = `
+    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto; line-height: 1.5;">
+      <h2 style="margin:0 0 8px;">Free Diagnosis Request</h2>
+      <p style="margin:0 0 16px; color:#555;">Reply to: <b>${escapeHtml(body.email)}</b></p>
+
+      <table style="width:100%; border-collapse:collapse; margin: 12px 0;">
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Name</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.name)}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Business</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.businessName)}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>City</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.city)}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Phone</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.phone || "-")}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Stage</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.stage || "-")}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Biggest pain</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.biggestPain || "-")}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Revenue range</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.revenueRange || "-")}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Website</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.website || "-")}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Instagram</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.instagram || "-")}</td></tr>
+        <tr><td style="padding:8px; border:1px solid #eee;"><b>Menu link</b></td><td style="padding:8px; border:1px solid #eee;">${escapeHtml(body.menuLink || "-")}</td></tr>
+      </table>
+
+      <h3 style="margin:18px 0 8px;">Message</h3>
+      <div style="padding:12px; border:1px solid #eee; background:#fafafa; white-space:pre-wrap;">${escapeHtml(body.message)}</div>
+
+      <p style="margin:16px 0 0; color:#777; font-size:12px;">Sent from /pricing free diagnosis form.</p>
+    </div>
+  `;
+
+  await transporter.sendMail({
+    from: FROM_EMAIL || SMTP_USER,
+    to: TO_EMAIL,
+    replyTo: body.email,
+    subject,
+    html,
+  });
+
+  return NextResponse.json({ ok: true });
 }
