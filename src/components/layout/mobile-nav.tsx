@@ -13,22 +13,19 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/logo";
-import { useTranslations } from "next-intl";
-import LocaleSwitcher from "../locale-switcher";
 import { cn } from "@/lib/utils";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const t = useTranslations("Header");
 
   const navLinks = [
-    { href: "/", label: t('home') },
-    { href: "/services", label: t('services') },
-    { href: "/pricing", label: t('pricing') },
-    { href: "/results", label: t('results') },
-    { href: "/insights", label: t('insights') },
-    { href: "/about", label: t('about') },
-    { href: "/free-diagnosis", label: t('freeDiagnosis') },
+    { href: "/", label: 'Home' },
+    { href: "/services", label: 'Services' },
+    { href: "/pricing", label: 'Pricing' },
+    { href: "/results", label: 'Results' },
+    { href: "/insights", label: 'Insights' },
+    { href: "/about", label: 'About' },
+    { href: "/free-diagnosis", label: 'Free Diagnosis' },
   ];
 
   return (
@@ -61,9 +58,8 @@ export function MobileNav() {
             ))}
             </nav>
             <div className="flex flex-col gap-4">
-            <LocaleSwitcher />
             <Link href="/contact" className={cn(buttonVariants({ size: "lg" }), "w-full font-semibold")} onClick={() => setIsOpen(false)}>
-                {t('bookCall')}
+                Book a call
             </Link>
             </div>
         </div>

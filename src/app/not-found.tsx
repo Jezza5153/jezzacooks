@@ -1,8 +1,9 @@
 
-import Link from 'next/link';
+import { Link } from "next-intl";
 import { buttonVariants } from '@/components/ui/button'
 import PageHeader from '@/components/page-header'
 import { cn } from '@/lib/utils'
+import type React from 'react';
 
 export default function NotFound() {
   return (

@@ -1,19 +1,20 @@
 
+import ArticlePage from '@/components/articles/article-page';
 import type React from 'react';
-import { getRequestConfig } from 'next-intl/server';
- 
-// A list of all locales that are supported
-export const locales = ['en', 'nl'] as const;
-export type AppLocale = (typeof locales)[number];
- 
-export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
-  const safeLocale: AppLocale = locales.includes(locale as AppLocale)
-    ? (locale as AppLocale)
-    : 'en';
- 
-  return {
-    locale: safeLocale,
-    messages: (await import(`../../../messages/${safeLocale}.json`)).default
-  };
-});
+
+const article = {
+    title: "Prime Cost Explained for Chefs",
+    description: "A practical guide to understanding and controlling your restaurant's prime cost.",
+    image: "blog-prime-cost",
+    category: "Finance",
+    date: "June 11, 2024",
+    body: (
+        <>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+        </>
+    )
+}
+
+export default function PrimeCostExplainedPage() {
+    return <ArticlePage article={article} />
+}

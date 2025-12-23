@@ -1,19 +1,16 @@
 
-import type React from 'react';
-import { getRequestConfig } from 'next-intl/server';
- 
-// A list of all locales that are supported
-export const locales = ['en', 'nl'] as const;
-export type AppLocale = (typeof locales)[number];
- 
-export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
-  const safeLocale: AppLocale = locales.includes(locale as AppLocale)
-    ? (locale as AppLocale)
-    : 'en';
- 
-  return {
-    locale: safeLocale,
-    messages: (await import(`../../messages/${safeLocale}.json`)).default
-  };
-});
+import PageHeader from "@/components/page-header";
+import type React from "react";
+
+export default function TermsPage() {
+    return (
+        <div>
+            <PageHeader title="Terms of Service" />
+             <div className="container mx-auto px-4 py-16 md:py-24">
+                <div className="prose prose-invert prose-lg max-w-none">
+                    <p>Terms of service content...</p>
+                </div>
+            </div>
+        </div>
+    )
+}

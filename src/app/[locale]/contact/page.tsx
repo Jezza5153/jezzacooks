@@ -1,6 +1,7 @@
 
 import { ContactForm } from "@/components/contact-form";
 import PageHeader from "@/components/page-header";
+import type React from "react";
 
 export default function ContactPage() {
     return (

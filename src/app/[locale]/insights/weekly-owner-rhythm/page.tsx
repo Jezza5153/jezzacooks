@@ -1,19 +1,20 @@
 
+import ArticlePage from '@/components/articles/article-page';
 import type React from 'react';
-import { getRequestConfig } from 'next-intl/server';
- 
-// A list of all locales that are supported
-export const locales = ['en', 'nl'] as const;
-export type AppLocale = (typeof locales)[number];
- 
-export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
-  const safeLocale: AppLocale = locales.includes(locale as AppLocale)
-    ? (locale as AppLocale)
-    : 'en';
- 
-  return {
-    locale: safeLocale,
-    messages: (await import(`../../../messages/${safeLocale}.json`)).default
-  };
-});
+
+const article = {
+    title: "The Weekly Owner's Rhythm",
+    description: "A simple weekly schedule to stay in control of your restaurant without losing your mind.",
+    image: "blog-weekly-rhythm",
+    category: "Productivity",
+    date: "June 14, 2024",
+    body: (
+        <>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+        </>
+    )
+}
+
+export default function WeeklyOwnerRhythmPage() {
+    return <ArticlePage article={article} />
+}
