@@ -55,7 +55,7 @@ export default function TermsPage() {
           
           <h2 className="font-headline">Contact Us</h2>
           <p>
-            If you have any questions about these Terms of Service, please contact us at: [Your Email Address]
+            If you have any questions about these Terms of Service, please contact us at: info@jezzacooks.com
           </p>
         </div>
       </div>

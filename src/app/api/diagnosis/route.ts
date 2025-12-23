@@ -40,9 +40,10 @@ export async function POST(req: Request) {
     SMTP_PORT,
     SMTP_USER,
     SMTP_PASS,
-    TO_EMAIL,
     FROM_EMAIL,
   } = process.env;
+  
+  const TO_EMAIL = "info@jezzacooks.com"
 
   if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !TO_EMAIL) {
     return new NextResponse(

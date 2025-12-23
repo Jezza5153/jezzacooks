@@ -49,7 +49,7 @@ export default function PrivacyPage() {
 
           <h2 className="font-headline">Contact Us</h2>
           <p>
-            If you have questions or comments about this Privacy Policy, please contact us at: [Your Email Address]
+            If you have questions or comments about this Privacy Policy, please contact us at: info@jezzacooks.com
           </p>
         </div>
       </div>
