@@ -1,5 +1,7 @@
+
+import type React from "react";
 import Image from "next/image";
-import { Link } from "next-intl";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";

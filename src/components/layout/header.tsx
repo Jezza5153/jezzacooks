@@ -1,3 +1,4 @@
+
 // src/components/layout/header.tsx
 "use client";
 
@@ -102,5 +103,3 @@ export default function Header() {
     </header>
   );
 }
-
-    
