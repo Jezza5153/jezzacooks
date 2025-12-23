@@ -1,17 +1,29 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from "next-intl/link";
+import { usePathname } from "next-intl/client";
 import { Button } from "@/components/ui/button";
-import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { useEffect, useState } from "react";
+import LocaleSwitcher from "../locale-switcher";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const t = useTranslations('Header');
+
+  const navLinks = [
+    { href: "/", label: t('home') },
+    { href: "/services", label: t('services') },
+    { href: "/pricing", label: t('pricing') },
+    { href: "/results", label: t('results') },
+    { href: "/insights", label: t('insights') },
+    { href: "/about", label: t('about') },
+    { href: "/free-diagnosis", label: t('freeDiagnosis') },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,8 +43,8 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           <Logo />
-          <nav className="hidden md:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
+          <nav className="hidden lg:flex items-center gap-6">
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -45,12 +57,13 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
+            <LocaleSwitcher />
             <Button asChild className="font-semibold">
-              <Link href="/contact">Book a call</Link>
+              <Link href="/contact">{t('bookCall')}</Link>
             </Button>
           </div>
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <MobileNav />
           </div>
         </div>

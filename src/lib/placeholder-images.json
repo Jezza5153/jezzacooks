@@ -3,85 +3,85 @@
     {
       "id": "hero-home",
       "description": "A chef plating a dish in a professional kitchen",
-      "imageUrl": "https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjaGVmJTIwa2l0Y2hlbnxlbnwwfHx8fDE3NjY0OTA4OTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/hero-home.jpg",
       "imageHint": "chef kitchen"
     },
     {
       "id": "service-consulting",
       "description": "A notepad with charts and notes about restaurant business",
-      "imageUrl": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxidXNpbmVzcyUyMHBsYW5uaW5nfGVufDB8fHx8MTc2NjQ4ODkxNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/service-consulting.jpg",
       "imageHint": "business planning"
     },
     {
       "id": "service-catering",
       "description": "A beautifully set table for a private dinner event",
-      "imageUrl": "https://images.unsplash.com/photo-1547573854-74d2a71d0826?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkaW5uZXIlMjBwYXJ0eXxlbnwwfHx8fDE3NjY1MTI5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/service-catering.jpg",
       "imageHint": "dinner party"
     },
     {
       "id": "service-websites",
       "description": "A person using a laptop showing a restaurant website",
-      "imageUrl": "https://images.unsplash.com/photo-1730993872148-83acdfb597e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsYXB0b3AlMjB3ZWJzaXRlfGVufDB8fHx8MTc2NjUxMjk3NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/service-websites.jpg",
       "imageHint": "laptop website"
     },
     {
       "id": "about-jezza",
       "description": "Portrait of a friendly and confident chef",
-      "imageUrl": "https://images.unsplash.com/photo-1574641264510-d656942d6380?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVmJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzY2NDI3MDA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/about-jezza.jpg",
       "imageHint": "chef portrait"
     },
     {
       "id": "result-1-after",
       "description": "A clean, organized, and efficient professional kitchen",
-      "imageUrl": "https://images.unsplash.com/photo-1556911220-bff31c812dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjbGVhbiUyMGtpdGNoZW58ZW58MHx8fHwxNzY2NTEyOTczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/result-1-after.jpg",
       "imageHint": "clean kitchen"
     },
     {
       "id": "result-2-after",
       "description": "A barista calmly making coffee",
-      "imageUrl": "https://images.unsplash.com/photo-1511920183353-3c9c9b062c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjYWxtJTIwYmFyaXN0YXxlbnwwfHx8fDE3NjY1MTU0ODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/result-2-after.jpg",
       "imageHint": "calm barista"
     },
     {
       "id": "result-3-after",
       "description": "A user booking a room on a hotel website on a laptop",
-      "imageUrl": "https://images.unsplash.com/photo-1611048264355-a6a8c2f08e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib29raW5nJTIwaG90ZWx8ZW58MHx8fHwxNzY2NTE1NzEwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/result-3-after.jpg",
       "imageHint": "booking hotel"
     },
     {
       "id": "blog-pillar",
       "description": "A consultant talking to a restaurant owner",
-      "imageUrl": "https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxidXNpbmVzcyUyMG1lZXRpbmd8ZW58MHx8fHwxNzY2NDY1MDc3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/blog-pillar.jpg",
       "imageHint": "business meeting"
     },
     {
       "id": "blog-prime-cost",
       "description": "A chef calculating costs on a calculator with receipts",
-      "imageUrl": "https://images.unsplash.com/photo-1554224155-8d04421cd67d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYWxjdWxhdGluZyUyMGNvc3RzfGVufDB8fHx8MTc2NjU4NjI4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/blog-prime-cost.jpg",
       "imageHint": "calculating costs"
     },
     {
       "id": "blog-menu-engineering",
       "description": "A restaurant menu with notes and highlights",
-      "imageUrl": "https://images.unsplash.com/photo-1549007953-623e19d9c158?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwbWVudXxlbnwwfHx8fDE3NjY1ODYzMDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/blog-menu-engineering.jpg",
       "imageHint": "restaurant menu"
     },
     {
       "id": "blog-service-system",
       "description": "Waitstaff in a busy but organized restaurant",
-      "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxidXN5JTIwcmVzdGF1cmFudHxlbnwwfHx8fDE3NjY1ODYzMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/blog-service-system.jpg",
       "imageHint": "busy restaurant"
     },
     {
       "id": "blog-booking-site",
       "description": "A laptop showing a clean website design",
-      "imageUrl": "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzbWlsZXxlbnwwfHx8fDE3NjY1ODYzNDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/blog-booking-site.jpg",
       "imageHint": "clean website"
     },
     {
       "id": "blog-weekly-rhythm",
       "description": "A calendar with weekly appointments marked",
-      "imageUrl": "https://images.unsplash.com/photo-1563291074-2c841aa7676a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYWxlbmRhcnxlbnwwfHx8fDE3NjY1ODYzNTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/blog-weekly-rhythm.jpg",
       "imageHint": "calendar"
     }
   ]
