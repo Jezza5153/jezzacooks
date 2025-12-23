@@ -1,10 +1,30 @@
-import Link from "next/link";
+import { Link } from "next-intl";
 import { Logo } from "@/components/logo";
-import { FOOTER_LINKS } from "@/lib/constants";
 import { WHATSAPP_LINK } from "@/lib/config";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
   const year = new Date().getFullYear();
+
+  const footerLinks = {
+    company: [
+      { href: "/about", label: t("about") },
+      { href: "/results", label: t("results") },
+      { href: "/insights", label: t("insights") },
+      { href: "/contact", label: t("contact") },
+      { href: "/free-diagnosis", label: t("freeDiagnosis") },
+    ],
+    services: [
+      { href: "/services/consulting", label: t("consulting") },
+      { href: "/services/catering", label: t("catering") },
+      { href: "/services/websites", label: t("websites") },
+    ],
+    legal: [
+      { href: "/privacy", label: t("privacyPolicy") },
+      { href: "/terms", label: t("termsOfService") },
+    ],
+  };
 
   return (
     <footer className="bg-card border-t border-border">
@@ -14,19 +34,31 @@ export default function Footer() {
           <div className="md:col-span-4 lg:col-span-2">
             <Logo />
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
-              Chef-led growth for hospitality. No poeha, just results.
+              {t("tagline")}
             </p>
             <div className="mt-6 space-x-4">
-              <a href="mailto:info@jezzacooks.com" className="text-muted-foreground hover:text-primary">info@jezzacooks.com</a>
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">WhatsApp</a>
+              <a
+                href="mailto:info@jezzacooks.com"
+                className="text-muted-foreground hover:text-primary"
+              >
+                info@jezzacooks.com
+              </a>
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary"
+              >
+                WhatsApp
+              </a>
             </div>
           </div>
 
           {/* Column 2: Company */}
           <div>
-            <h3 className="font-semibold text-foreground">Company</h3>
+            <h3 className="font-semibold text-foreground">{t("company")}</h3>
             <ul className="mt-4 space-y-2">
-              {FOOTER_LINKS.company.map((link) => (
+              {footerLinks.company.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -41,9 +73,9 @@ export default function Footer() {
 
           {/* Column 3: Services */}
           <div>
-            <h3 className="font-semibold text-foreground">Services</h3>
+            <h3 className="font-semibold text-foreground">{t("services")}</h3>
             <ul className="mt-4 space-y-2">
-              {FOOTER_LINKS.services.map((link) => (
+              {footerLinks.services.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -58,9 +90,9 @@ export default function Footer() {
 
           {/* Column 4: Legal */}
           <div>
-            <h3 className="font-semibold text-foreground">Legal</h3>
+            <h3 className="font-semibold text-foreground">{t("legal")}</h3>
             <ul className="mt-4 space-y-2">
-              {FOOTER_LINKS.legal.map((link) => (
+              {footerLinks.legal.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -75,9 +107,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>
-            © {year} JEZZA COOKS. All rights reserved. KvK: 12345678.
-          </p>
+          <p>{t("copyright", { year })}</p>
         </div>
       </div>
     </footer>

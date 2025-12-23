@@ -17,8 +17,9 @@ const inter = Inter({
 
 const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  display: 'swap',
   variable: '--font-fraunces',
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

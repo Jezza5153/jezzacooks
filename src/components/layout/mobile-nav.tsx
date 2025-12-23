@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import Link from "next-intl/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,11 +10,23 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { NAV_LINKS } from "@/lib/constants";
 import { Logo } from "@/components/logo";
+import { useTranslations } from "next-intl";
+import LocaleSwitcher from "../locale-switcher";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("Header");
+
+  const navLinks = [
+    { href: "/", label: t('home') },
+    { href: "/services", label: t('services') },
+    { href: "/pricing", label: t('pricing') },
+    { href: "/results", label: t('results') },
+    { href: "/insights", label: t('insights') },
+    { href: "/about", label: t('about') },
+    { href: "/free-diagnosis", label: t('freeDiagnosis') },
+  ];
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -34,7 +46,7 @@ export function MobileNav() {
         </SheetHeader>
         <div className="flex flex-col h-full py-8">
             <nav className="flex flex-col items-center justify-center flex-grow gap-6">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
                 <Link
                 key={link.href}
                 href={link.href}
@@ -46,8 +58,9 @@ export function MobileNav() {
             ))}
             </nav>
             <div className="flex flex-col gap-4">
+            <LocaleSwitcher />
             <Button asChild size="lg" className="w-full font-semibold" onClick={() => setIsOpen(false)}>
-                <Link href="/contact">Book a call</Link>
+                <Link href="/contact">{t('bookCall')}</Link>
             </Button>
             </div>
         </div>

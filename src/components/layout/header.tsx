@@ -1,17 +1,19 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-intl";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { NAV_LINKS } from "@/lib/constants";
 import { Logo } from "@/components/logo";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { useEffect, useState } from "react";
+import LocaleSwitcher from "../locale-switcher";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const t = useTranslations("Header");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +22,16 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navLinks = [
+    { href: "/", label: t('home') },
+    { href: "/services", label: t('services') },
+    { href: "/pricing", label: t('pricing') },
+    { href: "/results", label: t('results') },
+    { href: "/insights", label: t('insights') },
+    { href: "/about", label: t('about') },
+    { href: "/free-diagnosis", label: t('freeDiagnosis') },
+  ];
 
   return (
     <header
@@ -32,13 +44,13 @@ export default function Header() {
         <div className="flex h-20 items-center justify-between">
           <Logo />
           <nav className="hidden lg:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === link.href ? "text-primary" : "text-muted-foreground"
+                  pathname.endsWith(link.href) ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 {link.label}
@@ -46,8 +58,9 @@ export default function Header() {
             ))}
           </nav>
           <div className="hidden lg:flex items-center gap-4">
+            <LocaleSwitcher />
             <Button asChild className="font-semibold">
-              <Link href="/contact">Book a call</Link>
+              <Link href="/contact">{t('bookCall')}</Link>
             </Button>
           </div>
           <div className="lg:hidden">
