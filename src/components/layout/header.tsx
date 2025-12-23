@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next-intl/link";
-import { usePathname } from "next-intl/client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
@@ -33,6 +33,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // A helper function to check if the link is active
+  const isLinkActive = (href: string) => {
+    // For the home page, we check for exact match.
+    if (href === "/") {
+        // The pathname for the root will be /en or /nl, not just /
+        return pathname === "/en" || pathname === "/nl";
+    }
+    // For other links, we check if the pathname starts with the href.
+    // This accounts for nested routes. e.g. /services/consulting is active for /services
+    return pathname.startsWith(href);
+  };
+
   return (
     <header
       className={cn(
@@ -50,7 +62,7 @@ export default function Header() {
                 href={link.href}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === link.href ? "text-primary" : "text-muted-foreground"
+                  isLinkActive(link.href) ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 {link.label}
