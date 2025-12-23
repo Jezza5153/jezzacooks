@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-intl";
 import PageHeader from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";

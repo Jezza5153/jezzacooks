@@ -1,6 +1,6 @@
 // app/insights/prime-cost-explained/page.tsx
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";

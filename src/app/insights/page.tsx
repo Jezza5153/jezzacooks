@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import PageHeader from "@/components/page-header";
 import {
@@ -172,16 +172,16 @@ export default function InsightsPage() {
             Book a free 15-minute call—or DM “SCAN” on Instagram and I’ll send you 3 quick wins.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact" className="w-full sm:w-auto">
-              <span className="inline-flex w-full sm:w-auto items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">
-                Book a Free Call
-              </span>
-            </Link>
-            <Link href="/services/consulting" className="w-full sm:w-auto">
-              <span className="inline-flex w-full sm:w-auto items-center justify-center rounded-md border border-border bg-background px-6 py-3 text-sm font-semibold hover:bg-card">
-                See Consulting
-              </span>
-            </Link>
+            <Button asChild>
+                <Link href="/contact">
+                    Book a Free Call
+                </Link>
+            </Button>
+            <Button asChild variant="secondary">
+                <Link href="/services/consulting">
+                    See Consulting
+                </Link>
+            </Button>
           </div>
         </div>
       </div>
