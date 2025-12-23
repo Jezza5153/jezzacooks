@@ -1,5 +1,5 @@
 
-import { Link } from "next-intl";
+import Link from "next/link";
 import { buttonVariants } from '@/components/ui/button'
 import PageHeader from '@/components/page-header'
 import { cn } from '@/lib/utils'

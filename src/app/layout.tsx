@@ -20,12 +20,11 @@ export const metadata: Metadata = {
     "Consulting, catering, and hospitality websites that convert — no poeha, just results.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en" className="dark">
       <body

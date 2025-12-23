@@ -18,72 +18,72 @@ export default function Home() {
 
   const services = [
     {
-      title: 'Restaurant Consulting',
-      description: 'Fine-tune your operations for better margins and smoother service.',
+      title: "Restaurant Consulting",
+      description: "Fine-tune your operations for better margins and smoother service.",
       link: "/services/consulting",
       image: PlaceHolderImages.find(p => p.id === 'service-consulting'),
     },
     {
-      title: 'Catering & Private Chef',
-      description: 'Unforgettable dining experiences, tailored to your event.',
+      title: "Catering & Private Chef",
+      description: "Unforgettable dining experiences, tailored to your event.",
       link: "/services/catering",
       image: PlaceHolderImages.find(p => p.id === 'service-catering'),
     },
     {
-      title: 'Hospitality Websites',
-      description: 'Convert visitors into bookings with a site built by a chef.',
+      title: "Hospitality Websites",
+      description: "Convert visitors into bookings with a site built by a chef.",
       link: "/services/websites",
       image: PlaceHolderImages.find(p => p.id === 'service-websites'),
     },
   ];
 
   const benefits = [
-    'Increase your profit margins',
-    'Smoother, more efficient operations',
-    'A menu that sells and delights',
-    'Stronger brand that attracts guests',
-    'More direct bookings, less fees',
+    "Increase your profit margins",
+    "Smoother, more efficient operations",
+    "A menu that sells and delights",
+    "Stronger brand that attracts guests",
+    "More direct bookings, less fees",
   ];
 
   const pricingTiers = [
     {
-      title: 'Quick Scan',
-      price: '€ 495',
-      description: 'A 90-min deep-dive to identify your 3 biggest growth levers.',
-      features: ['Review of your choice (Menu, P&L, etc.)', 'Actionable priority list', '1-month WhatsApp support'],
-      cta: 'Book a Scan',
+      title: "Quick Scan",
+      price: "€ 495",
+      description: "A 90-min deep-dive to identify your 3 biggest growth levers.",
+      features: ["Review of your choice (Menu, P&L, etc.)", "Actionable priority list", "1-month WhatsApp support"],
+      cta: "Book a Scan",
       href: "/contact?service=consulting&package=scan"
     },
     {
-      title: 'Day Rate',
-      price: '€ 1200',
-      description: 'A full day on-site to tackle your most pressing challenges.',
-      features: ['On-site observation', 'Hands-on team training', 'SOP development', 'Follow-up report'],
-       cta: 'Book a Day',
+      title: "Day Rate",
+      price: "€ 1200",
+      description: "A full day on-site to tackle your most pressing challenges.",
+      features: ["On-site observation", "Hands-on team training", "SOP development", "Follow-up report"],
+       cta: "Book a Day",
        href: "/contact?service=consulting&package=day"
     },
     {
-      title: 'Retainer',
-      price: 'Custom',
-      description: 'Ongoing partnership for continuous growth and support.',
-      features: ['Weekly KPI check-ins', 'Menu iteration & costing', 'Marketing & brand support', 'Priority access'],
-      cta: 'Let\'s Talk',
+      title: "Retainer",
+      price: "Custom",
+      description: "Ongoing partnership for continuous growth and support.",
+      features: ["Weekly KPI check-ins", "Menu iteration & costing", "Marketing & brand support", "Priority access"],
+      cta: "Let's Talk",
       href: "/contact?service=consulting&package=retainer"
     },
   ];
 
   const faqs = [
       {
-          question: 'What does \'no poeha\' mean?',
-          answer: 'It\'s Dutch for \'no fuss\' or \'no nonsense\'. My approach is direct, practical, and focused on tangible results. We skip the jargon and get straight to what works for your business.',
+          question: "What does 'no poeha' mean?",
+          answer: "It's Dutch for 'no fuss' or 'no nonsense'. My approach is direct, practical, and focused on tangible results. We skip the jargon and get straight to what works for your business.",
       },
       {
-          question: 'I\'m just starting out. Can you help?',
-          answer: 'Absolutely. I help new restaurants and hospitality concepts build a strong foundation from day one, covering everything from menu engineering to operational workflows and a booking-focused website.',
+          question: "I'm just starting out. Can you help?",
+          answer: "Absolutely. I help new restaurants and hospitality concepts build a strong foundation from day one, covering everything from menu engineering to operational workflows and a booking-focused website.",
       },
       {
-          question: 'How are you different from a regular business consultant?',
-          answer: 'I\'m a chef first. I\'ve run the pass, managed inventory, and dealt with the day-to-day chaos of hospitality. My advice is grounded in real-world kitchen and front-of-house experience, not just spreadsheets.',
+          question: "How are you different from a regular business consultant?",
+          answer: "I'm a chef first. I've run the pass, managed inventory, and dealt with the day-to-day chaos of hospitality. My advice is grounded in real-world kitchen and front-of-house experience, not just spreadsheets.",
       }
   ]
   return (
