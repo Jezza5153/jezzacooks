@@ -4,30 +4,47 @@ import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
 
-const pillarImage = PlaceHolderImages.find(p => p.id === 'blog-pillar');
+const pillarImage = PlaceHolderImages.find((p) => p.id === "blog-pillar");
 
 export default function PillarArticlePage() {
   return (
     <div>
+      {/* HERO */}
       <header className="relative py-24 md:py-32 bg-card">
         <div className="container mx-auto px-4 z-10 relative">
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="outline">Ultimate Guide</Badge>
+
             <h1 className="font-headline text-4xl md:text-5xl font-bold mt-4">
               What Is a Restaurant Consultant?
             </h1>
+
             <p className="mt-4 text-lg text-muted-foreground">
-              A chef's no-nonsense guide to what a restaurant consultant does, when to hire one, and how to get your money's worth.
+              A chef-led, real-world guide to what consultants do, when to hire
+              one, and how to get measurable results (without the corporate
+              fluff).
             </p>
-            <p className="mt-4 text-sm text-muted-foreground">Published: July 2024 · 8 min read</p>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+              <Badge variant="secondary">Consulting</Badge>
+              <Badge variant="outline">Margins</Badge>
+              <Badge variant="outline">Systems</Badge>
+              <Badge variant="outline">Guest Experience</Badge>
+            </div>
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              Updated: 2025 · ~10 min read
+            </p>
           </div>
         </div>
       </header>
-      
+
+      {/* ARTICLE */}
       <article className="container mx-auto px-4 py-16 md:py-24">
         <div className="prose prose-invert prose-lg max-w-3xl mx-auto">
+          {/* FEATURE IMAGE */}
           {pillarImage && (
-            <div className="relative aspect-video rounded-lg overflow-hidden not-prose mb-12">
+            <div className="relative aspect-video rounded-lg overflow-hidden not-prose mb-10 border border-border bg-card">
               <Image
                 src={pillarImage.imageUrl}
                 alt={pillarImage.description}
@@ -38,104 +55,287 @@ export default function PillarArticlePage() {
             </div>
           )}
 
+          {/* QUICK TAKE */}
+          <div className="not-prose mb-10 rounded-lg border border-border bg-card p-6">
+            <p className="text-sm text-muted-foreground mb-2">Quick definition</p>
+            <p className="text-base">
+              A <b>restaurant consultant</b> helps owners fix specific problems in
+              operations, margins, menu strategy, team performance, and guest
+              experience—by building systems you can actually run in real service.
+            </p>
+
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+              <div className="rounded-md border border-border bg-background/40 p-3">
+                <p className="font-semibold">Best for</p>
+                <p className="text-muted-foreground mt-1">
+                  Good food, messy execution, weak cashflow.
+                </p>
+              </div>
+              <div className="rounded-md border border-border bg-background/40 p-3">
+                <p className="font-semibold">Not for</p>
+                <p className="text-muted-foreground mt-1">
+                  People wanting theory, ego, or generic templates.
+                </p>
+              </div>
+              <div className="rounded-md border border-border bg-background/40 p-3">
+                <p className="font-semibold">Outcome</p>
+                <p className="text-muted-foreground mt-1">
+                  Clarity → structure → measurable improvement.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* INTRO */}
           <p>
-            You see the term everywhere: "restaurant consultant." It sounds official, expensive, and maybe a little vague. As a chef who has become one, I get it. You're busy running a service, managing staff, and trying to keep food costs from exploding. The last thing you need is a suit telling you how to run your business based on a textbook.
+            You see the term everywhere: “restaurant consultant.” It sounds
+            expensive, vague, and a bit like someone in a suit will walk in and
+            tell you how to do your job.
           </p>
 
           <p>
-            But a good consultant isn't a suit. They're a specialist—a partner with a specific skillset to solve a specific problem. This guide will break down what we actually do, in plain English, so you can decide if it's the right move for your restaurant.
-          </p>
-          
-          <h2 className="font-headline">Why Do Restaurant Consultants Even Exist?</h2>
-          <p>
-            Restaurants operate on razor-thin margins. A few percentage points on your food cost or a slight dip in weekly covers can be the difference between profit and loss. Consultants exist to find and fix the leaks in your ship. We exist because it's nearly impossible to be an expert in everything—cooking, finance, marketing, HR, and technology—while also running the day-to-day.
+            A good consultant isn’t a suit. A good consultant is a specialist:
+            someone who helps you find the leaks, build structure, and make the
+            business run smoother—while protecting standards.
           </p>
 
-          <h2 className="font-headline">The 5 Core Areas a Good Consultant Tackles</h2>
           <p>
-            Most restaurant challenges fall into one of these five buckets. A consultant will typically specialize in one or two, but have working knowledge of all.
+            This guide breaks down what consultants actually do (in plain
+            English), when you should hire one, and how to make sure you get
+            real value for your money.
           </p>
-          
-          <h3 className="font-headline">1. Financial Health & Profitability</h3>
+
+          {/* SECTION: WHY */}
+          <h2 className="font-headline">Why do restaurant consultants exist?</h2>
+
           <p>
-            This is the big one. It's not just about looking at your P&L. It's about dissecting it.
+            Hospitality is brutal because everything happens at once: guests,
+            staff, suppliers, prep, service, reviews, and cashflow. Margins are
+            thin and mistakes are expensive.
+          </p>
+
+          <p>
+            Consultants exist because most owners are forced to be experts in
+            everything—while also running daily service. That’s not sustainable.
+            A consultant helps you zoom out, spot the real bottleneck, and build
+            a system that holds up on a Saturday night.
+          </p>
+
+          {/* SECTION: CORE AREAS */}
+          <h2 className="font-headline">The 5 core areas a strong consultant tackles</h2>
+
+          <p>
+            Most restaurant problems fall into a few buckets. A consultant might
+            specialize, but the best ones understand how everything connects.
+          </p>
+
+          <h3 className="font-headline">1) Margins & financial control</h3>
+          <p>
+            This is where most “good food / bad cashflow” stories live. We don’t
+            just look at numbers—we translate them into decisions your team can
+            execute.
           </p>
           <ul>
-            <li><strong>Menu Engineering & Costing:</strong> Analyzing your sales mix (what sells vs. what doesn't) against the food cost and margin of each dish. We identify your stars, puzzles, plowhorses, and dogs, then re-engineer your menu to maximize profit.</li>
-            <li><strong>Prime Cost Analysis:</strong> Your prime cost (Total Cost of Goods Sold + Total Labor Cost) should ideally be under 60%. We find where the money is going and create systems to control it.</li>
-            <li><strong>Budgeting & Forecasting:</strong> Creating realistic financial targets and a roadmap to hit them.</li>
+            <li>
+              <strong>Menu engineering:</strong> sales mix vs margin (what sells, what
+              earns, what needs fixing).
+            </li>
+            <li>
+              <strong>Food cost leak hunt:</strong> purchasing, portioning, waste,
+              comped items, and prep discipline.
+            </li>
+            <li>
+              <strong>Prime cost thinking:</strong> food + labor, and how to control it
+              without killing quality.
+            </li>
           </ul>
 
-          <h3 className="font-headline">2. Operations & Efficiency</h3>
+          <h3 className="font-headline">2) Operations & flow</h3>
           <p>
-            This is about making service smoother, less stressful, and more consistent.
+            Smooth service isn’t luck. It’s design. We remove friction so your
+            team can execute consistently.
           </p>
           <ul>
-            <li><strong>Kitchen Workflow (Mise en Place):</strong> Designing station setups and prep schedules that prevent bottlenecks during service. The goal is speed and consistency.</li>
-            <li><strong>Standard Operating Procedures (SOPs):</strong> Documenting everything from opening checklists to the recipe for your signature sauce. SOPs are the backbone of a scalable, consistent business.</li>
-            <li><strong>Inventory Management:</strong> Implementing systems (from simple spreadsheets to dedicated software) to reduce waste, prevent theft, and ensure you never 86 a key item on a Saturday night.</li>
+            <li>
+              <strong>Prep structure:</strong> who does what, when, and in what order.
+            </li>
+            <li>
+              <strong>Station setup:</strong> reduce bottlenecks and ticket panic.
+            </li>
+            <li>
+              <strong>SOPs:</strong> simple checklists that prevent “we forgot…” moments.
+            </li>
           </ul>
 
-          <h3 className="font-headline">3. Menu & Concept Development</h3>
+          <h3 className="font-headline">3) Menu & concept clarity</h3>
           <p>
-            Your menu is your single most important marketing tool.
+            Your menu is product + marketing in one. If your menu is confusing,
+            your guests feel it—and your margins suffer.
           </p>
           <ul>
-            <li><strong>Concept Refinement:</strong> Ensuring your menu, decor, service style, and price point all tell the same cohesive story.</li>
-            <li><strong>Supplier Sourcing & Negotiation:</strong> Finding the best quality ingredients for the best price.</li>
-            <li><strong>Recipe Development & Testing:</strong> Creating new, profitable, and "brand-right" dishes that your team can execute consistently.</li>
+            <li>
+              <strong>Concept alignment:</strong> menu, price point, vibe, and service style
+              telling one story.
+            </li>
+            <li>
+              <strong>Recipe standardization:</strong> consistent execution with clear specs.
+            </li>
+            <li>
+              <strong>Supplier strategy:</strong> quality/price balance and smarter purchasing.
+            </li>
           </ul>
 
-          <h3 className="font-headline">4. Team & Training</h3>
+          <h3 className="font-headline">4) Team, training & leadership</h3>
           <p>
-            Your staff delivers the guest experience. Investing in them is non-negotiable.
+            The guest experience is delivered by people. Systems are useless if
+            the team can’t run them.
           </p>
           <ul>
-            <li><strong>Hiring & Onboarding:</strong> Creating a process to attract and retain the right people.</li>
-            <li><strong>Service & Hospitality Training:</strong> Moving beyond "order-taking" to create memorable guest experiences that drive repeat business.</li>
-            <li><strong>Leadership Development:</strong> Coaching your managers to lead effectively, reducing your need to be in the business 24/7.</li>
+            <li>
+              <strong>Training that sticks:</strong> short, repeatable routines, not long manuals.
+            </li>
+            <li>
+              <strong>Role clarity:</strong> ownership, standards, and expectations.
+            </li>
+            <li>
+              <strong>Manager rhythm:</strong> so you’re not forced to be there 24/7.
+            </li>
           </ul>
-          
-          <h3 className="font-headline">5. Tech & Marketing</h3>
+
+          <h3 className="font-headline">5) Guest experience, marketing & digital</h3>
           <p>
-            In today's market, your digital presence is as important as your physical one.
+            Hospitality is an experience business. Marketing must match what
+            guests feel. Digital should drive bookings—not just look pretty.
           </p>
           <ul>
-            <li><strong>Point of Sale (POS) Optimization:</strong> Using your POS data to make smarter business decisions.</li>
-            <li><strong>Online Booking & Ordering Funnels:</strong> Building a website and booking system that converts visitors into paying customers, maximizing direct bookings.</li>
-            <li><strong>Local SEO & Google Business Profile:</strong> Ensuring you show up when hungry locals search for a place to eat.</li>
+            <li>
+              <strong>Offer clarity:</strong> what you’re known for and why people choose you.
+            </li>
+            <li>
+              <strong>Booking funnel:</strong> website + menu page + CTA that converts.
+            </li>
+            <li>
+              <strong>Local visibility:</strong> Google profile basics + simple content structure.
+            </li>
           </ul>
 
-          <h2 className="font-headline">When Should You Hire a Consultant?</h2>
-          <ul>
-            <li><strong>You're opening a new restaurant:</strong> Get the systems right from day one.</li>
-            <li><strong>You're profitable, but you feel stuck:</strong> You've hit a plateau and need a fresh perspective to get to the next level.</li>
-            <li><strong>You're losing money:</strong> You know there's a problem but can't pinpoint where the money is going.</li>
-            <li><strong>You're burnt out:</strong> You're working 80-hour weeks and the business still can't run without you.</li>
-            <li><strong>You're expanding:</strong> You need to standardize your operations to open a second location successfully.</li>
-          </ul>
-
-          <h2 className="font-headline">How to Pick the Right One</h2>
-          <p>Look for a "T-shaped" person: deep expertise in one core area (like kitchen operations or finance) but broad knowledge across all five. Most importantly, find someone who has <span className="text-primary font-semibold">actually done the job</span>. Ask for case studies. Talk to their past clients. Do you vibe with their "no poeha" approach?</p>
-
-          <h2 className="font-headline">Pricing Models: What to Expect</h2>
-          <p>Pricing varies wildly, but it usually falls into one of these structures:</p>
-          <ul>
-              <li><strong>Hourly/Day Rate:</strong> Best for short, specific problems. Expect rates to vary based on experience.</li>
-              <li><strong>Project-Based:</strong> A flat fee for a defined scope, like developing a new menu or building a website. This is transparent and good for budgeting.</li>
-              <li><strong>Retainer:</strong> A monthly fee for ongoing support, coaching, and accountability. This is for owners who want a long-term strategic partner.</li>
-          </ul>
-          
-          <h2 className="font-headline">Conclusion: An Investment, Not an Expense</h2>
+          {/* SECTION: WHEN TO HIRE */}
+          <h2 className="font-headline">When should you hire a consultant?</h2>
           <p>
-            Hiring the right restaurant consultant isn't an admission of failure. It's a strategic decision to bring in specialized expertise to accelerate your growth. Think of it like a chef bringing in a specialist butcher or baker—you're leveraging an expert so you can focus on what you do best: creating incredible experiences for your guests.
+            If one of these sounds familiar, you’ll likely get value fast:
           </p>
+          <ul>
+            <li>
+              <strong>Good food, bad cashflow:</strong> you’re busy, but money disappears.
+            </li>
+            <li>
+              <strong>Constant firefighting:</strong> the business relies on you to survive a service.
+            </li>
+            <li>
+              <strong>Inconsistency:</strong> guests don’t get the same experience every time.
+            </li>
+            <li>
+              <strong>Menu confusion:</strong> items don’t sell, margins are unclear, pricing feels random.
+            </li>
+            <li>
+              <strong>You’re expanding:</strong> you need standards and training that scale.
+            </li>
+          </ul>
+
+          {/* SECTION: PICKING */}
+          <h2 className="font-headline">How to pick the right consultant (and avoid wasting money)</h2>
+          <p>
+            Here’s the simple filter:
+          </p>
+
+          <ol>
+            <li>
+              <strong>Real hospitality experience:</strong> have they actually run service, led teams,
+              and built systems—not just “advised”?
+            </li>
+            <li>
+              <strong>Clear deliverables:</strong> what exactly do you get at the end—SOPs, costing
+              sheets, menu changes, training plan, KPI rhythm?
+            </li>
+            <li>
+              <strong>Measurable targets:</strong> agree on what “better” means (food cost, pace,
+              reviews, covers, labor %, etc.).
+            </li>
+            <li>
+              <strong>Fit and communication:</strong> can they challenge you without ego—and do they
+              listen?
+            </li>
+          </ol>
+
+          {/* SECTION: PRICING */}
+          <h2 className="font-headline">Pricing models: what to expect</h2>
+
+          <p>
+            Pricing varies by scope, urgency, and how hands-on the work is. Most
+            consultants use one of these models:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Quick Scan (fixed):</strong> ideal to diagnose one problem and set priorities.
+            </li>
+            <li>
+              <strong>Day rate / on-site blocks:</strong> best when you need real operational change and team training.
+            </li>
+            <li>
+              <strong>Project:</strong> a clear scope (menu rebuild, SOP system, launch plan, booking funnel).
+            </li>
+            <li>
+              <strong>Retainer:</strong> monthly support for owners who want accountability and steady improvement.
+            </li>
+          </ul>
+
+          <p>
+            The “right” model depends on speed. If you’re bleeding money or drowning
+            in chaos, on-site work usually creates the fastest impact.
+          </p>
+
+          {/* SECTION: ROI */}
+          <h2 className="font-headline">What ROI looks like (in reality)</h2>
+          <p>
+            Real ROI isn’t magic. It’s small improvements stacking up:
+          </p>
+          <ul>
+            <li>1–3% food cost improvement through portion control + purchasing discipline</li>
+            <li>Faster service pace through station flow + prep structure</li>
+            <li>More repeat guests through consistency and clearer experience</li>
+            <li>More direct bookings through a simple, clear booking funnel</li>
+            <li>Less owner burnout because the team can run the system</li>
+          </ul>
+
+          {/* CONCLUSION */}
+          <h2 className="font-headline">Conclusion: it’s structure, not magic</h2>
+          <p>
+            Hiring a consultant isn’t an admission of failure. It’s a shortcut to
+            clarity—so you stop guessing and start building a business that holds
+            up under pressure.
+          </p>
+
+          {/* CTA BOX */}
           <div className="not-prose mt-12 bg-card border border-border p-8 rounded-lg text-center">
-            <h3 className="font-headline text-2xl font-bold">Ready to take control of your business?</h3>
-            <p className="mt-2 text-muted-foreground">Book a free, no-obligation 15-minute call to discuss your specific challenges and see how I can help.</p>
-            <Button asChild size="lg" className="mt-6 font-semibold">
-              <Link href="/contact">Book Your Free Call</Link>
-            </Button>
+            <h3 className="font-headline text-2xl font-bold">
+              Want a quick diagnosis?
+            </h3>
+            <p className="mt-2 text-muted-foreground">
+              Book a free 15-minute call. If I can help, I’ll tell you exactly
+              what I’d fix first.
+            </p>
+            <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+              <Button asChild size="lg" className="font-semibold">
+                <Link href="/contact">Book Your Free Call</Link>
+              </Button>
+              <Button asChild size="lg" variant="secondary" className="font-semibold">
+                <Link href="/services/consulting">See Consulting</Link>
+              </Button>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              Prefer DM? Message “SCAN” on Instagram @chefjezz.
+            </p>
           </div>
         </div>
       </article>
