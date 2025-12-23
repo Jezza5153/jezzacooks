@@ -8,10 +8,9 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, ArrowRight, Star } from "lucide-react";
-import PageHeader from "@/components/page-header";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { CheckCircle, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-home');
 

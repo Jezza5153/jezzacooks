@@ -40,7 +40,7 @@ export default async function RootLayout({
           fraunces.variable
         )}
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
           <main className="flex-grow">{children}</main>
           <Footer />

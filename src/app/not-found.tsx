@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import PageHeader from '@/components/page-header'
 
