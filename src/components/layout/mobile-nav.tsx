@@ -10,23 +10,11 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { NAV_LINKS } from "@/lib/constants";
 import { Logo } from "@/components/logo";
-import LocaleSwitcher from "../locale-switcher";
-import { useTranslations } from "next-intl";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
-  const t = useTranslations('Header');
-
-  const navLinks = [
-    { href: "/", label: t('home') },
-    { href: "/services", label: t('services') },
-    { href: "/pricing", label: t('pricing') },
-    { href: "/results", label: t('results') },
-    { href: "/insights", label: t('insights') },
-    { href: "/about", label: t('about') },
-    { href: "/free-diagnosis", label: t('freeDiagnosis') },
-  ];
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -46,7 +34,7 @@ export function MobileNav() {
         </SheetHeader>
         <div className="flex flex-col h-full py-8">
             <nav className="flex flex-col items-center justify-center flex-grow gap-6">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
                 <Link
                 key={link.href}
                 href={link.href}
@@ -57,11 +45,10 @@ export function MobileNav() {
                 </Link>
             ))}
             </nav>
-            <div className="flex flex-col gap-4 items-center">
-              <LocaleSwitcher />
-              <Button asChild size="lg" className="w-full font-semibold" onClick={() => setIsOpen(false)}>
-                  <Link href="/contact">{t('bookCall')}</Link>
-              </Button>
+            <div className="flex flex-col gap-4">
+            <Button asChild size="lg" className="w-full font-semibold" onClick={() => setIsOpen(false)}>
+                <Link href="/contact">Book a call</Link>
+            </Button>
             </div>
         </div>
       </SheetContent>

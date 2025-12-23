@@ -45,7 +45,7 @@ const consultingTiers: Tier[] = [
   },
   {
     title: "Day Rate (On-Site)",
-    price: "€ 1100",
+    price: "€ 1200",
     priceDetails: "per day + travel",
     description:
       "A full day on-site to fix the real bottleneck: flow, prep, roles, standards, and execution.",
@@ -62,7 +62,7 @@ const consultingTiers: Tier[] = [
   },
   {
     title: "Retainer",
-    price: "From € 2400",
+    price: "Custom",
     priceDetails: "per month",
     description:
       "Ongoing partnership for continuous improvement, accountability, and steady margin + system upgrades.",

@@ -4,26 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { NAV_LINKS } from "@/lib/constants";
 import { Logo } from "@/components/logo";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { useEffect, useState } from "react";
-import LocaleSwitcher from "../locale-switcher";
-import { useTranslations } from "next-intl";
 
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const t = useTranslations('Header');
-
-  const navLinks = [
-    { href: "/", label: t('home') },
-    { href: "/services", label: t('services') },
-    { href: "/pricing", label: t('pricing') },
-    { href: "/results", label: t('results') },
-    { href: "/insights", label: t('insights') },
-    { href: "/about", label: t('about') },
-    { href: "/free-diagnosis", label: t('freeDiagnosis') },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,18 +20,6 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // A helper function to check if the link is active
-  const isLinkActive = (href: string) => {
-    // For the home page, we check for exact match.
-    if (href === "/") {
-        // The pathname for the root will be /en or /nl, not just /
-        return pathname === "/en" || pathname === "/nl";
-    }
-    // For other links, we check if the pathname starts with the href.
-    // This accounts for nested routes. e.g. /services/consulting is active for /services
-    return pathname.startsWith(href);
-  };
 
   return (
     <header
@@ -56,13 +32,13 @@ export default function Header() {
         <div className="flex h-20 items-center justify-between">
           <Logo />
           <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary",
-                  isLinkActive(link.href) ? "text-primary" : "text-muted-foreground"
+                  pathname === link.href ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 {link.label}
@@ -70,9 +46,8 @@ export default function Header() {
             ))}
           </nav>
           <div className="hidden lg:flex items-center gap-4">
-            <LocaleSwitcher />
             <Button asChild className="font-semibold">
-              <Link href="/contact">{t('bookCall')}</Link>
+              <Link href="/contact">Book a call</Link>
             </Button>
           </div>
           <div className="lg:hidden">
