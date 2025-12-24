@@ -22,7 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 
 type Stage = "open" | "opening_soon" | "idea";
 type Pain = "margins" | "systems" | "bookings";
-type Band = '28-33' | '33-38' | '38-45' | 'unknown';
+type Band = "28-33" | "33-38" | "38-45" | "unknown";
 
 
 const SIGNALS = [
@@ -35,9 +35,9 @@ const SIGNALS = [
 ] as const;
 
 const mid: Record<Band, number> = {
-  '28-33': 30.5,
-  '33-38': 35.5,
-  '38-45': 41.5,
+  "28-33": 30.5,
+  "33-38": 35.5,
+  "38-45": 41.5,
   unknown: 34,
 };
 
@@ -117,7 +117,7 @@ export default function FreeDiagnosisPage() {
     });
   }
 
-  async function onSubmit(e: React.FormEvent) {
+  const onSubmit = React.useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name.trim() || !business.trim() || !city.trim() || !email.trim()) {
@@ -131,15 +131,15 @@ export default function FreeDiagnosisPage() {
 
     const payload = {
       name,
-      business,
+      businessName: business,
       city,
       email,
       stage,
-      pain,
-      food,
-      labor,
+      biggestPain: pain,
+      foodCost: food,
+      laborCost: labor,
       signals,
-      quickPlan,
+      snapshot: quickPlan,
       createdAt: new Date().toISOString(),
     };
 
@@ -161,7 +161,7 @@ export default function FreeDiagnosisPage() {
         description: "Copied to clipboard (API not connected yet).",
       });
     }
-  }
+  }, [name, business, city, email, stage, pain, food, labor, signals, quickPlan, toast]);
 
   return (
     <div className="relative">
@@ -342,50 +342,50 @@ export default function FreeDiagnosisPage() {
                   </div>
 
                   {/* Signals */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <Label className="text-base font-semibold">Pick up to 3 signals</Label>
-                      <Badge className="rounded-full">{signals.length}/3</Badge>
-                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <Label className="text-base font-semibold">Pick up to 3 signals</Label>
+                        <Badge className="rounded-full">{signals.length}/3</Badge>
+                      </div>
 
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {SIGNALS.map((s) => {
-                        const checked = signals.includes(s.id);
-                        const disabled = !checked && signals.length >= 3;
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {SIGNALS.map((s) => {
+                          const checked = signals.includes(s.id);
+                          const disabled = !checked && signals.length >= 3;
 
-                        return (
-                          <div
-                            key={s.id}
-                            role="button"
-                            tabIndex={0}
-                            aria-disabled={disabled}
-                            onClick={() => !disabled && toggleSignal(s.id)}
-                            onKeyDown={(e) => {
-                              if (disabled) return;
-                              if (e.key === "Enter" || e.key === " ") toggleSignal(s.id);
-                            }}
-                            className={cn(
-                              "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
-                              "focus:outline-none focus:ring-2 focus:ring-primary/40",
-                              checked && "border-primary/60 bg-primary/10",
-                              disabled && "opacity-50 cursor-not-allowed"
-                            )}
-                          >
-                            <div className="flex items-start gap-3">
-                              <Checkbox
-                                checked={checked}
-                                onCheckedChange={() => !disabled && toggleSignal(s.id)}
-                                // prevent double toggle from bubbling to parent
-                                onClick={(e) => e.stopPropagation()}
-                                className="mt-0.5"
-                              />
-                              <div className="text-sm font-medium leading-relaxed">{s.label}</div>
+                          return (
+                            <div
+                              key={s.id}
+                              role="button"
+                              tabIndex={0}
+                              aria-disabled={disabled}
+                              onClick={() => !disabled && toggleSignal(s.id)}
+                              onKeyDown={(e) => {
+                                if (disabled) return;
+                                if (e.key === "Enter" || e.key === " ") toggleSignal(s.id);
+                              }}
+                              className={cn(
+                                "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
+                                "focus:outline-none focus:ring-2 focus:ring-primary/40",
+                                checked && "border-primary/60 bg-primary/10",
+                                disabled && "opacity-50 cursor-not-allowed"
+                              )}
+                            >
+                              <div className="flex items-start gap-3">
+                                <Checkbox
+                                  checked={checked}
+                                  onCheckedChange={() => !disabled && toggleSignal(s.id)}
+                                  // prevent double toggle from bubbling to parent
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="mt-0.5"
+                                />
+                                <div className="text-sm font-medium leading-relaxed">{s.label}</div>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
 
                   <Button type="submit" size="lg" className="w-full font-semibold">
                     Send & get diagnosed <ArrowRight className="ml-2 h-4 w-4" />
@@ -436,5 +436,3 @@ export default function FreeDiagnosisPage() {
     </div>
   );
 }
-
-    
