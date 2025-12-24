@@ -731,5 +731,3 @@ export default function FreeDiagnosisPage() {
     </div>
   );
 }
-
-    
