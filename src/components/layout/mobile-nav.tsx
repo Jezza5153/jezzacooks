@@ -1,41 +1,29 @@
-
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Logo } from "@/components/logo";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
+import { Logo } from "@/components/logo";
 
-const topLevelLinks = [
-  { href: "/pricing", label: "Pricing" },
+type LinkItem = { href: string; label: string };
+type Group = { title: string; links: LinkItem[] };
+
+const primaryCta: LinkItem = { href: "/free-diagnosis", label: "Book a free diagnosis" };
+
+const primaryLinks: LinkItem[] = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/results", label: "Results" },
+  { href: "/insights", label: "Insights" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-  { href: "/free-diagnosis", label: "Free Diagnosis" },
 ];
 
-const navGroups = [
-  {
-    title: "Company",
-    links: [
-      { href: "/about", label: "About" },
-      { href: "/results", label: "Results" },
-      { href: "/faq", label: "FAQ" },
-    ],
-  },
+const groups: Group[] = [
   {
     title: "Services",
     links: [
@@ -47,83 +35,98 @@ const navGroups = [
   {
     title: "Insights",
     links: [
-      { href: "/insights", label: "All Insights" },
-      { href: "/insights/restaurant-consultant-ultimate-guide", label: "Ultimate Guide to Hiring a Consultant" },
-      { href: "/insights/prime-cost-explained", label: "Prime Cost Explained" },
-      { href: "/insights/calm-service-system", label: "Calm Service System" },
+      { href: "/insights/restaurant-consultant-ultimate-guide", label: "Hiring a consultant" },
+      { href: "/insights/prime-cost-explained", label: "Prime cost explained" },
+      { href: "/insights/calm-service-system", label: "Calm service system" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "/faq", label: "FAQ" },
+      { href: "/privacy", label: "Privacy" },
+      { href: "/terms", label: "Terms" },
     ],
   },
 ];
 
 export function MobileNav() {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
 
-  const handleLinkClick = (href: string) => {
-    if (pathname !== href) {
-        setIsOpen(false);
-    }
+  const close = () => setOpen(false);
+
+  const Item = ({ href, label }: LinkItem) => {
+    const active =
+      pathname === href || (href !== "/" && pathname?.startsWith(href));
+
+    return (
+      <Link
+        href={href}
+        onClick={close}
+        className={cn(
+          "flex items-center justify-between rounded-lg px-3 py-3 text-base font-medium transition-colors",
+          active ? "bg-card text-foreground" : "text-muted-foreground hover:bg-card hover:text-foreground"
+        )}
+      >
+        <span>{label}</span>
+        <ArrowRight className={cn("h-4 w-4 opacity-60", active && "opacity-100")} />
+      </Link>
+    );
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" aria-label="Open menu">
           <Menu className="h-6 w-6" />
-          <span className="sr-only">Open menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full bg-background p-4">
-        <SheetHeader className="flex flex-row justify-between items-center mb-8">
+
+      <SheetContent side="right" className="w-full max-w-[420px] bg-background p-4">
+        <SheetHeader className="flex flex-row items-center justify-between">
           <Logo />
-          <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+          <Button variant="ghost" size="icon" onClick={close} aria-label="Close menu">
             <X className="h-6 w-6" />
-            <span className="sr-only">Close menu</span>
           </Button>
         </SheetHeader>
-        <div className="flex flex-col h-full">
-          <div className="flex-grow overflow-y-auto">
-            <Accordion type="multiple" className="w-full">
-              {navGroups.map((group) => (
-                <AccordionItem value={group.title} key={group.title}>
-                  <AccordionTrigger className="text-xl font-headline font-semibold text-foreground hover:no-underline">
-                    {group.title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-col gap-4 pl-4 pt-2">
-                      {group.links.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          className={cn(
-                            "text-lg text-muted-foreground transition-colors hover:text-primary",
-                            pathname === link.href && "text-primary font-semibold"
-                          )}
-                          onClick={() => handleLinkClick(link.href)}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-            <div className="flex flex-col gap-6 pt-6 border-t mt-6">
-                {topLevelLinks.map((link) => (
-                    <Link
-                    key={link.href}
-                    href={link.href}
-                    className={cn(
-                        "text-xl font-headline font-semibold text-foreground transition-colors hover:text-primary",
-                        pathname === link.href && "text-primary"
-                    )}
-                    onClick={() => handleLinkClick(link.href)}
-                    >
-                    {link.label}
-                    </Link>
-                ))}
-            </div>
+
+        <div className="mt-6 flex h-[calc(100vh-120px)] flex-col">
+          {/* Primary CTA */}
+          <Link
+            href={primaryCta.href}
+            onClick={close}
+            className={cn(buttonVariants(), "w-full justify-center font-semibold")}
+          >
+            {primaryCta.label}
+          </Link>
+
+          {/* Main links */}
+          <div className="mt-6 space-y-1">
+            {primaryLinks.map((l) => (
+              <Item key={l.href} {...l} />
+            ))}
+          </div>
+
+          {/* Groups */}
+          <div className="mt-8 space-y-6 border-t border-border pt-6">
+            {groups.map((g) => (
+              <div key={g.title}>
+                <div className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {g.title}
+                </div>
+                <div className="mt-2 space-y-1">
+                  {g.links.map((l) => (
+                    <Item key={l.href} {...l} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer microcopy */}
+          <div className="mt-auto pt-6 text-xs text-muted-foreground">
+            No poeha — just results.
           </div>
         </div>
       </SheetContent>

@@ -1,441 +1,225 @@
-import type React from 'react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
-import PageHeader from '@/components/page-header';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Card } from '@/components/ui/card';
+"use client";
 
-const articles = [
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+type Article = {
+  slug: string;
+  title: string;
+  description: string;
+  image: string; // placeholder id
+  category: string; // e.g. Margins, Systems, Menu, Bookings
+  readTimeMin: number;
+  year: number;
+  // body can exist elsewhere; not needed here
+};
+
+const articles: Article[] = [
   {
-    slug: 'restaurant-consultant-ultimate-guide',
-    title: 'The Ultimate Guide to Hiring a Restaurant Consultant',
+    slug: "restaurant-consultant-ultimate-guide",
+    title: "What Is a Restaurant Consultant? The Ultimate Guide",
     description:
-      'Everything you need to know before, during, and after hiring a restaurant consultant to ensure you get the best ROI.',
-    image: 'blog-pillar',
-    category: 'Consulting 101',
-    date: 'June 10, 2024',
-    body: (
-      <>
-        <p>
-          Hiring a restaurant consultant can feel like a big step. Will it be
-          worth the investment? How do you know you're hiring the right person?
-          This guide demystifies the process, giving you a clear roadmap from a
-          chef's perspective.
-        </p>
-        <h3>1. When to Hire a Consultant</h3>
-        <p>
-          You don't hire a consultant when things are perfect. You hire one
-          when you're stuck, overwhelmed, or ready to grow but unsure of the
-          next step. Common triggers include:
-        </p>
-        <ul>
-          <li>
-            <strong>Stagnant or Declining Profits:</strong> Your revenue is
-            okay, but your bank account isn't growing.
-          </li>
-          <li>
-            <strong>Operational Chaos:</strong> Service is inconsistent, the
-            kitchen is a mess, and you're constantly putting out of fires.
-          </li>
-          <li>
-            <strong>Menu Fatigue:</strong> Your menu hasn't changed in years,
-            and food costs are creeping up.
-          </li>
-          <li>
-            <strong>Expansion Plans:</strong> You want to open a second
-            location but need a bulletproof operational model first.
-          </li>
-        </ul>
-        <h3>2. What a (Good) Consultant Actually Does</h3>
-        <p>
-          A good consultant doesn't just give you a report; they roll up their
-          sleeves. I focus on three core areas:
-        </p>
-        <ul>
-          <li>
-            <strong>Profitability:</strong> Deep dive into your P&L, menu
-            engineering, and supplier negotiations. We find the hidden dollars.
-          </li>
-          <li>
-            <strong>Operations:</strong> Streamlining FOH and BOH workflows,
-            implementing simple systems (SOPs), and improving communication.
-          </li>
-          <li>
-            <strong>Brand & Marketing:</strong> Ensuring your concept, menu,
-            and online presence all tell the same story and attract the right
-            guests.
-          </li>
-        </ul>
-        <p>
-          The goal is to build systems that run themselves, so you can transition
-          from working IN your business to working ON it.
-        </p>
-      </>
-    ),
+      "A chef’s guide to when to hire a consultant, what good looks like, and how to get real ROI.",
+    image: "blog-pillar",
+    category: "Systems",
+    readTimeMin: 10,
+    year: 2025,
   },
   {
-    slug: 'prime-cost-explained',
-    title: 'Prime Cost Explained for Chefs',
+    slug: "prime-cost-explained",
+    title: "Prime Cost Explained (Without the Spreadsheet Pain)",
     description:
-      "A practical guide to understanding and controlling your restaurant's prime cost.",
-    image: 'blog-prime-cost',
-    category: 'Finance',
-    date: 'June 11, 2024',
-    body: (
-      <>
-        <p>
-          Prime Cost is the most important number for any restaurant owner to
-          know. It's the one number that tells you if your business is
-          fundamentally healthy.
-        </p>
-        <p>
-          <strong>Prime Cost = Total Cost of Goods Sold (CoGS) + Total Labor
-          Cost</strong>
-        </p>
-        <p>
-          Your CoGS includes all food and beverage costs. Your Total Labor Cost
-          includes salaries, hourly wages, payroll taxes, and benefits.
-        </p>
-        <h3>What's a Good Prime Cost?</h3>
-        <p>
-          The industry benchmark for a healthy prime cost is{' '}
-          <strong>60% or less</strong> of your total revenue.
-        </p>
-        <ul>
-          <li>
-            <strong>Under 60%:</strong> You're running a tight ship. Profitable.
-          </li>
-          <li>
-            <strong>60-65%:</strong> The "caution zone." You're likely breaking
-            even but have little room for error.
-          </li>
-          <li>
-            <strong>Over 65%:</strong> The "danger zone." You are very likely
-            losing money.
-          </li>
-        </ul>
-        <h3>How to Control It</h3>
-        <ol>
-          <li>
-            <strong>Accurate Recipe Costing:</strong> Know what every dish
-            costs to make, down to the gram.
-          </li>
-          <li>
-            <strong>Inventory Management:</strong> Implement a "first in, first
-            out" (FIFO) system and track waste diligently.
-          </li>
-          <li>
-            <strong>Smart Scheduling:</strong> Write schedules based on sales
-            forecasts, not just feelings. Avoid overstaffing during slow
-            periods.
-          </li>
-          <li>
-            <strong>Menu Engineering:</strong> Analyze your sales data (Menu
-            Mix report) to promote high-profit items and re-price or remove
-            low-profit ones.
-          </li>
-        </ol>
-        <p>
-          Controlling prime cost isn't about being cheap; it's about being
-          smart. It's the foundation of a sustainable, profitable restaurant.
-        </p>
-      </>
-    ),
+      "What prime cost is, the benchmarks that matter, and the fastest levers to pull this week.",
+    image: "blog-prime-cost",
+    category: "Margins",
+    readTimeMin: 7,
+    year: 2025,
   },
   {
-    slug: 'calm-service-system',
-    title: 'The Calm Service System',
+    slug: "menu-engineering-chef-version",
+    title: "Menu Engineering: Stars, Puzzles, Plowhorses, Dogs (Chef Version)",
     description:
-      'How to build a service system that runs itself, so you can focus on what matters.',
-    image: 'blog-service-system',
-    category: 'Operations',
-    date: 'June 12, 2024',
-    body: (
-      <>
-        <p>
-          "Calm service" sounds like an oxymoron in the restaurant industry.
-          But it's achievable when you replace chaos with a system. The goal is
-          to make the 'right way' the 'easy way' for your team.
-        </p>
-        <h3>The 3 Pillars of Calm Service</h3>
-        <p>
-          A solid service system is built on three pillars that support each
-          other.
-        </p>
-        <ol>
-          <li>
-            <strong>Clear Roles & Responsibilities (The "Who"):</strong> Every
-            person on the floor knows exactly what their primary role and
-            secondary responsibilities are. Who runs food? Who handles payment?
-            Who resets tables? When this is ambiguous, things get missed.
-            Create a simple chart.
-          </li>
-          <li>
-            <strong>Sequential Steps of Service (The "What"):</strong> Map out
-            the ideal guest journey from the moment they walk in to the moment
-            they leave. This should be a checklist, not a novel. E.g., 1. Greet
-            within 30 seconds. 2. Water on the table within 2 minutes. 3. Take
-            drink order. Etc.
-          </li>
-          <li>
-            <strong>Defined Communication Loops (The "How"):</strong> Chaos
-            thrives in poor communication. Standardize call-backs in the
-            kitchen ("Heard, chef!"), and define how FOH communicates with BOH
-            about VIPs, allergies, or long ticket times.
-          </li>
-        </ol>
-        <p>
-          Implementing this system isn't about turning your staff into robots.
-          It's about providing a framework that handles 90% of situations, so
-          their talent and personality can shine in handling the other 10%.
-          Structure creates freedom.
-        </p>
-      </>
-    ),
+      "A practical menu mix + margin approach that chefs actually use — no fluff.",
+    image: "blog-menu-engineering",
+    category: "Menu",
+    readTimeMin: 9,
+    year: 2025,
   },
   {
-    slug: 'website-booking-tool',
-    title: 'Your Website is a Booking Tool',
+    slug: "calm-service-system",
+    title: "The Calm Service System",
     description:
-      "How to turn your restaurant's website into a machine that generates direct bookings.",
-    image: 'blog-booking-site',
-    category: 'Marketing',
-    date: 'June 13, 2024',
-    body: (
-      <>
-        <p>
-          Most restaurant websites are digital brochures. They're pretty, but
-          they don't do any work. Your website should be your hardest-working
-          employee, converting visitors into direct bookings 24/7.
-        </p>
-        <h3>The 5-Second Test</h3>
-        <p>
-          When a potential guest lands on your homepage, can they answer these
-          three questions in 5 seconds?
-        </p>
-        <ol>
-          <li>What kind of food do you serve?</li>
-          <li>Where are you located?</li>
-          <li>How do I book a table?</li>
-        </ol>
-        <p>
-          If the answer to any of these isn't immediately obvious, you're
-          losing bookings.
-        </p>
-        <h3>Anatomy of a High-Converting Restaurant Website</h3>
-        <ul>
-          <li>
-            <strong>"Book Now" Button (Above the Fold):</strong> It must be
-            visible without scrolling. Use a contrasting color. This is the
-            single most important element.
-          </li>
-          <li>
-            <strong>The Menu is Front and Center:</strong> Don't make people
-            hunt for it. Link directly to your menu in the main navigation.
-            Bonus points for a simple, mobile-friendly design (NOT a PDF).
-          </li>
-          <li>
-            <strong>Address & Hours in the Footer/Header:</strong> Make this
-            information easy to find on every page.
-          </li>
-          <li>
-            <strong>High-Quality Photos:</strong> Invest in professional photos
-            of your food and your space. People eat with their eyes first.
-          </li>
-          <li>
-            <strong>Mobile-First Design:</strong> The vast majority of your
-            visitors will be on their phone. Your site must be fast and easy to
-            navigate on a small screen.
-          </li>
-        </ul>
-        <p>
-          Stop paying high commissions to third-party booking platforms. By
-          optimizing your own website, you take back control of your guest
-          relationships and your profit margins.
-        </p>
-      </>
-    ),
+      "How to replace chaos with a simple service system your team can follow every shift.",
+    image: "blog-service-system",
+    category: "Systems",
+    readTimeMin: 8,
+    year: 2025,
   },
   {
-    slug: 'weekly-owner-rhythm',
-    title: "The Weekly Owner's Rhythm",
+    slug: "website-booking-tool",
+    title: "Your Website Is a Booking Tool",
     description:
-      'A simple weekly schedule to stay in control of your restaurant without losing your mind.',
-    image: 'blog-weekly-rhythm',
-    category: 'Productivity',
-    date: 'June 14, 2024',
-    body: (
-      <>
-        <p>
-          As a restaurant owner, it's easy to get trapped in a cycle of
-          reactivity, constantly putting out of fires. A weekly rhythm helps you
-          shift from reactive to proactive, focusing on the tasks that actually
-          drive growth.
-        </p>
-        <p>
-          Block out time for these activities every week. Treat them as
-          unbreakable appointments.
-        </p>
-        <h3>The Template</h3>
-        <ul>
-          <li>
-            <strong>Monday (Admin & Review - 2 hours):</strong>
-            <ul>
-              <li>Review last week's sales, labor, and food cost reports.</li>
-              <li>Pay key suppliers.</li>
-              <li>Set goals for the upcoming week with your chef/manager.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Tuesday (Marketing & Growth - 1.5 hours):</strong>
-            <ul>
-              <li>Plan this week's social media posts.</li>
-              <li>Respond to all online reviews (good and bad).</li>
-              <li>
-                Work on one small marketing initiative (e.g., plan a new event,
-                write a newsletter).
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Wednesday (Team & Operations - 1 hour):</strong>
-            <ul>
-              <li>
-                Hold a brief, structured meeting with your key staff. Discuss
-                the week's goals and any operational hurdles.
-              </li>
-              <li>Review the upcoming schedule before it's posted.</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Thursday (On the Floor - 3 hours):</strong>
-            <ul>
-              <li>
-                Work a portion of the shift. Be visible. Talk to guests, support
-                your team. Don't be the boss; be part of the team. Observe.
-                What's working? What's not?
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>Friday (Financial Check-in - 30 mins):</strong>
-            <ul>
-              <li>Quick check of daily sales vs. labor.</li>
-              <li>Ensure all invoices are logged.</li>
-            </ul>
-          </li>
-        </ul>
-        <p>
-          This is just a template. Adjust it to your restaurant's rhythm. The
-          key is consistency. This structured approach reduces stress, empowers
-          your team, and gives you back the headspace to be a leader, not just a
-          firefighter.
-        </p>
-      </>
-    ),
+      "Turn your website into a direct booking machine with the right structure and CTAs.",
+    image: "blog-booking-site",
+    category: "Bookings",
+    readTimeMin: 6,
+    year: 2025,
+  },
+  {
+    slug: "weekly-owner-rhythm",
+    title: "The Weekly Owner’s Rhythm",
+    description:
+      "A weekly routine to stay in control (prime cost, people, marketing) without burning out.",
+    image: "blog-weekly-rhythm",
+    category: "Systems",
+    readTimeMin: 7,
+    year: 2025,
   },
 ];
 
-type Article = (typeof articles)[0];
-
-const ArticleContent = ({ article }: { article: Article }) => {
-  const articleImage = PlaceHolderImages.find((p) => p.id === article.image);
-  return (
-    <article className="prose prose-invert prose-lg max-w-none">
-      <h2 className="font-headline text-4xl md:text-5xl font-bold mb-4">{article.title}</h2>
-      {articleImage && (
-        <div className="relative aspect-video rounded-lg overflow-hidden not-prose mb-10 border border-border bg-card">
-          <Image
-            src={articleImage.imageUrl}
-            alt={articleImage.description}
-            fill
-            className="object-cover"
-            data-ai-hint={articleImage.imageHint}
-          />
-        </div>
-      )}
-
-      <div className="mb-8">
-        <Badge variant="outline">{article.category}</Badge>
-        <p className="mt-2 text-sm text-muted-foreground">{article.date}</p>
-      </div>
-
-      {article.body}
-
-      {/* CTA BOX */}
-      <div className="not-prose mt-12 bg-card border border-border p-8 rounded-lg text-center">
-        <h3 className="font-headline text-2xl font-bold">
-          Want a quick diagnosis?
-        </h3>
-        <p className="mt-2 text-muted-foreground">
-          Book a free 15-minute call. If I can help, I’ll tell you exactly
-          what I’d fix first.
-        </p>
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-          <Button asChild size="lg" className="font-semibold">
-            <Link href="/contact">Book Your Free Call</Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="secondary"
-            className="font-semibold"
-          >
-            <Link href="/services/consulting">See Consulting</Link>
-          </Button>
-        </div>
-        <p className="mt-4 text-xs text-muted-foreground">
-          Prefer DM? Message “SCAN” on Instagram @chefjezz.
-        </p>
-      </div>
-    </article>
-  );
-};
+// Keep this aligned with your screenshot pills
+const filters = ["All", "Margins", "Systems", "Menu", "Bookings"] as const;
+type Filter = (typeof filters)[number];
 
 export default function InsightsPage() {
-  return (
-    <div>
-      <PageHeader
-        title="Insights"
-        subtitle="Actionable advice for hospitality professionals."
-      />
-      <div className="container mx-auto px-4 py-16 md:py-24">
-        {/* Sticky Nav */}
-        <div className="sticky top-16 bg-background/80 backdrop-blur-lg z-10 py-6 mb-12 border-b">
-            <h2 className="font-headline text-2xl font-bold mb-4 text-center">
-              All Articles
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 justify-center">
-              {articles.map((article) => (
-                <a
-                  key={article.slug}
-                  href={`#${article.slug}`}
-                  className="text-center p-2 rounded-lg transition-colors text-muted-foreground hover:bg-card hover:text-foreground text-sm font-medium"
-                >
-                  {article.title}
-                </a>
-              ))}
-            </div>
-        </div>
+  const [active, setActive] = useState<Filter>("All");
 
-        {/* Article Blocks */}
-        <main className="space-y-24 max-w-4xl mx-auto">
-          {articles.map((article, index) => (
-            <section
-              id={article.slug}
-              key={article.slug}
-              className="scroll-mt-24"
-            >
-              <ArticleContent article={article} />
-              {index < articles.length - 1 && (
-                <hr className="my-16 border-t border-border" />
-              )}
-            </section>
-          ))}
-        </main>
-      </div>
+  const filtered = useMemo(() => {
+    if (active === "All") return articles;
+    return articles.filter((a) => a.category === active);
+  }, [active]);
+
+  return (
+    <div className="relative">
+      {/* Top hero band */}
+      <section className="border-b border-border bg-background/40">
+        <div className="container mx-auto px-4 py-10 md:py-14">
+          <div className="mx-auto max-w-5xl">
+            <div className="rounded-2xl border border-border bg-card/40 backdrop-blur px-6 py-10 md:px-10 md:py-12">
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-2xl">
+                  <h1 className="font-headline text-3xl md:text-5xl font-bold tracking-tight">
+                    Learn the thinking behind the systems
+                  </h1>
+                  <p className="mt-3 text-muted-foreground text-base md:text-lg">
+                    If you’re running good food with messy execution, start here —
+                    then work through margins → systems → bookings.
+                  </p>
+                </div>
+
+                {/* Pills */}
+                <div className="flex flex-wrap gap-2 md:justify-end">
+                  {filters.map((f) => (
+                    <button
+                      key={f}
+                      onClick={() => setActive(f)}
+                      className={cn(
+                        "inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+                        "border border-border bg-background/40 hover:bg-card",
+                        active === f && "bg-primary text-primary-foreground border-primary"
+                      )}
+                      type="button"
+                    >
+                      {f === "All" ? "All" : f}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA right under hero (optional but nice) */}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button asChild className="font-semibold">
+                  <Link href="/free-diagnosis">Free 15-min diagnosis</Link>
+                </Button>
+                <Button asChild variant="secondary" className="font-semibold">
+                  <Link href="/results">See Results</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Card grid */}
+      <section className="container mx-auto px-4 py-12 md:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {filtered.map((article) => {
+              const img = PlaceHolderImages.find((p) => p.id === article.image);
+
+              return (
+                <Card
+                  key={article.slug}
+                  className="overflow-hidden bg-card/40 border-border hover:bg-card/60 transition-colors"
+                >
+                  <Link href={`/insights/${article.slug}`} className="block">
+                    <div className="relative aspect-[16/10] bg-background">
+                      {img ? (
+                        <Image
+                          src={img.imageUrl}
+                          alt={img.description}
+                          fill
+                          className="object-cover"
+                          data-ai-hint={img.imageHint}
+                        />
+                      ) : null}
+
+                      {/* Top-left category badge */}
+                      <div className="absolute left-4 bottom-4">
+                        <Badge variant="secondary" className="rounded-full">
+                          {article.category}
+                        </Badge>
+                      </div>
+
+                      {/* Bottom-right meta */}
+                      <div className="absolute right-4 bottom-4 text-xs text-muted-foreground">
+                        {article.readTimeMin} min · {article.year}
+                      </div>
+                    </div>
+
+                    <CardHeader className="pb-2">
+                      <h3 className="font-headline text-xl font-bold leading-snug">
+                        {article.title}
+                      </h3>
+                    </CardHeader>
+
+                    <CardContent className="pt-0">
+                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                        {article.description}
+                      </p>
+                    </CardContent>
+
+                    <CardFooter className="pt-0">
+                      <span className="text-sm font-semibold text-primary inline-flex items-center">
+                        Read <span className="ml-2">→</span>
+                      </span>
+                    </CardFooter>
+                  </Link>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Bottom CTA band (small, punchy) */}
+          <div className="mt-14 rounded-2xl border border-border bg-card/40 p-8 text-center">
+            <h3 className="font-headline text-2xl font-bold">Want the fast version?</h3>
+            <p className="mt-2 text-muted-foreground">
+              Do the quick diagnosis. I’ll tell you the 3 fixes that matter first.
+            </p>
+            <div className="mt-6 flex justify-center">
+              <Button asChild size="lg" className="font-semibold">
+                <Link href="/free-diagnosis">Start free diagnosis</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
