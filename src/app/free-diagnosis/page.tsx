@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowRight, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-type Band = "28_33" | "33_38" | "38_45" | "unknown";
+type Band = "28-33" | "33-38" | "38-45" | "unknown";
 type Pain = "margins" | "systems" | "bookings";
 
 const SIGNALS = [
@@ -26,16 +26,16 @@ const SIGNALS = [
 ] as const;
 
 const mid: Record<Band, number> = {
-  "28_33": 30.5,
-  "33_38": 35.5,
-  "38_45": 41.5,
+  "28-33": 30.5,
+  "33-38": 35.5,
+  "38-45": 41.5,
   unknown: 34,
 };
 
 const bandLabel: Record<Band, string> = {
-  "28_33": "28–33%",
-  "33_38": "33–38%",
-  "38_45": "38–45%",
+  "28-33": "28–33%",
+  "33-38": "33–38%",
+  "38-45": "38–45%",
   unknown: "Not sure",
 };
 
@@ -107,8 +107,8 @@ export default function FreeDiagnosisPage() {
 
   // Small + focused inputs
   const [pain, setPain] = React.useState<Pain>("margins");
-  const [food, setFood] = React.useState<Band>("33_38");
-  const [labor, setLabor] = React.useState<Band>("33_38");
+  const [food, setFood] = React.useState<Band>("33-38");
+  const [labor, setLabor] = React.useState<Band>("33-38");
   const [signals, setSignals] = React.useState<string[]>([]);
 
   const quickPlan = React.useMemo(() => planFrom({ food, labor, pain, signals }), [food, labor, pain, signals]);
@@ -133,6 +133,7 @@ export default function FreeDiagnosisPage() {
       });
       return;
     }
+    const currentQuickPlan = planFrom({ food, labor, pain, signals });
 
     const payload = {
       name,
@@ -143,9 +144,9 @@ export default function FreeDiagnosisPage() {
         pain === "margins" ? "Margins / cash" : pain === "systems" ? "Systems / chaos" : "Bookings",
       foodCost: bandLabel[food],
       laborCost: bandLabel[labor],
-      primeCostApprox: quickPlan.primeCostApprox,
+      primeCostApprox: currentQuickPlan.primeCostApprox,
       signals,
-      snapshot: { tag: quickPlan.tag, steps: quickPlan.steps },
+      snapshot: { tag: currentQuickPlan.tag, steps: currentQuickPlan.steps },
       nextStep: "Free 15-min diagnosis",
     };
 
@@ -176,7 +177,7 @@ export default function FreeDiagnosisPage() {
         variant: "destructive",
       });
     }
-  }, [name, businessName, city, email, pain, food, labor, signals, quickPlan, toast]);
+  }, [name, businessName, city, email, pain, food, labor, signals, toast]);
 
 
   const signalsFull = signals.length >= 3;
@@ -302,9 +303,9 @@ export default function FreeDiagnosisPage() {
                         value={food}
                         onChange={(v) => setFood(v as Band)}
                         options={[
-                          { value: "28_33", label: "28–33%" },
-                          { value: "33_38", label: "33–38%" },
-                          { value: "38_45", label: "38–45%" },
+                          { value: "28-33", label: "28–33%" },
+                          { value: "33-38", label: "33–38%" },
+                          { value: "38-45", label: "38–45%" },
                           { value: "unknown", label: "Not sure" },
                         ]}
                       />
@@ -317,9 +318,9 @@ export default function FreeDiagnosisPage() {
                         value={labor}
                         onChange={(v) => setLabor(v as Band)}
                         options={[
-                          { value: "28_33", label: "28–33%" },
-                          { value: "33_38", label: "33–38%" },
-                          { value: "38_45", label: "38–45%" },
+                          { value: "28-33", label: "28–33%" },
+                          { value: "33-38", label: "33–38%" },
+                          { value: "38-45", label: "38–45%" },
                           { value: "unknown", label: "Not sure" },
                         ]}
                       />
@@ -327,50 +328,80 @@ export default function FreeDiagnosisPage() {
                   </div>
 
                   {/* Signals */}
-                    <div className="space-y-3">
-                        <div className="flex items-center justify-between gap-3">
-                            <Label className="text-base font-semibold">Pick up to 3 signals</Label>
-                            <Badge className="rounded-full">{signals.length}/3</Badge>
-                        </div>
-
-                        <div className="grid gap-3 sm:grid-cols-2">
-                            {SIGNALS.map((s) => {
-                            const checked = signals.includes(s.id);
-                            const disabled = !checked && signals.length >= 3;
-
-                            return (
-                                <div
-                                key={s.id}
-                                role="button"
-                                tabIndex={0}
-                                aria-disabled={disabled}
-                                onClick={() => !disabled && toggleSignal(s.id)}
-                                onKeyDown={(e) => {
-                                    if (disabled) return;
-                                    if (e.key === "Enter" || e.key === " ") toggleSignal(s.id);
-                                }}
-                                className={cn(
-                                    "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
-                                    "focus:outline-none focus:ring-2 focus:ring-primary/40",
-                                    checked && "border-primary/60 bg-primary/10",
-                                    disabled && "opacity-50 cursor-not-allowed"
-                                )}
-                                >
-                                <div className="flex items-start gap-3">
-                                    <Checkbox
-                                    checked={checked}
-                                    onCheckedChange={() => !disabled && toggleSignal(s.id)}
-                                    // prevent double toggle from bubbling to parent
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="mt-0.5"
-                                    />
-                                    <div className="text-sm font-medium leading-relaxed">{s.label}</div>
-                                </div>
-                                </div>
-                            );
-                            })}
-                        </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <Label className="text-base font-semibold">Pick up to 3 signals</Label>
+                      <Badge className="rounded-full">{signals.length}/3</Badge>
                     </div>
+
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {SIGNALS.map((s) => {
+                        const checked = signals.includes(s.id);
+                        const disabled = !checked && signals.length >= 3;
+
+                        return (
+                          <div
+                            key={s.id}
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => {
+                              if (disabled) return;
+                              setSignals((prev) => {
+                                const has = prev.includes(s.id);
+                                if (has) return prev.filter((x) => x !== s.id);
+                                if (prev.length >= 3) return prev;
+                                return [...prev, s.id];
+                              });
+                            }}
+                            onKeyDown={(e) => {
+                              if (disabled) return;
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                setSignals((prev) => {
+                                  const has = prev.includes(s.id);
+                                  if (has) return prev.filter((x) => x !== s.id);
+                                  if (prev.length >= 3) return prev;
+                                  return [...prev, s.id];
+                                });
+                              }
+                            }}
+                            className={cn(
+                              "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
+                              "focus:outline-none focus:ring-2 focus:ring-primary/40",
+                              checked && "border-primary/60 bg-primary/10",
+                              disabled && "opacity-50 cursor-not-allowed"
+                            )}
+                          >
+                            <div className="flex items-start gap-3">
+                              <Checkbox
+                                checked={checked}
+                                disabled={disabled}
+                                // IMPORTANT: stop propagation so the outer click handler doesn't fire again
+                                onClick={(e) => e.stopPropagation()}
+                                // IMPORTANT: set based on Radix value, don't toggle
+                                onCheckedChange={(v) => {
+                                  const next = v === true;
+                                  setSignals((prev) => {
+                                    const has = prev.includes(s.id);
+
+                                    if (next && !has) {
+                                      if (prev.length >= 3) return prev;
+                                      return [...prev, s.id];
+                                    }
+                                    if (!next && has) return prev.filter((x) => x !== s.id);
+                                    return prev;
+                                  });
+                                }}
+                                className="mt-0.5"
+                              />
+                              <div className="text-sm font-medium leading-relaxed">{s.label}</div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
 
                   <Button type="submit" size="lg" className="w-full font-semibold">
                     Send & get diagnosed <ArrowRight className="ml-2 h-4 w-4" />
