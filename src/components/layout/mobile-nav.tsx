@@ -1,29 +1,40 @@
+// src/components/layout/mobile-nav.tsx
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/logo";
+import { cn } from "@/lib/utils";
 
 type LinkItem = { href: string; label: string };
 type Group = { title: string; links: LinkItem[] };
 
-const primaryCta: LinkItem = { href: "/free-diagnosis", label: "Book a free diagnosis" };
+const primaryCta: LinkItem = { href: "/free-diagnosis", label: "Free 15-min diagnosis" };
 
-const primaryLinks: LinkItem[] = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/results", label: "Results" },
-  { href: "/insights", label: "Insights" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
+const mainLinks: LinkItem[] = [
+    { href: "/pricing", label: "Pricing" },
+    { href: "/contact", label: "Contact" },
+]
 
 const groups: Group[] = [
+  {
+    title: "Company",
+    links: [
+        { href: "/about", label: "About" },
+        { href: "/results", label: "Results" },
+        { href: "/faq", label: "FAQ" },
+    ],
+  },
   {
     title: "Services",
     links: [
@@ -35,19 +46,21 @@ const groups: Group[] = [
   {
     title: "Insights",
     links: [
-      { href: "/insights/restaurant-consultant-ultimate-guide", label: "Hiring a consultant" },
-      { href: "/insights/prime-cost-explained", label: "Prime cost explained" },
-      { href: "/insights/calm-service-system", label: "Calm service system" },
+        { href: "/insights", label: "All Insights" },
+        { href: "/insights/prime-cost-explained", label: "Prime Cost Explained" },
+        { href: "/insights/menu-engineering-chef-version", label: "Menu Engineering (Chef Version)" },
+        { href: "/insights/calm-service-system", label: "Calm Service System" },
+        { href: "/insights/website-booking-tool", label: "Website Booking Tool" },
+        { href: "/insights/weekly-owner-rhythm", label: "Weekly Owner Rhythm" },
     ],
   },
   {
-    title: "Company",
+    title: "Legal",
     links: [
-      { href: "/faq", label: "FAQ" },
-      { href: "/privacy", label: "Privacy" },
-      { href: "/terms", label: "Terms" },
+        { href: "/privacy", label: "Privacy" },
+        { href: "/terms", label: "Terms" },
     ],
-  },
+  }
 ];
 
 export function MobileNav() {
@@ -55,25 +68,6 @@ export function MobileNav() {
   const pathname = usePathname();
 
   const close = () => setOpen(false);
-
-  const Item = ({ href, label }: LinkItem) => {
-    const active =
-      pathname === href || (href !== "/" && pathname?.startsWith(href));
-
-    return (
-      <Link
-        href={href}
-        onClick={close}
-        className={cn(
-          "flex items-center justify-between rounded-lg px-3 py-3 text-base font-medium transition-colors",
-          active ? "bg-card text-foreground" : "text-muted-foreground hover:bg-card hover:text-foreground"
-        )}
-      >
-        <span>{label}</span>
-        <ArrowRight className={cn("h-4 w-4 opacity-60", active && "opacity-100")} />
-      </Link>
-    );
-  };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -85,14 +79,15 @@ export function MobileNav() {
 
       <SheetContent side="right" className="w-full max-w-[420px] bg-background p-4">
         <SheetHeader className="flex flex-row items-center justify-between">
-          <Logo />
+            <Link href="/" onClick={close}>
+                <Logo />
+            </Link>
           <Button variant="ghost" size="icon" onClick={close} aria-label="Close menu">
             <X className="h-6 w-6" />
           </Button>
         </SheetHeader>
 
         <div className="mt-6 flex h-[calc(100vh-120px)] flex-col">
-          {/* Primary CTA */}
           <Link
             href={primaryCta.href}
             onClick={close}
@@ -101,30 +96,51 @@ export function MobileNav() {
             {primaryCta.label}
           </Link>
 
-          {/* Main links */}
-          <div className="mt-6 space-y-1">
-            {primaryLinks.map((l) => (
-              <Item key={l.href} {...l} />
-            ))}
+          <div className="mt-6 flex-grow overflow-y-auto">
+            <div className="space-y-1 mb-4">
+                {mainLinks.map((link) => (
+                     <Link
+                     key={link.href}
+                     href={link.href}
+                     onClick={close}
+                     className={cn(
+                       "block rounded-lg px-3 py-3 text-base font-medium transition-colors",
+                       pathname?.startsWith(link.href) ? "bg-card text-foreground" : "text-muted-foreground hover:bg-card"
+                     )}
+                   >
+                     {link.label}
+                   </Link>
+                ))}
+            </div>
+
+            <Accordion type="multiple" className="w-full">
+              {groups.map((g) => (
+                <AccordionItem value={g.title} key={g.title}>
+                  <AccordionTrigger className="text-base font-medium hover:no-underline">
+                    {g.title}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col space-y-1 pl-4">
+                      {g.links.map((l) => (
+                        <Link
+                          key={l.href}
+                          href={l.href}
+                          onClick={close}
+                          className={cn(
+                            "block rounded-md p-2 text-sm",
+                            pathname?.startsWith(l.href) ? "bg-card text-foreground" : "text-muted-foreground hover:bg-card"
+                          )}
+                        >
+                          {l.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
 
-          {/* Groups */}
-          <div className="mt-8 space-y-6 border-t border-border pt-6">
-            {groups.map((g) => (
-              <div key={g.title}>
-                <div className="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  {g.title}
-                </div>
-                <div className="mt-2 space-y-1">
-                  {g.links.map((l) => (
-                    <Item key={l.href} {...l} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Footer microcopy */}
           <div className="mt-auto pt-6 text-xs text-muted-foreground">
             No poeha — just results.
           </div>
