@@ -9,17 +9,23 @@ type DiagnosisPayload = {
   businessName: string;
   city: string;
   email: string;
+
   website?: string;
   instagram?: string;
 
   stage?: string;
   biggestPain?: string;
+  urgency?: string;
+  revenue?: string;
   foodCost?: string;
   laborCost?: string;
+  onlineBookings?: string;
+  systems?: string;
+  nextStep?: string;
+
   primeCostApprox?: number | string;
   signals?: string[];
 
-  nextStep?: string;
   snapshot?: { steps?: string[]; tag?: string };
 };
 
@@ -55,31 +61,8 @@ function row(label: string, value: unknown) {
   `;
 }
 
-// light in-memory rate limit (per server instance)
-const hits = new Map<string, { count: number; ts: number }>();
-function isRateLimited(ip: string, limit = 12, windowMs = 60_000) {
-  const now = Date.now();
-  const h = hits.get(ip);
-  if (!h || now - h.ts > windowMs) {
-    hits.set(ip, { count: 1, ts: now });
-    return false;
-  }
-  h.count += 1;
-  hits.set(ip, h);
-  return h.count > limit;
-}
-
 export async function POST(req: Request) {
   try {
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      "unknown";
-
-    if (isRateLimited(ip)) {
-      return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
-    }
-
     let body: DiagnosisPayload;
     try {
       body = (await req.json()) as DiagnosisPayload;
@@ -99,24 +82,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Invalid email" }, { status: 400 });
     }
 
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, FROM_EMAIL, TO_EMAIL } =
-      process.env;
+    const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
+    const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
+    const SMTP_USER = process.env.SMTP_USER;
+    const SMTP_PASS = process.env.SMTP_PASS;
 
-    // Your env:
-    // TO_EMAIL=info@jezzacooks.com
-    // FROM_EMAIL=info@jezzacooks.com
-    // SMTP_HOST=smtp.gmail.com
-    // SMTP_PORT=587
-    // SMTP_USER=info@jezzacooks.com
-    // SMTP_PASS= <app password>
-    const to = TO_EMAIL || "info@jezzacooks.com";
+    // Your Workspace inbox
+    const TO_EMAIL = process.env.TO_EMAIL || "info@jezzacooks.com";
+    const FROM_EMAIL = process.env.FROM_EMAIL || "info@jezzacooks.com";
 
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
+    if (!SMTP_USER || !SMTP_PASS) {
       return NextResponse.json(
         {
           ok: false,
-          error:
-            "Email not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS (and optionally FROM_EMAIL, TO_EMAIL).",
+          error: "Email not configured. Set SMTP_USER and SMTP_PASS (Gmail app password).",
         },
         { status: 500 }
       );
@@ -124,23 +103,22 @@ export async function POST(req: Request) {
 
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
-      port: Number(SMTP_PORT),
-      secure: false, // 587 uses STARTTLS
+      port: SMTP_PORT,
+      secure: SMTP_PORT === 465, // false for 587
       auth: { user: SMTP_USER, pass: SMTP_PASS },
+      requireTLS: SMTP_PORT === 587,
     });
 
     const subject = `Free Diagnosis — ${businessName} (${city})`;
 
     const signals = Array.isArray(body.signals) ? body.signals.slice(0, 3) : [];
-    const snapshotSteps = Array.isArray(body.snapshot?.steps)
-      ? body.snapshot!.steps!.slice(0, 10)
-      : [];
+    const snapshotSteps = Array.isArray(body.snapshot?.steps) ? body.snapshot!.steps!.slice(0, 10) : [];
 
     const html = `
       <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;line-height:1.5;background:#0b1220;padding:20px;color:#e5e7eb;">
         <div style="max-width:760px;margin:0 auto;border:1px solid #1f2937;border-radius:14px;overflow:hidden;">
           <div style="padding:18px 20px;background:#0f172a;border-bottom:1px solid #1f2937;">
-            <h2 style="margin:0;font-size:18px;">Free Diagnosis</h2>
+            <h2 style="margin:0;font-size:18px;">Free Diagnosis (Website form)</h2>
             <p style="margin:6px 0 0;color:#9ca3af;">Reply to: <b style="color:#e5e7eb;">${escapeHtml(
               email
             )}</b></p>
@@ -159,15 +137,12 @@ export async function POST(req: Request) {
 
             <h3 style="margin:18px 0 10px;font-size:16px;">Picks</h3>
             <table style="width:100%;border-collapse:collapse;">
-              ${row("Stage", body.stage)}
               ${row("Biggest pain", body.biggestPain)}
               ${row("Food cost", body.foodCost)}
               ${row("Labor cost", body.laborCost)}
               ${row(
                 "Prime cost approx",
-                body.primeCostApprox !== undefined &&
-                  body.primeCostApprox !== null &&
-                  String(body.primeCostApprox).trim() !== ""
+                body.primeCostApprox !== undefined && body.primeCostApprox !== null && String(body.primeCostApprox).trim() !== ""
                   ? `${body.primeCostApprox}%`
                   : "-"
               )}
@@ -175,7 +150,7 @@ export async function POST(req: Request) {
               ${row("Preferred next step", body.nextStep)}
             </table>
 
-            <h3 style="margin:18px 0 10px;font-size:16px;">Snapshot shown on site</h3>
+            <h3 style="margin:18px 0 10px;font-size:16px;">Auto snapshot shown on site</h3>
             <div style="padding:12px;border:1px solid #1f2937;background:#0f172a;border-radius:12px;white-space:pre-wrap;color:#e5e7eb;">
 ${escapeHtml(snapshotSteps.length ? snapshotSteps.map((s) => `- ${s}`).join("\n") : "-")}
             </div>
@@ -189,8 +164,8 @@ ${escapeHtml(snapshotSteps.length ? snapshotSteps.map((s) => `- ${s}`).join("\n"
     `;
 
     await transporter.sendMail({
-      from: FROM_EMAIL || SMTP_USER,
-      to,
+      from: FROM_EMAIL,
+      to: TO_EMAIL,
       replyTo: email,
       subject,
       html,

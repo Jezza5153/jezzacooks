@@ -4,27 +4,17 @@
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { ArrowRight, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-type Stage = "open" | "opening_soon" | "idea";
-type Pain = "margins" | "systems" | "bookings";
 type Band = "28_33" | "33_38" | "38_45" | "unknown";
+type Pain = "margins" | "systems" | "bookings";
 
 const SIGNALS = [
   { id: "cashflow", label: "Cashflow stress (always tight)" },
@@ -42,45 +32,68 @@ const mid: Record<Band, number> = {
   unknown: 34,
 };
 
+const bandLabel: Record<Band, string> = {
+  "28_33": "28–33%",
+  "33_38": "33–38%",
+  "38_45": "38–45%",
+  unknown: "Not sure",
+};
+
 function planFrom(input: { food: Band; labor: Band; pain: Pain; signals: string[] }) {
   const prime = Math.round((mid[input.food] + mid[input.labor]) * 10) / 10;
   const tag = `Prime cost ≈ ${prime}%`;
 
+  const hasMoney =
+    input.pain === "margins" ||
+    input.signals.includes("cashflow") ||
+    input.signals.includes("food_drift") ||
+    input.signals.includes("labor_high");
+
+  const hasOps =
+    input.pain === "systems" ||
+    input.signals.includes("menu_chaos") ||
+    input.signals.includes("training_weak");
+
+  const hasBookings = input.pain === "bookings" || input.signals.includes("direct_low");
+
   const steps: string[] = [];
   steps.push("Step 1: Identify your top 5 sellers + margins (quick menu mix).");
 
-  const hasOps =
-    input.signals.includes("menu_chaos") ||
-    input.signals.includes("training_weak") ||
-    input.pain === "systems";
+  if (hasMoney) steps.push("Step 2: Tighten portions + 7-day waste log (2 items only).");
+  else if (hasOps) steps.push("Step 2: Tighten prep map + station ownership for service.");
+  else steps.push("Step 2: Set 1 weekly KPI rhythm (sales, food%, labor%).");
 
-  const hasMoney =
-    input.signals.includes("cashflow") ||
-    input.signals.includes("food_drift") ||
-    input.signals.includes("labor_high") ||
-    input.pain === "margins";
+  if (hasBookings) steps.push("Step 3: One clear ‘Book Now’ CTA above the fold + hours/location everywhere.");
+  else steps.push("Step 3: Set 1 weekly KPI rhythm (sales, food%, labor%).");
 
-  const hasBookings = input.signals.includes("direct_low") || input.pain === "bookings";
-
-  if (hasMoney) {
-    steps.push("Step 2: Tighten portions + 7-day waste log (2 items only).");
-  } else if (hasOps) {
-    steps.push("Step 2: Tighten prep map + station ownership for service.");
-  } else {
-    steps.push("Step 2: Set 1 weekly KPI rhythm (sales, food%, labor%).");
-  }
-
-  if (hasBookings) {
-    steps.push("Step 3: One clear ‘Book Now’ CTA above the fold + hours/location everywhere.");
-  } else {
-    steps.push("Step 3: Set 1 weekly KPI rhythm (sales, food%, labor%).");
-  }
-
-  return { tag, steps: steps.slice(0, 3) };
+  return { tag, steps: steps.slice(0, 3), primeCostApprox: prime };
 }
 
-function isEmail(v: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+function NativeSelect(props: {
+  id: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
+}) {
+  const { id, value, onChange, options } = props;
+  return (
+    <select
+      id={id}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className={cn(
+        "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm",
+        "ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+        "disabled:cursor-not-allowed disabled:opacity-50"
+      )}
+    >
+      {options.map((o) => (
+        <option key={o.value} value={o.value}>
+          {o.label}
+        </option>
+      ))}
+    </select>
+  );
 }
 
 export default function FreeDiagnosisPage() {
@@ -92,20 +105,13 @@ export default function FreeDiagnosisPage() {
   const [city, setCity] = React.useState("");
   const [email, setEmail] = React.useState("");
 
-  // Optional
-  const [website, setWebsite] = React.useState("");
-  const [instagram, setInstagram] = React.useState("");
-
-  // Inputs
-  const [stage, setStage] = React.useState<Stage>("open");
-  const [biggestPain, setBiggestPain] = React.useState<Pain>("margins");
-  const [foodCost, setFoodCost] = React.useState<Band>("33_38");
-  const [laborCost, setLaborCost] = React.useState<Band>("33_38");
+  // Small + focused inputs
+  const [pain, setPain] = React.useState<Pain>("margins");
+  const [food, setFood] = React.useState<Band>("33_38");
+  const [labor, setLabor] = React.useState<Band>("33_38");
   const [signals, setSignals] = React.useState<string[]>([]);
 
-  // The snapshot is now calculated on-the-fly for display purposes
-  const snapshotForDisplay = planFrom({ food: foodCost, labor: laborCost, pain: biggestPain, signals });
-
+  const quickPlan = React.useMemo(() => planFrom({ food, labor, pain, signals }), [food, labor, pain, signals]);
 
   function toggleSignal(id: string) {
     setSignals((prev) => {
@@ -127,36 +133,19 @@ export default function FreeDiagnosisPage() {
       });
       return;
     }
-    if (!isEmail(email.trim())) {
-      toast({
-        title: "Invalid email",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Calculate snapshot inside the submit handler
-    const snapshot = planFrom({ food: foodCost, labor: laborCost, pain: biggestPain, signals });
 
     const payload = {
-      name: name.trim(),
-      businessName: businessName.trim(),
-      city: city.trim(),
-      email: email.trim().toLowerCase(),
-      website: website.trim() || undefined,
-      instagram: instagram.trim() || undefined,
-
-      stage,
-      biggestPain,
-      foodCost,
-      laborCost,
+      name,
+      businessName,
+      city,
+      email,
+      biggestPain:
+        pain === "margins" ? "Margins / cash" : pain === "systems" ? "Systems / chaos" : "Bookings",
+      foodCost: bandLabel[food],
+      laborCost: bandLabel[labor],
+      primeCostApprox: quickPlan.primeCostApprox,
       signals,
-
-      primeCostApprox: Number(
-        (mid[foodCost] + mid[laborCost]).toFixed(1)
-      ),
-      snapshot,
+      snapshot: { tag: quickPlan.tag, steps: quickPlan.steps },
       nextStep: "Free 15-min diagnosis",
     };
 
@@ -168,19 +157,29 @@ export default function FreeDiagnosisPage() {
       });
 
       if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.error || "Request failed");
+        const msg = await res.text().catch(() => "");
+        throw new Error(msg || "Request failed");
       }
 
       toast({ title: "Sent ✅", description: "Got it — I’ll reply by email." });
+
+      // optional: clear form
+      setName("");
+      setBusinessName("");
+      setCity("");
+      setEmail("");
+      setSignals([]);
     } catch (err: any) {
       toast({
         title: "Couldn’t send",
-        description: err?.message || "Something went wrong. Try again.",
+        description: err?.message || "Please try again in a minute.",
         variant: "destructive",
       });
     }
-  }, [name, businessName, city, email, website, instagram, stage, biggestPain, foodCost, laborCost, signals, toast]);
+  }, [name, businessName, city, email, pain, food, labor, signals, quickPlan, toast]);
+
+
+  const signalsFull = signals.length >= 3;
 
   return (
     <div className="relative">
@@ -191,7 +190,7 @@ export default function FreeDiagnosisPage() {
       <section className="relative border-b border-border">
         <div className="container mx-auto px-4 py-14 md:py-20">
           <div className="mx-auto max-w-5xl">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 items-center">
               <Badge variant="outline" className="rounded-full px-3 py-1">
                 Free
               </Badge>
@@ -199,63 +198,49 @@ export default function FreeDiagnosisPage() {
               <Badge variant="outline" className="rounded-full px-3 py-1">
                 No hard sell
               </Badge>
+
               <span className="ml-auto hidden sm:flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1.5 text-sm text-muted-foreground">
                 <Clock className="h-4 w-4" /> ~2 min
               </span>
             </div>
 
             <h1 className="mt-6 font-headline text-4xl md:text-6xl font-bold tracking-tight">
-              Free diagnosis call{" "}
-              <span className="text-muted-foreground">
-                (so you feel safe before spending a euro)
-              </span>
+              Free diagnosis{" "}
+              <span className="text-muted-foreground">(so you feel safe before spending a euro)</span>
             </h1>
 
             <p className="mt-4 text-base md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
-              Tell me what’s happening (margins, chaos, systems, bookings). I’ll
-              ask sharp questions, give you 1–2 quick wins, and recommend the
-              simplest next step.
+              Tell me what’s happening. You’ll instantly see a likely first step plan. I’ll reply personally by email.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Link href="#form" className={cn(buttonVariants({ size: "lg" }), "font-semibold")}>
+                Start the quick form
+              </Link>
               <Link
                 href="/contact"
-                className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
+                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
               >
-                Book the Free Call
+                Book the call instead
               </Link>
-              <a
-                href="#diagnosis-form"
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "secondary" }),
-                  "font-semibold"
-                )}
-              >
-                Fill the Diagnosis Form
-              </a>
             </div>
 
             <p className="mt-4 text-sm text-muted-foreground">
-              Prefer DM? Message “SCAN” on Instagram and I’ll send 3 quick wins.
+              Prefer DM? Message “SCAN” on Instagram @chefjezz and I’ll send 3 quick wins.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CONTENT */}
-      <section id="diagnosis-form" className="relative">
+      {/* FORM + SNAPSHOT */}
+      <section id="form" className="relative">
         <div className="container mx-auto px-4 py-14 md:py-20">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             {/* FORM */}
             <Card className="border-border bg-card/50">
               <CardHeader>
-                <CardTitle className="font-headline text-3xl md:text-4xl">
-                  2 minutes. I reply fast.
-                </CardTitle>
-                <p className="mt-2 text-muted-foreground">
-                  Pick answers → see a “likely first steps” snapshot instantly.
-                  Then I email you back.
-                </p>
+                <CardTitle className="font-headline text-3xl md:text-4xl">2 minutes. I reply fast.</CardTitle>
+                <p className="mt-2 text-muted-foreground">Pick a few answers → get your “likely first steps” instantly.</p>
               </CardHeader>
 
               <CardContent>
@@ -264,14 +249,9 @@ export default function FreeDiagnosisPage() {
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="name">Your name *</Label>
-                      <Input
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Name"
-                        autoComplete="name"
-                      />
+                      <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
                     </div>
+
                     <div className="space-y-2">
                       <Label htmlFor="biz">Business name *</Label>
                       <Input
@@ -281,16 +261,12 @@ export default function FreeDiagnosisPage() {
                         placeholder="Restaurant / cafe / hotel"
                       />
                     </div>
+
                     <div className="space-y-2">
                       <Label htmlFor="city">City *</Label>
-                      <Input
-                        id="city"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        placeholder="City"
-                        autoComplete="address-level2"
-                      />
+                      <Input id="city" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
                     </div>
+
                     <div className="space-y-2">
                       <Label htmlFor="email">Email *</Label>
                       <Input
@@ -299,143 +275,102 @@ export default function FreeDiagnosisPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@domain.com"
                         type="email"
-                        autoComplete="email"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="website">Website (optional)</Label>
-                      <Input
-                        id="website"
-                        value={website}
-                        onChange={(e) => setWebsite(e.target.value)}
-                        placeholder="https://..."
-                        inputMode="url"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="instagram">Instagram (optional)</Label>
-                      <Input
-                        id="instagram"
-                        value={instagram}
-                        onChange={(e) => setInstagram(e.target.value)}
-                        placeholder="@handle"
                       />
                     </div>
                   </div>
 
-                  {/* Key selectors */}
-                  <div className="grid gap-4 md:grid-cols-2">
+                  {/* Selectors (native select, stable) */}
+                  <div className="grid gap-4 md:grid-cols-3">
                     <div className="space-y-2">
-                      <Label>Stage</Label>
-                      <Select value={stage} onValueChange={(v) => setStage(v as Stage)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select stage" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="open">Open & running</SelectItem>
-                          <SelectItem value="opening_soon">Opening soon</SelectItem>
-                          <SelectItem value="idea">Idea / planning</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor="pain">Biggest pain</Label>
+                      <NativeSelect
+                        id="pain"
+                        value={pain}
+                        onChange={(v) => setPain(v as Pain)}
+                        options={[
+                          { value: "margins", label: "Margins / cash" },
+                          { value: "systems", label: "Systems / chaos" },
+                          { value: "bookings", label: "Bookings" },
+                        ]}
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Biggest pain</Label>
-                      <Select value={biggestPain} onValueChange={(v) => setBiggestPain(v as Pain)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select pain" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="margins">Margins / cash</SelectItem>
-                          <SelectItem value="systems">Systems / chaos</SelectItem>
-                          <SelectItem value="bookings">Bookings</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor="food">Food cost %</Label>
+                      <NativeSelect
+                        id="food"
+                        value={food}
+                        onChange={(v) => setFood(v as Band)}
+                        options={[
+                          { value: "28_33", label: "28–33%" },
+                          { value: "33_38", label: "33–38%" },
+                          { value: "38_45", label: "38–45%" },
+                          { value: "unknown", label: "Not sure" },
+                        ]}
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Food cost %</Label>
-                      <Select value={foodCost} onValueChange={(v) => setFoodCost(v as Band)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Pick one" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="28_33">28–33%</SelectItem>
-                          <SelectItem value="33_38">33–38%</SelectItem>
-                          <SelectItem value="38_45">38–45%</SelectItem>
-                          <SelectItem value="unknown">Not sure</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label>Labor cost %</Label>
-                      <Select value={laborCost} onValueChange={(v) => setLaborCost(v as Band)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Pick one" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="28_33">28–33%</SelectItem>
-                          <SelectItem value="33_38">33–38%</SelectItem>
-                          <SelectItem value="38_45">38–45%</SelectItem>
-                          <SelectItem value="unknown">Not sure</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor="labor">Labor cost %</Label>
+                      <NativeSelect
+                        id="labor"
+                        value={labor}
+                        onChange={(v) => setLabor(v as Band)}
+                        options={[
+                          { value: "28_33", label: "28–33%" },
+                          { value: "33_38", label: "33–38%" },
+                          { value: "38_45", label: "38–45%" },
+                          { value: "unknown", label: "Not sure" },
+                        ]}
+                      />
                     </div>
                   </div>
 
                   {/* Signals */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <Label className="text-base font-semibold">
-                        Pick up to 3 signals
-                      </Label>
-                      <Badge className="rounded-full">{signals.length}/3</Badge>
-                    </div>
+                    <div className="space-y-3">
+                        <div className="flex items-center justify-between gap-3">
+                            <Label className="text-base font-semibold">Pick up to 3 signals</Label>
+                            <Badge className="rounded-full">{signals.length}/3</Badge>
+                        </div>
 
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {SIGNALS.map((s) => {
-                        const checked = signals.includes(s.id);
-                        const disabled = !checked && signals.length >= 3;
+                        <div className="grid gap-3 sm:grid-cols-2">
+                            {SIGNALS.map((s) => {
+                            const checked = signals.includes(s.id);
+                            const disabled = !checked && signals.length >= 3;
 
-                        return (
-                          <div
-                            key={s.id}
-                            role="button"
-                            tabIndex={disabled ? -1 : 0}
-                            aria-disabled={disabled}
-                            onClick={() => !disabled && toggleSignal(s.id)}
-                            onKeyDown={(e) => {
-                              if (disabled) return;
-                              if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                toggleSignal(s.id);
-                              }
-                            }}
-                            className={cn(
-                              "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
-                              "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
-                              checked && "border-primary/60 bg-primary/10",
-                              disabled && "opacity-50 cursor-not-allowed"
-                            )}
-                          >
-                            <div className="flex items-start gap-3">
-                              <Checkbox
-                                checked={checked}
-                                onCheckedChange={() => !disabled && toggleSignal(s.id)}
-                                onClick={(e) => e.stopPropagation()}
-                                className="mt-0.5"
-                              />
-                              <div className="text-sm font-medium leading-relaxed">
-                                {s.label}
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
+                            return (
+                                <div
+                                key={s.id}
+                                role="button"
+                                tabIndex={0}
+                                aria-disabled={disabled}
+                                onClick={() => !disabled && toggleSignal(s.id)}
+                                onKeyDown={(e) => {
+                                    if (disabled) return;
+                                    if (e.key === "Enter" || e.key === " ") toggleSignal(s.id);
+                                }}
+                                className={cn(
+                                    "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
+                                    "focus:outline-none focus:ring-2 focus:ring-primary/40",
+                                    checked && "border-primary/60 bg-primary/10",
+                                    disabled && "opacity-50 cursor-not-allowed"
+                                )}
+                                >
+                                <div className="flex items-start gap-3">
+                                    <Checkbox
+                                    checked={checked}
+                                    onCheckedChange={() => !disabled && toggleSignal(s.id)}
+                                    // prevent double toggle from bubbling to parent
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="mt-0.5"
+                                    />
+                                    <div className="text-sm font-medium leading-relaxed">{s.label}</div>
+                                </div>
+                                </div>
+                            );
+                            })}
+                        </div>
                     </div>
-                  </div>
 
                   <Button type="submit" size="lg" className="w-full font-semibold">
                     Send & get diagnosed <ArrowRight className="ml-2 h-4 w-4" />
@@ -448,31 +383,27 @@ export default function FreeDiagnosisPage() {
               </CardContent>
             </Card>
 
-            {/* QUICK PLAN */}
+            {/* SNAPSHOT */}
             <div className="lg:sticky lg:top-24">
               <Card className="border-border bg-background/40">
                 <CardHeader className="space-y-3">
-                  <CardTitle className="font-headline text-2xl">
-                    Likely first steps (quick plan)
-                  </CardTitle>
-                  <Badge className="w-fit rounded-full">{snapshotForDisplay.tag}</Badge>
+                  <CardTitle className="font-headline text-2xl">Likely first steps (quick plan)</CardTitle>
+                  <Badge className="w-fit rounded-full">{quickPlan.tag}</Badge>
                 </CardHeader>
+
                 <CardContent className="space-y-4">
                   <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
-                    {snapshotForDisplay.steps.map((s) => (
+                    {quickPlan.steps.map((s) => (
                       <li key={s}>{s}</li>
                     ))}
                   </ul>
 
-                  <Link
-                    href="/contact"
-                    className={cn(buttonVariants({ size: "lg" }), "w-full font-semibold")}
-                  >
+                  <Link href="/contact" className={cn(buttonVariants({ size: "lg" }), "w-full font-semibold")}>
                     Book the free call
                   </Link>
 
                   <p className="text-xs text-muted-foreground">
-                    Prefer DM? Message “SCAN” on Instagram and I’ll send 3 quick wins.
+                    Prefer DM? Message “SCAN” on Instagram @chefjezz and I’ll send 3 quick wins.
                   </p>
                 </CardContent>
               </Card>
