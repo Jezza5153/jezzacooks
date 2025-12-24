@@ -38,7 +38,7 @@ const mid: Record<Band, number> = {
   "28-33": 30.5,
   "33-38": 35.5,
   "38-45": 41.5,
-  unknown: 34,
+  "unknown": 34,
 };
 
 function planFrom(input: {
@@ -161,7 +161,7 @@ export default function FreeDiagnosisPage() {
         description: "Copied to clipboard (API not connected yet).",
       });
     }
-  }, [name, business, city, email, stage, pain, food, labor, signals, quickPlan, toast]);
+  }, [name, business, city, email, stage, pain, food, labor, signals, toast, quickPlan]);
 
   return (
     <div className="relative">
