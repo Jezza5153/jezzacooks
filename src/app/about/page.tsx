@@ -38,25 +38,23 @@ const values = [
 const steps = [
   {
     n: "1",
-    // tile title stays EN
     title: "Diagnose",
-    // body in NL
-    body: "We vinden de echte bottlenecks: cashflow-lekken, workflow-chaos, menu-killers of gaten in de gastbeleving.",
+    body: "We vinden waar het echt misgaat: waar je geld weglekt, waar service vastloopt, welke keuzes op de kaart je pijn doen en waar de gastbeleving niet klopt.",
   },
   {
     n: "2",
     title: "Build Structure",
-    body: "Prepplannen, SOP’s, training, costing en menu-structuur. Systemen die je team kan draaien zonder dat jij overal bovenop zit.",
+    body: "We zetten de basis strak: prepplanning, duidelijke afspraken, training, costing en een kaart die logisch draait. Systemen die je team kan volgen zonder dat jij overal bovenop zit.",
   },
   {
     n: "3",
     title: "Execute With the Team",
-    body: "Ik ben hands-on. We implementeren, trainen, verdelen rollen en halen frictie uit echte service, niet uit theorie.",
+    body: "Ik ben hands-on. We voeren het samen in, trainen op de werkvloer, verdelen rollen en halen frictie uit echte service, niet uit theorie.",
   },
   {
     n: "4",
     title: "Measure & Improve",
-    body: "We volgen een paar kerncijfers (food cost, labor, covers, tempo, reviews) en verbeteren elke week.",
+    body: "We kiezen een paar kerncijfers en houden ze simpel: food cost, loonkosten, covers, tempo en reviews. Elke week scherper, elke maand beter.",
   },
 ];
 
@@ -232,7 +230,7 @@ export default function AboutPage() {
               Hoe ik werk
             </h2>
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
-              Een simpele loop die chaos omzet naar overzicht en resultaat dat je kunt meten.
+              Een simpele loop die chaos omzet in overzicht en resultaat dat je kunt sturen.
             </p>
           </div>
 
