@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react"
@@ -24,7 +25,9 @@ const Checkbox = React.forwardRef<
       <Check className="h-4 w-4" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
-))
+));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName
 
 export { Checkbox }
+
+    

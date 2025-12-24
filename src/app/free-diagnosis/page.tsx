@@ -1,7 +1,8 @@
+
 // src/app/free-diagnosis/page.tsx
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, Clock, Mail, ShieldCheck, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -206,13 +207,7 @@ export default function FreeDiagnosisPage() {
 
   // signals (max 3)
   const [signals, setSignals] = useState<string[]>([]);
-
-  const primeCostApprox = useMemo(() => {
-    const prime = Math.round((midMap[foodCost] + midMap[laborCost]) * 10) / 10;
-    // Email example shows 72% — keep integer look in email if you want
-    return Math.round(prime);
-  }, [foodCost, laborCost]);
-
+  
   const toggleSignal = useCallback((id: string) => {
     setSignals((prev) => {
       const has = prev.includes(id);
@@ -225,6 +220,7 @@ export default function FreeDiagnosisPage() {
       return [...prev, id];
     });
   }, []);
+
 
   const onSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -241,6 +237,8 @@ export default function FreeDiagnosisPage() {
 
     setLoading(true);
 
+    const primeCostApprox = Math.round((midMap[foodCost] + midMap[laborCost]) * 10) / 10;
+    
     // Calculate snapshot inside the submit handler
     const steps: string[] = [];
     if (primeCostApprox >= 75) {
@@ -264,7 +262,7 @@ export default function FreeDiagnosisPage() {
     try {
       const payload = {
         name,
-        businessName, // Corrected from business
+        businessName,
         city,
         email,
         website: website?.trim() || "",
@@ -275,7 +273,7 @@ export default function FreeDiagnosisPage() {
         revenue,
         foodCost,
         laborCost,
-        primeCostApprox,
+        primeCostApprox: Math.round(primeCostApprox),
         onlineBookings,
         systems,
         signals,
@@ -314,12 +312,12 @@ export default function FreeDiagnosisPage() {
       setLoading(false);
     }
   }, [
-    loading, name, businessName, city, email, toast, primeCostApprox,
+    loading, name, businessName, city, email, toast,
     website, instagram, stage, biggestPain, urgency, revenue, foodCost,
     laborCost, onlineBookings, systems, signals
   ]);
 
-  const signalsFull = signals.length >= 3;
+  const primeCostApprox = Math.round((midMap[foodCost] + midMap[laborCost]) * 10) / 10;
 
   return (
     <div className="relative">
@@ -733,3 +731,5 @@ export default function FreeDiagnosisPage() {
     </div>
   );
 }
+
+    
