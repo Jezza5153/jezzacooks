@@ -4,6 +4,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,13 +18,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { ArrowRight, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type Stage = "open" | "opening_soon" | "idea";
 type Pain = "margins" | "systems" | "bookings";
-type Band = "28-33" | "33-38" | "38-45" | "unknown";
-
+type Band = "28_33" | "33_38" | "38_45" | "unknown";
 
 const SIGNALS = [
   { id: "cashflow", label: "Cashflow stress (always tight)" },
@@ -35,27 +36,19 @@ const SIGNALS = [
 ] as const;
 
 const mid: Record<Band, number> = {
-  "28-33": 30.5,
-  "33-38": 35.5,
-  "38-45": 41.5,
-  "unknown": 34,
+  "28_33": 30.5,
+  "33_38": 35.5,
+  "38_45": 41.5,
+  unknown: 34,
 };
 
-function planFrom(input: {
-  food: Band;
-  labor: Band;
-  pain: Pain;
-  signals: string[];
-}) {
+function planFrom(input: { food: Band; labor: Band; pain: Pain; signals: string[] }) {
   const prime = Math.round((mid[input.food] + mid[input.labor]) * 10) / 10;
   const tag = `Prime cost ≈ ${prime}%`;
 
   const steps: string[] = [];
-
-  // Step 1 is always diagnostic + menu mix because it's fast and universal
   steps.push("Step 1: Identify your top 5 sellers + margins (quick menu mix).");
 
-  // If they selected typical chaos signals, push structure next
   const hasOps =
     input.signals.includes("menu_chaos") ||
     input.signals.includes("training_weak") ||
@@ -67,8 +60,7 @@ function planFrom(input: {
     input.signals.includes("labor_high") ||
     input.pain === "margins";
 
-  const hasBookings =
-    input.signals.includes("direct_low") || input.pain === "bookings";
+  const hasBookings = input.signals.includes("direct_low") || input.pain === "bookings";
 
   if (hasMoney) {
     steps.push("Step 2: Tighten portions + 7-day waste log (2 items only).");
@@ -87,32 +79,40 @@ function planFrom(input: {
   return { tag, steps: steps.slice(0, 3) };
 }
 
+function isEmail(v: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
 export default function FreeDiagnosisPage() {
   const { toast } = useToast();
 
   // Contact
   const [name, setName] = React.useState("");
-  const [business, setBusiness] = React.useState("");
+  const [businessName, setBusinessName] = React.useState("");
   const [city, setCity] = React.useState("");
   const [email, setEmail] = React.useState("");
 
+  // Optional
+  const [website, setWebsite] = React.useState("");
+  const [instagram, setInstagram] = React.useState("");
+
   // Inputs
   const [stage, setStage] = React.useState<Stage>("open");
-  const [pain, setPain] = React.useState<Pain>("margins");
-  const [food, setFood] = React.useState<Band>("33-38");
-  const [labor, setLabor] = React.useState<Band>("33-38");
+  const [biggestPain, setBiggestPain] = React.useState<Pain>("margins");
+  const [foodCost, setFoodCost] = React.useState<Band>("33_38");
+  const [laborCost, setLaborCost] = React.useState<Band>("33_38");
   const [signals, setSignals] = React.useState<string[]>([]);
 
-  const quickPlan = React.useMemo(
-    () => planFrom({ food, labor, pain, signals }),
-    [food, labor, pain, signals]
+  const snapshot = React.useMemo(
+    () => planFrom({ food: foodCost, labor: laborCost, pain: biggestPain, signals }),
+    [foodCost, laborCost, biggestPain, signals]
   );
 
   function toggleSignal(id: string) {
     setSignals((prev) => {
       const has = prev.includes(id);
       if (has) return prev.filter((x) => x !== id);
-      if (prev.length >= 3) return prev; // max 3
+      if (prev.length >= 3) return prev;
       return [...prev, id];
     });
   }
@@ -120,7 +120,7 @@ export default function FreeDiagnosisPage() {
   const onSubmit = React.useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim() || !business.trim() || !city.trim() || !email.trim()) {
+    if (!name.trim() || !businessName.trim() || !city.trim() || !email.trim()) {
       toast({
         title: "Missing info",
         description: "Please fill: name, business name, city, email.",
@@ -128,19 +128,34 @@ export default function FreeDiagnosisPage() {
       });
       return;
     }
+    if (!isEmail(email.trim())) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     const payload = {
-      name,
-      businessName: business,
-      city,
-      email,
+      name: name.trim(),
+      businessName: businessName.trim(),
+      city: city.trim(),
+      email: email.trim().toLowerCase(),
+      website: website.trim() || undefined,
+      instagram: instagram.trim() || undefined,
+
       stage,
-      biggestPain: pain,
-      foodCost: food,
-      laborCost: labor,
+      biggestPain,
+      foodCost,
+      laborCost,
       signals,
-      snapshot: quickPlan,
-      createdAt: new Date().toISOString(),
+
+      primeCostApprox: Number(
+        (mid[foodCost] + mid[laborCost]).toFixed(1)
+      ),
+      snapshot,
+      nextStep: "Free 15-min diagnosis",
     };
 
     try {
@@ -150,18 +165,20 @@ export default function FreeDiagnosisPage() {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) throw new Error("api");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Request failed");
+      }
 
       toast({ title: "Sent ✅", description: "Got it — I’ll reply by email." });
-    } catch {
-      // Safe fallback so you never lose leads while wiring backend
-      await navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+    } catch (err: any) {
       toast({
-        title: "Saved",
-        description: "Copied to clipboard (API not connected yet).",
+        title: "Couldn’t send",
+        description: err?.message || "Something went wrong. Try again.",
+        variant: "destructive",
       });
     }
-  }, [name, business, city, email, stage, pain, food, labor, signals, toast, quickPlan]);
+  }, [name, businessName, city, email, website, instagram, stage, biggestPain, foodCost, laborCost, signals, snapshot, toast]);
 
   return (
     <div className="relative">
@@ -194,7 +211,8 @@ export default function FreeDiagnosisPage() {
 
             <p className="mt-4 text-base md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
               Tell me what’s happening (margins, chaos, systems, bookings). I’ll
-              give you 1–2 quick wins and the simplest next step.
+              ask sharp questions, give you 1–2 quick wins, and recommend the
+              simplest next step.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -202,7 +220,7 @@ export default function FreeDiagnosisPage() {
                 href="/contact"
                 className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
               >
-                Book the free call
+                Book the Free Call
               </Link>
               <a
                 href="#diagnosis-form"
@@ -211,7 +229,7 @@ export default function FreeDiagnosisPage() {
                   "font-semibold"
                 )}
               >
-                Fill the form
+                Fill the Diagnosis Form
               </a>
             </div>
 
@@ -234,6 +252,7 @@ export default function FreeDiagnosisPage() {
                 </CardTitle>
                 <p className="mt-2 text-muted-foreground">
                   Pick answers → see a “likely first steps” snapshot instantly.
+                  Then I email you back.
                 </p>
               </CardHeader>
 
@@ -248,14 +267,15 @@ export default function FreeDiagnosisPage() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Name"
+                        autoComplete="name"
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="biz">Business name *</Label>
                       <Input
                         id="biz"
-                        value={business}
-                        onChange={(e) => setBusiness(e.target.value)}
+                        value={businessName}
+                        onChange={(e) => setBusinessName(e.target.value)}
                         placeholder="Restaurant / cafe / hotel"
                       />
                     </div>
@@ -266,6 +286,7 @@ export default function FreeDiagnosisPage() {
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="City"
+                        autoComplete="address-level2"
                       />
                     </div>
                     <div className="space-y-2">
@@ -276,6 +297,27 @@ export default function FreeDiagnosisPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@domain.com"
                         type="email"
+                        autoComplete="email"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="website">Website (optional)</Label>
+                      <Input
+                        id="website"
+                        value={website}
+                        onChange={(e) => setWebsite(e.target.value)}
+                        placeholder="https://..."
+                        inputMode="url"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="instagram">Instagram (optional)</Label>
+                      <Input
+                        id="instagram"
+                        value={instagram}
+                        onChange={(e) => setInstagram(e.target.value)}
+                        placeholder="@handle"
                       />
                     </div>
                   </div>
@@ -298,7 +340,7 @@ export default function FreeDiagnosisPage() {
 
                     <div className="space-y-2">
                       <Label>Biggest pain</Label>
-                      <Select value={pain} onValueChange={(v) => setPain(v as Pain)}>
+                      <Select value={biggestPain} onValueChange={(v) => setBiggestPain(v as Pain)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select pain" />
                         </SelectTrigger>
@@ -312,14 +354,14 @@ export default function FreeDiagnosisPage() {
 
                     <div className="space-y-2">
                       <Label>Food cost %</Label>
-                      <Select value={food} onValueChange={(v) => setFood(v as Band)}>
+                      <Select value={foodCost} onValueChange={(v) => setFoodCost(v as Band)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Pick one" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="28-33">28–33%</SelectItem>
-                          <SelectItem value="33-38">33–38%</SelectItem>
-                          <SelectItem value="38-45">38–45%</SelectItem>
+                          <SelectItem value="28_33">28–33%</SelectItem>
+                          <SelectItem value="33_38">33–38%</SelectItem>
+                          <SelectItem value="38_45">38–45%</SelectItem>
                           <SelectItem value="unknown">Not sure</SelectItem>
                         </SelectContent>
                       </Select>
@@ -327,14 +369,14 @@ export default function FreeDiagnosisPage() {
 
                     <div className="space-y-2">
                       <Label>Labor cost %</Label>
-                      <Select value={labor} onValueChange={(v) => setLabor(v as Band)}>
+                      <Select value={laborCost} onValueChange={(v) => setLaborCost(v as Band)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Pick one" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="28-33">28–33%</SelectItem>
-                          <SelectItem value="33-38">33–38%</SelectItem>
-                          <SelectItem value="38-45">38–45%</SelectItem>
+                          <SelectItem value="28_33">28–33%</SelectItem>
+                          <SelectItem value="33_38">33–38%</SelectItem>
+                          <SelectItem value="38_45">38–45%</SelectItem>
                           <SelectItem value="unknown">Not sure</SelectItem>
                         </SelectContent>
                       </Select>
@@ -342,50 +384,56 @@ export default function FreeDiagnosisPage() {
                   </div>
 
                   {/* Signals */}
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between gap-3">
-                        <Label className="text-base font-semibold">Pick up to 3 signals</Label>
-                        <Badge className="rounded-full">{signals.length}/3</Badge>
-                      </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <Label className="text-base font-semibold">
+                        Pick up to 3 signals
+                      </Label>
+                      <Badge className="rounded-full">{signals.length}/3</Badge>
+                    </div>
 
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        {SIGNALS.map((s) => {
-                          const checked = signals.includes(s.id);
-                          const disabled = !checked && signals.length >= 3;
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {SIGNALS.map((s) => {
+                        const checked = signals.includes(s.id);
+                        const disabled = !checked && signals.length >= 3;
 
-                          return (
-                            <div
-                              key={s.id}
-                              role="button"
-                              tabIndex={0}
-                              aria-disabled={disabled}
-                              onClick={() => !disabled && toggleSignal(s.id)}
-                              onKeyDown={(e) => {
-                                if (disabled) return;
-                                if (e.key === "Enter" || e.key === " ") toggleSignal(s.id);
-                              }}
-                              className={cn(
-                                "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
-                                "focus:outline-none focus:ring-2 focus:ring-primary/40",
-                                checked && "border-primary/60 bg-primary/10",
-                                disabled && "opacity-50 cursor-not-allowed"
-                              )}
-                            >
-                              <div className="flex items-start gap-3">
-                                <Checkbox
-                                  checked={checked}
-                                  onCheckedChange={() => !disabled && toggleSignal(s.id)}
-                                  // prevent double toggle from bubbling to parent
-                                  onClick={(e) => e.stopPropagation()}
-                                  className="mt-0.5"
-                                />
-                                <div className="text-sm font-medium leading-relaxed">{s.label}</div>
+                        return (
+                          <div
+                            key={s.id}
+                            role="button"
+                            tabIndex={disabled ? -1 : 0}
+                            aria-disabled={disabled}
+                            onClick={() => !disabled && toggleSignal(s.id)}
+                            onKeyDown={(e) => {
+                              if (disabled) return;
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                toggleSignal(s.id);
+                              }
+                            }}
+                            className={cn(
+                              "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
+                              "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
+                              checked && "border-primary/60 bg-primary/10",
+                              disabled && "opacity-50 cursor-not-allowed"
+                            )}
+                          >
+                            <div className="flex items-start gap-3">
+                              <Checkbox
+                                checked={checked}
+                                onCheckedChange={() => !disabled && toggleSignal(s.id)}
+                                onClick={(e) => e.stopPropagation()}
+                                className="mt-0.5"
+                              />
+                              <div className="text-sm font-medium leading-relaxed">
+                                {s.label}
                               </div>
                             </div>
-                          );
-                        })}
-                      </div>
+                          </div>
+                        );
+                      })}
                     </div>
+                  </div>
 
                   <Button type="submit" size="lg" className="w-full font-semibold">
                     Send & get diagnosed <ArrowRight className="ml-2 h-4 w-4" />
@@ -405,21 +453,18 @@ export default function FreeDiagnosisPage() {
                   <CardTitle className="font-headline text-2xl">
                     Likely first steps (quick plan)
                   </CardTitle>
-                  <Badge className="w-fit rounded-full">{quickPlan.tag}</Badge>
+                  <Badge className="w-fit rounded-full">{snapshot.tag}</Badge>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
-                    {quickPlan.steps.map((s) => (
+                    {snapshot.steps.map((s) => (
                       <li key={s}>{s}</li>
                     ))}
                   </ul>
 
                   <Link
                     href="/contact"
-                    className={cn(
-                      buttonVariants({ size: "lg" }),
-                      "w-full font-semibold"
-                    )}
+                    className={cn(buttonVariants({ size: "lg" }), "w-full font-semibold")}
                   >
                     Book the free call
                   </Link>
