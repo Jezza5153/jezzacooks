@@ -22,7 +22,8 @@ import { useToast } from "@/hooks/use-toast";
 
 type Stage = "open" | "opening_soon" | "idea";
 type Pain = "margins" | "systems" | "bookings";
-type Band = "28_33" | "33_38" | "38_45" | "unknown";
+type Band = '28-33' | '33-38' | '38-45' | 'unknown';
+
 
 const SIGNALS = [
   { id: "cashflow", label: "Cashflow stress (always tight)" },
@@ -34,9 +35,9 @@ const SIGNALS = [
 ] as const;
 
 const mid: Record<Band, number> = {
-  28_33: 30.5,
-  33_38: 35.5,
-  38_45: 41.5,
+  '28-33': 30.5,
+  '33-38': 35.5,
+  '38-45': 41.5,
   unknown: 34,
 };
 
@@ -98,8 +99,8 @@ export default function FreeDiagnosisPage() {
   // Inputs
   const [stage, setStage] = React.useState<Stage>("open");
   const [pain, setPain] = React.useState<Pain>("margins");
-  const [food, setFood] = React.useState<Band>("33_38");
-  const [labor, setLabor] = React.useState<Band>("33_38");
+  const [food, setFood] = React.useState<Band>("33-38");
+  const [labor, setLabor] = React.useState<Band>("33-38");
   const [signals, setSignals] = React.useState<string[]>([]);
 
   const quickPlan = React.useMemo(
@@ -143,7 +144,7 @@ export default function FreeDiagnosisPage() {
     };
 
     try {
-      const res = await fetch("/api/free-diagnosis", {
+      const res = await fetch("/api/diagnosis", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -316,9 +317,9 @@ export default function FreeDiagnosisPage() {
                           <SelectValue placeholder="Pick one" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="28_33">28–33%</SelectItem>
-                          <SelectItem value="33_38">33–38%</SelectItem>
-                          <SelectItem value="38_45">38–45%</SelectItem>
+                          <SelectItem value="28-33">28–33%</SelectItem>
+                          <SelectItem value="33-38">33–38%</SelectItem>
+                          <SelectItem value="38-45">38–45%</SelectItem>
                           <SelectItem value="unknown">Not sure</SelectItem>
                         </SelectContent>
                       </Select>
@@ -331,9 +332,9 @@ export default function FreeDiagnosisPage() {
                           <SelectValue placeholder="Pick one" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="28_33">28–33%</SelectItem>
-                          <SelectItem value="33_38">33–38%</SelectItem>
-                          <SelectItem value="38_45">38–45%</SelectItem>
+                          <SelectItem value="28-33">28–33%</SelectItem>
+                          <SelectItem value="33-38">33–38%</SelectItem>
+                          <SelectItem value="38-45">38–45%</SelectItem>
                           <SelectItem value="unknown">Not sure</SelectItem>
                         </SelectContent>
                       </Select>
@@ -343,9 +344,7 @@ export default function FreeDiagnosisPage() {
                   {/* Signals */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
-                      <Label className="text-base font-semibold">
-                        Pick up to 3 signals
-                      </Label>
+                      <Label className="text-base font-semibold">Pick up to 3 signals</Label>
                       <Badge className="rounded-full">{signals.length}/3</Badge>
                     </div>
 
@@ -353,13 +352,21 @@ export default function FreeDiagnosisPage() {
                       {SIGNALS.map((s) => {
                         const checked = signals.includes(s.id);
                         const disabled = !checked && signals.length >= 3;
+
                         return (
-                          <button
+                          <div
                             key={s.id}
-                            type="button"
+                            role="button"
+                            tabIndex={0}
+                            aria-disabled={disabled}
                             onClick={() => !disabled && toggleSignal(s.id)}
+                            onKeyDown={(e) => {
+                              if (disabled) return;
+                              if (e.key === "Enter" || e.key === " ") toggleSignal(s.id);
+                            }}
                             className={cn(
-                              "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors",
+                              "rounded-2xl border border-border bg-background/40 p-4 text-left transition-colors select-none",
+                              "focus:outline-none focus:ring-2 focus:ring-primary/40",
                               checked && "border-primary/60 bg-primary/10",
                               disabled && "opacity-50 cursor-not-allowed"
                             )}
@@ -368,13 +375,13 @@ export default function FreeDiagnosisPage() {
                               <Checkbox
                                 checked={checked}
                                 onCheckedChange={() => !disabled && toggleSignal(s.id)}
+                                // prevent double toggle from bubbling to parent
+                                onClick={(e) => e.stopPropagation()}
                                 className="mt-0.5"
                               />
-                              <div className="text-sm font-medium leading-relaxed">
-                                {s.label}
-                              </div>
+                              <div className="text-sm font-medium leading-relaxed">{s.label}</div>
                             </div>
-                          </button>
+                          </div>
                         );
                       })}
                     </div>
@@ -429,3 +436,5 @@ export default function FreeDiagnosisPage() {
     </div>
   );
 }
+
+    
