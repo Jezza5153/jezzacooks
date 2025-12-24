@@ -1,3 +1,4 @@
+
 // src/app/about/page.tsx
 import Image from "next/image";
 import Link from "next/link";
@@ -7,51 +8,55 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const values = [
   {
+    // tile title stays EN
     title: "Safe Hands, Clear Direction",
-    body: "Calm leadership in chaos. I bring clarity, priorities, and a plan your team can actually follow.",
+    // body in NL
+    body: "Rust in de chaos. Ik breng overzicht, scherpe prioriteiten en een plan dat je team echt kan uitvoeren.",
   },
   {
     title: "First Principles Thinking",
-    body: "No copy-paste advice. We break the problem down, ask the right questions, and rebuild what works for your business.",
+    body: "Geen standaard advies. We ontleden het probleem, stellen de juiste vragen en bouwen opnieuw op wat werkt voor jouw zaak.",
   },
   {
     title: "Structure Creates Freedom",
-    body: "When prep, roles, and systems are tight, creativity and quality go up—stress goes down.",
+    body: "Als prep, rollen en routines strak staan, gaat de kwaliteit omhoog en gaat de stress omlaag.",
   },
   {
     title: "Margins Without Killing the Food",
-    body: "Portions, pricing, menu design, purchasing—practical changes that protect profit and keep standards high.",
+    body: "Porties, prijsstelling, menu-opbouw, inkoop. Praktische ingrepen die marge beschermen zonder je eten te slopen.",
   },
   {
     title: "Consistency Wins",
-    body: "Guests return for consistency. We build repeatable execution: recipes, training, checks, and rhythm.",
+    body: "Gasten komen terug voor consistentie. We bouwen herhaalbare uitvoering: recepten, training, checks en ritme.",
   },
   {
     title: "Experience Sells",
-    body: "Hospitality is an experience business. We align service flow, menu psychology, and marketing with what guests feel.",
+    body: "Horeca is een belevingsbusiness. We maken serviceflow, menu-psychologie en marketing één verhaal dat gasten voelen.",
   },
 ];
 
 const steps = [
   {
     n: "1",
+    // tile title stays EN
     title: "Diagnose",
-    body: "We find the real bottlenecks—cashflow leaks, workflow chaos, menu margin killers, or experience gaps.",
+    // body in NL
+    body: "We vinden de echte bottlenecks: cashflow-lekken, workflow-chaos, menu-killers of gaten in de gastbeleving.",
   },
   {
     n: "2",
     title: "Build Structure",
-    body: "Prep plans, SOPs, training, costing, menu structure—systems your team can run without you babysitting.",
+    body: "Prepplannen, SOP’s, training, costing en menu-structuur. Systemen die je team kan draaien zonder dat jij overal bovenop zit.",
   },
   {
     n: "3",
     title: "Execute With the Team",
-    body: "I’m hands-on. We implement, train, adjust roles, and remove friction in real service—not in theory.",
+    body: "Ik ben hands-on. We implementeren, trainen, verdelen rollen en halen frictie uit echte service, niet uit theorie.",
   },
   {
     n: "4",
     title: "Measure & Improve",
-    body: "We track a few key numbers (food cost, labor, covers, pace, reviews) and improve every week.",
+    body: "We volgen een paar kerncijfers (food cost, labor, covers, tempo, reviews) en verbeteren elke week.",
   },
 ];
 
@@ -68,31 +73,66 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tight">
-              I fix chaos in hospitality.
+              Level up the chaos.
             </h1>
-            <p className="mt-4 text-base md:text-xl text-muted-foreground">
-              I’m a chef with 20 years of experience, including Michelin-level kitchens and management roles.
-              I help struggling restaurants rebuild structure, protect margins, and create a guest experience
-              that actually sells.
+
+            <p className="mt-4 text-lg md:text-2xl text-muted-foreground">
+              Make it organized chaos, built to perform.
             </p>
 
+            <p className="mt-6 text-base md:text-xl text-muted-foreground leading-relaxed">
+              Perfectie is geen moment. Het is elke dag de kleine dingen goed doen.
+              <br />
+              Rust komt niet door meer personeel of harder werken, maar door betere gewoontes.
+              <br />
+              Ik bouw liever mensen dan gerechten. Leren werkt langer dan schreeuwen.
+              <br />
+              Daarmee wordt chaos georganiseerd en wordt kwaliteit herhaalbaar, elke service opnieuw.
+            </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/free-diagnosis"
                 className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
               >
-                Book a free 15-min call
+                Plan een gratis 15-min call
               </Link>
               <Link
                 href="/services/consulting"
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "outline" }),
-                  "font-semibold"
-                )}
+                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
               >
-                See how I work
+                Bekijk hoe ik werk
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT I STAND FOR */}
+      <section className="relative border-b border-border bg-card/40">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">
+              Waar ik voor sta
+            </h2>
+            <p className="mt-3 text-base md:text-lg text-muted-foreground">
+              Geen ego, geen fluff. Alleen praktische verbeteringen die je team kan uitvoeren en die je cijfers bewijzen.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {values.map((v) => (
+              <div
+                key={v.title}
+                className="rounded-2xl border border-border bg-background/60 p-6 md:p-7"
+              >
+                <h3 className="font-headline text-xl md:text-2xl font-bold text-primary">
+                  {v.title}
+                </h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">
+                  {v.body}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -124,29 +164,40 @@ export default function AboutPage() {
             {/* Text */}
             <div className="order-1 md:order-2">
               <h2 className="font-headline text-3xl md:text-4xl font-bold">
-                My Story
+                Mijn verhaal
               </h2>
+
               <div className="mt-6 space-y-5 text-base md:text-lg leading-relaxed text-muted-foreground">
                 <p>
-                  I didn’t start in an office. I started on the line—learning the rhythm of service, the
-                  pressure of a full ticket rail, and the discipline it takes to execute at a high level
-                  every single day. Over the years I worked my way up through kitchens around the world,
-                  including Michelin-level environments, and stepped into multiple leadership and management roles.
+                  Ik ben begonnen in de afwas. Daar leer je tempo, discipline en waarom structuur alles is. Van daaruit ben ik
+                  doorgegroeid als commis en later naar leidinggevende rollen, met ervaring in vier keukens op Michelin-niveau en functies
+                  in Europa en Australië.
                 </p>
                 <p>
-                  And I learned a hard truth: great food alone doesn’t guarantee a great business.
-                  The places that survive—and grow—are the ones with strong systems behind the scenes.
-                  Cost control, prep structure, training, menu psychology, purchasing, service flow… the “boring”
-                  stuff that actually creates freedom.
+                  Ik heb gewerkt in high-end viszaken, drukke pubs en catering. Wat ik het leukste vind is menu’s en concepten bouwen die
+                  echt werken. Creatief en seizoensgericht, maar vooral logisch voor de keuken en winstgevend voor het bedrijf. Ik heb
+                  teams aangestuurd van leerlingen tot souschefs, head chefs getraind, met leveranciers onderhandeld en eigenaren geholpen
+                  om ideeën om te zetten in een stabiele, herhaalbare operatie.
                 </p>
                 <p>
-                  That’s why I do what I do now. I help hospitality businesses that feel stuck—good food,
-                  bad cashflow, too much chaos—build a calmer operation with better margins. Not with vague theory,
-                  but with practical structure: clear priorities, repeatable processes, and a way of working that improves every week.
+                  De manier waarop ik werk is simpel. Ik breng rust in de chaos. Overzicht, scherpe prioriteiten en een plan dat je team
+                  écht kan uitvoeren. Geen standaard advies, maar terug naar de kern. We halen het probleem uit elkaar, stellen de juiste
+                  vragen en bouwen opnieuw op wat werkt voor jouw zaak.
                 </p>
                 <p>
-                  My style is high energy when we brainstorm and create, and calm and structured when it’s
-                  time to put it on paper and execute. Thinking is only useful if it becomes real-world results.
+                  Want structuur geeft vrijheid. Als prep, rollen en routines kloppen, stijgt de kwaliteit en daalt de stress. En marge
+                  hoeft niet ten koste te gaan van het eten. Met slimme keuzes in porties, prijzen, inkoop en je kaart beschermen we je
+                  winst, zonder je identiteit te slopen.
+                </p>
+                <p>
+                  Uiteindelijk draait het om één ding: consistentie. Gasten komen terug omdat het elke keer klopt. Daarom bouwen we
+                  herhaalbaarheid in je uitvoering met recepten, training, checks en ritme. En omdat horeca beleving is, trekken we één
+                  lijn in service, kaart en communicatie, zodat gasten het voelen en onthouden.
+                </p>
+                <p>
+                  Nu ik terug ben in Nederland help ik horecabedrijven met menuontwikkeling en praktische ondersteuning op de vloer en
+                  achter de schermen. Of je nu iets nieuws start, je menu wil vernieuwen of meer grip wil op marge en workflow: ik breng
+                  rust, structuur en resultaat.
                 </p>
               </div>
 
@@ -155,7 +206,7 @@ export default function AboutPage() {
                   href="/free-diagnosis"
                   className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
                 >
-                  Book Your Free Call
+                  Plan je gratis call
                 </Link>
                 <Link
                   href="/contact"
@@ -164,40 +215,11 @@ export default function AboutPage() {
                   Contact
                 </Link>
               </div>
+
               <p className="mt-4 text-xs text-muted-foreground">
-                Prefer DM? Message “SCAN” on Instagram @chefjezz and I’ll send you 3 quick wins.
+                Liever DM? Stuur “SCAN” op Instagram @chefjezz en ik stuur je 3 snelle wins.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHAT I STAND FOR */}
-      <section className="relative border-y border-border bg-card/40">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl md:text-5xl font-bold">
-              What I Stand For
-            </h2>
-            <p className="mt-3 text-base md:text-lg text-muted-foreground">
-              No ego, no fluff—just practical improvements that your team can execute and your numbers can prove.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {values.map((v) => (
-              <div
-                key={v.title}
-                className="rounded-2xl border border-border bg-background/60 p-6 md:p-7"
-              >
-                <h3 className="font-headline text-xl md:text-2xl font-bold text-primary">
-                  {v.title}
-                </h3>
-                <p className="mt-3 text-muted-foreground leading-relaxed">
-                  {v.body}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -207,10 +229,10 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-headline text-3xl md:text-5xl font-bold">
-              How I Work
+              Hoe ik werk
             </h2>
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
-              A simple loop that turns chaos into clarity and results you can measure.
+              Een simpele loop die chaos omzet naar overzicht en resultaat dat je kunt meten.
             </p>
           </div>
 
@@ -237,10 +259,10 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-16 md:py-20">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Ready to get your operation under control?
+              Klaar om je operatie weer onder controle te krijgen?
             </h2>
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
-              Book a free 15-minute call. If I can help, I’ll tell you exactly what I’d fix first.
+              Plan een gratis 15-minuten call. Als ik kan helpen, vertel ik je precies wat ik als eerste zou fixen.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -248,18 +270,18 @@ export default function AboutPage() {
                 href="/free-diagnosis"
                 className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
               >
-                Book Your Free Call
+                Plan je gratis call
               </Link>
               <Link
                 href="/services/consulting"
                 className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
               >
-                See Consulting
+                Bekijk consulting
               </Link>
             </div>
 
             <p className="mt-4 text-xs text-muted-foreground">
-              Prefer DM? Message “SCAN” on Instagram @chefjezz and I’ll send you 3 quick wins.
+              Liever DM? Stuur “SCAN” op Instagram @chefjezz en ik stuur je 3 snelle wins.
             </p>
           </div>
         </div>

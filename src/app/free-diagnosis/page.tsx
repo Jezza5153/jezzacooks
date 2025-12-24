@@ -1,15 +1,13 @@
-
 // src/app/free-diagnosis/page.tsx
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { ChevronDown, Clock, Mail, ShieldCheck, ArrowRight } from "lucide-react";
+import { ChevronDown, Clock, Mail, ShieldCheck, ArrowRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
 type Option = { value: string; label: string };
@@ -36,13 +34,12 @@ const URGENCY: Option[] = [
 ];
 
 const REVENUE: Option[] = [
-    { value: "<25k", label: "< €25k / month" },
-    { value: "25_50k", label: "€25k–€50k / month" },
-    { value: "50_100k", label: "€50k–€100k / month" },
-    { value: "100k_plus", label: "€100k+ / month" },
-    { value: "unknown", label: "Not sure" },
+  { value: "lt_25k", label: "< €25k / month" },
+  { value: "25_50k", label: "€25k–€50k / month" },
+  { value: "50_100k", label: "€50k–€100k / month" },
+  { value: "100k_plus", label: "€100k+ / month" },
+  { value: "unknown", label: "Not sure" },
 ];
-  
 
 const COST: Option[] = [
   { value: "under_28", label: "Under 28%" },
@@ -68,15 +65,15 @@ const SYSTEMS: Option[] = [
 ];
 
 const SIGNALS = [
-    { id: "cashflow", label: "Cashflow stress (always tight)" },
-    { id: "food_drift", label: "Food cost drifting / portion control weak" },
-    { id: "labor_high", label: "Labor too high / rosters feel random" },
-    { id: "menu_chaos", label: "Menu too big / prep is chaos" },
-    { id: "team_turnover", label: "High turnover / training weak" },
-    { id: "owner_burnout", label: "Owner doing 60–80h (no control)" },
-    { id: "reviews_flat", label: "Reviews not improving / experience uneven" },
-    { id: "direct_low", label: "Not enough direct bookings" },
-  ] as const;
+  { id: "cashflow", label: "Cashflow stress (always tight)" },
+  { id: "food_drift", label: "Food cost drifting / portion control weak" },
+  { id: "labor_high", label: "Labor too high / rosters feel random" },
+  { id: "menu_chaos", label: "Menu too big / prep is chaos" },
+  { id: "team_turnover", label: "High turnover / training weak" },
+  { id: "owner_burnout", label: "Owner doing 60–80h (no control)" },
+  { id: "reviews_flat", label: "Reviews not improving / experience uneven" },
+  { id: "direct_low", label: "Not enough direct bookings" },
+] as const;
 
 const midMap: Record<string, number> = {
   under_28: 26,
@@ -88,7 +85,7 @@ const midMap: Record<string, number> = {
 };
 
 function CardShell(props: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   tone?: "default" | "warm";
 }) {
@@ -101,9 +98,7 @@ function CardShell(props: {
         "border border-border/70 bg-card/35",
         "shadow-[0_24px_80px_rgba(0,0,0,0.45)]",
         "backdrop-blur-md",
-        // layered "material" edges
         "ring-1 ring-white/5",
-        // subtle top highlight
         "before:pointer-events-none before:absolute before:inset-0",
         "before:bg-[radial-gradient(1200px_400px_at_50%_-10%,rgba(255,255,255,0.10),transparent_60%)]",
         tone === "warm" &&
@@ -166,11 +161,7 @@ function SelectField(props: {
         name={name}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={cn(
-          inputClass,
-          "appearance-none pr-10",
-          "cursor-pointer"
-        )}
+        className={cn(inputClass, "appearance-none pr-10", "cursor-pointer")}
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -180,6 +171,51 @@ function SelectField(props: {
       </select>
       <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/80" />
     </div>
+  );
+}
+
+/**
+ * Native checkbox styled to match your site.
+ * This avoids Radix/shadcn checkbox update-loop issues in Next 15 + Turbopack.
+ */
+function PremiumCheckbox(props: {
+  checked: boolean;
+  disabled?: boolean;
+  onChange: (next: boolean) => void;
+  onClick?: React.MouseEventHandler;
+}) {
+  const { checked, disabled, onChange, onClick } = props;
+
+  return (
+    <button
+      type="button"
+      aria-pressed={checked}
+      aria-checked={checked}
+      role="checkbox"
+      disabled={disabled}
+      onClick={(e) => {
+        onClick?.(e);
+        if (disabled) return;
+        onChange(!checked);
+      }}
+      className={cn(
+        "relative mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md",
+        "border border-border/70 bg-background/30",
+        "shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
+        "transition",
+        "hover:bg-background/45 hover:border-border/90",
+        "focus:outline-none focus:ring-2 focus:ring-[hsla(var(--primary)/0.35)]",
+        checked && "border-[hsla(var(--primary)/0.55)] bg-[hsla(var(--primary)/0.16)]",
+        disabled && "opacity-50 cursor-not-allowed"
+      )}
+    >
+      <Check
+        className={cn(
+          "h-4 w-4",
+          checked ? "opacity-100 text-[hsl(var(--primary))]" : "opacity-0"
+        )}
+      />
+    </button>
   );
 }
 
@@ -207,117 +243,130 @@ export default function FreeDiagnosisPage() {
 
   // signals (max 3)
   const [signals, setSignals] = useState<string[]>([]);
-  
+
   const toggleSignal = useCallback((id: string) => {
     setSignals((prev) => {
       const has = prev.includes(id);
-      if (has) {
-        return prev.filter((x) => x !== id);
-      }
-      if (prev.length >= 3) {
-        return prev;
-      }
+      if (has) return prev.filter((x) => x !== id);
+      if (prev.length >= 3) return prev;
       return [...prev, id];
     });
   }, []);
 
+  const onSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (loading) return;
 
-  const onSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (loading) return;
+      if (!name.trim() || !businessName.trim() || !city.trim() || !email.trim()) {
+        toast({
+          title: "Missing info",
+          description: "Please fill in: name, business name, city, email.",
+          variant: "destructive",
+        });
+        return;
+      }
 
-    if (!name.trim() || !businessName.trim() || !city.trim() || !email.trim()) {
-      toast({
-        title: "Missing info",
-        description: "Please fill in: name, business name, city, email.",
-        variant: "destructive",
-      });
-      return;
-    }
+      setLoading(true);
 
-    setLoading(true);
+      const primeCostApprox =
+        Math.round((midMap[foodCost] + midMap[laborCost]) * 10) / 10;
 
-    const primeCostApprox = Math.round((midMap[foodCost] + midMap[laborCost]) * 10) / 10;
-    
-    // Calculate snapshot inside the submit handler
-    const steps: string[] = [];
-    if (primeCostApprox >= 75) {
-      steps.push("Step 1: Portion specs + top-10 dish costing this week.");
-      steps.push("Step 2: Fix roster to covers (remove dead hours).");
-      steps.push("Step 3: Cut/trim 2–3 menu items that cause prep chaos.");
-    } else if (primeCostApprox >= 68) {
-      steps.push("Step 1: Identify your top 5 sellers + margins (quick menu mix).");
-      steps.push("Step 2: Tighten prep map + station ownership for service.");
-      steps.push("Step 3: Set 1 weekly KPI rhythm (sales, food%, labor%).");
-    } else {
-      steps.push("Step 1: Standardize SOPs (opening/closing + 10 core recipes).");
-      steps.push("Step 2: Improve direct bookings funnel (CTA, menu clarity, trust).");
-      steps.push("Step 3: Weekly rhythm + continuous menu iteration.");
-    }
-    const snapshot = {
-      tag: primeCostApprox >= 68 ? "High Prime Cost" : "Systems Focus",
-      steps: steps.slice(0, 4)
-    };
-
-    try {
-      const payload = {
-        name,
-        businessName,
-        city,
-        email,
-        website: website?.trim() || "",
-        instagram: instagram?.trim() || "",
-        stage,
-        biggestPain,
-        urgency,
-        revenue,
-        foodCost,
-        laborCost,
-        primeCostApprox: Math.round(primeCostApprox),
-        onlineBookings,
-        systems,
-        signals,
-        nextStep: "quick_scan",
-        snapshot,
+      // (You can remove snapshot later if you want “zero diagnosis” on-site)
+      const steps: string[] = [];
+      if (primeCostApprox >= 75) {
+        steps.push("Step 1: Portion specs + top-10 dish costing this week.");
+        steps.push("Step 2: Fix roster to covers (remove dead hours).");
+        steps.push("Step 3: Cut/trim 2–3 menu items that cause prep chaos.");
+      } else if (primeCostApprox >= 68) {
+        steps.push("Step 1: Identify your top 5 sellers + margins (quick menu mix).");
+        steps.push("Step 2: Tighten prep map + station ownership for service.");
+        steps.push("Step 3: Set 1 weekly KPI rhythm (sales, food%, labor%).");
+      } else {
+        steps.push("Step 1: Standardize SOPs (opening/closing + 10 core recipes).");
+        steps.push("Step 2: Improve direct bookings funnel (CTA, menu clarity, trust).");
+        steps.push("Step 3: Weekly rhythm + continuous menu iteration.");
+      }
+      const snapshot = {
+        tag: primeCostApprox >= 68 ? "High Prime Cost" : "Systems Focus",
+        steps: steps.slice(0, 4),
       };
 
-      const res = await fetch("/api/diagnosis", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      try {
+        const payload = {
+          name,
+          businessName,
+          city,
+          email,
+          website: website?.trim() || "",
+          instagram: instagram?.trim() || "",
+          stage,
+          biggestPain,
+          urgency,
+          revenue,
+          foodCost,
+          laborCost,
+          primeCostApprox: Math.round(primeCostApprox),
+          onlineBookings,
+          systems,
+          signals,
+          nextStep: "quick_scan",
+          snapshot,
+        };
 
-      if (!res.ok) throw new Error("Failed");
+        const res = await fetch("/api/diagnosis", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
 
-      toast({
-        title: "Sent ✅",
-        description: "Got it — I’ll reply personally by email.",
-      });
+        if (!res.ok) throw new Error("Failed");
 
-      // reset
-      setName("");
-      setBusinessName("");
-      setCity("");
-      setEmail("");
-      setWebsite("");
-      setInstagram("");
-      setSignals([]);
-    } catch {
-      toast({
-        title: "Error",
-        description: "Could not send. Try again in a minute.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, [
-    loading, name, businessName, city, email, toast,
-    website, instagram, stage, biggestPain, urgency, revenue, foodCost,
-    laborCost, onlineBookings, systems, signals
-  ]);
+        toast({
+          title: "Sent ✅",
+          description: "Got it — I’ll reply personally by email.",
+        });
 
-  const primeCostApprox = Math.round((midMap[foodCost] + midMap[laborCost]) * 10) / 10;
+        setName("");
+        setBusinessName("");
+        setCity("");
+        setEmail("");
+        setWebsite("");
+        setInstagram("");
+        setSignals([]);
+      } catch {
+        toast({
+          title: "Error",
+          description: "Could not send. Try again in a minute.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [
+      loading,
+      name,
+      businessName,
+      city,
+      email,
+      toast,
+      website,
+      instagram,
+      stage,
+      biggestPain,
+      urgency,
+      revenue,
+      foodCost,
+      laborCost,
+      onlineBookings,
+      systems,
+      signals,
+    ]
+  );
+
+  const primeCostApprox =
+    Math.round((midMap[foodCost] + midMap[laborCost]) * 10) / 10;
 
   return (
     <div className="relative">
@@ -352,18 +401,12 @@ export default function FreeDiagnosisPage() {
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <a
-                href="#diagnosis"
-                className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
-              >
+              <a href="#diagnosis" className={cn(buttonVariants({ size: "lg" }), "font-semibold")}>
                 Fill the quick form <ArrowRight className="ml-2 h-4 w-4" />
               </a>
               <Link
                 href="/contact"
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "outline" }),
-                  "font-semibold"
-                )}
+                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
               >
                 Book the call instead
               </Link>
@@ -385,9 +428,7 @@ export default function FreeDiagnosisPage() {
               <CardShell tone="warm">
                 <div className="flex items-start justify-between gap-6">
                   <div>
-                    <h2 className="font-headline text-2xl md:text-3xl font-bold">
-                      A bit of context
-                    </h2>
+                    <h2 className="font-headline text-2xl md:text-3xl font-bold">A bit of context</h2>
                     <p className="mt-2 text-sm md:text-base text-muted-foreground">
                       No need to write essays — this just helps me understand who I’m talking to.
                     </p>
@@ -470,12 +511,8 @@ export default function FreeDiagnosisPage() {
 
               {/* Middle title */}
               <div className="px-1">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold">
-                  What’s actually going on
-                </h2>
-                <p className="mt-2 text-muted-foreground">
-                  Pick what feels closest. Precision is not required.
-                </p>
+                <h2 className="font-headline text-3xl md:text-4xl font-bold">What’s actually going on</h2>
+                <p className="mt-2 text-muted-foreground">Pick what feels closest. Precision is not required.</p>
               </div>
 
               {/* 8 blocks */}
@@ -484,12 +521,7 @@ export default function FreeDiagnosisPage() {
                   <div className="grid gap-5 md:gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                       <FieldLabel n="1" label="Stage" required />
-                      <SelectField
-                        name="stage"
-                        value={stage}
-                        onChange={setStage}
-                        options={STAGE}
-                      />
+                      <SelectField name="stage" value={stage} onChange={setStage} options={STAGE} />
                     </div>
 
                     <div>
@@ -504,44 +536,24 @@ export default function FreeDiagnosisPage() {
 
                     <div>
                       <FieldLabel n="3" label="Urgency" required />
-                      <SelectField
-                        name="urgency"
-                        value={urgency}
-                        onChange={setUrgency}
-                        options={URGENCY}
-                      />
+                      <SelectField name="urgency" value={urgency} onChange={setUrgency} options={URGENCY} />
                     </div>
 
                     <div>
                       <FieldLabel n="4" label="Monthly revenue" />
-                      <SelectField
-                        name="revenue"
-                        value={revenue}
-                        onChange={setRevenue}
-                        options={REVENUE}
-                      />
+                      <SelectField name="revenue" value={revenue} onChange={setRevenue} options={REVENUE} />
                     </div>
                   </div>
 
                   <div className="grid gap-5 md:gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                       <FieldLabel n="5" label="Food cost %" />
-                      <SelectField
-                        name="foodCost"
-                        value={foodCost}
-                        onChange={setFoodCost}
-                        options={COST}
-                      />
+                      <SelectField name="foodCost" value={foodCost} onChange={setFoodCost} options={COST} />
                     </div>
 
                     <div>
                       <FieldLabel n="6" label="Labour cost %" />
-                      <SelectField
-                        name="laborCost"
-                        value={laborCost}
-                        onChange={setLaborCost}
-                        options={COST}
-                      />
+                      <SelectField name="laborCost" value={laborCost} onChange={setLaborCost} options={COST} />
                     </div>
 
                     <div>
@@ -556,32 +568,27 @@ export default function FreeDiagnosisPage() {
 
                     <div>
                       <FieldLabel n="8" label="Systems & routines" />
-                      <SelectField
-                        name="systems"
-                        value={systems}
-                        onChange={setSystems}
-                        options={SYSTEMS}
-                      />
+                      <SelectField name="systems" value={systems} onChange={setSystems} options={SYSTEMS} />
                     </div>
                   </div>
 
-                  {/* hidden prime cost for your email template */}
                   <input type="hidden" name="primeCostApprox" value={String(primeCostApprox)} />
                 </div>
               </CardShell>
 
+              {/* Signals (NO Radix checkbox = NO loop) */}
               <CardShell>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-3">
                     <Label className="text-base font-semibold">Pick up to 3 signals</Label>
                     <Badge className="rounded-full">{signals.length}/3</Badge>
                   </div>
-              
+
                   <div className="grid gap-3 sm:grid-cols-2">
                     {SIGNALS.map((s) => {
                       const checked = signals.includes(s.id);
                       const disabled = !checked && signals.length >= 3;
-              
+
                       return (
                         <div
                           key={s.id}
@@ -592,8 +599,8 @@ export default function FreeDiagnosisPage() {
                           onKeyDown={(e) => {
                             if (disabled) return;
                             if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                toggleSignal(s.id);
+                              e.preventDefault();
+                              toggleSignal(s.id);
                             }
                           }}
                           className={cn(
@@ -604,20 +611,17 @@ export default function FreeDiagnosisPage() {
                           )}
                         >
                           <div className="flex items-start gap-3">
-                            <Checkbox
+                            <PremiumCheckbox
                               checked={checked}
                               disabled={disabled}
-                              // prevent double toggle from bubbling to parent
+                              // prevent click on checkbox from also triggering card click
                               onClick={(e) => e.stopPropagation()}
-                              onCheckedChange={(v) => {
-                                const next = v === true;
-                                if (next && !checked) {
-                                  toggleSignal(s.id);
-                                } else if (!next && checked) {
-                                  toggleSignal(s.id);
-                                }
+                              onChange={(next) => {
+                                if (disabled) return;
+                                // keep logic consistent with max-3 rule
+                                if (next && !checked) toggleSignal(s.id);
+                                if (!next && checked) toggleSignal(s.id);
                               }}
-                              className="mt-0.5"
                             />
                             <div className="text-sm font-medium leading-relaxed">{s.label}</div>
                           </div>
@@ -651,7 +655,6 @@ export default function FreeDiagnosisPage() {
                 </div>
               </CardShell>
 
-              {/* tiny reassurance line (mobile) */}
               <div className="lg:hidden">
                 <CardShell className="py-5">
                   <div className="flex items-start gap-3">
@@ -667,7 +670,6 @@ export default function FreeDiagnosisPage() {
               </div>
             </form>
 
-            {/* Sticky side: signature + reassurance */}
             <aside className="hidden lg:block lg:sticky lg:top-24">
               <CardShell className="space-y-5">
                 <div>
@@ -683,9 +685,7 @@ export default function FreeDiagnosisPage() {
                       <Clock className="h-4 w-4 text-primary" />
                       Fast turnaround
                     </div>
-                    <div className="mt-1 text-muted-foreground">
-                      Usually same day or within 24 hours.
-                    </div>
+                    <div className="mt-1 text-muted-foreground">Usually same day or within 24 hours.</div>
                   </div>
 
                   <div className="rounded-2xl border border-border/70 bg-background/25 p-4">
@@ -693,9 +693,7 @@ export default function FreeDiagnosisPage() {
                       <Mail className="h-4 w-4 text-primary" />
                       Email, not automation
                     </div>
-                    <div className="mt-1 text-muted-foreground">
-                      No auto reply, no “AI diagnosis” — just me.
-                    </div>
+                    <div className="mt-1 text-muted-foreground">No auto reply, no “AI diagnosis” — just me.</div>
                   </div>
 
                   <div className="rounded-2xl border border-border/70 bg-background/25 p-4">
@@ -703,19 +701,14 @@ export default function FreeDiagnosisPage() {
                       <ShieldCheck className="h-4 w-4 text-primary" />
                       Privacy
                     </div>
-                    <div className="mt-1 text-muted-foreground">
-                      Not added to a list. No spam. Ever.
-                    </div>
+                    <div className="mt-1 text-muted-foreground">Not added to a list. No spam. Ever.</div>
                   </div>
                 </div>
 
                 <div className="pt-2">
                   <Link
                     href="/contact"
-                    className={cn(
-                      buttonVariants({ size: "lg", variant: "outline" }),
-                      "w-full font-semibold rounded-2xl"
-                    )}
+                    className={cn(buttonVariants({ size: "lg", variant: "outline" }), "w-full font-semibold rounded-2xl")}
                   >
                     Prefer a call? Book here
                   </Link>
