@@ -346,23 +346,13 @@ export default function FreeDiagnosisPage() {
                             tabIndex={0}
                             onClick={() => {
                               if (disabled) return;
-                              setSignals((prev) => {
-                                const has = prev.includes(s.id);
-                                if (has) return prev.filter((x) => x !== s.id);
-                                if (prev.length >= 3) return prev;
-                                return [...prev, s.id];
-                              });
+                              toggleSignal(s.id);
                             }}
                             onKeyDown={(e) => {
                               if (disabled) return;
                               if (e.key === "Enter" || e.key === " ") {
                                 e.preventDefault();
-                                setSignals((prev) => {
-                                  const has = prev.includes(s.id);
-                                  if (has) return prev.filter((x) => x !== s.id);
-                                  if (prev.length >= 3) return prev;
-                                  return [...prev, s.id];
-                                });
+                                toggleSignal(s.id);
                               }
                             }}
                             className={cn(
@@ -380,17 +370,8 @@ export default function FreeDiagnosisPage() {
                                 onClick={(e) => e.stopPropagation()}
                                 // IMPORTANT: set based on Radix value, don't toggle
                                 onCheckedChange={(v) => {
-                                  const next = v === true;
-                                  setSignals((prev) => {
-                                    const has = prev.includes(s.id);
-
-                                    if (next && !has) {
-                                      if (prev.length >= 3) return prev;
-                                      return [...prev, s.id];
-                                    }
-                                    if (!next && has) return prev.filter((x) => x !== s.id);
-                                    return prev;
-                                  });
+                                  if (disabled && v) return;
+                                  toggleSignal(s.id);
                                 }}
                                 className="mt-0.5"
                               />
