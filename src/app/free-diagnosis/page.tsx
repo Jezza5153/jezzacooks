@@ -103,10 +103,9 @@ export default function FreeDiagnosisPage() {
   const [laborCost, setLaborCost] = React.useState<Band>("33_38");
   const [signals, setSignals] = React.useState<string[]>([]);
 
-  const snapshot = React.useMemo(
-    () => planFrom({ food: foodCost, labor: laborCost, pain: biggestPain, signals }),
-    [foodCost, laborCost, biggestPain, signals]
-  );
+  // The snapshot is now calculated on-the-fly for display purposes
+  const snapshotForDisplay = planFrom({ food: foodCost, labor: laborCost, pain: biggestPain, signals });
+
 
   function toggleSignal(id: string) {
     setSignals((prev) => {
@@ -136,6 +135,9 @@ export default function FreeDiagnosisPage() {
       });
       return;
     }
+
+    // Calculate snapshot inside the submit handler
+    const snapshot = planFrom({ food: foodCost, labor: laborCost, pain: biggestPain, signals });
 
     const payload = {
       name: name.trim(),
@@ -178,7 +180,7 @@ export default function FreeDiagnosisPage() {
         variant: "destructive",
       });
     }
-  }, [name, businessName, city, email, website, instagram, stage, biggestPain, foodCost, laborCost, signals, snapshot, toast]);
+  }, [name, businessName, city, email, website, instagram, stage, biggestPain, foodCost, laborCost, signals, toast]);
 
   return (
     <div className="relative">
@@ -453,11 +455,11 @@ export default function FreeDiagnosisPage() {
                   <CardTitle className="font-headline text-2xl">
                     Likely first steps (quick plan)
                   </CardTitle>
-                  <Badge className="w-fit rounded-full">{snapshot.tag}</Badge>
+                  <Badge className="w-fit rounded-full">{snapshotForDisplay.tag}</Badge>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
-                    {snapshot.steps.map((s) => (
+                    {snapshotForDisplay.steps.map((s) => (
                       <li key={s}>{s}</li>
                     ))}
                   </ul>
