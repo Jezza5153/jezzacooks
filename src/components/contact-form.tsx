@@ -1,343 +1,261 @@
+// src/components/contact-form.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useActionState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { submitContactForm, FormState } from "@/app/actions";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Terminal } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const formSchema = z.object({
-  service: z.string().min(1, "Please select a service"),
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  city: z.string().min(1, "Please enter your city"),
-  date: z.string().optional(),
-  guests: z.string().optional(),
-  budget: z.string().optional(),
-  website: z.string().url({ message: "Please enter a valid URL." }).optional().or(z.literal('')),
-  goal: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-  consent: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the privacy policy.",
-  }),
-});
+type Service = "consulting" | "catering" | "websites" | "";
 
-type FormData = z.infer<typeof formSchema>;
+const field =
+  "w-full rounded-2xl border border-border bg-card/40 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground " +
+  "focus:outline-none focus:ring-2 focus:ring-ring/40 focus:bg-card/60 transition";
+
+const label = "text-sm font-medium text-foreground/90";
+const hint = "text-xs text-muted-foreground";
 
 export function ContactForm() {
-  const searchParams = useSearchParams();
-  const serviceParam = searchParams.get("service");
-  const packageParam = searchParams.get("package");
-
-  const [state, formAction] = useActionState<FormState, FormData>(
-    // @ts-ignore
-    submitContactForm,
-    { message: "", success: false }
-  );
-  
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      service: serviceParam || "",
-      name: "",
-      email: "",
-      phone: "",
-      city: "",
-      date: "",
-      guests: "",
-      budget: "",
-      website: "",
-      goal: "",
-      message: packageParam ? `Hi, I'm interested in the ${packageParam} package.` : "",
-      consent: false,
-    },
-  });
-
   const { toast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null);
-  const selectedService = form.watch("service");
+  const searchParams = useSearchParams();
+  const serviceParam = (searchParams.get("service") || "") as Service;
+  const packageParam = searchParams.get("package") || "";
 
-  useEffect(() => {
-    if (state.message) {
-      if (state.success) {
-        toast({
-          title: "Success!",
-          description: state.message,
-        });
-        form.reset();
-      }
-    }
-    if (state.issues) {
-      state.issues.forEach(issue => {
-        // This is a simplified error mapping. For a more complex form, you might need a more robust solution.
-        const fieldName = issue.includes("service") ? "service" : 
-                          issue.includes("Name") ? "name" :
-                          issue.includes("email") ? "email" :
-                          issue.includes("city") ? "city" :
-                          issue.includes("Message") ? "message" :
-                          issue.includes("agree") ? "consent" : "root";
-        form.setError(fieldName as keyof FormData, { type: 'manual', message: issue });
+  const [loading, setLoading] = useState(false);
+
+  const [service, setService] = useState<Service>(serviceParam);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+
+  // Catering
+  const [date, setDate] = useState("");
+  const [guests, setGuests] = useState("");
+  const [budget, setBudget] = useState("");
+
+  // Consulting / Websites
+  const [website, setWebsite] = useState("");
+  const [goal, setGoal] = useState("");
+
+  const [message, setMessage] = useState(
+    packageParam ? `Hi, I’m interested in the ${packageParam} package.` : ""
+  );
+  const [consent, setConsent] = useState(false);
+
+  const showCatering = service === "catering";
+  const showProject = service === "consulting" || service === "websites";
+
+  const serviceLabel = useMemo(() => {
+    if (service === "consulting") return "Restaurant Consulting";
+    if (service === "catering") return "Catering / Private Chef";
+    if (service === "websites") return "Hospitality Websites";
+    return "";
+  }, [service]);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (loading) return;
+
+    // basic validation (server still validates too)
+    if (!service || !name.trim() || !email.trim() || !city.trim() || !message.trim()) {
+      toast({
+        title: "Missing info",
+        description: "Please fill in service, name, email, city and a short message.",
+        variant: "destructive",
       });
+      return;
     }
-  }, [state, form, toast]);
+    if (!consent) {
+      toast({
+        title: "One more thing",
+        description: "Please agree to the privacy policy so I can contact you back.",
+        variant: "destructive",
+      });
+      return;
+    }
 
+    setLoading(true);
+    try {
+      const payload = {
+        service: serviceLabel || service,
+        package: packageParam || "",
+        name,
+        email,
+        phone,
+        city,
+        date,
+        guests,
+        budget,
+        website,
+        goal,
+        message,
+        consent,
+      };
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const msg = await res.text().catch(() => "");
+        throw new Error(msg || "Request failed");
+      }
+
+      toast({ title: "Sent ✅", description: "Got it — I’ll reply by email." });
+
+      // reset
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCity("");
+      setDate("");
+      setGuests("");
+      setBudget("");
+      setWebsite("");
+      setGoal("");
+      setMessage("");
+      setConsent(false);
+    } catch (err: any) {
+      toast({
+        title: "Couldn’t send",
+        description: err?.message || "Try again in a minute.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
-    <div>
-        {state.success ? (
-             <Alert>
-                <Terminal className="h-4 w-4" />
-                <AlertTitle>Success!</AlertTitle>
-                <AlertDescription>{state.message}</AlertDescription>
-            </Alert>
-        ) : (
-        <Form {...form}>
-            <form
-            ref={formRef}
-            action={formAction}
-            className="space-y-6"
+    <form onSubmit={onSubmit} className="space-y-8">
+      {/* Top block */}
+      <div className="rounded-3xl border border-border bg-card/30 p-6 md:p-8">
+        <div className="space-y-2">
+          <p className="font-headline text-xl md:text-2xl">Tell me what you’re working on</p>
+          <p className={hint}>
+            Short + real is perfect. I’ll reply personally — no spam, no hard sell.
+          </p>
+        </div>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <div className="space-y-2">
+            <div className={label}>Service *</div>
+            <select
+              className={field}
+              value={service}
+              onChange={(e) => setService(e.target.value as Service)}
+              required
             >
-            <FormField
-                control={form.control}
-                name="service"
-                render={({ field }) => (
-                <FormItem>
-                    <FormLabel>Service of Interest</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                        <SelectTrigger>
-                        <SelectValue placeholder="Select a service" />
-                        </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                        <SelectItem value="consulting">Restaurant Consulting</SelectItem>
-                        <SelectItem value="catering">Catering / Private Chef</SelectItem>
-                        <SelectItem value="websites">Hospitality Websites</SelectItem>
-                    </SelectContent>
-                    </Select>
-                    <FormMessage />
-                </FormItem>
-                )}
-            />
+              <option value="" disabled>
+                Select a service
+              </option>
+              <option value="consulting">Restaurant Consulting</option>
+              <option value="catering">Catering / Private Chef</option>
+              <option value="websites">Hospitality Websites</option>
+            </select>
+            <p className={hint}>Pick the closest match.</p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>Full Name</FormLabel>
-                    <FormControl>
-                        <Input placeholder="John Doe" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
-                <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>Email Address</FormLabel>
-                    <FormControl>
-                        <Input placeholder="you@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
+          <div className="space-y-2">
+            <div className={label}>City / Region *</div>
+            <input className={field} value={city} onChange={(e) => setCity(e.target.value)} placeholder="Amsterdam" required />
+          </div>
+
+          <div className="space-y-2">
+            <div className={label}>Full name *</div>
+            <input className={field} value={name} onChange={(e) => setName(e.target.value)} placeholder="John Doe" required />
+          </div>
+
+          <div className="space-y-2">
+            <div className={label}>Email *</div>
+            <input className={field} type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@domain.com" required />
+          </div>
+
+          <div className="space-y-2 md:col-span-2">
+            <div className={label}>Phone (optional)</div>
+            <input className={field} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+31 6 12345678" />
+          </div>
+        </div>
+      </div>
+
+      {/* Conditional blocks */}
+      {showCatering && (
+        <div className="rounded-3xl border border-border bg-card/30 p-6 md:p-8">
+          <p className="font-headline text-lg md:text-xl">Catering details</p>
+          <div className="mt-5 grid gap-6 md:grid-cols-3">
+            <div className="space-y-2">
+              <div className={label}>Event date (optional)</div>
+              <input className={field} type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>Phone (Optional)</FormLabel>
-                    <FormControl>
-                        <Input placeholder="+31 6 12345678" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
-                <FormField
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel>City / Region</FormLabel>
-                    <FormControl>
-                        <Input placeholder="Amsterdam" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
+            <div className="space-y-2">
+              <div className={label}>Guests (optional)</div>
+              <input className={field} inputMode="numeric" value={guests} onChange={(e) => setGuests(e.target.value)} placeholder="e.g. 25" />
             </div>
+            <div className="space-y-2">
+              <div className={label}>Budget p.p. (optional)</div>
+              <input className={field} value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="e.g. €75–€120" />
+            </div>
+          </div>
+        </div>
+      )}
 
-            {selectedService === "catering" && (
-                <div className="p-6 border border-border rounded-lg space-y-6 bg-card">
-                    <p className="font-headline text-lg">Catering Details</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <FormField
-                            control={form.control}
-                            name="date"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Event Date</FormLabel>
-                                <FormControl>
-                                <Input type="date" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="guests"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Number of Guests</FormLabel>
-                                <FormControl>
-                                <Input type="number" placeholder="e.g., 25" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="budget"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Budget Range (p.p.)</FormLabel>
-                                <FormControl>
-                                <Input placeholder="e.g., €100-€150" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                    </div>
-                </div>
-            )}
+      {showProject && (
+        <div className="rounded-3xl border border-border bg-card/30 p-6 md:p-8">
+          <p className="font-headline text-lg md:text-xl">Project details</p>
+          <div className="mt-5 grid gap-6 md:grid-cols-2">
+            <div className="space-y-2">
+              <div className={label}>Current website (optional)</div>
+              <input className={field} value={website} onChange={(e) => setWebsite(e.target.value)} placeholder="https://myrestaurant.com" />
+            </div>
+            <div className="space-y-2">
+              <div className={label}>Biggest goal (optional)</div>
+              <input className={field} value={goal} onChange={(e) => setGoal(e.target.value)} placeholder="More direct bookings" />
+            </div>
+          </div>
+        </div>
+      )}
 
-            {(selectedService === "consulting" || selectedService === "websites") && (
-                 <div className="p-6 border border-border rounded-lg space-y-6 bg-card">
-                     <p className="font-headline text-lg">Project Details</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <FormField
-                            control={form.control}
-                            name="website"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Current Website URL</FormLabel>
-                                <FormControl>
-                                <Input placeholder="https://myrestaurant.com" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="goal"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Biggest Goal</FormLabel>
-                                <FormControl>
-                                <Input placeholder="Increase direct bookings" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                    </div>
-                </div>
-            )}
+      {/* Message + consent */}
+      <div className="rounded-3xl border border-border bg-card/30 p-6 md:p-8">
+        <div className="space-y-2">
+          <p className="font-headline text-lg md:text-xl">Your message *</p>
+          <p className={hint}>
+            A few lines is enough. If you’re stuck, tell me what “feels broken” right now.
+          </p>
+        </div>
 
-            <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                <FormItem>
-                    <FormLabel>Your Message</FormLabel>
-                    <FormControl>
-                    <Textarea
-                        placeholder="Tell me a bit about your project or challenge..."
-                        className="min-h-[150px]"
-                        {...field}
-                    />
-                    </FormControl>
-                    <FormMessage />
-                </FormItem>
-                )}
-            />
+        <textarea
+          className={cn(field, "min-h-[170px] resize-y")}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Tell me a bit about your situation…"
+          required
+        />
 
-            <FormField
-                control={form.control}
-                name="consent"
-                render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md p-4 border border-border bg-card">
-                    <FormControl>
-                    <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                    />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                    <FormLabel>
-                        I agree to the privacy policy.
-                    </FormLabel>
-                    <FormDescription>
-                        Your information is used only to respond to your inquiry.
-                    </FormDescription>
-                    <FormMessage />
-                    </div>
-                </FormItem>
-                )}
-            />
-            
-            <Button 
-                type="submit" 
-                size="lg" 
-                className="w-full md:w-auto font-semibold"
-                disabled={form.formState.isSubmitting}
-            >
-                {form.formState.isSubmitting ? "Sending..." : "Send Message"}
-            </Button>
-            </form>
-        </Form>
-        )}
-    </div>
+        <label className="mt-5 flex items-start gap-3 rounded-2xl border border-border bg-background/20 p-4">
+          <input
+            type="checkbox"
+            checked={consent}
+            onChange={(e) => setConsent(e.target.checked)}
+            className="mt-1 h-4 w-4 accent-[hsl(var(--primary))]"
+          />
+          <div>
+            <div className={cn(label, "text-sm")}>I agree to the privacy policy.</div>
+            <div className={hint}>Your info is used only to reply to your inquiry.</div>
+          </div>
+        </label>
+
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className={hint}>Typical reply: same day (or next morning).</p>
+          <Button type="submit" size="lg" disabled={loading} className="font-semibold">
+            {loading ? "Sending…" : "Send message"}
+          </Button>
+        </div>
+      </div>
+    </form>
   );
 }
