@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "logo",
+      "description": "Jezza Cooks Logo",
+      "imageUrl": "/pics/logo.svg",
+      "imageHint": "logo"
+    },
+    {
       "id": "hero-home",
       "description": "A chef plating a dish in a professional kitchen",
       "imageUrl": "/pics/hero-home.jpg",
