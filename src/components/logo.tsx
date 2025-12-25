@@ -1,11 +1,10 @@
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export function Logo({ className }: { className?: string }) {
-  // By adding a version query parameter, we can force the browser to reload the image
-  // when it changes, bypassing stubborn caches.
-  const cacheBuster = `?v=${new Date().getTime()}`;
-  const logoSrc = `/pics/logo.png${cacheBuster}`;
+  // Using a direct, static path to the logo to prevent hydration errors.
+  const logoSrc = "/pics/logo.png";
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
@@ -16,7 +15,7 @@ export function Logo({ className }: { className?: string }) {
         height={32}
         className="h-8 w-auto"
         priority
-        unoptimized // We use unoptimized to ensure the cache buster isn't stripped by Next.js image optimization
+        unoptimized // Using unoptimized to prevent Next.js from altering the src path, which can help with stubborn caching.
       />
       <span className="text-xl font-bold tracking-tight">
         <span className="font-headline text-foreground">JEZZA COOKS</span>
