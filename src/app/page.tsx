@@ -45,30 +45,28 @@ export default function Home() {
     "Training die blijft hangen (minder schreeuwen, meer duidelijkheid)",
     "Meer directe boekingen, minder platformkosten",
   ];
-
   const faqs = [
     {
-      question: "What do you mean by 'organized chaos'?",
+      question: "Wat bedoel je met ‘organized chaos’?",
       answer:
-        "Hospitality will always be busy. Organized chaos means the rush stays, but the panic is gone. Clear prep, clear roles, and systems your team actually follows. That’s how you get consistency, calmer shifts, and better margins.",
+        "Horeca blijft druk, dat hoort erbij. ‘Organized chaos’ betekent: de rush blijft, maar de paniek verdwijnt. Met duidelijke prep, heldere rollen en systemen die je team écht volgt, krijg je consistentie, rustigere shifts en betere marges.",
     },
     {
-      question: "What happens in the free diagnosis?",
+      question: "Wat gebeurt er bij de gratis diagnose?",
       answer:
-        "You answer a short questionnaire. I look for the obvious leaks: food cost, labor pressure, workflow friction, and menu issues. Then you get 3 concrete next steps you can implement this week. No long reports, no fluff.",
+        "Je vult een korte vragenlijst in. Ik zoek naar de duidelijke lekken: food cost, loondruk, frictie in workflow en menukaartproblemen. Daarna krijg je drie concrete stappen die je deze week al kunt uitvoeren. Geen lange rapporten, geen fluff.",
     },
     {
-      question: "Do you only work with fine dining?",
+      question: "Werk je alleen met fine dining restaurants?",
       answer:
-        "No. I work with restaurants, pubs, cafes, catering teams, and hospitality concepts that want more control and better results. The principles are the same: structure, training, consistency, and a menu that makes sense.",
+        "Nee. Ik werk met restaurants, cafés, pubs, cateringteams en hospitality concepten die meer grip willen en betere resultaten zoeken. De principes zijn overal hetzelfde: structuur, training, consistentie en een menukaart die logisch draait.",
     },
     {
-      question: "How are you different from a standard business consultant?",
+      question: "Wat maakt jou anders dan een standaard business consultant?",
       answer:
-        "I’m a chef and operator first. I’ve run service, built prep systems, negotiated with suppliers, trained teams, and dealt with real hospitality chaos. So the advice is practical and executable, not theory on a slide deck.",
+        "Ik ben chef en operator eerst. Ik heb service gedraaid, prepsystemen gebouwd, met leveranciers onderhandeld, teams getraind en echte horeca-chaos meegemaakt. Daarom is mijn advies praktisch en uitvoerbaar op de vloer, niet alleen theorie in een slide deck.",
     },
-  ];
-
+  ];  
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
