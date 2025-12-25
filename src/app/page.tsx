@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,8 +12,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
-
-const heroImage = PlaceHolderImages.find((p) => p.id === "hero-home");
 
 export default function Home() {
   const services = [
@@ -40,11 +39,11 @@ export default function Home() {
   ];
 
   const benefits = [
-    "Lower food cost and better margin control",
-    "Prep structure and smoother service flow",
-    "Menus that sell and still feel like you",
-    "Training that sticks (less shouting, more clarity)",
-    "More direct bookings, fewer platform fees",
+    "Lagere food cost en betere margecontrole",
+    "Strakkere prep en een soepelere serviceflow",
+    "Menu’s die verkopen én bij je passen",
+    "Training die blijft hangen (minder schreeuwen, meer duidelijkheid)",
+    "Meer directe boekingen, minder platformkosten",
   ];
 
   const faqs = [
@@ -74,17 +73,17 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative h-[80vh] min-h-[600px] w-full">
-        {heroImage && (
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint={heroImage.imageHint}
-          />
-        )}
-        <div className="absolute inset-0 bg-background/70 bg-gradient-to-t from-background via-background/80 to-transparent" />
+        <Image
+          src="/pics/hero-home.jpg"
+          alt="Jezza Cooks — organized chaos in hospitality"
+          fill
+          className="object-cover"
+          priority
+          data-ai-hint="chef kitchen"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/55 to-background/10" />
+
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">
           <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-foreground max-w-4xl">
             Level up the chaos.
@@ -106,7 +105,7 @@ export default function Home() {
               href="/free-diagnosis"
               className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
             >
-              Free 15-min diagnosis
+              Gratis 15-min diagnose
             </Link>
             <Link
               href="/results"
@@ -115,12 +114,12 @@ export default function Home() {
                 "font-semibold border-2"
               )}
             >
-              See Results
+              Bekijk resultaten
             </Link>
           </div>
 
           <p className="mt-6 text-sm text-muted-foreground">
-            Typical focus: food cost, prep structure, smoother service, and more control.
+            Typische focus: food cost, prep-structuur, soepelere service en meer controle.
           </p>
         </div>
       </section>
@@ -177,10 +176,11 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Practical results, fast.
+              Snelle, praktische resultaten.
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              We focus on the levers that actually move performance in restaurants and hospitality teams.
+              We focussen op de hefbomen die prestaties in restaurants en horecateams écht verbeteren:
+              food cost, workflow, training en directe boekingen.
             </p>
           </div>
 
@@ -198,7 +198,7 @@ export default function Home() {
               href="/free-diagnosis"
               className={cn(buttonVariants({ variant: "outline" }), "font-semibold")}
             >
-              Get your free diagnosis <ArrowRight className="ml-2 h-4 w-4" />
+              Start je gratis diagnose <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -214,37 +214,37 @@ export default function Home() {
             Chaos to Control.
           </h2>
           <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Examples of what clients typically improve with better structure, pricing, and execution.
+            Voorbeelden van wat klanten meestal verbeteren met betere structuur, prijsstelling en uitvoering.
           </p>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 rounded-lg">
               <p className="font-headline text-5xl font-bold text-primary">5–15%</p>
-              <p className="mt-2 text-lg text-muted-foreground">Lower food cost</p>
+              <p className="mt-2 text-lg text-muted-foreground">Lagere food cost</p>
               <p className="text-sm text-muted-foreground/50">
-                Through menu engineering + tighter prep and portion control
+                Door menu engineering + strakkere prep en portiecontrole
               </p>
             </div>
 
             <div className="p-6 rounded-lg border-x-2 border-border">
-              <p className="font-headline text-5xl font-bold text-primary">4–10 hrs</p>
-              <p className="mt-2 text-lg text-muted-foreground">Less owner firefighting</p>
+              <p className="font-headline text-5xl font-bold text-primary">4–10 uur</p>
+              <p className="mt-2 text-lg text-muted-foreground">Minder brandjes blussen</p>
               <p className="text-sm text-muted-foreground/50">
-                With clear roles, SOPs, and team training
+                Met duidelijke rollen, SOP’s/checklists en teamtraining
               </p>
             </div>
 
             <div className="p-6 rounded-lg">
               <p className="font-headline text-5xl font-bold text-primary">2–4x</p>
-              <p className="mt-2 text-lg text-muted-foreground">More direct bookings</p>
+              <p className="mt-2 text-lg text-muted-foreground">Meer directe boekingen</p>
               <p className="text-sm text-muted-foreground/50">
-                With a booking-focused hospitality website + SEO basics
+                Met een booking-focused hospitality website + SEO basics
               </p>
             </div>
           </div>
 
           <Link href="/results" className={cn(buttonVariants({ variant: "outline" }), "mt-12")}>
-            See More Results
+            Bekijk meer resultaten
           </Link>
         </div>
       </section>
@@ -254,38 +254,39 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Free diagnosis. Zero poeha.
+              Gratis diagnose. Zero poeha.
             </h2>
             <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Answer a short questionnaire. I’ll spot the obvious leaks and send you 3 clear next steps.
+              Vul een korte vragenlijst in. Ik spot de grootste “leaks” (food cost, arbeid, workflow, menu) en stuur je
+              3 concrete next steps die je deze week al kunt uitvoeren.
             </p>
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="bg-card">
               <CardHeader>
-                <CardTitle className="font-headline text-2xl">1) You fill it in</CardTitle>
+                <CardTitle className="font-headline text-2xl">1) Jij vult het in</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
-                2 minutes. Multiple choice. No long stories needed.
+                2 minuten. Multiple choice. Geen lange verhalen nodig.
               </CardContent>
             </Card>
 
             <Card className="bg-card">
               <CardHeader>
-                <CardTitle className="font-headline text-2xl">2) I diagnose</CardTitle>
+                <CardTitle className="font-headline text-2xl">2) Ik diagnoseer</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
-                Food cost, labor pressure, workflow friction, and menu issues. Straight to the point.
+                Food cost, loondruk, workflow-frictie en menu-issues. Recht door zee.
               </CardContent>
             </Card>
 
             <Card className="bg-card">
               <CardHeader>
-                <CardTitle className="font-headline text-2xl">3) You get a plan</CardTitle>
+                <CardTitle className="font-headline text-2xl">3) Jij krijgt een plan</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
-                3 actions you can do this week. If it clicks, we talk next steps.
+                3 acties voor deze week. Als het klikt, bespreken we de volgende stap.
               </CardContent>
             </Card>
           </div>
@@ -295,7 +296,7 @@ export default function Home() {
               href="/free-diagnosis"
               className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
             >
-              Start the free diagnosis <ArrowRight className="ml-2 h-5 w-5" />
+              Start de gratis diagnose <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
         </div>
@@ -305,10 +306,10 @@ export default function Home() {
       <section className="bg-primary text-primary-foreground py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl md:text-4xl font-bold">
-            Ready for a calmer, stronger operation?
+            Klaar voor een rustigere, sterkere operatie?
           </h2>
           <p className="mt-2 text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-            Start with the free diagnosis. If there’s a fit, we move fast and build systems your team can actually run.
+            Start met de gratis diagnose. Als er een match is, bouwen we snel systemen die je team écht kan draaien.
           </p>
           <Link
             href="/free-diagnosis"
@@ -317,7 +318,7 @@ export default function Home() {
               "mt-8 bg-foreground text-background hover:bg-foreground/80 font-bold"
             )}
           >
-            Free 15-min diagnosis
+            Gratis 15-min diagnose
           </Link>
         </div>
       </section>
