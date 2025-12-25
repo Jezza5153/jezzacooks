@@ -3,85 +3,85 @@
     {
       "id": "hero-home",
       "description": "A chef plating a dish in a professional kitchen",
-      "imageUrl": "/images/hero-home.jpg",
+      "imageUrl": "/pics/hero-home.jpg",
       "imageHint": "chef kitchen"
     },
     {
       "id": "service-consulting",
       "description": "A notepad with charts and notes about restaurant business",
-      "imageUrl": "/images/service-consulting.jpg",
+      "imageUrl": "/pics/service-consulting.jpg",
       "imageHint": "business planning"
     },
     {
       "id": "service-catering",
       "description": "A beautifully set table for a private dinner event",
-      "imageUrl": "/images/service-catering.jpg",
+      "imageUrl": "/pics/service-catering.jpg",
       "imageHint": "dinner party"
     },
     {
       "id": "service-websites",
       "description": "A person using a laptop showing a restaurant website",
-      "imageUrl": "/images/service-websites.jpg",
+      "imageUrl": "/pics/service-websites.jpg",
       "imageHint": "laptop website"
     },
     {
       "id": "about-jezza",
       "description": "Portrait of a friendly and confident chef",
-      "imageUrl": "/images/about-jezza.jpg",
+      "imageUrl": "/pics/about-jezza.jpg",
       "imageHint": "chef portrait"
     },
     {
       "id": "result-1-after",
       "description": "A clean, organized, and efficient professional kitchen",
-      "imageUrl": "/images/result-1-after.jpg",
+      "imageUrl": "/pics/result-1-after.jpg",
       "imageHint": "clean kitchen"
     },
     {
       "id": "result-2-after",
       "description": "A barista calmly making coffee",
-      "imageUrl": "/images/result-2-after.jpg",
+      "imageUrl": "/pics/result-2-after.jpg",
       "imageHint": "calm barista"
     },
     {
       "id": "result-3-after",
       "description": "A user booking a room on a hotel website on a laptop",
-      "imageUrl": "/images/result-3-after.jpg",
+      "imageUrl": "/pics/result-3-after.jpg",
       "imageHint": "booking hotel"
     },
     {
       "id": "blog-pillar",
       "description": "A consultant talking to a restaurant owner",
-      "imageUrl": "/images/blog-pillar.jpg",
+      "imageUrl": "/pics/blog-pillar.jpg",
       "imageHint": "business meeting"
     },
     {
       "id": "blog-prime-cost",
       "description": "A chef calculating costs on a calculator with receipts",
-      "imageUrl": "/images/blog-prime-cost.jpg",
+      "imageUrl": "/pics/blog-prime-cost.jpg",
       "imageHint": "calculating costs"
     },
     {
       "id": "blog-menu-engineering",
       "description": "A restaurant menu with notes and highlights",
-      "imageUrl": "/images/blog-menu-engineering.jpg",
+      "imageUrl": "/pics/blog-menu-engineering.jpg",
       "imageHint": "restaurant menu"
     },
     {
       "id": "blog-service-system",
       "description": "Waitstaff in a busy but organized restaurant",
-      "imageUrl": "/images/blog-service-system.jpg",
+      "imageUrl": "/pics/blog-service-system.jpg",
       "imageHint": "busy restaurant"
     },
     {
       "id": "blog-booking-site",
       "description": "A laptop showing a clean website design",
-      "imageUrl": "/images/blog-booking-site.jpg",
+      "imageUrl": "/pics/blog-booking-site.jpg",
       "imageHint": "clean website"
     },
     {
       "id": "blog-weekly-rhythm",
       "description": "A calendar with weekly appointments marked",
-      "imageUrl": "/images/blog-weekly-rhythm.jpg",
+      "imageUrl": "/pics/blog-weekly-rhythm.jpg",
       "imageHint": "calendar"
     }
   ]
