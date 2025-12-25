@@ -18,47 +18,55 @@ export default function Home() {
   const services = [
     {
       title: "Restaurant Consulting",
-      description: "Fine-tune your operations for better margins and smoother service.",
+      description:
+        "Menu engineering, food cost control, prep structure, SOPs, and team training. Calm systems that hold up in real service.",
       link: "/services/consulting",
       image: PlaceHolderImages.find((p) => p.id === "service-consulting"),
     },
     {
       title: "Catering & Private Chef",
-      description: "Unforgettable dining experiences, tailored to your event.",
+      description:
+        "Chef-led dining for events and private dinners. Seasonal menus, smooth execution, and a guest experience people remember.",
       link: "/services/catering",
       image: PlaceHolderImages.find((p) => p.id === "service-catering"),
     },
     {
       title: "Hospitality Websites",
-      description: "Convert visitors into bookings with a site built by a chef.",
+      description:
+        "Websites built for restaurants. Clear story, strong SEO, and more direct bookings without endless platform fees.",
       link: "/services/websites",
       image: PlaceHolderImages.find((p) => p.id === "service-websites"),
     },
   ];
 
   const benefits = [
-    "Increase your profit margins",
-    "Smoother, more efficient operations",
-    "A menu that sells and delights",
-    "Stronger brand that attracts guests",
-    "More direct bookings, less fees",
+    "Lower food cost and better margin control",
+    "Prep structure and smoother service flow",
+    "Menus that sell and still feel like you",
+    "Training that sticks (less shouting, more clarity)",
+    "More direct bookings, fewer platform fees",
   ];
 
   const faqs = [
     {
-      question: "What does 'no poeha' mean?",
+      question: "What do you mean by 'organized chaos'?",
       answer:
-        "It's Dutch for 'no fuss' or 'no nonsense'. My approach is direct, practical, and focused on tangible results. We skip the jargon and get straight to what works for your business.",
+        "Hospitality will always be busy. Organized chaos means the rush stays, but the panic is gone. Clear prep, clear roles, and systems your team actually follows. That’s how you get consistency, calmer shifts, and better margins.",
     },
     {
-      question: "I'm just starting out. Can you help?",
+      question: "What happens in the free diagnosis?",
       answer:
-        "Absolutely. I help new restaurants and hospitality concepts build a strong foundation from day one, covering everything from menu engineering to operational workflows and a booking-focused website.",
+        "You answer a short questionnaire. I look for the obvious leaks: food cost, labor pressure, workflow friction, and menu issues. Then you get 3 concrete next steps you can implement this week. No long reports, no fluff.",
     },
     {
-      question: "How are you different from a regular business consultant?",
+      question: "Do you only work with fine dining?",
       answer:
-        "I'm a chef first. I've run the pass, managed inventory, and dealt with the day-to-day chaos of hospitality. My advice is grounded in real-world kitchen and front-of-house experience, not just spreadsheets.",
+        "No. I work with restaurants, pubs, cafes, catering teams, and hospitality concepts that want more control and better results. The principles are the same: structure, training, consistency, and a menu that makes sense.",
+    },
+    {
+      question: "How are you different from a standard business consultant?",
+      answer:
+        "I’m a chef and operator first. I’ve run service, built prep systems, negotiated with suppliers, trained teams, and dealt with real hospitality chaos. So the advice is practical and executable, not theory on a slide deck.",
     },
   ];
 
@@ -79,10 +87,18 @@ export default function Home() {
         <div className="absolute inset-0 bg-background/70 bg-gradient-to-t from-background via-background/80 to-transparent" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">
           <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-foreground max-w-4xl">
-            Chef-led growth for hospitality.
+            Level up the chaos.
           </h1>
-          <p className="mt-4 text-lg md:text-xl text-muted-foreground max-w-2xl">
-            Consulting, catering, and websites that convert — no poeha, just results.
+
+          <p className="mt-4 text-lg md:text-2xl text-muted-foreground max-w-3xl">
+            Don&apos;t chase perfection. Chase improvement.
+          </p>
+
+          <p className="mt-6 text-base md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
+            Rust komt niet door meer personeel, maar door betere gewoontes. Daarom bouw ik teams die het kunnen herhalen,
+            niet gerechten die één keer lukken.
+            <br />
+            Als dat staat, dan krijg je organized chaos: de shift loopt strak en de kwaliteit blijft hoog, keer op keer.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -104,7 +120,7 @@ export default function Home() {
           </div>
 
           <p className="mt-6 text-sm text-muted-foreground">
-            Typical wins: lower food cost, calmer service, more control.
+            Typical focus: food cost, prep structure, smoother service, and more control.
           </p>
         </div>
       </section>
@@ -113,11 +129,14 @@ export default function Home() {
       <section id="services" className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">Choose your path</h2>
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">
+              Choose your path
+            </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              Three ways to elevate your hospitality business.
+              Three ways to improve your hospitality business with chef-led strategy and execution.
             </p>
           </div>
+
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service) => (
               <Card key={service.title} className="bg-background overflow-hidden group">
@@ -157,11 +176,14 @@ export default function Home() {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">Practical results, fast.</h2>
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">
+              Practical results, fast.
+            </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              We focus on what moves the needle for your business.
+              We focus on the levers that actually move performance in restaurants and hospitality teams.
             </p>
           </div>
+
           <div className="mt-12 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
             {benefits.map((benefit) => (
               <div key={benefit} className="flex items-center gap-3">
@@ -189,31 +211,38 @@ export default function Home() {
             RESULTS
           </p>
           <h2 className="font-headline text-3xl md:text-4xl font-bold mt-2">
-            Chaos → Control.
+            Chaos to Control.
           </h2>
+          <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Examples of what clients typically improve with better structure, pricing, and execution.
+          </p>
+
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 rounded-lg">
-              <p className="font-headline text-5xl font-bold text-primary">+25%</p>
-              <p className="mt-2 text-lg text-muted-foreground">Increase in GOPPAR</p>
+              <p className="font-headline text-5xl font-bold text-primary">5–15%</p>
+              <p className="mt-2 text-lg text-muted-foreground">Lower food cost</p>
               <p className="text-sm text-muted-foreground/50">
-                Restaurant A, after menu engineering
+                Through menu engineering + tighter prep and portion control
               </p>
             </div>
+
             <div className="p-6 rounded-lg border-x-2 border-border">
-              <p className="font-headline text-5xl font-bold text-primary">-8 hrs</p>
-              <p className="mt-2 text-lg text-muted-foreground">Owner&apos;s weekly hours</p>
+              <p className="font-headline text-5xl font-bold text-primary">4–10 hrs</p>
+              <p className="mt-2 text-lg text-muted-foreground">Less owner firefighting</p>
               <p className="text-sm text-muted-foreground/50">
-                Cafe B, after ops streamlining
+                With clear roles, SOPs, and team training
               </p>
             </div>
+
             <div className="p-6 rounded-lg">
-              <p className="font-headline text-5xl font-bold text-primary">+300%</p>
-              <p className="mt-2 text-lg text-muted-foreground">Direct booking rate</p>
+              <p className="font-headline text-5xl font-bold text-primary">2–4x</p>
+              <p className="mt-2 text-lg text-muted-foreground">More direct bookings</p>
               <p className="text-sm text-muted-foreground/50">
-                Hotel C, after new website launch
+                With a booking-focused hospitality website + SEO basics
               </p>
             </div>
           </div>
+
           <Link href="/results" className={cn(buttonVariants({ variant: "outline" }), "mt-12")}>
             See More Results
           </Link>
@@ -247,7 +276,7 @@ export default function Home() {
                 <CardTitle className="font-headline text-2xl">2) I diagnose</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
-                Prime cost, chaos points, quick margin wins — straight to the point.
+                Food cost, labor pressure, workflow friction, and menu issues. Straight to the point.
               </CardContent>
             </Card>
 
@@ -275,9 +304,11 @@ export default function Home() {
       {/* CTA Band */}
       <section className="bg-primary text-primary-foreground py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold">Ready for a change?</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold">
+            Ready for a calmer, stronger operation?
+          </h2>
           <p className="mt-2 text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-            Start with the free diagnosis. If there’s a fit, we move fast.
+            Start with the free diagnosis. If there’s a fit, we move fast and build systems your team can actually run.
           </p>
           <Link
             href="/free-diagnosis"
