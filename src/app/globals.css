@@ -4,27 +4,41 @@
 
 @layer base {
   :root {
+    /* Core */
     --background: 220 14% 7%;
     --foreground: 40 56% 94%;
+
+    /* Surfaces */
     --card: 222 22% 11%;
     --card-foreground: 40 56% 94%;
     --popover: 222 22% 11%;
     --popover-foreground: 40 56% 94%;
-    --primary: 38 88% 62%;
-    --primary-foreground: 220 14% 10%;
-    --secondary: 19 78% 53%;
+
+    /* Brand */
+    --primary: 38 88% 62%;            /* Gold */
+    --primary-foreground: 220 14% 7%; /* Dark text on gold for max contrast */
+    --secondary: 19 78% 53%;          /* Orange */
     --secondary-foreground: 40 56% 94%;
-    --muted: 225 4% 18%;
-    --muted-foreground: 40 19% 78%;
-    --accent: 222 22% 15%;
+
+    /* Utility */
+    --muted: 222 14% 14%;             /* Dark muted panel */
+    --muted-foreground: 40 19% 78%;   /* Light gray text */
+
+    --accent: 222 18% 18%;            /* Clearer than card for hovers/selected */
     --accent-foreground: 40 56% 94%;
+
+    /* Feedback */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 40 56% 94% / 0.12;
-    --input: 40 56% 94% / 0.12;
+    --success: 167 54% 66%;           /* Only for success states (optional) */
+
+    /* Borders / Inputs (cooler + calmer than off-white alpha) */
+    --border: 222 16% 22%;
+    --input: 222 16% 22%;
     --ring: 38 88% 62%;
+
+    /* Shape */
     --radius: 1rem;
-    --mint-accent: 167 54% 66%;
   }
 }
 
@@ -32,10 +46,11 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
-  
+
   body::before {
     content: "";
     position: fixed;
