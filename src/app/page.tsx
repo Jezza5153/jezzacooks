@@ -1,3 +1,4 @@
+
 // src/app/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -33,7 +34,7 @@ export default function Home() {
     {
       title: "Restaurant Consulting",
       description:
-        "Menukaart optimaliseren (menu engineering), food cost onder controle, prep structuur, SOP’s en teamtraining. Systemen die blijven staan tijdens echte service.",
+        "Menukaart optimaliseren, food cost onder controle, prep structuur en teamtraining. Systemen die blijven staan tijdens echte service.",
       link: "/services/consulting",
       image: PlaceHolderImages.find((p) => p.id === "service-consulting"),
     },
@@ -47,7 +48,7 @@ export default function Home() {
     {
       title: "Restaurant Websites",
       description:
-        "Websites voor restaurants die reserveringen en aanvragen binnenhalen. Heldere propositie, sterke SEO en meer directe boekingen zonder platformfees.",
+"Websites voor restaurants die je verhaal helder maken. Een premium visitekaartje met duidelijke info, foto’s, menu en contact. Reserveren? Daar koppel ik een systeem aan dat bij je zaak past.",
       link: "/services/websites",
       image: PlaceHolderImages.find((p) => p.id === "service-websites"),
     },
