@@ -1,4 +1,5 @@
-
+// src/app/page.tsx
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,26 +14,40 @@ import { CheckCircle, ArrowRight } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
 
+export const metadata: Metadata = {
+  title: "Jezza Cooks | Horeca consultancy, catering en restaurant websites",
+  description:
+    "Horeca consultant voor restaurants en hospitality teams. Menu engineering, food cost controle, prep structuur, SOP’s en team training. Ook restaurant websites voor directe reserveringen met SEO.",
+  openGraph: {
+    title: "Jezza Cooks | Level up the chaos",
+    description:
+      "Rust op de vloer met betere gewoontes: menu engineering, food cost, SOP’s en training. Plus restaurant websites die directe boekingen verhogen.",
+    type: "website",
+  },
+};
+
 export default function Home() {
+  const heroImage = PlaceHolderImages.find((p) => p.id === "hero-home");
+
   const services = [
     {
       title: "Restaurant Consulting",
       description:
-        "Menu engineering, food cost control, prep structure, SOPs, and team training. Calm systems that hold up in real service.",
+        "Menukaart optimaliseren (menu engineering), food cost onder controle, prep structuur, SOP’s en teamtraining. Systemen die blijven staan tijdens echte service.",
       link: "/services/consulting",
       image: PlaceHolderImages.find((p) => p.id === "service-consulting"),
     },
     {
       title: "Catering & Private Chef",
       description:
-        "Chef-led dining for events and private dinners. Seasonal menus, smooth execution, and a guest experience people remember.",
+        "Chef-led diners voor events en privé. Seizoensmenu’s, strakke timing en een ervaring waar gasten over praten.",
       link: "/services/catering",
       image: PlaceHolderImages.find((p) => p.id === "service-catering"),
     },
     {
-      title: "Hospitality Websites",
+      title: "Restaurant Websites",
       description:
-        "Websites built for restaurants. Clear story, strong SEO, and more direct bookings without endless platform fees.",
+        "Websites voor restaurants die reserveringen en aanvragen binnenhalen. Heldere propositie, sterke SEO en meer directe boekingen zonder platformfees.",
       link: "/services/websites",
       image: PlaceHolderImages.find((p) => p.id === "service-websites"),
     },
@@ -45,42 +60,47 @@ export default function Home() {
     "Training die blijft hangen (minder schreeuwen, meer duidelijkheid)",
     "Meer directe boekingen, minder platformkosten",
   ];
+
   const faqs = [
     {
       question: "Wat bedoel je met ‘organized chaos’?",
       answer:
-        "Horeca blijft druk, dat hoort erbij. ‘Organized chaos’ betekent: de rush blijft, maar de paniek verdwijnt. Met duidelijke prep, heldere rollen en systemen die je team écht volgt, krijg je consistentie, rustigere shifts en betere marges.",
+        "Horeca blijft druk, dat hoort erbij. Organized chaos betekent: de rush blijft, maar de paniek verdwijnt. Met duidelijke prep, heldere rollen en systemen die je team echt volgt, krijg je consistentie, rustigere shifts en betere marges.",
     },
     {
       question: "Wat gebeurt er bij de gratis diagnose?",
       answer:
-        "Je vult een korte vragenlijst in. Ik zoek naar de duidelijke lekken: food cost, loondruk, frictie in workflow en menukaartproblemen. Daarna krijg je drie concrete stappen die je deze week al kunt uitvoeren. Geen lange rapporten, geen fluff.",
+        "Je vult een korte vragenlijst in. Ik kijk waar het weglekt: food cost, loondruk, frictie in workflow en menukaartproblemen. Daarna stuur ik drie concrete stappen die je deze week al kunt uitvoeren. Kort, praktisch en uitvoerbaar.",
     },
     {
       question: "Werk je alleen met fine dining restaurants?",
       answer:
-        "Nee. Ik werk met restaurants, cafés, pubs, cateringteams en hospitality concepten die meer grip willen en betere resultaten zoeken. De principes zijn overal hetzelfde: structuur, training, consistentie en een menukaart die logisch draait.",
+        "Nee. Ik werk met restaurants, cafés, pubs, cateringteams en hospitality concepten die meer grip willen en betere resultaten zoeken. De basis blijft hetzelfde: structuur, training, consistentie en een menukaart die logisch draait.",
     },
     {
       question: "Wat maakt jou anders dan een standaard business consultant?",
       answer:
-        "Ik ben chef en operator eerst. Ik heb service gedraaid, prepsystemen gebouwd, met leveranciers onderhandeld, teams getraind en echte horeca-chaos meegemaakt. Daarom is mijn advies praktisch en uitvoerbaar op de vloer, niet alleen theorie in een slide deck.",
+        "Ik ben chef en operator eerst. Ik heb service gedraaid, prepsystemen gebouwd, met leveranciers onderhandeld en teams getraind in echte horeca-druk. Daarom is mijn advies uitvoerbaar op de vloer, niet alleen theorie op papier.",
     },
-  ];  
+  ];
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative h-[80vh] min-h-[600px] w-full">
-        <Image
-          src="/pics/hero-home.jpg"
-          alt="Jezza Cooks — organized chaos in hospitality"
-          fill
-          className="object-cover"
-          priority
-          data-ai-hint="chef kitchen"
-        />
+        {heroImage && (
+          <Image
+            src={heroImage.imageUrl}
+            alt={heroImage.description}
+            fill
+            className="object-cover"
+            priority
+            data-ai-hint={heroImage.imageHint}
+          />
+        )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/55 to-background/10" />
+        {/* Stronger image presence: lighter overlay (less fade), still readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-background/40 to-background/10" />
 
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">
           <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-foreground max-w-4xl">
@@ -127,10 +147,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Choose your path
+              Kies je pad
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              Three ways to improve your hospitality business with chef-led strategy and execution.
+              Drie manieren om je restaurant of horecateam strakker te laten draaien, met chef-led strategie en uitvoering.
             </p>
           </div>
 
@@ -160,7 +180,7 @@ export default function Home() {
                       "p-0 font-semibold text-primary"
                     )}
                   >
-                    See how it works <ArrowRight className="ml-2 h-4 w-4" />
+                    Bekijk hoe het werkt <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </CardContent>
               </Card>
@@ -177,8 +197,7 @@ export default function Home() {
               Snelle, praktische resultaten.
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              We focussen op de hefbomen die prestaties in restaurants en horecateams écht verbeteren:
-              food cost, workflow, training en directe boekingen.
+              We focussen op wat prestaties in restaurants en horecateams echt verbetert: food cost, workflow, training en directe boekingen.
             </p>
           </div>
 
@@ -236,7 +255,7 @@ export default function Home() {
               <p className="font-headline text-5xl font-bold text-primary">2–4x</p>
               <p className="mt-2 text-lg text-muted-foreground">Meer directe boekingen</p>
               <p className="text-sm text-muted-foreground/50">
-                Met een booking-focused hospitality website + SEO basics
+                Met een restaurant website die gemaakt is voor reserveringen + een sterke SEO basis
               </p>
             </div>
           </div>
@@ -255,8 +274,8 @@ export default function Home() {
               Gratis diagnose. Zero poeha.
             </h2>
             <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Vul een korte vragenlijst in. Ik spot de grootste “leaks” (food cost, arbeid, workflow, menu) en stuur je
-              3 concrete next steps die je deze week al kunt uitvoeren.
+              Vul een korte vragenlijst in. Ik spot de grootste knelpunten (food cost, arbeid, workflow, menu) en stuur je
+              drie concrete stappen die je deze week al kunt uitvoeren.
             </p>
           </div>
 
@@ -266,7 +285,7 @@ export default function Home() {
                 <CardTitle className="font-headline text-2xl">1) Jij vult het in</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
-                2 minuten. Multiple choice. Geen lange verhalen nodig.
+                Ongeveer 2 minuten. Meerkeuze. Geen lange verhalen nodig.
               </CardContent>
             </Card>
 
@@ -275,7 +294,7 @@ export default function Home() {
                 <CardTitle className="font-headline text-2xl">2) Ik diagnoseer</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
-                Food cost, loondruk, workflow-frictie en menu-issues. Recht door zee.
+                Food cost, loondruk, workflow-frictie en menukaart-issues. Recht door zee.
               </CardContent>
             </Card>
 
@@ -284,7 +303,7 @@ export default function Home() {
                 <CardTitle className="font-headline text-2xl">3) Jij krijgt een plan</CardTitle>
               </CardHeader>
               <CardContent className="text-muted-foreground">
-                3 acties voor deze week. Als het klikt, bespreken we de volgende stap.
+                Drie acties voor deze week. Als het klikt, bespreken we de volgende stap.
               </CardContent>
             </Card>
           </div>
@@ -307,7 +326,7 @@ export default function Home() {
             Klaar voor een rustigere, sterkere operatie?
           </h2>
           <p className="mt-2 text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-            Start met de gratis diagnose. Als er een match is, bouwen we snel systemen die je team écht kan draaien.
+            Start met de gratis diagnose. Als er een match is, bouwen we snel systemen die je team echt kan draaien.
           </p>
           <Link
             href="/free-diagnosis"
@@ -326,7 +345,7 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Frequently Asked Questions
+              Veelgestelde vragen
             </h2>
           </div>
           <Accordion type="single" collapsible className="w-full mt-8">
@@ -343,7 +362,7 @@ export default function Home() {
           </Accordion>
           <div className="text-center mt-8">
             <Link href="/faq" className={cn(buttonVariants({ variant: "link" }))}>
-              More Questions? <ArrowRight className="ml-2 h-4 w-4" />
+              Meer vragen? <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
         </div>
