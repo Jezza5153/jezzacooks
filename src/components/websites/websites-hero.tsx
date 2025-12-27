@@ -5,7 +5,7 @@ import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import anime from "animejs/lib/anime.es.js";
+import anime from "animejs";
 
 type Mode = "simple" | "pro" | "custom";
 
@@ -244,7 +244,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
           if (typeof v.height === "number") attrs.height = v.height;
           
           if (instant || reducedMotion) {
-            Object.keys(attrs).forEach(key => el.setAttribute(key, String(attrs[key as keyof SvgRectAttrs])))
+            Object.keys(attrs).forEach(key => el.setAttribute(key, String(attrs[key as keyof SvgRectAttrs])));
             el.style.opacity = String(v.opacity ?? 1);
             el.style.transform = "translateY(0px)";
             return;
@@ -427,7 +427,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
                 y={40}
                 width={520}
                 height={420}
-                rx="26"
+                rx={26}
                 fill="hsl(var(--card))"
                 opacity="0.85"
               />
@@ -436,7 +436,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
                 y={56}
                 width={488}
                 height={388}
-                rx="18"
+                rx={18}
                 fill="hsl(var(--background))"
                 opacity="0.65"
                 stroke="hsl(var(--border))"
@@ -444,17 +444,17 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
               />
 
               {/* screen UI blocks */}
-              <rect className="ui-block" data-b="topbar" x={104} y={78} width={332} height={18} rx="9" fill="hsl(var(--primary))" opacity={0.9} />
-              <rect className="ui-block" data-b="hero" x={104} y={108} width={332} height={78} rx="16" fill="hsl(var(--foreground))" opacity={0.08} />
-              <rect className="ui-block" data-b="cta" x={104} y={194} width={160} height={22} rx="11" fill="hsl(var(--primary))" opacity={0.75} />
+              <rect className="ui-block" data-b="topbar" x={104} y={78} width={332} height={18} rx={9} fill="hsl(var(--primary))" opacity={0.9} />
+              <rect className="ui-block" data-b="hero" x={104} y={108} width={332} height={78} rx={16} fill="hsl(var(--foreground))" opacity={0.08} />
+              <rect className="ui-block" data-b="cta" x={104} y={194} width={160} height={22} rx={11} fill="hsl(var(--primary))" opacity={0.75} />
 
-              <rect className="ui-block" data-b="card1" x={104} y={230} width={158} height={56} rx="16" fill="hsl(var(--foreground))" opacity={0.07} />
-              <rect className="ui-block" data-b="card2" x={278} y={230} width={158} height={56} rx="16" fill="hsl(var(--foreground))" opacity={0.07} />
-              <rect className="ui-block" data-b="card3" x={104} y={292} width={332} height={56} rx="16" fill="hsl(var(--foreground))" opacity={0.06} />
+              <rect className="ui-block" data-b="card1" x={104} y={230} width={158} height={56} rx={16} fill="hsl(var(--foreground))" opacity={0.07} />
+              <rect className="ui-block" data-b="card2" x={278} y={230} width={158} height={56} rx={16} fill="hsl(var(--foreground))" opacity={0.07} />
+              <rect className="ui-block" data-b="card3" x={104} y={292} width={332} height={56} rx={16} fill="hsl(var(--foreground))" opacity={0.06} />
 
-              <rect className="ui-block" data-b="code1" x={104} y={368} width={290} height={10} rx="5" fill="hsl(var(--primary))" opacity={0.22} />
-              <rect className="ui-block" data-b="code2" x={104} y={384} width={260} height={10} rx="5" fill="hsl(var(--primary))" opacity={0.14} />
-              <rect className="ui-block" data-b="code3" x={104} y={400} width={240} height={10} rx="5" fill="hsl(var(--primary))" opacity={0.08} />
+              <rect className="ui-block" data-b="code1" x={104} y={368} width={290} height={10} rx={5} fill="hsl(var(--primary))" opacity={0.22} />
+              <rect className="ui-block" data-b="code2" x={104} y={384} width={260} height={10} rx={5} fill="hsl(var(--primary))" opacity={0.14} />
+              <rect className="ui-block" data-b="code3" x={104} y={400} width={240} height={10} rx={5} fill="hsl(var(--primary))" opacity={0.08} />
 
               {/* cursor */}
               <circle className="cursor-dot" cx={150} cy={212} r={5} fill="hsl(var(--foreground))" opacity={0} />
@@ -466,7 +466,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
                 fill="hsl(var(--card))"
                 opacity="0.8"
               />
-              <rect x={255} y={492} width={130} height={14} rx="7" fill="hsl(var(--border))" opacity={0.35} />
+              <rect x={255} y={492} width={130} height={14} rx={7} fill="hsl(var(--border))" opacity={0.35} />
             </g>
 
             {/* subtle noise lines */}
@@ -478,7 +478,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
                   y={80 + i * 24}
                   width={220 - i * 8}
                   height={3}
-                  rx="2"
+                  rx={2}
                   fill="hsl(var(--foreground))"
                 />
               ))}
