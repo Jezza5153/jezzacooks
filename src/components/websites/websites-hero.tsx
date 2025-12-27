@@ -192,24 +192,8 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
         if (!root) return;
         currentMode.current = mode;
 
-        const b = (name: string) =>
-          root.querySelector<SVGRectElement>(`.ui-block[data-b="${name}"]`);
-
-        const topbar = b("topbar");
-        const hero = b("hero");
-        const cta = b("cta");
-        const card1 = b("card1");
-        const card2 = b("card2");
-        const card3 = b("card3");
-        const code1 = b("code1");
-        const code2 = b("code2");
-        const code3 = b("code3");
-
-        const targets = [topbar, hero, cta, card1, card2, card3, code1, code2, code3].filter(
-          Boolean
-        ) as SVGRectElement[];
-
-        const cfg: Record<Mode, Record<string, Partial<SVGRectElement> & { x?: number; y?: number; width?: number; height?: number; opacity?: number }>> =
+        type SvgRectAttrs = { x?: number; y?: number; width?: number; height?: number; opacity?: number };
+        const cfg: Record<Mode, Record<string, SvgRectAttrs>> =
           {
             simple: {
               topbar: { x: 110, y: 84, width: 320, height: 18, opacity: 1 },
@@ -248,20 +232,19 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
 
         const next = cfg[mode];
 
-        const to = (el: SVGRectElement, name: string) => {
+        root.querySelectorAll<SVGRectElement>(".ui-block").forEach((el) => {
+          const name = el.dataset.b || "";
           const v = next[name];
           if (!v) return;
-          const attrs: any = {};
+
+          const attrs: SvgRectAttrs = {};
           if (typeof v.x === "number") attrs.x = v.x;
           if (typeof v.y === "number") attrs.y = v.y;
           if (typeof v.width === "number") attrs.width = v.width;
           if (typeof v.height === "number") attrs.height = v.height;
-
+          
           if (instant || reducedMotion) {
-            el.setAttribute("x", String(attrs.x ?? el.getAttribute("x")));
-            el.setAttribute("y", String(attrs.y ?? el.getAttribute("y")));
-            el.setAttribute("width", String(attrs.width ?? el.getAttribute("width")));
-            el.setAttribute("height", String(attrs.height ?? el.getAttribute("height")));
+            Object.keys(attrs).forEach(key => el.setAttribute(key, String(attrs[key as keyof SvgRectAttrs])))
             el.style.opacity = String(v.opacity ?? 1);
             el.style.transform = "translateY(0px)";
             return;
@@ -275,11 +258,6 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
             translateY: [8, 0],
             ...attrs,
           });
-        };
-
-        targets.forEach((el) => {
-          const name = el.dataset.b || "";
-          to(el, name);
         });
       },
       [reducedMotion]
@@ -402,7 +380,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
                 <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
               </radialGradient>
             </defs>
-            <rect x="0" y="0" width="900" height="700" fill="url(#glow)" />
+            <rect x={0} y={0} width={900} height={700} fill="url(#glow)" />
 
             {/* CHEF line art */}
             <g transform="translate(90,170)">
@@ -445,19 +423,19 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
             <g className="laptop" transform="translate(350,140)">
               {/* screen frame */}
               <rect
-                x="60"
-                y="40"
-                width="520"
-                height="420"
+                x={60}
+                y={40}
+                width={520}
+                height={420}
                 rx="26"
                 fill="hsl(var(--card))"
                 opacity="0.85"
               />
               <rect
-                x="76"
-                y="56"
-                width="488"
-                height="388"
+                x={76}
+                y={56}
+                width={488}
+                height={388}
                 rx="18"
                 fill="hsl(var(--background))"
                 opacity="0.65"
@@ -466,20 +444,20 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
               />
 
               {/* screen UI blocks */}
-              <rect className="ui-block" data-b="topbar" x="104" y="78" width="332" height="18" rx="9" fill="hsl(var(--primary))" opacity="0.9" />
-              <rect className="ui-block" data-b="hero" x="104" y="108" width="332" height="78" rx="16" fill="hsl(var(--foreground))" opacity="0.08" />
-              <rect className="ui-block" data-b="cta" x="104" y="194" width="160" height="22" rx="11" fill="hsl(var(--primary))" opacity="0.75" />
+              <rect className="ui-block" data-b="topbar" x={104} y={78} width={332} height={18} rx="9" fill="hsl(var(--primary))" opacity={0.9} />
+              <rect className="ui-block" data-b="hero" x={104} y={108} width={332} height={78} rx="16" fill="hsl(var(--foreground))" opacity={0.08} />
+              <rect className="ui-block" data-b="cta" x={104} y={194} width={160} height={22} rx="11" fill="hsl(var(--primary))" opacity={0.75} />
 
-              <rect className="ui-block" data-b="card1" x="104" y="230" width="158" height="56" rx="16" fill="hsl(var(--foreground))" opacity="0.07" />
-              <rect className="ui-block" data-b="card2" x="278" y="230" width="158" height="56" rx="16" fill="hsl(var(--foreground))" opacity="0.07" />
-              <rect className="ui-block" data-b="card3" x="104" y="292" width="332" height="56" rx="16" fill="hsl(var(--foreground))" opacity="0.06" />
+              <rect className="ui-block" data-b="card1" x={104} y={230} width={158} height={56} rx="16" fill="hsl(var(--foreground))" opacity={0.07} />
+              <rect className="ui-block" data-b="card2" x={278} y={230} width={158} height={56} rx="16" fill="hsl(var(--foreground))" opacity={0.07} />
+              <rect className="ui-block" data-b="card3" x={104} y={292} width={332} height={56} rx="16" fill="hsl(var(--foreground))" opacity={0.06} />
 
-              <rect className="ui-block" data-b="code1" x="104" y="368" width="290" height="10" rx="5" fill="hsl(var(--primary))" opacity="0.22" />
-              <rect className="ui-block" data-b="code2" x="104" y="384" width="260" height="10" rx="5" fill="hsl(var(--primary))" opacity="0.14" />
-              <rect className="ui-block" data-b="code3" x="104" y="400" width="240" height="10" rx="5" fill="hsl(var(--primary))" opacity="0.08" />
+              <rect className="ui-block" data-b="code1" x={104} y={368} width={290} height={10} rx="5" fill="hsl(var(--primary))" opacity={0.22} />
+              <rect className="ui-block" data-b="code2" x={104} y={384} width={260} height={10} rx="5" fill="hsl(var(--primary))" opacity={0.14} />
+              <rect className="ui-block" data-b="code3" x={104} y={400} width={240} height={10} rx="5" fill="hsl(var(--primary))" opacity={0.08} />
 
               {/* cursor */}
-              <circle className="cursor-dot" cx="150" cy="212" r="5" fill="hsl(var(--foreground))" opacity="0" />
+              <circle className="cursor-dot" cx={150} cy={212} r={5} fill="hsl(var(--foreground))" opacity={0} />
 
               {/* base */}
               <path
@@ -488,7 +466,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
                 fill="hsl(var(--card))"
                 opacity="0.8"
               />
-              <rect x="255" y="492" width="130" height="14" rx="7" fill="hsl(var(--border))" opacity="0.35" />
+              <rect x={255} y={492} width={130} height={14} rx="7" fill="hsl(var(--border))" opacity={0.35} />
             </g>
 
             {/* subtle noise lines */}
@@ -499,7 +477,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, { reducedMotion: boolean }>(
                   x={520 + i * 12}
                   y={80 + i * 24}
                   width={220 - i * 8}
-                  height="3"
+                  height={3}
                   rx="2"
                   fill="hsl(var(--foreground))"
                 />

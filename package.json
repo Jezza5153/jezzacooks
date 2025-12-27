@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
+    "@types/animejs": "^3.1.12",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.15",
     "@types/react": "^19.2.1",
