@@ -1,4 +1,3 @@
-
 // src/components/websites/websites-hero.tsx
 "use client";
 
@@ -6,7 +5,7 @@ import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import anime from "animejs/lib/anime.esm.js";
+import anime from "animejs";
 
 type Mode = "simple" | "pro" | "custom";
 
@@ -749,5 +748,3 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(
     );
   }
 );
-
-    
