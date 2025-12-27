@@ -7,6 +7,12 @@
       "imageHint": "chef kitchen"
     },
     {
+      "id": "consulting-hero",
+      "description": "Chef pointing at a whiteboard in a kitchen, explaining a new system.",
+      "imageUrl": "/pics/consulting.jpg",
+      "imageHint": "chef teaching"
+    },
+    {
       "id": "service-consulting",
       "description": "A notepad with charts and notes about restaurant business",
       "imageUrl": "/pics/service-consulting.jpg",
