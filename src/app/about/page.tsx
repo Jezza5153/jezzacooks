@@ -1,351 +1,460 @@
-// src/app/page.tsx
+// src/app/about/page.tsx
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, ArrowRight } from "lucide-react";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
-const heroImage = PlaceHolderImages.find((p) => p.id === "hero-home");
+export const metadata: Metadata = {
+  title: "Over mij | Jezza Cooks | Horeca consultant in Amersfoort",
+  description:
+    "Jeremy Arrascaeta (Amersfoort). Horeca consultancy voor restaurants en teams: menu engineering, food cost controle, prepstructuur, SOP’s, serviceflow en teamtraining. Praktisch, no poeha, gericht op rust op de vloer en betere marges. Ook restaurant websites als premium visitekaartje met duidelijke info en CTA’s.",
+  openGraph: {
+    title: "Over mij | Jezza Cooks",
+    description:
+      "Horeca consultant in Amersfoort. Structuur op papier en rust op de vloer met menu engineering, food cost, SOP’s, serviceflow en teamtraining. Ook restaurant websites die je verhaal helder maken.",
+    type: "website",
+  },
+};
 
-export default function Home() {
-  const services = [
-    {
-      title: "Restaurant Consulting",
-      description:
-        "Menu engineering, food cost, prime cost, prepstructuur, SOP’s en teamtraining. Rustige systemen die overeind blijven tijdens echte service.",
-      link: "/services/consulting",
-      image: PlaceHolderImages.find((p) => p.id === "service-consulting"),
-    },
-    {
-      title: "Catering & Private Chef",
-      description:
-        "Chef-led diners en events. Seizoensmenu’s, strakke uitvoering, goede timing en een gastbeleving die mensen onthouden.",
-      link: "/services/catering",
-      image: PlaceHolderImages.find((p) => p.id === "service-catering"),
-    },
-    {
-      title: "Hospitality Websites",
-      description:
-        "Websites voor restaurants en horeca. Duidelijk verhaal, sterke SEO, en meer directe reserveringen zonder eindeloze platformkosten.",
-      link: "/services/websites",
-      image: PlaceHolderImages.find((p) => p.id === "service-websites"),
-    },
-  ];
+const values = [
+  {
+    title: "Safe Hands, Clear Direction",
+    body: "Rust in de chaos. Overzicht, scherpe keuzes en een plan dat je team kan uitvoeren zonder extra gedoe.",
+  },
+  {
+    title: "First Principles Thinking",
+    body: "Geen standaard advies. We halen het probleem uit elkaar en bouwen een simpel systeem dat in jouw zaak werkt.",
+  },
+  {
+    title: "Structure Creates Freedom",
+    body: "Als prep, rollen en routines kloppen, stijgt de kwaliteit en daalt de stress. Dan wordt service weer leuk.",
+  },
+  {
+    title: "Margins Without Killing the Food",
+    body: "Meer marge zit vaak in portionering, recepturen, inkoop en kaartkeuzes. Niet in bezuinigen op smaak.",
+  },
+  {
+    title: "Consistency Wins",
+    body: "Gasten komen terug omdat het klopt. We bouwen herhaalbaarheid met training, checks en een vaste werkwijze.",
+  },
+  {
+    title: "Experience Sells",
+    body: "Eten, service en communicatie moeten één lijn zijn. Dan voelen gasten het en gaan ze je aanraden.",
+  },
+];
 
-  const benefits = [
-    "Lagere food cost en betere margecontrole",
-    "Strakkere prepstructuur en soepelere serviceflow",
-    "Menu’s die verkopen én bij je concept passen",
-    "Training die blijft hangen (minder schreeuwen, meer duidelijkheid)",
-    "Meer directe reserveringen en minder platformkosten",
-  ];
+const steps = [
+  {
+    n: "1",
+    title: "Diagnose",
+    body: "We vinden de lekken: food cost, loondruk, prepfrictie, menu keuzes en serviceflow. Kort en eerlijk.",
+  },
+  {
+    n: "2",
+    title: "Structuur bouwen",
+    body: "Prepplanning, rolverdeling, SOP’s en checklists. Niet dik, wel bruikbaar tijdens echte drukte.",
+  },
+  {
+    n: "3",
+    title: "Invoeren met het team",
+    body: "Hands on. We trainen op de vloer, in echte prep en echte service. Zo blijft het hangen.",
+  },
+  {
+    n: "4",
+    title: "Sturen op ritme",
+    body: "Een paar KPI’s en een weekritme. Kleine verbeteringen, elke week. Zo ga je echt vooruit.",
+  },
+];
 
-  const faqs = [
-    {
-      question: "Wat bedoel je met ‘organized chaos’?",
-      answer:
-        "Horeca blijft druk. Organized chaos betekent: de druk blijft, maar de paniek verdwijnt. Duidelijke prep, heldere rollen, vaste standaarden en systemen die je team echt volgt. Dat levert consistentie, rustigere shifts en betere marges op.",
-    },
-    {
-      question: "Wat gebeurt er in de gratis diagnose?",
-      answer:
-        "Je vult een korte intake in. Ik spot de grootste lekken in je operatie: food cost, loonkosten (labor), workflow frictie en menu-keuzes. Daarna krijg je 3 concrete next steps die je deze week kunt uitvoeren. Geen lange rapporten, wel actie.",
-    },
-    {
-      question: "Werk je alleen met fine dining?",
-      answer:
-        "Nee. Ik werk met restaurants, pubs, cafés, catering teams en horecaconcepten die meer controle en betere resultaten willen. De basis is overal hetzelfde: structuur, training, consistentie en een menu dat klopt.",
-    },
-    {
-      question: "Wat is het verschil met een ‘gewone’ business consultant?",
-      answer:
-        "Ik ben chef en operator eerst. Ik sta op de vloer, zie wat er echt gebeurt, en bouw systemen die in service werken. Dus geen theorie op slides, maar praktische verbeteringen die je team kan herhalen.",
-    },
-  ];
+const experience = [
+  {
+    period: "2024 – 2025",
+    role: "Sous Chef (Australië)",
+    bullets: [
+      "Bestelritme en par-levels opgezet voor voorraad en rust in de keuken",
+      "Menu engineering: verkoopmix, marge en prepdruk scherper gemaakt",
+      "Prepplanning en dagstructuur gebouwd die het team kan volgen",
+      "Aansturing tijdens service: passcontrole, tempo en consistentie",
+    ],
+  },
+  {
+    period: "2023 – 2024",
+    role: "Sous Chef (catering en volume)",
+    bullets: [
+      "Productieplanning en draaiboeken gemaakt voor events met volume",
+      "Mise en place structuur aangebracht zodat kwaliteit gelijk blijft",
+      "Inzet en roosters afgestemd op piekmomenten en workload",
+      "Uitvoering bewaakt op timing, portionering en afwerking",
+    ],
+  },
+  {
+    period: "2020 – 2022",
+    role: "General Manager (high-end visrestaurant)",
+    bullets: [
+      "Omzet met 60% gegroeid in 2 jaar door betere gastflow en herhaalbezoek",
+      "Team aangestuurd op standaard: afspraken, training en feedback ritme",
+      "Gestuurd op cijfers: omzet, marge, waste en planning, zonder administratie-ellende",
+      "Concepten en samenwerkingen opgezet die echt gasten brachten",
+    ],
+  },
+  {
+    period: "2010 – 2019",
+    role: "Keukenrollen Europa (NL, BE, FR)",
+    bullets: [
+      "Basis gebouwd: tempo, discipline, mise en place en station ownership",
+      "Partie gedraaid en collega’s ingewerkt zodat service stabiel blijft",
+      "Recepturen en portionering strak gezet voor constante kwaliteit",
+      "Kwaliteit geborgd met simpele checks die je volhoudt in de drukte",
+    ],
+  },
+];
+
+export default function AboutPage() {
+  const aboutImage = PlaceHolderImages.find((p) => p.id === "about-jezza");
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        name: "Jeremy Arrascaeta",
+        jobTitle: "Horeca consultant",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Amersfoort",
+          addressCountry: "NL",
+        },
+        knowsAbout: [
+          "horeca consultancy",
+          "restaurant consulting",
+          "menu engineering",
+          "food cost controle",
+          "prepstructuur",
+          "SOP’s",
+          "serviceflow",
+          "teamtraining",
+          "restaurant websites",
+          "website voor restaurant",
+        ],
+        sameAs: ["https://instagram.com/chefjezz"],
+      },
+      {
+        "@type": "ProfessionalService",
+        name: "Jezza Cooks",
+        areaServed: {
+          "@type": "AdministrativeArea",
+          name: "Amersfoort en omgeving",
+        },
+        serviceType: ["Horeca consultancy", "Restaurant consulting", "Restaurant websites"],
+        description:
+          "Horeca consultancy en restaurant websites. Structuur op papier en rust op de vloer met menu engineering, food cost controle, SOP’s, serviceflow en teamtraining.",
+      },
+    ],
+  };
 
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-[80vh] min-h-[600px] w-full">
-        {heroImage && (
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint={heroImage.imageHint}
-          />
-        )}
-        <div className="absolute inset-0 bg-background/70 bg-gradient-to-t from-background via-background/80 to-transparent" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">
-          <h1 className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-foreground max-w-4xl">
-            Level up the chaos.
-          </h1>
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] bg-gradient-to-b from-primary/10 to-transparent" />
 
-          <p className="mt-4 text-lg md:text-2xl text-muted-foreground max-w-3xl">
-            Don’t chase perfection. Chase improvement.
-          </p>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-          <p className="mt-6 text-base md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
-            Rust komt niet door meer personeel, maar door betere gewoontes. Daarom bouw ik teams die het kunnen herhalen,
-            niet gerechten die één keer lukken. En als dat staat, dan krijg je organized chaos: de shift loopt strak en de
-            kwaliteit blijft hoog, service na service.
-          </p>
+      {/* HERO */}
+      <section className="relative border-b border-border">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tight">
+              Level up the chaos.
+            </h1>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/free-diagnosis"
-              className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
-            >
-              Plan een gratis 15-min call
-            </Link>
-            <Link
-              href="/results"
-              className={cn(
-                buttonVariants({ size: "lg", variant: "outline" }),
-                "font-semibold border-2"
-              )}
-            >
-              Bekijk resultaten
-            </Link>
+            <p className="mt-4 text-lg md:text-2xl text-muted-foreground">
+              Don&apos;t chase perfection. Chase improvement.
+            </p>
+
+            <p className="mt-6 text-base md:text-xl text-muted-foreground leading-relaxed">
+              Ik help restaurants en horecateams om chaos om te zetten in structuur op papier, zodat je rust krijgt op de vloer.
+              <br />
+              Praktisch, uitvoerbaar en zonder poeha.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/free-diagnosis"
+                className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
+              >
+                Start de gratis diagnose
+              </Link>
+              <Link
+                href="/services/consulting"
+                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
+              >
+                Bekijk restaurant consulting
+              </Link>
+              <Link
+                href="/services/websites"
+                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
+              >
+                Bekijk restaurant websites
+              </Link>
+            </div>
+
+            <div className="mt-10 mx-auto max-w-3xl rounded-2xl border border-border bg-card/40 p-6 text-left">
+              <h2 className="font-headline text-xl md:text-2xl font-bold">
+                Waar ik meestal mee help
+              </h2>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2 text-muted-foreground">
+                <li>Menu engineering en kaartkeuzes</li>
+                <li>Food cost controle en portionering</li>
+                <li>Prepstructuur en mise en place ritme</li>
+                <li>SOP’s en checklists die werken</li>
+                <li>Serviceflow en rolverdeling</li>
+                <li>Teamtraining die blijft hangen</li>
+                <li>Restaurant websites als premium visitekaartje</li>
+                <li>Duidelijke CTA’s voor contact en reserveren</li>
+              </ul>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Werkgebied: Amersfoort en omgeving. Op locatie of online, afhankelijk van wat het snelst resultaat geeft.
+              </p>
+            </div>
           </div>
-
-          <p className="mt-6 text-sm text-muted-foreground">
-            Focus: food cost, prime cost, prepstructuur, serviceflow, training en menu engineering.
-          </p>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-16 md:py-24 bg-card">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Choose your path
+      {/* VALUES */}
+      <section className="relative border-b border-border bg-card/40">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">
+              Waar ik voor sta
             </h2>
-            <p className="mt-2 text-lg text-muted-foreground">
-              Drie manieren om je horecabedrijf te verbeteren met chef-led strategie en uitvoering op de vloer.
+            <p className="mt-3 text-base md:text-lg text-muted-foreground">
+              Niet harder werken. Slimmer werken. Met een team dat het kan herhalen.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <Card key={service.title} className="bg-background overflow-hidden group">
-                <div className="relative h-48">
-                  {service.image && (
-                    <Image
-                      src={service.image.imageUrl}
-                      alt={service.image.description}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      data-ai-hint={service.image.imageHint}
-                    />
-                  )}
-                </div>
-                <CardHeader>
-                  <CardTitle className="font-headline text-2xl">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">{service.description}</p>
-                  <Link
-                    href={service.link}
-                    className={cn(
-                      buttonVariants({ variant: "link" }),
-                      "p-0 font-semibold text-primary"
-                    )}
-                  >
-                    Bekijk hoe het werkt <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </CardContent>
-              </Card>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {values.map((v) => (
+              <div
+                key={v.title}
+                className="rounded-2xl border border-border bg-background/60 p-6 md:p-7"
+              >
+                <h3 className="font-headline text-xl md:text-2xl font-bold text-primary">
+                  {v.title}
+                </h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{v.body}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Snelle, meetbare verbeteringen.
+      {/* STORY */}
+      <section className="relative">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="grid gap-12 md:grid-cols-2 md:items-start">
+            {/* Image */}
+            <div className="order-2 md:order-1">
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
+                {aboutImage ? (
+                  <div className="relative aspect-[4/3] md:aspect-[3/4]">
+                    <Image
+                      src={aboutImage.imageUrl}
+                      alt={aboutImage.description}
+                      fill
+                      className="object-cover"
+                      data-ai-hint={aboutImage.imageHint}
+                      priority
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-[4/3] md:aspect-[3/4]" />
+                )}
+              </div>
+            </div>
+
+            {/* Text */}
+            <div className="order-1 md:order-2">
+              <h2 className="font-headline text-3xl md:text-4xl font-bold">
+                Mijn verhaal
+              </h2>
+
+              <div className="mt-6 space-y-5 text-base md:text-lg leading-relaxed text-muted-foreground">
+                <p>
+                  Ik zit ruim 20 jaar in de horeca en begon onderaan. Daar leer je snel wat wel werkt tijdens drukte en wat alleen mooi klinkt op papier.
+                  Kwaliteit is geen toeval. Het is ritme, afspraken en herhaling.
+                </p>
+
+                <p>
+                  In vier jaar tijd werkte ik in vijf Michelinster-keukens. Dat leerde me tempo, discipline en detail, maar vooral hoe je een standaard bouwt die elke service opnieuw haalbaar is.
+                  Die aanpak neem ik mee in hoe ik teams coach en systemen neerzet.
+                </p>
+
+                <p>
+                  De afgelopen jaren werkte ik in Australië en droeg ik ook operationele verantwoordelijkheid. Denk aan planning, bestellingen, roosters, team aansturing en het strak organiseren van de dag.
+                  Minder ruis, meer uitvoering.
+                </p>
+
+                <p>
+                  Ik heb ook gewerkt in Frankrijk, België en Nederland. Daardoor kan ik snel schakelen in verschillende teams en werkstijlen.
+                  Uiteindelijk draait het overal om hetzelfde: duidelijke afspraken en herhaalbare uitvoering.
+                </p>
+
+                <p>
+                  Nu ben ik terug in Nederland, in Amersfoort. Ik help restaurants en horecateams met horeca consultancy die je team kan uitvoeren.
+                  Geen rapporten voor in de la, maar stappen die je deze week al merkt.
+                </p>
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/free-diagnosis"
+                  className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
+                >
+                  Start met de gratis diagnose
+                </Link>
+                <Link
+                  href="/contact"
+                  className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
+                >
+                  Contact
+                </Link>
+              </div>
+
+              <p className="mt-4 text-xs text-muted-foreground">
+                Liever DM? Stuur “SCAN” op Instagram @chefjezz en ik stuur je 3 snelle verbeterpunten.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EXPERIENCE */}
+      <section className="relative border-t border-border bg-card/30">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">
+              Ervaring in het kort
             </h2>
-            <p className="mt-2 text-lg text-muted-foreground">
-              We focussen op de hefbomen die in de horeca écht het verschil maken: food cost, workflow, training, menu engineering en uitvoering.
+            <p className="mt-3 text-base md:text-lg text-muted-foreground">
+              Geen borstklopperij. Wel context, zodat je weet waar mijn aanpak vandaan komt.
             </p>
           </div>
 
-          <div className="mt-12 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-            {benefits.map((benefit) => (
-              <div key={benefit} className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                <span className="text-lg text-foreground">{benefit}</span>
+          <div className="mx-auto mt-12 max-w-4xl space-y-6">
+            {experience.map((e) => (
+              <div
+                key={`${e.period}-${e.role}`}
+                className="rounded-2xl border border-border bg-background/60 p-6 md:p-7"
+              >
+                <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
+                  <h3 className="font-headline text-xl md:text-2xl font-bold">
+                    {e.role}
+                  </h3>
+                  <div className="text-sm text-muted-foreground">{e.period}</div>
+                </div>
+
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2 text-muted-foreground">
+                  {e.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 text-center">
-            <Link
-              href="/free-diagnosis"
-              className={cn(buttonVariants({ variant: "outline" }), "font-semibold")}
-            >
-              Start met de gratis diagnose <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+          <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-border bg-background/50 p-6 md:p-7">
+            <h3 className="font-headline text-xl md:text-2xl font-bold">
+              Talen
+            </h3>
+            <p className="mt-3 text-muted-foreground leading-relaxed">
+              Nederlands, Engels en Frans.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Mini Case/Results Strip */}
-      <section className="py-16 md:py-24 bg-card">
-        <div className="container mx-auto px-4 text-center">
-          <p className="font-headline text-primary text-sm font-bold tracking-widest uppercase">
-            RESULTS
-          </p>
-          <h2 className="font-headline text-3xl md:text-4xl font-bold mt-2">
-            Chaos to Control.
-          </h2>
-          <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Voorbeelden van wat ondernemers meestal verbeteren met betere structuur, prijsstrategie, menu engineering en uitvoering op de vloer.
-          </p>
-
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-lg">
-              <p className="font-headline text-5xl font-bold text-primary">5–15%</p>
-              <p className="mt-2 text-lg text-muted-foreground">Lagere food cost</p>
-              <p className="text-sm text-muted-foreground/50">
-                Door menu engineering, portiecontrole en strakkere prep
-              </p>
-            </div>
-
-            <div className="p-6 rounded-lg border-x-2 border-border">
-              <p className="font-headline text-5xl font-bold text-primary">4–10 uur</p>
-              <p className="mt-2 text-lg text-muted-foreground">Minder brandjes blussen</p>
-              <p className="text-sm text-muted-foreground/50">
-                Met duidelijke rollen, SOP’s, routines en teamtraining
-              </p>
-            </div>
-
-            <div className="p-6 rounded-lg">
-              <p className="font-headline text-5xl font-bold text-primary">2–4x</p>
-              <p className="mt-2 text-lg text-muted-foreground">Meer directe reserveringen</p>
-              <p className="text-sm text-muted-foreground/50">
-                Met een website die converteert plus SEO basics
-              </p>
-            </div>
-          </div>
-
-          <Link href="/results" className={cn(buttonVariants({ variant: "outline" }), "mt-12")}>
-            Bekijk meer resultaten
-          </Link>
-        </div>
-      </section>
-
-      {/* How the free diagnosis works */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Gratis diagnose. Zero poeha.
+      {/* HOW I WORK */}
+      <section className="relative">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">
+              Hoe ik werk
             </h2>
-            <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Vul een korte intake in. Ik spot de grootste lekken in je operatie (food cost, loonkosten, workflow en menu) en je krijgt 3 concrete next steps voor deze week.
+            <p className="mt-3 text-base md:text-lg text-muted-foreground">
+              Van chaos naar controle, stap voor stap. Geen magie, wel ritme.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-card">
-              <CardHeader>
-                <CardTitle className="font-headline text-2xl">1) Jij vult ‘m in</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                2 minuten. Multiple choice. Geen lange verhalen, alleen de info die ik nodig heb.
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card">
-              <CardHeader>
-                <CardTitle className="font-headline text-2xl">2) Ik diagnoseer</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Ik kijk naar prime cost (food + labor), serviceflow, prepstructuur en menu-keuzes. Waar lekt geld, waar ontstaat stress?
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card">
-              <CardHeader>
-                <CardTitle className="font-headline text-2xl">3) Jij krijgt een plan</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                3 acties die je direct kunt uitvoeren. Als het klikt, bepalen we samen de volgende stap.
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-10 text-center">
-            <Link
-              href="/free-diagnosis"
-              className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
-            >
-              Start de gratis diagnose <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Band */}
-      <section className="bg-primary text-primary-foreground py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold">
-            Klaar voor meer rust en controle?
-          </h2>
-          <p className="mt-2 text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-            Start met de gratis diagnose. Als er een fit is, bouwen we snel systemen die je team echt kan draaien.
-          </p>
-          <Link
-            href="/free-diagnosis"
-            className={cn(
-              buttonVariants({ size: "lg", variant: "secondary" }),
-              "mt-8 bg-foreground text-background hover:bg-foreground/80 font-bold"
-            )}
-          >
-            Plan een gratis 15-min call
-          </Link>
-        </div>
-      </section>
-
-      {/* FAQ Preview */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Veelgestelde vragen
-            </h2>
-          </div>
-          <Accordion type="single" collapsible className="w-full mt-8">
-            {faqs.map((faq, i) => (
-              <AccordionItem value={`item-${i}`} key={i}>
-                <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-base">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s) => (
+              <div key={s.n} className="text-center">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary text-primary font-headline text-2xl font-bold">
+                  {s.n}
+                </div>
+                <h3 className="mt-6 font-headline text-xl md:text-2xl font-bold">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">
+                  {s.body}
+                </p>
+              </div>
             ))}
-          </Accordion>
-          <div className="text-center mt-8">
-            <Link href="/faq" className={cn(buttonVariants({ variant: "link" }))}>
-              Meer vragen? <ArrowRight className="ml-2 h-4 w-4" />
+          </div>
+
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/services/consulting"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}
+            >
+              Bekijk restaurant consulting
             </Link>
+            <Link
+              href="/services/websites"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}
+            >
+              Bekijk restaurant websites
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="relative border-t border-border bg-card/50">
+        <div className="container mx-auto px-4 py-16 md:py-20">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">
+              Klaar voor rust op de vloer en betere cijfers?
+            </h2>
+            <p className="mt-3 text-base md:text-lg text-muted-foreground">
+              Start met de gratis diagnose. Je krijgt drie concrete stappen die je deze week al kunt uitvoeren.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/free-diagnosis"
+                className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
+              >
+                Start de gratis diagnose
+              </Link>
+              <Link
+                href="/pricing"
+                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
+              >
+                Bekijk opties
+              </Link>
+            </div>
+
+            <p className="mt-4 text-xs text-muted-foreground">
+              No poeha. Wel structuur en uitvoering.
+            </p>
           </div>
         </div>
       </section>

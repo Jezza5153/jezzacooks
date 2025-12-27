@@ -1,4 +1,3 @@
-
 // src/app/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -18,11 +17,11 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Jezza Cooks | Horeca consultancy, catering en restaurant websites",
   description:
-    "Horeca consultant voor restaurants en hospitality teams. Menu engineering, food cost controle, prep structuur, SOP’s en team training. Ook restaurant websites voor directe reserveringen met SEO.",
+    "Horeca consultant voor restaurants en hospitality teams. Menu engineering, food cost controle, prep structuur, SOP’s en team training. Ook restaurant websites met heldere presentatie en SEO basis.",
   openGraph: {
     title: "Jezza Cooks | Level up the chaos",
     description:
-      "Rust op de vloer met betere gewoontes: menu engineering, food cost, SOP’s en training. Plus restaurant websites die directe boekingen verhogen.",
+      "Rust op de vloer met betere gewoontes: menu engineering, food cost, SOP’s en training. Plus restaurant websites die helder laten zien wat je doet en meer aanvragen opleveren.",
     type: "website",
   },
 };
@@ -48,7 +47,7 @@ export default function Home() {
     {
       title: "Restaurant Websites",
       description:
-"Websites voor restaurants die je verhaal helder maken. Een premium visitekaartje met duidelijke info, foto’s, menu en contact. Reserveren? Daar koppel ik een systeem aan dat bij je zaak past.",
+        "Websites voor restaurants die je verhaal helder maken. Een premium visitekaartje met duidelijke info, foto’s, menu en contact. Reserveren? Daar koppel ik een systeem aan dat bij je zaak past.",
       link: "/services/websites",
       image: PlaceHolderImages.find((p) => p.id === "service-websites"),
     },
@@ -157,34 +156,70 @@ export default function Home() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service) => (
-              <Card key={service.title} className="bg-background overflow-hidden group">
-                <div className="relative h-48">
-                  {service.image && (
-                    <Image
-                      src={service.image.imageUrl}
-                      alt={service.image.description}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      data-ai-hint={service.image.imageHint}
-                    />
+              <Link
+                key={service.title}
+                href={service.link}
+                className={cn(
+                  "group block h-full",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-0"
+                )}
+                aria-label={`${service.title} bekijken`}
+              >
+                <Card
+                  className={cn(
+                    "h-full overflow-hidden rounded-3xl",
+                    "border border-white/5",
+                    "bg-card/30 backdrop-blur-md",
+                    "shadow-[0_18px_70px_rgba(0,0,0,0.35)]",
+                    "transition-all duration-300 ease-out",
+                    "hover:-translate-y-1 hover:bg-card/40 hover:border-white/8 hover:shadow-[0_28px_90px_rgba(0,0,0,0.45)]"
                   )}
-                </div>
-                <CardHeader>
-                  <CardTitle className="font-headline text-2xl">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">{service.description}</p>
-                  <Link
-                    href={service.link}
-                    className={cn(
-                      buttonVariants({ variant: "link" }),
-                      "p-0 font-semibold text-primary"
+                >
+                  {/* Image */}
+                  <div className="relative aspect-[4/3]">
+                    {/* soft top glow, blends in */}
+                    <div
+                      className={cn(
+                        "pointer-events-none absolute inset-0 opacity-60",
+                        "bg-[radial-gradient(900px_320px_at_50%_0%,rgba(255,255,255,0.08),transparent_60%)]",
+                        "transition-opacity duration-300 ease-out",
+                        "group-hover:opacity-80"
+                      )}
+                    />
+                    {service.image && (
+                      <Image
+                        src={service.image.imageUrl}
+                        alt={service.image.description}
+                        fill
+                        className={cn(
+                          "object-contain p-5",
+                          "transition-transform duration-300 ease-out",
+                          "group-hover:scale-[1.03]"
+                        )}
+                        data-ai-hint={service.image.imageHint}
+                      />
                     )}
-                  >
-                    Bekijk hoe het werkt <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </CardContent>
-              </Card>
+                  </div>
+
+                  <CardHeader className="pt-6">
+                    <CardTitle className="font-headline text-2xl">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+
+                  <CardContent className="pb-7">
+                    <p className="text-muted-foreground leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    {/* CTA hint (not a link, whole card is clickable) */}
+                    <div className="mt-6 inline-flex items-center gap-2 text-primary font-semibold">
+                      <span>Bekijk hoe het werkt</span>
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
