@@ -16,7 +16,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import {
   ArrowRight,
-  BrainCircuit,
   Calculator,
   ClipboardList,
   UtensilsCrossed,
@@ -41,7 +40,13 @@ type Value = { title: string; body: string };
 type Block = { title: string; bullets: readonly string[] };
 type FAQ = { q: string; a: string };
 
-const heroImage = PlaceHolderImages.find((p) => p.id === "consulting-hero");
+type PlaceholderImage = (typeof PlaceHolderImages)[number];
+const heroImage = PlaceHolderImages.find(
+  (p) => p.id === "consulting-hero"
+) as PlaceholderImage | undefined;
+
+// Zet je echte logo hier (public folder). Voorbeeld: /brand/jezza-logo-gold.png
+const LOGO_SRC = "/pics/logo.png";
 
 const values: Value[] = [
   {
@@ -118,8 +123,7 @@ const jsonLd = {
   ],
 };
 
-const panel =
-  "rounded-[34px] border border-border/35 bg-card/10 overflow-hidden";
+const panel = "rounded-[34px] border border-border/35 bg-card/10 overflow-hidden";
 const panelInner =
   "bg-gradient-to-b from-background/40 via-background/20 to-background/40";
 const softGlow = "shadow-[0_0_90px_hsl(var(--primary)/0.12)]";
@@ -144,9 +148,7 @@ function Section({
     <section className={cn("py-12 md:py-20", className)}>
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold">
-            {title}
-          </h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold">{title}</h2>
           {subtitle ? (
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
               {subtitle}
@@ -212,6 +214,91 @@ function FocusCard({ area }: { area: FocusArea }) {
   );
 }
 
+function HeroTop({
+  image,
+  logoSrc,
+}: {
+  image?: PlaceholderImage;
+  logoSrc: string;
+}) {
+  return (
+    <div className="relative">
+      {/* Background photo spans the whole hero-top for more “real estate” */}
+      {image ? (
+        <Image
+          src={image.imageUrl}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          aria-hidden="true"
+          className="object-cover object-right"
+        />
+      ) : null}
+
+      {/* Premium grading: make left readable, keep right clean */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/95 via-background/75 to-transparent md:from-background/82 md:via-background/40" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/55 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/18 via-transparent to-transparent" />
+
+      {/* Optional subtle vignette for depth */}
+      <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] bg-black/10" />
+
+      {/* Content grid: right column is mostly “breathing room” so photo feels intentional */}
+      <div className="relative grid md:[grid-template-columns:1fr_1.1fr] min-h-[420px] md:min-h-[640px]">
+        <div className="p-7 md:p-10 lg:p-12">
+          {/* Logo top-left inside the panel */}
+          <div className="flex items-center gap-3">
+            <div className="relative h-10 w-10 md:h-12 md:w-12">
+              <Image
+                src={logoSrc}
+                alt="Jezza Cooks"
+                width={48}
+                height={48}
+                className="object-contain"
+                sizes="48px"
+              />
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <p className="font-headline text-primary text-sm font-bold tracking-widest uppercase">
+              Don&apos;t chase perfection.
+            </p>
+
+            <h1 className="mt-3 font-headline text-3xl md:text-5xl font-bold tracking-tight">
+              Chase improvement.
+            </h1>
+
+            <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
+              Zet chaos om in controle. Chef-geleide strategie voor betere marges,
+              gestructureerde systemen en teamconsistentie.
+            </p>
+
+            <div className="mt-7">
+              <Link
+                href="/free-diagnosis"
+                className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
+              >
+                Gratis adviesgesprek <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="mt-7 grid gap-3 max-w-xl text-muted-foreground">
+              <BulletItem text="Menukaart, porties en control die je elke service herhaalt" />
+              <BulletItem text="Prep, timing en afspraken die passen bij drukte" />
+              <BulletItem text="Training die kort is en blijft hangen in het team" />
+            </div>
+          </div>
+        </div>
+
+        {/* Right side spacer: keeps the composition like your reference */}
+        <div className="hidden md:block" />
+      </div>
+    </div>
+  );
+}
+
 export default function ConsultingPage() {
   return (
     <div className="relative">
@@ -221,80 +308,14 @@ export default function ConsultingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* subtle ambient background */}
       <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] bg-gradient-to-b from-primary/10 to-transparent" />
 
-      {/* HERO PANEL like screenshot */}
+      {/* HERO PANEL */}
       <section className="py-10 md:py-16">
         <div className="container mx-auto px-4">
           <div className={cn(panel, panelInner, softGlow)}>
-            {/* hero top */}
-            <div className="relative grid lg:grid-cols-12">
-              {/* Left copy */}
-              <div className="relative p-7 md:p-10 lg:p-12 lg:col-span-5">
-                {/* watermark icon */}
-                <div className="pointer-events-none absolute -top-6 -left-6 opacity-[0.14]">
-                  <BrainCircuit className="h-24 w-24 text-primary" />
-                </div>
-
-                <div className="relative">
-                  <p className="font-headline text-primary text-sm font-bold tracking-widest uppercase">
-                    Don&apos;t chase perfection.
-                  </p>
-
-                  <h1 className="mt-3 font-headline text-3xl md:text-5xl font-bold tracking-tight">
-                    Chase improvement.
-                  </h1>
-
-                  <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-                    Zet chaos om in controle. Chef-geleide strategie voor betere
-                    marges, gestructureerde systemen en teamconsistentie.
-                  </p>
-
-                  <div className="mt-7">
-                    <Link
-                      href="/free-diagnosis"
-                      className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
-                    >
-                      Gratis adviesgesprek <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </div>
-
-                  <div className="mt-7 grid gap-3 max-w-xl text-muted-foreground">
-                    <BulletItem text="Menukaart, porties en control die je elke service herhaalt" />
-                    <BulletItem text="Prep, timing en afspraken die passen bij drukte" />
-                    <BulletItem text="Training die kort is en blijft hangen in het team" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Right image (bigger + premium blend) */}
-              <div className="relative min-h-[320px] md:min-h-[480px] lg:min-h-[560px] lg:col-span-7">
-                {heroImage ? (
-                  <Image
-                    src={heroImage.imageUrl}
-                    alt={heroImage.description}
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(min-width: 1024px) 58vw, (min-width: 768px) 50vw, 100vw"
-                    data-ai-hint={heroImage.imageHint}
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-card" />
-                )}
-
-                {/* Strong left blend into the panel */}
-                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/30 to-transparent lg:from-background/75 lg:via-background/15" />
-
-                {/* Premium vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/55 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/45" />
-
-                {/* Tiny warm gold bloom */}
-                <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
-              </div>
-            </div>
+            {/* Hero top with background photo + logo left */}
+            <HeroTop image={heroImage} logoSrc={LOGO_SRC} />
 
             {/* focus areas bottom inside same panel */}
             <div className="px-7 pb-8 md:px-10 md:pb-10 lg:px-12 lg:pb-12">
