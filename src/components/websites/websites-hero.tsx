@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -508,13 +507,6 @@ export default function WebsitesHero({ mode, onModeChange }: WebsitesHeroProps) 
               className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
             >
               Vraag gratis quick scan aan
-            </Link>
-
-            <Link
-              href="#resultaat"
-              className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
-            >
-              Bekijk het verschil
             </Link>
           </div>
 
