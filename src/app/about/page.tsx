@@ -115,29 +115,31 @@ const experience = [
 function AboutBackground() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* Photo layer */}
+      {/* Photo layer: visible, not smeared */}
       <Image
         src="/pics/aboutme.png"
         alt=""
         fill
         sizes="100vw"
+        priority={false}
         className={cn(
           "object-cover",
-          "blur-sm scale-110 opacity-[0.52]",
-          "brightness-[0.78] saturate-[1.08]"
+          "scale-105",
+          "blur-0",
+          "opacity-[0.72]",
+          "brightness-[0.62] contrast-[1.08] saturate-[1.08]"
         )}
-        priority={false}
       />
 
-      {/* Readability curtain: lighter so you actually see the photo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/65 via-background/38 to-background/90" />
+      {/* Readability curtain: light, only to protect text */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/18 to-background/75" />
 
-      {/* Brand glow, subtle */}
-      <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.12),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(900px_560px_at_85%_85%,hsla(var(--secondary)/0.10),transparent_60%)]" />
+      {/* Brand glow: keep it, but subtle */}
+      <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.10),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(900px_560px_at_85%_85%,hsla(var(--secondary)/0.08),transparent_60%)]" />
 
-      {/* Super soft vignette (don’t kill the image) */}
-      <div className="absolute inset-0 bg-black/10" />
+      {/* Optional: tiny vignette, super soft */}
+      <div className="absolute inset-0 bg-black/5" />
     </div>
   );
 }
