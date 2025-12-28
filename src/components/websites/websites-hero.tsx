@@ -1,19 +1,18 @@
-
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { animate, createTimeline, stagger, set } from "animejs";
-
-type Mode = "simple" | "pro" | "custom";
+import { createTimeline, set, stagger } from "animejs";
+import type { WebsitesMode } from "./websites-types";
+import { WEBSITE_MODES } from "./websites-types";
 
 const panel = "rounded-[34px] border border-border/35 bg-card/10 overflow-hidden";
 const panelInner = "bg-gradient-to-b from-background/40 via-background/20 to-background/40";
 const softGlow = "shadow-[0_0_90px_hsl(var(--primary)/0.12)]";
 
-const modeCopy: Record<Mode, { title: string; desc: string }> = {
+const modeCopy: Record<WebsitesMode, { title: string; desc: string }> = {
   simple: {
     title: "Simple",
     desc: "Clean, snel, duidelijk. Perfect als je wil dat het gewoon werkt.",
@@ -44,7 +43,7 @@ function usePrefersReducedMotion() {
 
 type HeroSceneHandle = {
   replay: () => void;
-  setMode: (mode: Mode, instant?: boolean) => void;
+  setMode: (mode: WebsitesMode, instant?: boolean) => void;
   seek: (pct: number) => void;
   pause: () => void;
   play: () => void;
@@ -55,8 +54,12 @@ type HeroSceneProps = {
   onProgress?: (pct: number) => void;
 };
 
-export default function WebsitesHero() {
-  const [mode, setMode] = React.useState<Mode>("pro");
+type WebsitesHeroProps = {
+  mode: WebsitesMode;
+  onModeChange: (mode: WebsitesMode) => void;
+};
+
+export default function WebsitesHero({ mode, onModeChange }: WebsitesHeroProps) {
   const reducedMotion = usePrefersReducedMotion();
   const sceneRef = React.useRef<HeroSceneHandle | null>(null);
 
@@ -66,7 +69,6 @@ export default function WebsitesHero() {
 
   React.useEffect(() => {
     sceneRef.current?.setMode(mode, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
   React.useEffect(() => {
@@ -115,7 +117,7 @@ export default function WebsitesHero() {
               </div>
 
               <div className="mt-3 grid grid-cols-3 gap-2 max-w-md">
-                {(["simple", "pro", "custom"] as Mode[]).map((m) => {
+                {WEBSITE_MODES.map((m) => {
                   const active = mode === m;
                   return (
                     <button
@@ -123,7 +125,7 @@ export default function WebsitesHero() {
                       type="button"
                       aria-pressed={active}
                       onClick={() => {
-                        setMode(m);
+                        onModeChange(m);
                         if (isScrubbing) {
                           sceneRef.current?.setMode(m, true);
                         }
@@ -242,16 +244,27 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
 ) {
   const rootRef = React.useRef<HTMLDivElement | null>(null);
 
-  type Timeline = ReturnType<typeof createTimeline>;
-  const tlRef = React.useRef<Timeline | null>(null);
+  type TimelineType = ReturnType<typeof createTimeline>;
+  const tlRef = React.useRef<TimelineType | null>(null);
 
-  const modeRef = React.useRef<Mode>("pro");
+  const modeRef = React.useRef<WebsitesMode>("pro");
   const pctRef = React.useRef(0);
+
+  const throttleRef = React.useRef(0);
 
   const tiltCleanupRef = React.useRef<null | (() => void)>(null);
   const tiltRafRef = React.useRef<number | null>(null);
 
-  const throttleRef = React.useRef(0);
+  const cleanupTilt = React.useCallback(() => {
+    if (tiltCleanupRef.current) {
+      tiltCleanupRef.current();
+      tiltCleanupRef.current = null;
+    }
+    if (tiltRafRef.current) {
+      cancelAnimationFrame(tiltRafRef.current);
+      tiltRafRef.current = null;
+    }
+  }, []);
 
   const getEls = React.useCallback(() => {
     const root = rootRef.current;
@@ -269,17 +282,6 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
     return { chef, laptopWrap, laptopTilt, lines, cursor, glow };
   }, []);
 
-  const cleanupTilt = React.useCallback(() => {
-    if (tiltCleanupRef.current) {
-      tiltCleanupRef.current();
-      tiltCleanupRef.current = null;
-    }
-    if (tiltRafRef.current) {
-      cancelAnimationFrame(tiltRafRef.current);
-      tiltRafRef.current = null;
-    }
-  }, []);
-
   const enableTilt = React.useCallback(() => {
     cleanupTilt();
     const root = rootRef.current;
@@ -288,51 +290,33 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
 
     const { laptopTilt } = els;
 
-    // Ensure CSS transforms behave on SVG <g>
     laptopTilt.style.transformBox = "fill-box";
     laptopTilt.style.transformOrigin = "center";
 
-    let targetRX = 0;
-    let targetRY = 0;
-    let currentRX = 0;
-    let currentRY = 0;
+    let target = 0;
+    let current = 0;
 
     const onMove = (e: PointerEvent) => {
       const rect = root.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
 
-      // Only react mostly on the right half (keeps it feeling intentional)
       const weight = Math.max(0, Math.min(1, (x - 0.45) / 0.55));
-
-      const ry = (x - 0.75) * 10 * weight; // degrees
-      const rx = -(y - 0.5) * 8 * weight;
-
-      targetRX = rx;
-      targetRY = ry;
+      target = (x - 0.75) * 10 * weight;
 
       if (tiltRafRef.current) return;
       tiltRafRef.current = requestAnimationFrame(() => {
         tiltRafRef.current = null;
-
-        // Smooth
-        currentRX = currentRX + (targetRX - currentRX) * 0.14;
-        currentRY = currentRY + (targetRY - currentRY) * 0.14;
-
-        laptopTilt.style.transform = `rotate(${currentRY}deg)`;
-        // Rotate only (2D) to avoid browser SVG 3D inconsistencies.
+        current = current + (target - current) * 0.14;
+        laptopTilt.style.transform = `rotate(${current}deg)`;
       });
     };
 
     const onLeave = () => {
-      targetRX = 0;
-      targetRY = 0;
+      target = 0;
       if (tiltRafRef.current) return;
-
       tiltRafRef.current = requestAnimationFrame(() => {
         tiltRafRef.current = null;
-        currentRX = 0;
-        currentRY = 0;
+        current = 0;
         laptopTilt.style.transform = "rotate(0deg)";
       });
     };
@@ -348,13 +332,12 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
   }, [cleanupTilt, getEls]);
 
   const buildTimeline = React.useCallback(
-    (mode: Mode) => {
+    (mode: WebsitesMode) => {
       const els = getEls();
       if (!els) return null;
 
       const { chef, laptopWrap, lines, cursor, glow } = els;
 
-      // Reset scene deterministically
       set(chef, { opacity: 0, translateX: -46 });
       set(laptopWrap, { opacity: 0, translateY: 18 });
       set(lines, { opacity: 0, translateY: 10 });
@@ -363,14 +346,14 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
 
       const timings =
         mode === "simple"
-          ? { chef: 520, laptop: 440, lines: 320, stagger: 55 }
+          ? { chef: 520, laptop: 440, lines: 320, s: 55 }
           : mode === "pro"
-          ? { chef: 650, laptop: 520, lines: 420, stagger: 70 }
-          : { chef: 720, laptop: 560, lines: 460, stagger: 80 };
+          ? { chef: 650, laptop: 520, lines: 420, s: 70 }
+          : { chef: 720, laptop: 560, lines: 460, s: 80 };
 
       const tl = createTimeline({
         autoplay: false,
-        onUpdate: (self) => {
+        onUpdate: (self: { currentTime: number; duration: number }) => {
           const now = performance.now();
           if (now - throttleRef.current < 50) return;
           throttleRef.current = now;
@@ -384,8 +367,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
         },
       });
 
-      tl.add({
-        target: chef,
+      tl.add(chef, {
         opacity: 1,
         translateX: 0,
         duration: timings.chef,
@@ -393,8 +375,8 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
       });
 
       tl.add(
+        laptopWrap,
         {
-          target: laptopWrap,
           opacity: 1,
           translateY: 0,
           duration: timings.laptop,
@@ -404,38 +386,34 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
       );
 
       tl.add(
+        lines,
         {
-          target: lines,
           opacity: 1,
           translateY: 0,
-          delay: stagger(timings.stagger),
+          delay: stagger(timings.s),
           duration: timings.lines,
           ease: "outQuad",
         },
         "-=170"
       );
 
-      // Pro and Custom: cursor blink + subtle glow pulse
       if (mode !== "simple") {
         if (cursor) {
-          tl.add(
-            { target: cursor, opacity: 1, duration: 1, ease: "linear" },
-            "-=280"
-          )
-            .add({ target: cursor, opacity: 0.15, duration: 180, ease: "inOutQuad" })
-            .add({ target: cursor, opacity: 1, duration: 160, ease: "inOutQuad" })
-            .add({ target: cursor, opacity: 0.2, duration: 220, ease: "inOutQuad" });
+          tl.add(cursor, { opacity: 1, duration: 1, ease: "linear" }, "-=280")
+            .add(cursor, { opacity: 0.15, duration: 180, ease: "inOutQuad" })
+            .add(cursor, { opacity: 1, duration: 160, ease: "inOutQuad" })
+            .add(cursor, { opacity: 0.2, duration: 220, ease: "inOutQuad" });
         }
 
         if (glow) {
-          tl.add(
-            { target: glow, opacity: 1, duration: 260, ease: "outQuad" },
-            "-=520"
-          ).add({ target: glow, opacity: 0, duration: 520, ease: "outQuad" });
+          tl.add(glow, { opacity: 1, duration: 260, ease: "outQuad" }, "-=520").add(glow, {
+            opacity: 0,
+            duration: 520,
+            ease: "outQuad",
+          });
         }
       }
 
-      // Make sure the first frame is applied immediately
       tl.seek(0);
 
       if (reducedMotion) {
@@ -450,13 +428,12 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
   );
 
   const setMode = React.useCallback(
-    (next: Mode, instant = false) => {
+    (next: WebsitesMode, instant = false) => {
       modeRef.current = next;
 
       cleanupTilt();
       if (next === "custom" && !reducedMotion) enableTilt();
 
-      // rebuild timeline
       tlRef.current?.pause();
       tlRef.current = buildTimeline(next);
 
@@ -527,10 +504,8 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
   }));
 
   React.useEffect(() => {
-    // init
     tlRef.current = buildTimeline(modeRef.current);
     if (!reducedMotion) tlRef.current?.play();
-
     if (modeRef.current === "custom" && !reducedMotion) enableTilt();
 
     return () => {
@@ -541,12 +516,7 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
 
   return (
     <div ref={rootRef} className="absolute inset-0">
-      <svg
-        viewBox="0 0 900 700"
-        className="h-full w-full"
-        role="img"
-        aria-label="Chef bouwt een website op een laptop"
-      >
+      <svg viewBox="0 0 900 700" className="h-full w-full" role="img" aria-label="Chef bouwt een website op een laptop">
         <defs>
           <radialGradient id="glow" cx="70%" cy="40%" r="60%">
             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.18" />
@@ -555,9 +525,8 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
           </radialGradient>
         </defs>
 
-        <rect x={0} y={0} width={900} height={700} fill="url(#glow)" />
+        <rect x="0" y="0" width="900" height="700" fill="url(#glow)" />
 
-        {/* CHEF */}
         <g data-anim="chef" opacity="0">
           <path
             d="M110 20 C140 0, 190 0, 205 28 C230 10, 260 30, 250 60 C270 70, 270 110, 238 120
@@ -581,24 +550,11 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
           />
         </g>
 
-        {/* LAPTOP WRAP (Anime transforms) */}
         <g data-anim="laptopWrap" opacity="0" transform="translate(350,140)">
-          {/* LAPTOP TILT (CSS transform only) */}
           <g data-anim="laptopTilt">
             <rect x="60" y="40" width="520" height="420" rx="26" fill="hsl(var(--card))" opacity="0.85" />
-            <rect
-              x="76"
-              y="56"
-              width="488"
-              height="388"
-              rx="18"
-              fill="hsl(var(--background))"
-              opacity="0.65"
-              stroke="hsl(var(--border))"
-              strokeOpacity="0.35"
-            />
+            <rect x="76" y="56" width="488" height="388" rx="18" fill="hsl(var(--background))" opacity="0.65" stroke="hsl(var(--border))" strokeOpacity="0.35" />
 
-            {/* Subtle screen glow pulse (Pro/Custom) */}
             <rect
               data-anim="screenGlow"
               x="76"
@@ -610,15 +566,13 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
               opacity="0"
             />
 
-            {/* Fake layout blocks */}
             <rect data-anim="line" x="104" y="78" width="332" height="18" rx="9" fill="hsl(var(--primary))" opacity="0" />
             <rect data-anim="line" x="104" y="108" width="332" height="78" rx="16" fill="hsl(var(--foreground))" opacity="0" />
             <rect data-anim="line" x="104" y="194" width="160" height="22" rx="11" fill="hsl(var(--primary))" opacity="0" />
             <rect data-anim="line" x="104" y="230" width="158" height="56" rx="16" fill="hsl(var(--foreground))" opacity="0" />
             <rect data-anim="line" x="278" y="230" width="158" height="56" rx="16" fill="hsl(var(--foreground))" opacity="0" />
-            <rect data-anim="line"x="104" y="292" width="332" height="56" rx="16" fill="hsl(var(--foreground))" opacity="0" />
+            <rect data-anim="line" x="104" y="292" width="332" height="56" rx="16" fill="hsl(var(--foreground))" opacity="0" />
 
-            {/* Cursor */}
             <rect data-anim="cursor" x="455" y="112" width="10" height="20" rx="4" fill="hsl(var(--primary))" opacity="0" />
           </g>
         </g>
@@ -626,4 +580,3 @@ const HeroScene = React.forwardRef<HeroSceneHandle, HeroSceneProps>(function Her
     </div>
   );
 });
-HeroScene.displayName = "HeroScene";
