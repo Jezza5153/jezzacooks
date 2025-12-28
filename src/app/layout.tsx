@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
-import Image from "next/image";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
@@ -40,37 +39,6 @@ export const metadata: Metadata = {
   },
 };
 
-function BackgroundImageFX() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-      {/* Base */}
-      <div className="absolute inset-0 bg-background" />
-
-      {/* Background photo (blurred cover fill) */}
-      <div className="absolute inset-0">
-        <Image
-          src="/pics/aboutme.png"
-          alt=""
-          fill
-          sizes="100vw"
-          priority={false}
-          className="object-cover blur-2xl scale-110 opacity-30"
-        />
-      </div>
-
-      {/* Readability curtain (natural fade to content) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background/90" />
-
-      {/* Subtle brand glow (warm, not loud) */}
-      <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_18%_6%,hsla(var(--primary)/0.12),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(900px_560px_at_86%_92%,hsla(var(--secondary)/0.10),transparent_58%)]" />
-
-      {/* Soft vignette to keep focus on content */}
-      <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] bg-black/35" />
-    </div>
-  );
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -80,21 +48,16 @@ export default function RootLayout({
     <html lang="nl" className="dark">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased flex flex-col",
           inter.variable,
           fraunces.variable
         )}
       >
-        <div className="relative isolate min-h-screen flex flex-col">
-          <BackgroundImageFX />
-
-          <Header />
-          <main className="relative flex-grow">{children}</main>
-          <Footer />
-
-          <WhatsAppFAB />
-          <Toaster />
-        </div>
+        <Header />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+        <WhatsAppFAB />
+        <Toaster />
       </body>
     </html>
   );

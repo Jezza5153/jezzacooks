@@ -1,3 +1,4 @@
+
 // src/app/about/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -73,7 +74,7 @@ const experience = [
     period: "2024 - 2025",
     role: "Sous Chef (Australië)",
     bullets: [
-      "Bestelritme en min/max voorraad opgezet voor overzicht en rust",
+      "Bestelritme en minimum en maximum voorraad opgezet voor overzicht en rust",
       "Menukaart scherper gemaakt op verkoop, marge en prepdruk",
       "Prepplanning en dagstructuur gebouwd die het team kan volgen",
       "Aansturing tijdens service: tempo, consistentie en controle op de pas",
@@ -85,7 +86,7 @@ const experience = [
     bullets: [
       "Productieplanning en draaiboeken gemaakt voor events met volume",
       "Mise en place structuur aangebracht zodat kwaliteit gelijk blijft",
-      "Inzet en roosters afgestemd op piekmomenten en workload",
+      "Inzet en roosters afgestemd op piekmomenten en werkdruk",
       "Uitvoering bewaakt op timing, portionering en afwerking",
     ],
   },
@@ -110,6 +111,36 @@ const experience = [
     ],
   },
 ];
+
+function AboutBackground() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      {/* Photo layer */}
+      <Image
+        src="/pics/aboutme.png"
+        alt=""
+        fill
+        sizes="100vw"
+        className={cn(
+          "object-cover",
+          "blur-sm scale-110 opacity-[0.52]",
+          "brightness-[0.78] saturate-[1.08]"
+        )}
+        priority={false}
+      />
+
+      {/* Readability curtain: lighter so you actually see the photo */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/65 via-background/38 to-background/90" />
+
+      {/* Brand glow, subtle */}
+      <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.12),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(900px_560px_at_85%_85%,hsla(var(--secondary)/0.10),transparent_60%)]" />
+
+      {/* Super soft vignette (don’t kill the image) */}
+      <div className="absolute inset-0 bg-black/10" />
+    </div>
+  );
+}
 
 export default function AboutPage() {
   const aboutImage = PlaceHolderImages.find((p) => p.id === "about-jezza");
@@ -156,8 +187,8 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="relative">
-      <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] bg-gradient-to-b from-primary/10 to-transparent" />
+    <div className="relative isolate">
+      <AboutBackground />
 
       <script
         type="application/ld+json"
@@ -200,7 +231,7 @@ export default function AboutPage() {
             <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
               <span>20+ jaar horeca</span>
               <span className="opacity-60" aria-hidden="true">•</span>
-              <span>NL, BE, FR, AU</span>
+              <span>Nederland, België, Frankrijk, Australië</span>
               <span className="opacity-60" aria-hidden="true">•</span>
               <span>Chef + operatie + team</span>
             </div>
