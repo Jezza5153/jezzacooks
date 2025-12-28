@@ -1,78 +1,100 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import type { WebsitesMode } from "./websites-types";
 import { WEBSITE_MODES } from "./websites-types";
 
 const cardBase =
-  "rounded-3xl border border-border/35 bg-background/30 backdrop-blur";
+  "relative rounded-3xl border border-border/35 bg-background/20 backdrop-blur";
+const cardFocus =
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsla(var(--primary)/0.45)]";
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = React.useState(false);
-
-  React.useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(mq.matches);
-    onChange();
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
-  }, []);
-
-  return reduced;
-}
-
-const MODE_LABEL: Record<WebsitesMode, string> = {
-  simple: "Simple",
-  pro: "Pro",
-  custom: "Custom",
-};
-
-const features: Record<WebsitesMode, { headline: string; bullets: string[] }> = {
+const MODE_LABEL: Record<WebsitesMode, { pill: string; title: string; sub: string }> = {
   simple: {
-    headline: "Snel live. Clean en betrouwbaar.",
-    bullets: [
-      "Heldere structuur met 1 duidelijke CTA per sectie",
-      "Performance en basis SEO strak",
-      "Perfect voor starters of een snelle upgrade",
-    ],
+    pill: "Simple",
+    title: "Snel live. Strak en betrouwbaar.",
+    sub: "Voor als je vooral duidelijkheid wil, zonder gedoe.",
   },
   pro: {
-    headline: "Premium feel zonder ruis.",
-    bullets: [
-      "Sterkere hiërarchie en betere sectie-flow",
-      "Micro-feedback op hover en states, geen circus",
-      "Meer vertrouwen door betere copy en social proof",
-    ],
+    pill: "Pro",
+    title: "Premium gevoel, zonder ruis.",
+    sub: "Voor restaurants die meer vertrouwen en meer aanvragen willen.",
   },
   custom: {
-    headline: "Custom merkgevoel met high-end afwerking.",
-    bullets: [
-      "Storytelling layout met ritme en rust",
-      "Unieke componenten die jouw merk dragen",
-      "Details met functie, niet alleen mooi",
-    ],
+    pill: "Custom",
+    title: "Merkgevoel met high-end afwerking.",
+    sub: "Voor merken die echt willen opvallen, maar wel rustig willen blijven.",
   },
 };
 
-function ModeChip({
-  active,
-  children,
-}: {
-  active: boolean;
-  children: React.ReactNode;
-}) {
+const FEATURES: Record<WebsitesMode, string[]> = {
+  simple: [
+    "Structuur die mensen snappen in 5 seconden",
+    "Reserveren, bellen of aanvragen staat altijd duidelijk",
+    "Snel op mobiel en goed vindbaar in Google",
+  ],
+  pro: [
+    "Sterkere volgorde, bezoekers besluiten sneller",
+    "Meer vertrouwen door betere opbouw met reviews en locatie",
+    "Knoppen en kaarten voelen echt af door duidelijke feedback",
+  ],
+  custom: [
+    "Unieke opbouw die jouw verhaal draagt en toch rustig blijft",
+    "Details met functie: focus, ritme en duidelijke keuzes",
+    "Meer merkherkenning zonder dat je site druk wordt",
+  ],
+};
+
+const ALWAYS_INCLUDED = [
+  "Mobiel eerst, daarna desktop",
+  "Duidelijke actieknoppen per sectie",
+  "Snelle laadtijd en nette basis",
+  "Contact werkt en je ziet wat het oplevert",
+] as const;
+
+const CTA_COPY: Record<WebsitesMode, { primary: string; secondary: string; valueLine: string }> = {
+  simple: {
+    primary: "Start gratis quick scan (Simple)",
+    secondary: "Vraag offerte (Simple)",
+    valueLine: "Je krijgt snel helderheid of Simple al genoeg is.",
+  },
+  pro: {
+    primary: "Start gratis quick scan (Pro)",
+    secondary: "Vraag offerte (Pro)",
+    valueLine: "Je krijgt duidelijk welke verbeteringen het meeste aanvragen opleveren.",
+  },
+  custom: {
+    primary: "Start gratis quick scan (Custom)",
+    secondary: "Vraag offerte (Custom)",
+    valueLine: "Je krijgt richting op merkgevoel, structuur en wat het echt moet opleveren.",
+  },
+};
+
+function Pill({ active, children }: { active: boolean; children: React.ReactNode }) {
   return (
     <div
       className={cn(
         "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold",
         active
-          ? "border-primary/40 bg-primary/10 text-foreground"
+          ? "border-primary/45 bg-primary/10 text-foreground"
           : "border-border/40 bg-background/20 text-muted-foreground"
       )}
     >
       {children}
     </div>
+  );
+}
+
+function Dot({ active }: { active: boolean }) {
+  return (
+    <div
+      className={cn("h-2 w-2 rounded-full", active ? "bg-primary" : "bg-muted-foreground/35")}
+      aria-hidden="true"
+    />
   );
 }
 
@@ -83,35 +105,44 @@ export default function BuildOptions({
   mode: WebsitesMode;
   onModeChange: (m: WebsitesMode) => void;
 }) {
-  const reducedMotion = usePrefersReducedMotion();
   const groupLabelId = React.useId();
   const groupDescId = React.useId();
 
-  const cardHover = reducedMotion
-    ? ""
-    : "transition duration-300 hover:bg-background/40 hover:border-border/55 hover:shadow-[0_18px_70px_rgba(0,0,0,0.35)]";
+  const refs = React.useRef<Record<string, HTMLButtonElement | null>>({});
 
-  function move(delta: number) {
+  function focusMode(next: WebsitesMode) {
+    requestAnimationFrame(() => {
+      refs.current[next]?.focus();
+    });
+  }
+
+  function setModeAndFocus(next: WebsitesMode) {
+    onModeChange(next);
+    focusMode(next);
+  }
+
+  function nextMode(delta: number) {
     const idx = WEBSITE_MODES.indexOf(mode);
     const next = (idx + delta + WEBSITE_MODES.length) % WEBSITE_MODES.length;
-    onModeChange(WEBSITE_MODES[next]);
+    return WEBSITE_MODES[next];
   }
+
+  const label = MODE_LABEL[mode];
+  const cta = CTA_COPY[mode];
+
+  // We geven de keuze mee in de URL. Later kan je /free-diagnosis dit gebruiken om de juiste diagnose te tonen.
+  const primaryHref = `/free-diagnosis?service=websites&package=${mode}`;
+  const secondaryHref = `/contact?service=websites&package=${mode}`;
 
   return (
     <section className="border-t border-border/60 bg-card/10 py-12 md:py-20">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
-          <h2
-            id={groupLabelId}
-            className="font-headline text-3xl font-bold md:text-4xl"
-          >
+          <h2 id={groupLabelId} className="font-headline text-3xl font-bold md:text-5xl">
             Pakketten
           </h2>
-          <p
-            id={groupDescId}
-            className="mt-3 text-base text-muted-foreground md:text-lg"
-          >
-            Zelfde basis. Andere afwerking. Klik en je ziet meteen wat het doet.
+          <p id={groupDescId} className="mt-3 text-base text-muted-foreground md:text-lg">
+            Kies wat je nu nodig hebt. Het voorbeeld bovenaan verandert direct mee.
           </p>
         </div>
 
@@ -123,109 +154,139 @@ export default function BuildOptions({
         >
           {WEBSITE_MODES.map((m) => {
             const active = m === mode;
-            const f = features[m];
+            const l = MODE_LABEL[m];
 
             return (
               <button
                 key={m}
+                ref={(el) => {
+                  refs.current[m] = el;
+                }}
                 type="button"
                 onClick={() => onModeChange(m)}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowRight" || e.key === "ArrowDown") {
                     e.preventDefault();
-                    move(1);
+                    setModeAndFocus(nextMode(1));
                   }
                   if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
                     e.preventDefault();
-                    move(-1);
+                    setModeAndFocus(nextMode(-1));
+                  }
+                  if (e.key === "Home") {
+                    e.preventDefault();
+                    setModeAndFocus(WEBSITE_MODES[0]);
+                  }
+                  if (e.key === "End") {
+                    e.preventDefault();
+                    setModeAndFocus(WEBSITE_MODES[WEBSITE_MODES.length - 1]);
                   }
                 }}
                 className={cn(
                   cardBase,
-                  cardHover,
-                  "p-7 text-left focus:outline-none focus:ring-2 focus:ring-primary/30",
-                  active ? "border-primary/45 bg-primary/5" : "border-border/35"
+                  cardFocus,
+                  "p-7 text-left",
+                  active ? "border-primary/45 bg-primary/5" : "hover:bg-background/25"
                 )}
                 role="radio"
                 aria-checked={active}
-                aria-pressed={active}
+                tabIndex={active ? 0 : -1}
               >
-                <div className="flex items-center justify-between">
-                  <ModeChip active={active}>{MODE_LABEL[m]}</ModeChip>
-                  <div
-                    className={cn(
-                      "h-2 w-2 rounded-full",
-                      active ? "bg-primary" : "bg-muted-foreground/40"
-                    )}
-                    aria-hidden="true"
-                  />
+                <div className="flex items-center justify-between gap-3">
+                  <Pill active={active}>{l.pill}</Pill>
+                  <div className="flex items-center gap-2">
+                    {active ? (
+                      <span className="grid h-6 w-6 place-items-center rounded-full border border-primary/35 bg-primary/10">
+                        <Check className="h-4 w-4 text-primary" />
+                      </span>
+                    ) : null}
+                    <Dot active={active} />
+                  </div>
                 </div>
 
-                <div className="mt-4 font-headline text-2xl font-bold">
-                  {f.headline}
+                <div className="mt-5">
+                  <h3 className="font-headline text-2xl font-bold md:text-3xl">{l.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{l.sub}</p>
                 </div>
 
-                <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                  {f.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3">
-                      <span
-                        className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary/55"
-                        aria-hidden="true"
-                      />
-                      <span>{b}</span>
+                <ul className="mt-5 space-y-3">
+                  {FEATURES[m].map((text) => (
+                    <li key={text} className="flex items-start gap-3 text-sm text-foreground/90">
+                      <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-md border border-border/45 bg-background/25">
+                        <Check className="h-3.5 w-3.5 text-primary" />
+                      </span>
+                      <span className="leading-relaxed">{text}</span>
                     </li>
                   ))}
                 </ul>
-
-                <div className="mt-6 rounded-2xl border border-border/35 bg-background/20 p-4">
-                  <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                    Sfeer
-                  </div>
-                  <div
-                    className="mt-3 grid grid-cols-3 gap-2"
-                    aria-hidden="true"
-                  >
-                    <div
-                      className={cn(
-                        "h-10 rounded-xl",
-                        active ? "bg-primary/20" : "bg-muted/25"
-                      )}
-                    />
-                    <div
-                      className={cn(
-                        "h-10 rounded-xl",
-                        active ? "bg-muted/25" : "bg-muted/20"
-                      )}
-                    />
-                    <div
-                      className={cn(
-                        "h-10 rounded-xl",
-                        active ? "bg-muted/25" : "bg-muted/20"
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <p className="mt-4 text-xs text-muted-foreground">
-                  Interactie is hier feedback: je klikt en de UI verandert. Geen decor.
-                </p>
               </button>
             );
           })}
         </div>
 
-        <div className={cn(cardBase, cardHover, "mt-10 p-7")}>
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            Reality check
+        {/* Action block: this is the point of clicking */}
+        <div className="mx-auto mt-10 max-w-5xl rounded-3xl border border-border/35 bg-background/15 p-6 md:p-7">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div aria-live="polite">
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Jouw keuze
+              </div>
+              <div className="mt-2 font-headline text-xl font-bold md:text-2xl">
+                {label.pill}: {label.title}
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground max-w-2xl">
+                {cta.valueLine}
+              </p>
+            </div>
+
+            <div className="flex w-full flex-col gap-2 md:w-auto md:min-w-[280px]">
+              <Link
+                href={primaryHref}
+                className={cn(buttonVariants({ size: "lg" }), "font-semibold rounded-2xl w-full justify-center")}
+              >
+                {cta.primary}
+              </Link>
+              <Link
+                href={secondaryHref}
+                className={cn(
+                  buttonVariants({ size: "lg", variant: "outline" }),
+                  "font-semibold rounded-2xl w-full justify-center"
+                )}
+              >
+                {cta.secondary}
+              </Link>
+            </div>
           </div>
-          <div className="mt-2 font-headline text-2xl font-bold">
-            Rust is omzet, geen luxe
+
+          <div className="mt-6 border-t border-border/35 pt-6">
+            <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Altijd inbegrepen
+            </div>
+            <div className="mt-2 font-headline text-xl font-bold md:text-2xl">
+              De basis is altijd strak. Alleen de afwerking verandert.
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {ALWAYS_INCLUDED.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-border/35 bg-background/15 p-4 text-sm text-muted-foreground"
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-md border border-border/45 bg-background/25">
+                      <Check className="h-3.5 w-3.5 text-primary" />
+                    </span>
+                    <span className="leading-relaxed">{item}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-            Hospitality sites moeten snel, helder en logisch zijn. Interactie is alleen premium als
-            het de flow beter maakt. Daarom bouwen we eerst structuur en vertrouwen, en pas daarna
-            voegen we details toe die echt waarde hebben.
-          </p>
+        </div>
+
+        {/* Optional: keep this short, not salesy */}
+        <div className="mx-auto mt-6 max-w-5xl text-center text-sm text-muted-foreground">
+          Je kiest hierboven. Daarna kun je meteen starten. Geen gedoe.
         </div>
       </div>
     </section>

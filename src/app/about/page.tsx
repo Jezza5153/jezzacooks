@@ -9,11 +9,11 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 export const metadata: Metadata = {
   title: "Over mij | Jezza Cooks | Horeca consultant in Amersfoort",
   description:
-    "Jeremy Arrascaeta (Amersfoort). Horeca consultancy voor restaurants en teams: menu engineering, food cost controle, prepstructuur, SOP’s, serviceflow en teamtraining. Praktisch, no poeha, gericht op rust op de vloer en betere marges. Ook restaurant websites als premium visitekaartje met duidelijke info en CTA’s.",
+    "Jeremy Arrascaeta (Amersfoort). Horeca consultancy voor restaurants en teams: menukaart keuzes, food cost controle, prepstructuur, serviceflow, teamtraining en werkafspraken die je volhoudt in de drukte. Praktisch, zonder poeha. Ook restaurant websites die reserveringen en aanvragen opleveren.",
   openGraph: {
     title: "Over mij | Jezza Cooks",
     description:
-      "Horeca consultant in Amersfoort. Structuur op papier en rust op de vloer met menu engineering, food cost, SOP’s, serviceflow en teamtraining. Ook restaurant websites die je verhaal helder maken.",
+      "Horeca consultant in Amersfoort. Structuur op papier en rust op de vloer met food cost, prepstructuur, serviceflow en teamtraining. Ook restaurant websites die je verhaal helder maken en aanzetten tot actie.",
     type: "website",
   },
 };
@@ -49,12 +49,12 @@ const steps = [
   {
     n: "1",
     title: "Diagnose",
-    body: "We vinden de lekken: food cost, loondruk, prepfrictie, menu keuzes en serviceflow. Kort en eerlijk.",
+    body: "We vinden de lekken: food cost, loondruk, prepfrictie, menukaart keuzes en serviceflow. Kort en eerlijk.",
   },
   {
     n: "2",
     title: "Structuur bouwen",
-    body: "Prepplanning, rolverdeling, SOP’s en checklists. Niet dik, wel bruikbaar tijdens echte drukte.",
+    body: "Prepplanning, rolverdeling, werkafspraken en checklists. Niet dik, wel bruikbaar tijdens echte drukte.",
   },
   {
     n: "3",
@@ -64,23 +64,23 @@ const steps = [
   {
     n: "4",
     title: "Sturen op ritme",
-    body: "Een paar KPI’s en een weekritme. Kleine verbeteringen, elke week. Zo ga je echt vooruit.",
+    body: "Een paar kerncijfers en een weekritme. Kleine verbeteringen, elke week. Zo ga je echt vooruit.",
   },
 ];
 
 const experience = [
   {
-    period: "2024 – 2025",
+    period: "2024 - 2025",
     role: "Sous Chef (Australië)",
     bullets: [
-      "Bestelritme en par-levels opgezet voor voorraad en rust in de keuken",
-      "Menu engineering: verkoopmix, marge en prepdruk scherper gemaakt",
+      "Bestelritme en min/max voorraad opgezet voor overzicht en rust",
+      "Menukaart scherper gemaakt op verkoop, marge en prepdruk",
       "Prepplanning en dagstructuur gebouwd die het team kan volgen",
-      "Aansturing tijdens service: passcontrole, tempo en consistentie",
+      "Aansturing tijdens service: tempo, consistentie en controle op de pas",
     ],
   },
   {
-    period: "2023 – 2024",
+    period: "2023 - 2024",
     role: "Sous Chef (catering en volume)",
     bullets: [
       "Productieplanning en draaiboeken gemaakt voor events met volume",
@@ -90,21 +90,21 @@ const experience = [
     ],
   },
   {
-    period: "2020 – 2022",
+    period: "2020 - 2022",
     role: "General Manager (high-end visrestaurant)",
     bullets: [
       "Omzet met 60% gegroeid in 2 jaar door betere gastflow en herhaalbezoek",
-      "Team aangestuurd op standaard: afspraken, training en feedback ritme",
-      "Gestuurd op cijfers: omzet, marge, waste en planning, zonder administratie-ellende",
+      "Team aangestuurd op standaard: afspraken, training en een feedback ritme",
+      "Gestuurd op cijfers: omzet, marge, waste en planning zonder administratie-ellende",
       "Concepten en samenwerkingen opgezet die echt gasten brachten",
     ],
   },
   {
-    period: "2010 – 2019",
+    period: "2010 - 2019",
     role: "Keukenrollen Europa (NL, BE, FR)",
     bullets: [
-      "Basis gebouwd: tempo, discipline, mise en place en station ownership",
-      "Partie gedraaid en collega’s ingewerkt zodat service stabiel blijft",
+      "Basis gebouwd: tempo, discipline, mise en place en verantwoordelijkheid per station",
+      "Partie gedraaid en collega's ingewerkt zodat service stabiel blijft",
       "Recepturen en portionering strak gezet voor constante kwaliteit",
       "Kwaliteit geborgd met simpele checks die je volhoudt in de drukte",
     ],
@@ -132,9 +132,10 @@ export default function AboutPage() {
           "menu engineering",
           "food cost controle",
           "prepstructuur",
-          "SOP’s",
           "serviceflow",
           "teamtraining",
+          "werkafspraken",
+          "checklists",
           "restaurant websites",
           "website voor restaurant",
         ],
@@ -149,7 +150,7 @@ export default function AboutPage() {
         },
         serviceType: ["Horeca consultancy", "Restaurant consulting", "Restaurant websites"],
         description:
-          "Horeca consultancy en restaurant websites. Structuur op papier en rust op de vloer met menu engineering, food cost controle, SOP’s, serviceflow en teamtraining.",
+          "Horeca consultancy en restaurant websites. Structuur op papier en rust op de vloer met menukaart keuzes, food cost controle, prepstructuur, serviceflow en teamtraining.",
       },
     ],
   };
@@ -173,13 +174,12 @@ export default function AboutPage() {
             </h1>
 
             <p className="mt-4 text-lg md:text-2xl text-muted-foreground">
-              Don&apos;t chase perfection. Chase improvement.
+              Niet jagen op perfectie. Wel op verbetering.
             </p>
 
             <p className="mt-6 text-base md:text-xl text-muted-foreground leading-relaxed">
-              Ik help restaurants en horecateams om chaos om te zetten in structuur op papier, zodat je rust krijgt op de vloer.
-              <br />
-              Praktisch, uitvoerbaar en zonder poeha.
+              Ik help restaurants en horecateams om chaos om te zetten in structuur op papier,
+              zodat je rust krijgt op de vloer. Praktisch, uitvoerbaar en zonder poeha.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -190,32 +190,37 @@ export default function AboutPage() {
                 Start de gratis diagnose
               </Link>
               <Link
-                href="/services/consulting"
+                href="#waar-ik-meestal-mee-help"
                 className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
               >
-                Bekijk restaurant consulting
-              </Link>
-              <Link
-                href="/services/websites"
-                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
-              >
-                Bekijk restaurant websites
+                Bekijk waar ik mee help
               </Link>
             </div>
 
-            <div className="mt-10 mx-auto max-w-3xl rounded-2xl border border-border bg-card/40 p-6 text-left">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+              <span>20+ jaar horeca</span>
+              <span className="opacity-60" aria-hidden="true">•</span>
+              <span>NL, BE, FR, AU</span>
+              <span className="opacity-60" aria-hidden="true">•</span>
+              <span>Chef + operatie + team</span>
+            </div>
+
+            <div
+              id="waar-ik-meestal-mee-help"
+              className="mt-10 mx-auto max-w-3xl rounded-2xl border border-border bg-card/40 p-6 text-left"
+            >
               <h2 className="font-headline text-xl md:text-2xl font-bold">
                 Waar ik meestal mee help
               </h2>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2 text-muted-foreground">
-                <li>Menu engineering en kaartkeuzes</li>
+                <li>Menukaart keuzes en menu engineering</li>
                 <li>Food cost controle en portionering</li>
                 <li>Prepstructuur en mise en place ritme</li>
-                <li>SOP’s en checklists die werken</li>
+                <li>Werkafspraken en checklists die werken</li>
                 <li>Serviceflow en rolverdeling</li>
                 <li>Teamtraining die blijft hangen</li>
                 <li>Restaurant websites als premium visitekaartje</li>
-                <li>Duidelijke CTA’s voor contact en reserveren</li>
+                <li>Duidelijke actieknoppen voor contact en reserveren</li>
               </ul>
               <p className="mt-4 text-sm text-muted-foreground">
                 Werkgebied: Amersfoort en omgeving. Op locatie of online, afhankelijk van wat het snelst resultaat geeft.
@@ -262,14 +267,34 @@ export default function AboutPage() {
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
                 {aboutImage ? (
                   <div className="relative aspect-[4/3] md:aspect-[3/4]">
-                    <Image
-                      src={aboutImage.imageUrl}
-                      alt={aboutImage.description}
-                      fill
-                      className="object-cover"
-                      data-ai-hint={aboutImage.imageHint}
-                      priority
-                    />
+                    {/* blurred cover background */}
+                    <div className="absolute inset-0">
+                      <Image
+                        src={aboutImage.imageUrl}
+                        alt=""
+                        aria-hidden="true"
+                        fill
+                        className="object-cover blur-2xl scale-110 opacity-35"
+                        data-ai-hint={aboutImage.imageHint}
+                        priority
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent" />
+                    </div>
+
+                    {/* foreground contain */}
+                    <div className="relative h-full w-full p-4">
+                      <div className="relative h-full w-full">
+                        <Image
+                          src={aboutImage.imageUrl}
+                          alt={aboutImage.description}
+                          fill
+                          className="object-contain"
+                          data-ai-hint={aboutImage.imageHint}
+                          priority
+                        />
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background/65 to-transparent" />
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <div className="aspect-[4/3] md:aspect-[3/4]" />
@@ -285,28 +310,24 @@ export default function AboutPage() {
 
               <div className="mt-6 space-y-5 text-base md:text-lg leading-relaxed text-muted-foreground">
                 <p>
-                  Ik zit ruim 20 jaar in de horeca en begon onderaan. Daar leer je snel wat wel werkt tijdens drukte en wat alleen mooi klinkt op papier.
+                  Ik zit ruim 20 jaar in de horeca en begon onderaan. Daar leer je snel wat werkt in drukte en wat alleen mooi klinkt op papier.
                   Kwaliteit is geen toeval. Het is ritme, afspraken en herhaling.
                 </p>
 
                 <p>
-                  In vier jaar tijd werkte ik in vijf Michelinster-keukens. Dat leerde me tempo, discipline en detail, maar vooral hoe je een standaard bouwt die elke service opnieuw haalbaar is.
-                  Die aanpak neem ik mee in hoe ik teams coach en systemen neerzet.
+                  In vier jaar tijd werkte ik in vijf Michelinster-keukens. Dat leerde me tempo, discipline en detail,
+                  maar vooral hoe je een standaard bouwt die elke service opnieuw haalbaar is.
                 </p>
 
                 <p>
-                  De afgelopen jaren werkte ik in Australië en droeg ik ook operationele verantwoordelijkheid. Denk aan planning, bestellingen, roosters, team aansturing en het strak organiseren van de dag.
+                  De afgelopen jaren werkte ik in Australië en droeg ik ook operationele verantwoordelijkheid.
+                  Denk aan planning, bestellingen, roosters en het strak organiseren van de dag.
                   Minder ruis, meer uitvoering.
                 </p>
 
                 <p>
-                  Ik heb ook gewerkt in Frankrijk, België en Nederland. Daardoor kan ik snel schakelen in verschillende teams en werkstijlen.
-                  Uiteindelijk draait het overal om hetzelfde: duidelijke afspraken en herhaalbare uitvoering.
-                </p>
-
-                <p>
-                  Nu ben ik terug in Nederland, in Amersfoort. Ik help restaurants en horecateams met horeca consultancy die je team kan uitvoeren.
-                  Geen rapporten voor in de la, maar stappen die je deze week al merkt.
+                  Nu ben ik terug in Nederland, in Amersfoort. Ik help restaurants en teams met stappen die je deze week al merkt.
+                  Geen rapporten voor in de la, maar afspraken die je kunt herhalen.
                 </p>
               </div>
 
@@ -326,7 +347,7 @@ export default function AboutPage() {
               </div>
 
               <p className="mt-4 text-xs text-muted-foreground">
-                Liever DM? Stuur “SCAN” op Instagram @chefjezz en ik stuur je 3 snelle verbeterpunten.
+                Liever DM? Stuur "SCAN" op Instagram @chefjezz en ik stuur je 3 snelle verbeterpunten.
               </p>
             </div>
           </div>
@@ -453,7 +474,7 @@ export default function AboutPage() {
             </div>
 
             <p className="mt-4 text-xs text-muted-foreground">
-              No poeha. Wel structuur en uitvoering.
+              Geen poeha. Wel structuur en uitvoering.
             </p>
           </div>
         </div>
