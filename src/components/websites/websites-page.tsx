@@ -1,19 +1,30 @@
 "use client";
 
 import * as React from "react";
-import WebsitesHero from "@/components/websites/websites-hero";
-import ResultsSlider from "@/components/websites/results-slider";
-import BuildOptions from "@/components/websites/build-options";
-import type { WebsitesMode } from "@/components/websites/websites-types";
+import WebsitesHero from "./websites-hero";
+import ResultsSlider from "./results-slider";
+import BuildOptions from "./build-options";
+import QuickScanForm from "./quick-scan-form";
+import type { WebsitesMode } from "./websites-types";
 
 export default function WebsitesPageClient() {
   const [mode, setMode] = React.useState<WebsitesMode>("pro");
 
   return (
-    <div className="container mx-auto px-4 py-10 md:py-16">
-      <WebsitesHero mode={mode} onModeChange={setMode} />
-      <ResultsSlider mode={mode} />
+    <main>
+      <section className="pt-10 md:pt-16">
+        <div className="container mx-auto px-4">
+          <WebsitesHero mode={mode} onModeChange={setMode} />
+        </div>
+      </section>
+
+      <div className="container mx-auto px-4">
+        <ResultsSlider mode={mode} />
+      </div>
+
       <BuildOptions mode={mode} onModeChange={setMode} />
-    </div>
+
+      <QuickScanForm />
+    </main>
   );
 }
