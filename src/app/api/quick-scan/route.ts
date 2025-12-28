@@ -51,7 +51,9 @@ function row(label: string, value: string) {
   const safe = value?.trim() ? escapeHtml(value.trim()) : "<em>Niet aangeleverd</em>";
   return `
     <tr>
-      <td style="padding:10px 12px;border:1px solid #2a2a2a;color:#c9c9c9;white-space:nowrap;"><strong>${escapeHtml(label)}</strong></td>
+      <td style="padding:10px 12px;border:1px solid #2a2a2a;color:#c9c9c9;white-space:nowrap;"><strong>${escapeHtml(
+        label
+      )}</strong></td>
       <td style="padding:10px 12px;border:1px solid #2a2a2a;color:#f1f1f1;">${safe}</td>
     </tr>
   `;
@@ -61,7 +63,7 @@ export async function POST(req: Request) {
   try {
     const body = (await req.json()) as Payload;
 
-    // Honeypot spam: doen alsof het gelukt is
+    // Honeypot spam: doe alsof het gelukt is
     if (body.honey && body.honey.trim().length > 0) {
       return NextResponse.json({ ok: true });
     }
@@ -82,19 +84,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Stap 2 is niet compleet." }, { status: 400 });
     }
 
-    const to = needEnv("QUICK_SCAN_TO_EMAIL");
-    const from = needEnv("QUICK_SCAN_FROM_EMAIL");
+    const to = needEnv("TO_EMAIL");
+    const from = needEnv("FROM_EMAIL");
 
     const host = needEnv("SMTP_HOST");
     const port = Number(needEnv("SMTP_PORT"));
     const user = needEnv("SMTP_USER");
-    const pass = needEnv("SMTP_PASS");
+    const pass = needEnv("SMTP_PASS").replaceAll(" ", ""); // Gmail app password vaak met spaties gekopieerd
 
     const transporter = nodemailer.createTransport({
       host,
       port,
-      secure: port === 465,
+      secure: false, // 587 = STARTTLS
       auth: { user, pass },
+      requireTLS: true,
     });
 
     const submittedAt = body.submittedAtIso ? new Date(body.submittedAtIso) : new Date();
@@ -205,7 +208,7 @@ BUDGET_BAND: ${body.budgetBand || "Niet aangeleverd"}
     await transporter.sendMail({
       from,
       to,
-      replyTo: body.email,
+      replyTo: body.email, // zodat jij direct op de klant kan replyen
       subject,
       text,
       html,
