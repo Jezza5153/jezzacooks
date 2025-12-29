@@ -1,3 +1,4 @@
+
 // src/components/diagnosis-client-page.tsx
 "use client";
 
@@ -468,7 +469,7 @@ const URGENCY: Option[] = [
 ];
 
 const REVENUE: Option[] = [
-  { value: "lt_25k", label: "< €25k / maand" },
+  { value: "lt_25k", label: "&lt; €25k / maand" },
   { value: "25_50k", label: "€25k–€50k / maand" },
   { value: "50_100k", label: "€50k–€100k / maand" },
   { value: "100k_plus", label: "€100k+ / maand" },
@@ -1293,7 +1294,7 @@ const CATERING_TYPE: Option[] = [
 
 const CATERING_BUDGET: Option[] = [
   { value: "", label: "Maak een keuze" },
-  { value: "lt_40", label: "< €40 p.p." },
+  { value: "lt_40", label: "&lt; €40 p.p." },
   { value: "40_70", label: "€40–€70 p.p." },
   { value: "70_110", label: "€70–€110 p.p." },
   { value: "110_plus", label: "€110+ p.p." },
