@@ -1,10 +1,11 @@
 // src/app/results/page.tsx
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/page-header";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Resultaten | Jezza Cooks | Wat je kunt verwachten",
@@ -25,47 +26,54 @@ type Outcome = {
   points: string[];
   href: string;
   cta: string;
+  image: { src: string; alt: string };
 };
+
+const HERO_IMAGE = "/pics/results-hero.jpg"; // zet jouw favoriete hero hier
+const PROOF_IMAGE = "/pics/results-proof.jpg"; // tweede sterke beeld hier
 
 const outcomes: Outcome[] = [
   {
     title: "Marge en food cost",
     headline: "Meer grip op je cijfers",
     body:
-      "We maken je kostprijs per gerecht zichtbaar, brengen portionering terug naar afspraken, en pakken waste aan. Niet met dikke rapporten, maar met simpele routines die je volhoudt.",
+      "We maken je kostprijs per gerecht zichtbaar, brengen portionering terug naar duidelijke afspraken en pakken waste aan. Niet met dikke rapporten, maar met routines die je team echt gebruikt.",
     points: [
-      "Receptuur en portionering strak trekken",
-      "Menu keuzes die logisch draaien in prep",
-      "Inkoop en voorraad met een vast ritme",
+      "Recepturen en portionering terug naar vaste afspraken",
+      "Menukaart keuzes die logisch draaien in prep",
+      "Voorraad en inkoop in een simpel ritme",
     ],
     href: "/services/consulting",
     cta: "Bekijk restaurant consulting",
+    image: { src: "/pics/service-consulting.jpg", alt: "Consulting in de keuken" },
   },
   {
     title: "Prep en service",
     headline: "Rust op de vloer",
     body:
-      "Drukte blijft. Paniek hoeft niet. We bouwen een prepplan, heldere rollen, en een serviceflow die je team kan herhalen. Daardoor wordt kwaliteit consistenter en shifts voelen minder zwaar.",
+      "Drukte blijft. Paniek hoeft niet. We bouwen een prepplan, heldere rollen en werkafspraken die je in een druk moment ook kunt volgen. Daardoor wordt kwaliteit consistenter en shifts voelen lichter.",
     points: [
       "Prepplanning die past bij je covers",
-      "Station ownership en duidelijke verantwoordelijkheden",
-      "SOP’s en checklists die echt gebruikt worden",
+      "Rolverdeling die iedereen snapt",
+      "Checklists en werkafspraken die je volhoudt",
     ],
     href: "/services/consulting",
     cta: "Zo bouwen we structuur",
+    image: { src: "/pics/consulting.jpg", alt: "Team en serviceflow" },
   },
   {
     title: "Restaurant websites",
     headline: "Een website die duidelijk verkoopt",
     body:
-      "Ik bouw websites voor restaurants zodat je presence klopt. Helder verhaal, goede foto’s, menu, openingstijden en contact. Reserveren kan via een systeem dat bij je zaak past.",
+      "Ik bouw restaurant websites zodat je verhaal klopt. Goede foto’s, menu, openingstijden en contact staan op de juiste plek. Reserveren of aanvragen voelt logisch voor je gast.",
     points: [
       "Premium visitekaartje dat vertrouwen geeft",
-      "Duidelijke CTA’s voor contact en aanvragen",
-      "SEO basis zodat je beter gevonden wordt",
+      "Duidelijke actieknoppen voor reserveren of contact",
+      "Basis Google vindbaarheid netjes geregeld",
     ],
     href: "/services/websites",
     cta: "Bekijk restaurant websites",
+    image: { src: "/pics/service-websites.jpg", alt: "Restaurant website op mobiel" },
   },
 ];
 
@@ -76,73 +84,224 @@ const deliverables = [
       "Geen advies dat alleen werkt als jij ernaast staat. We maken afspraken die een medewerker ook snapt op een druk moment.",
   },
   {
-    title: "Een korte, heldere prioriteitenlijst",
+    title: "Een heldere prioriteitenlijst",
     body:
       "Wat eerst, wat later. We kiezen de paar dingen die direct effect hebben en bouwen vanaf daar.",
   },
   {
     title: "Een werkritme dat je volhoudt",
     body:
-      "Kleine verbeteringen die je elke week herhaalt. Dat is hoe je echt vooruit gaat, zonder dat het na twee weken wegzakt.",
+      "Kleine verbeteringen die je elke week herhaalt. Dat is hoe je vooruit gaat zonder dat het na twee weken wegzakt.",
   },
 ];
 
-const cardClass =
-  "group relative overflow-hidden rounded-3xl border border-border/55 bg-card/30 p-7 " +
+const quickWins = [
+  "Je weet precies wat eerst moet (en wat even niet).",
+  "De dag voelt minder zwaar door duidelijke rollen en timing.",
+  "Je ziet waar je marge weglekt zonder dat het ‘meer administratie’ wordt.",
+];
+
+const monthOutcome = [
+  "Een prioriteitenplan voor 30 dagen dat je echt kunt uitvoeren.",
+  "Werkafspraken en checklists die je team herhaalt zonder discussie.",
+  "Een basis die je kunt meten en blijven verbeteren.",
+];
+
+const cardShell =
+  "group relative overflow-hidden rounded-3xl border border-border/55 bg-card/25 " +
   "shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-md ring-1 ring-white/5 " +
-  "transition duration-300 hover:bg-card/40 hover:border-border/75 hover:shadow-[0_28px_90px_rgba(0,0,0,0.42)] " +
+  "transition duration-300 hover:bg-card/35 hover:border-border/75 hover:shadow-[0_28px_90px_rgba(0,0,0,0.42)] " +
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40";
+
+function OutcomeCard({ o }: { o: Outcome }) {
+  return (
+    <div className={cardShell}>
+      {/* Image header */}
+      <div className="relative h-44 w-full overflow-hidden">
+        <Image
+          src={o.image.src}
+          alt={o.image.alt}
+          fill
+          sizes="(max-width: 1024px) 100vw, 33vw"
+          className="object-cover opacity-90"
+          priority={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/35 to-transparent" />
+        <div className="absolute left-5 top-5 inline-flex items-center rounded-full border border-border/40 bg-background/30 px-3 py-1 text-xs font-semibold text-foreground/90">
+          {o.title}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-7">
+        <h3 className="font-headline text-2xl md:text-3xl font-bold text-foreground">
+          {o.headline}
+        </h3>
+
+        <p className="mt-3 text-muted-foreground leading-relaxed">{o.body}</p>
+
+        <ul className="mt-5 space-y-2 text-muted-foreground">
+          {o.points.map((p) => (
+            <li key={p} className="flex items-start gap-2">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              <span>{p}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Link
+            href={o.href}
+            className={cn(buttonVariants({ size: "lg" }), "font-semibold rounded-2xl")}
+          >
+            {o.cta}
+          </Link>
+
+          <Link
+            href="/free-diagnosis"
+            className={cn(
+              buttonVariants({ size: "lg", variant: "outline" }),
+              "font-semibold rounded-2xl"
+            )}
+          >
+            Start gratis diagnose <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Subtle hover glow */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100">
+        <div className="absolute inset-0 bg-[radial-gradient(900px_280px_at_20%_0%,hsla(var(--primary)/0.16),transparent_60%)]" />
+      </div>
+    </div>
+  );
+}
 
 export default function ResultsPage() {
   return (
-    <div>
+    <div className="relative">
       <PageHeader
         title="Wat je kunt verwachten"
         subtitle="Geen grote claims op basis van verzonnen cijfers. Wel een aanpak die je team kan uitvoeren en die je deze week al voelt."
       />
 
+      {/* Premium hero band (approachable) */}
+      <section className="relative border-b border-border/60">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <Image
+            src={HERO_IMAGE}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-[0.22]"
+            priority={false}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/25 to-background/85" />
+          <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_15%_10%,hsla(var(--primary)/0.10),transparent_60%)]" />
+        </div>
+
+        <div className="container mx-auto px-4 py-10 md:py-14">
+          <div className="mx-auto max-w-5xl rounded-3xl border border-border/45 bg-background/35 p-7 md:p-9 backdrop-blur-md">
+            <h2 className="font-headline text-2xl md:text-4xl font-bold">
+              Je koopt geen “advies”. Je koopt rust en controle.
+            </h2>
+            <p className="mt-3 text-muted-foreground leading-relaxed max-w-3xl">
+              Ik help je de chaos te vertalen naar duidelijke afspraken, een haalbare dagstructuur
+              en keuzes die je marge beschermen. Zonder poeha, zonder dikke rapporten.
+            </p>
+
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
+              <div className="rounded-2xl border border-border/45 bg-background/25 p-5">
+                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Wat je binnen 7 dagen merkt
+                </div>
+                <ul className="mt-3 space-y-2">
+                  {quickWins.map((t) => (
+                    <li key={t} className="flex items-start gap-3 text-sm text-foreground/90">
+                      <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-md border border-border/45 bg-background/20">
+                        <Check className="h-3.5 w-3.5 text-primary" />
+                      </span>
+                      <span className="leading-relaxed">{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-border/45 bg-background/25 p-5">
+                <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Wat je binnen 30 dagen hebt
+                </div>
+                <ul className="mt-3 space-y-2">
+                  {monthOutcome.map((t) => (
+                    <li key={t} className="flex items-start gap-3 text-sm text-foreground/90">
+                      <span className="mt-0.5 grid h-5 w-5 place-items-center rounded-md border border-border/45 bg-background/20">
+                        <Check className="h-3.5 w-3.5 text-primary" />
+                      </span>
+                      <span className="leading-relaxed">{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/free-diagnosis"
+                className={cn(buttonVariants({ size: "lg" }), "font-semibold rounded-2xl")}
+              >
+                Start de gratis diagnose
+              </Link>
+              <Link
+                href="/pricing"
+                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold rounded-2xl")}
+              >
+                Bekijk opties
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="container mx-auto px-4 py-16 md:py-24">
         {/* Outcomes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {outcomes.map((o) => (
-            <Link key={o.title} href={o.href} className={cardClass} aria-label={o.title}>
-              <div className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100">
-                <div className="absolute inset-0 bg-[radial-gradient(900px_280px_at_20%_0%,hsla(var(--primary)/0.16),transparent_60%)]" />
-              </div>
-
-              <div className="relative">
-                <p className="text-sm font-semibold text-muted-foreground">{o.title}</p>
-
-                <h3 className="mt-3 font-headline text-2xl md:text-3xl font-bold text-foreground">
-                  {o.headline}
-                </h3>
-
-                <p className="mt-3 text-muted-foreground leading-relaxed">
-                  {o.body}
-                </p>
-
-                <ul className="mt-5 space-y-2 text-muted-foreground">
-                  {o.points.map((p) => (
-                    <li key={p} className="flex items-start gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                      <span>{p}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-6 inline-flex items-center text-primary font-semibold">
-                  {o.cta}
-                  <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
-                </div>
-              </div>
-            </Link>
+            <OutcomeCard key={o.title} o={o} />
           ))}
         </div>
 
-        {/* Trust without fake proof */}
+        {/* Premium proof image strip */}
+        <div className="mt-12 md:mt-16 overflow-hidden rounded-3xl border border-border/45 bg-card/25">
+          <div className="relative h-56 md:h-64">
+            <Image
+              src={PROOF_IMAGE}
+              alt="Sfeerbeeld Jezza Cooks"
+              fill
+              sizes="100vw"
+              className="object-cover opacity-85"
+              priority={false}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/45 to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.12),transparent_60%)]" />
+            <div className="absolute left-7 top-7 max-w-xl">
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Premium, maar toegankelijk
+              </div>
+              <h3 className="mt-2 font-headline text-2xl md:text-3xl font-bold">
+                Geen show. Wel uitvoering.
+              </h3>
+              <p className="mt-2 text-muted-foreground leading-relaxed">
+                Als je dit leest, weet je al waar het wringt. Ik help je het simpel maken,
+                zodat je team het ook echt volhoudt.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Deliverables */}
         <div className="mt-12 md:mt-16 grid gap-6 md:grid-cols-3">
           {deliverables.map((d) => (
-            <div key={d.title} className="rounded-3xl border border-border/45 bg-background/40 p-7">
+            <div key={d.title} className="rounded-3xl border border-border/45 bg-background/30 p-7">
               <h3 className="font-headline text-xl md:text-2xl font-bold">{d.title}</h3>
               <p className="mt-3 text-muted-foreground leading-relaxed">{d.body}</p>
             </div>
@@ -150,26 +309,26 @@ export default function ResultsPage() {
         </div>
 
         {/* Honest note */}
-        <div className="mt-12 rounded-3xl border border-border/45 bg-background/35 p-7 md:p-8">
+        <div className="mt-12 rounded-3xl border border-border/45 bg-background/30 p-7 md:p-8">
           <h3 className="font-headline text-2xl md:text-3xl font-bold">
             Waarom je hier geen klantnamen en percentages ziet
           </h3>
           <p className="mt-3 text-muted-foreground leading-relaxed max-w-3xl">
-            Ik ben eerlijk: ik ga geen resultaten claimen die ik niet kan onderbouwen op deze pagina.
-            Wat ik wél doe is je situatie scherp krijgen en je drie concrete stappen sturen die je direct kunt testen.
-            Als het werkt, dan bouwen we door. Zo simpel is het.
+            Ik ga geen resultaten claimen die ik niet kan onderbouwen op deze pagina.
+            Wat ik wel doe: je situatie scherp krijgen en je drie concrete stappen sturen die je direct kunt testen.
+            Als het werkt, bouwen we door. Zo simpel is het.
           </p>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Link
               href="/free-diagnosis"
-              className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
+              className={cn(buttonVariants({ size: "lg" }), "font-semibold rounded-2xl")}
             >
               Start de gratis diagnose
             </Link>
             <Link
               href="/contact"
-              className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
+              className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold rounded-2xl")}
             >
               Contact
             </Link>

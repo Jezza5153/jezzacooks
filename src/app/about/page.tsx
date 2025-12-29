@@ -1,4 +1,3 @@
-
 // src/app/about/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -112,10 +111,9 @@ const experience = [
   },
 ];
 
-function AboutBackground() {
+function AboutHeroBackground() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* Photo layer: visible, not smeared */}
       <Image
         src="/pics/aboutme.png"
         alt=""
@@ -125,21 +123,19 @@ function AboutBackground() {
         className={cn(
           "object-cover",
           "scale-105",
-          "blur-0",
-          "opacity-[0.72]",
-          "brightness-[0.62] contrast-[1.08] saturate-[1.08]"
+          "opacity-90",
+          "brightness-[0.78] contrast-[1.08] saturate-[1.05]"
         )}
       />
 
-      {/* Readability curtain: light, only to protect text */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/18 to-background/75" />
+      {/* Heel lichte curtain: foto blijft zichtbaar, tekst blijft leesbaar */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/15 to-background/55" />
 
-      {/* Brand glow: keep it, but subtle */}
-      <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.10),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(900px_560px_at_85%_85%,hsla(var(--secondary)/0.08),transparent_60%)]" />
+      {/* Subtiele focus achter de tekst (maakt het “in de foto” i.p.v. los erop) */}
+      <div className="absolute inset-0 bg-[radial-gradient(700px_360px_at_50%_24%,rgba(0,0,0,0.35),transparent_70%)]" />
 
-      {/* Optional: tiny vignette, super soft */}
-      <div className="absolute inset-0 bg-black/5" />
+      {/* Mini brand glow, niet schreeuwerig */}
+      <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_18%_6%,hsla(var(--primary)/0.10),transparent_60%)]" />
     </div>
   );
 }
@@ -177,10 +173,7 @@ export default function AboutPage() {
       {
         "@type": "ProfessionalService",
         name: "Jezza Cooks",
-        areaServed: {
-          "@type": "AdministrativeArea",
-          name: "Amersfoort en omgeving",
-        },
+        areaServed: { "@type": "AdministrativeArea", name: "Amersfoort en omgeving" },
         serviceType: ["Horeca consultancy", "Restaurant consulting", "Restaurant websites"],
         description:
           "Horeca consultancy en restaurant websites. Structuur op papier en rust op de vloer met menukaart keuzes, food cost controle, prepstructuur, serviceflow en teamtraining.",
@@ -189,9 +182,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="relative isolate">
-      <AboutBackground />
-
+    <div className="relative">
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -200,39 +191,25 @@ export default function AboutPage() {
 
       {/* HERO */}
       <section className="relative isolate overflow-hidden border-b border-border">
-<div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-  <Image
-    src="/pics/aboutme.png"
-    alt=""
-    fill
-    sizes="100vw"
-    className="object-cover opacity-80"
-    priority={false}
-  />
+        <AboutHeroBackground />
 
-  {/* heel lichte curtain zodat tekst leesbaar blijft, maar foto zichtbaar */}
-  <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/15 to-background/55" />
-</div>
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tight">
+            <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tight drop-shadow-[0_22px_70px_rgba(0,0,0,0.65)]">
               Level up the chaos.
             </h1>
 
-            <p className="mt-4 text-lg md:text-2xl text-muted-foreground">
-              Niet jagen op perfectie. Wel op verbetering.
+            <p className="mt-4 text-lg md:text-2xl text-foreground/90 drop-shadow-[0_14px_40px_rgba(0,0,0,0.55)]">
+              Don&apos;t chase perfection. Chase improvement.
             </p>
 
-            <p className="mt-6 text-base md:text-xl text-muted-foreground leading-relaxed">
-              Ik help restaurants en horecateams om chaos om te zetten in structuur op papier,
-              zodat je rust krijgt op de vloer. Praktisch, uitvoerbaar en zonder poeha.
+            <p className="mt-6 text-base md:text-xl text-foreground/80 leading-relaxed drop-shadow-[0_12px_34px_rgba(0,0,0,0.50)]">
+              Ik help restaurants en horecateams om chaos om te zetten in structuur op papier, zodat je rust krijgt op de vloer.
+              Praktisch, uitvoerbaar en zonder poeha.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                href="/free-diagnosis"
-                className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
-              >
+              <Link href="/free-diagnosis" className={cn(buttonVariants({ size: "lg" }), "font-semibold")}>
                 Start de gratis diagnose
               </Link>
               <Link
@@ -243,22 +220,29 @@ export default function AboutPage() {
               </Link>
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-foreground/70 drop-shadow-[0_10px_26px_rgba(0,0,0,0.45)]">
               <span>20+ jaar horeca</span>
-              <span className="opacity-60" aria-hidden="true">•</span>
+              <span className="opacity-70" aria-hidden="true">
+                •
+              </span>
               <span>Nederland, België, Frankrijk, Australië</span>
-              <span className="opacity-60" aria-hidden="true">•</span>
+              <span className="opacity-70" aria-hidden="true">
+                •
+              </span>
               <span>Chef + operatie + team</span>
             </div>
 
             <div
               id="waar-ik-meestal-mee-help"
-              className="mt-10 mx-auto max-w-3xl rounded-2xl border border-border bg-card/40 p-6 text-left"
+              className={cn(
+                "mt-10 mx-auto max-w-3xl rounded-2xl border border-white/10",
+                "bg-black/25 backdrop-blur-md",
+                "shadow-[0_22px_90px_rgba(0,0,0,0.45)]",
+                "p-6 text-left"
+              )}
             >
-              <h2 className="font-headline text-xl md:text-2xl font-bold">
-                Waar ik meestal mee help
-              </h2>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2 text-muted-foreground">
+              <h2 className="font-headline text-xl md:text-2xl font-bold">Waar ik meestal mee help</h2>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2 text-foreground/75">
                 <li>Menukaart keuzes en menu engineering</li>
                 <li>Food cost controle en portionering</li>
                 <li>Prepstructuur en mise en place ritme</li>
@@ -268,7 +252,7 @@ export default function AboutPage() {
                 <li>Restaurant websites als premium visitekaartje</li>
                 <li>Duidelijke actieknoppen voor contact en reserveren</li>
               </ul>
-              <p className="mt-4 text-sm text-muted-foreground">
+              <p className="mt-4 text-sm text-foreground/65">
                 Werkgebied: Amersfoort en omgeving. Op locatie of online, afhankelijk van wat het snelst resultaat geeft.
               </p>
             </div>
@@ -280,9 +264,7 @@ export default function AboutPage() {
       <section className="relative border-b border-border bg-card/40">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl md:text-5xl font-bold">
-              Waar ik voor sta
-            </h2>
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">Waar ik voor sta</h2>
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
               Niet harder werken. Slimmer werken. Met een team dat het kan herhalen.
             </p>
@@ -290,13 +272,8 @@ export default function AboutPage() {
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {values.map((v) => (
-              <div
-                key={v.title}
-                className="rounded-2xl border border-border bg-background/60 p-6 md:p-7"
-              >
-                <h3 className="font-headline text-xl md:text-2xl font-bold text-primary">
-                  {v.title}
-                </h3>
+              <div key={v.title} className="rounded-2xl border border-border bg-background/60 p-6 md:p-7">
+                <h3 className="font-headline text-xl md:text-2xl font-bold text-primary">{v.title}</h3>
                 <p className="mt-3 text-muted-foreground leading-relaxed">{v.body}</p>
               </div>
             ))}
@@ -313,7 +290,6 @@ export default function AboutPage() {
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
                 {aboutImage ? (
                   <div className="relative aspect-[4/3] md:aspect-[3/4]">
-                    {/* blurred cover background */}
                     <div className="absolute inset-0">
                       <Image
                         src={aboutImage.imageUrl}
@@ -327,7 +303,6 @@ export default function AboutPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent" />
                     </div>
 
-                    {/* foreground contain */}
                     <div className="relative h-full w-full p-4">
                       <div className="relative h-full w-full">
                         <Image
@@ -350,25 +325,22 @@ export default function AboutPage() {
 
             {/* Text */}
             <div className="order-1 md:order-2">
-              <h2 className="font-headline text-3xl md:text-4xl font-bold">
-                Mijn verhaal
-              </h2>
+              <h2 className="font-headline text-3xl md:text-4xl font-bold">Mijn verhaal</h2>
 
               <div className="mt-6 space-y-5 text-base md:text-lg leading-relaxed text-muted-foreground">
                 <p>
-                  Ik zit ruim 20 jaar in de horeca en begon onderaan. Daar leer je snel wat werkt in drukte en wat alleen mooi klinkt op papier.
-                  Kwaliteit is geen toeval. Het is ritme, afspraken en herhaling.
+                  Ik zit ruim 20 jaar in de horeca en begon onderaan. Daar leer je snel wat werkt in drukte en wat alleen mooi
+                  klinkt op papier. Kwaliteit is geen toeval. Het is ritme, afspraken en herhaling.
                 </p>
 
                 <p>
-                  In vier jaar tijd werkte ik in vijf Michelinster-keukens. Dat leerde me tempo, discipline en detail,
-                  maar vooral hoe je een standaard bouwt die elke service opnieuw haalbaar is.
+                  In vier jaar tijd werkte ik in vijf Michelinster-keukens. Dat leerde me tempo, discipline en detail, maar vooral
+                  hoe je een standaard bouwt die elke service opnieuw haalbaar is.
                 </p>
 
                 <p>
-                  De afgelopen jaren werkte ik in Australië en droeg ik ook operationele verantwoordelijkheid.
-                  Denk aan planning, bestellingen, roosters en het strak organiseren van de dag.
-                  Minder ruis, meer uitvoering.
+                  De afgelopen jaren werkte ik in Australië en droeg ik ook operationele verantwoordelijkheid. Denk aan planning,
+                  bestellingen, roosters en het strak organiseren van de dag. Minder ruis, meer uitvoering.
                 </p>
 
                 <p>
@@ -378,16 +350,10 @@ export default function AboutPage() {
               </div>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/free-diagnosis"
-                  className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
-                >
+                <Link href="/free-diagnosis" className={cn(buttonVariants({ size: "lg" }), "font-semibold")}>
                   Start met de gratis diagnose
                 </Link>
-                <Link
-                  href="/contact"
-                  className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
-                >
+                <Link href="/contact" className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}>
                   Contact
                 </Link>
               </div>
@@ -404,9 +370,7 @@ export default function AboutPage() {
       <section className="relative border-t border-border bg-card/30">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl md:text-5xl font-bold">
-              Ervaring in het kort
-            </h2>
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">Ervaring in het kort</h2>
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
               Geen borstklopperij. Wel context, zodat je weet waar mijn aanpak vandaan komt.
             </p>
@@ -414,14 +378,9 @@ export default function AboutPage() {
 
           <div className="mx-auto mt-12 max-w-4xl space-y-6">
             {experience.map((e) => (
-              <div
-                key={`${e.period}-${e.role}`}
-                className="rounded-2xl border border-border bg-background/60 p-6 md:p-7"
-              >
+              <div key={`${e.period}-${e.role}`} className="rounded-2xl border border-border bg-background/60 p-6 md:p-7">
                 <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
-                  <h3 className="font-headline text-xl md:text-2xl font-bold">
-                    {e.role}
-                  </h3>
+                  <h3 className="font-headline text-xl md:text-2xl font-bold">{e.role}</h3>
                   <div className="text-sm text-muted-foreground">{e.period}</div>
                 </div>
 
@@ -438,12 +397,8 @@ export default function AboutPage() {
           </div>
 
           <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-border bg-background/50 p-6 md:p-7">
-            <h3 className="font-headline text-xl md:text-2xl font-bold">
-              Talen
-            </h3>
-            <p className="mt-3 text-muted-foreground leading-relaxed">
-              Nederlands, Engels en Frans.
-            </p>
+            <h3 className="font-headline text-xl md:text-2xl font-bold">Talen</h3>
+            <p className="mt-3 text-muted-foreground leading-relaxed">Nederlands, Engels en Frans.</p>
           </div>
         </div>
       </section>
@@ -452,9 +407,7 @@ export default function AboutPage() {
       <section className="relative">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl md:text-5xl font-bold">
-              Hoe ik werk
-            </h2>
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">Hoe ik werk</h2>
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
               Van chaos naar controle, stap voor stap. Geen magie, wel ritme.
             </p>
@@ -466,27 +419,17 @@ export default function AboutPage() {
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary text-primary font-headline text-2xl font-bold">
                   {s.n}
                 </div>
-                <h3 className="mt-6 font-headline text-xl md:text-2xl font-bold">
-                  {s.title}
-                </h3>
-                <p className="mt-3 text-muted-foreground leading-relaxed">
-                  {s.body}
-                </p>
+                <h3 className="mt-6 font-headline text-xl md:text-2xl font-bold">{s.title}</h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{s.body}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/services/consulting"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}
-            >
+            <Link href="/services/consulting" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}>
               Bekijk restaurant consulting
             </Link>
-            <Link
-              href="/services/websites"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}
-            >
+            <Link href="/services/websites" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}>
               Bekijk restaurant websites
             </Link>
           </div>
@@ -497,31 +440,21 @@ export default function AboutPage() {
       <section className="relative border-t border-border bg-card/50">
         <div className="container mx-auto px-4 py-16 md:py-20">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold">
-              Klaar voor rust op de vloer en betere cijfers?
-            </h2>
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">Klaar voor rust op de vloer en betere cijfers?</h2>
             <p className="mt-3 text-base md:text-lg text-muted-foreground">
               Start met de gratis diagnose. Je krijgt drie concrete stappen die je deze week al kunt uitvoeren.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                href="/free-diagnosis"
-                className={cn(buttonVariants({ size: "lg" }), "font-semibold")}
-              >
+              <Link href="/free-diagnosis" className={cn(buttonVariants({ size: "lg" }), "font-semibold")}>
                 Start de gratis diagnose
               </Link>
-              <Link
-                href="/pricing"
-                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}
-              >
+              <Link href="/pricing" className={cn(buttonVariants({ size: "lg", variant: "outline" }), "font-semibold")}>
                 Bekijk opties
               </Link>
             </div>
 
-            <p className="mt-4 text-xs text-muted-foreground">
-              Geen poeha. Wel structuur en uitvoering.
-            </p>
+            <p className="mt-4 text-xs text-muted-foreground">Geen poeha. Wel structuur en uitvoering.</p>
           </div>
         </div>
       </section>
