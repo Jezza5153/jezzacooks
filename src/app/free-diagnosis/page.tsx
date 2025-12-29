@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
@@ -19,6 +20,8 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
+
+export const dynamic = "force-dynamic";
 
 type DiagnosisType = "website" | "consulting" | "catering";
 type Option = { value: string; label: string };
@@ -1580,3 +1583,5 @@ function CateringIntakeForm() {
     </form>
   );
 }
+
+    
