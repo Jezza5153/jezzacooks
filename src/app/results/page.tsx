@@ -30,8 +30,8 @@ type Outcome = {
   image: { src: string; alt: string; hint: string; };
 };
 
-const HERO_IMAGE_DATA = PlaceHolderImages.find(p => p.id === 'consulting-hero');
-const PROOF_IMAGE_DATA = PlaceHolderImages.find(p => p.id === 'about-jezza');
+const HERO_IMAGE_DATA = PlaceHolderImages.find(p => p.id === 'results-hero');
+const PROOF_IMAGE_DATA = PlaceHolderImages.find(p => p.id === 'results-proof');
 
 
 const outcomes: Outcome[] = [
