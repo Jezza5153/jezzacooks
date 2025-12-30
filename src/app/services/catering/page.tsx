@@ -13,11 +13,11 @@ import { CheckCircle, ArrowRight, Package, Users, Leaf, Clock } from "lucide-rea
 import CateringInquiryForm from "@/components/catering-inquiry-form";
 
 export const metadata: Metadata = {
-  title: "Catering | De Tafelaar x Jezza Cooks | Kantoorlunch & events",
+  title: "Catering | Tafelaar Catering | Kantoorlunch & events",
   description:
-    "Catering in de stijl van De Tafelaar x Jezza Cooks. Kantoorlunch catering (broodjes, wraps, bowls, lunchpakketten) en diners voor verjaardagen, babyshowers en events. Nuchter, geen poeha, wel structuur en smaak.",
+    "Catering in de stijl van Tafelaar Catering. Kantoorlunch catering (broodjes, wraps, bowls, lunchpakketten) en diners voor verjaardagen, babyshowers en events. Nuchter, geen poeha, wel structuur en smaak.",
   openGraph: {
-    title: "Catering | De Tafelaar x Jezza Cooks",
+    title: "Catering | Tafelaar Catering",
     description:
       "Kantoorlunch catering en events. Strak verpakt, makkelijk uit te delen en gemaakt met vertrouwde smaken.",
     type: "website",
@@ -408,7 +408,7 @@ export default function CateringPage() {
               <div className="relative h-16 w-[260px] md:h-20 md:w-[320px]">
                 <Image
                   src="/pics/tafelaar-x-jezza-logo.png"
-                  alt="De Tafelaar x Jezza Cooks"
+                  alt="Tafelaar Catering"
                   fill
                   className="object-contain"
                   priority
@@ -417,7 +417,7 @@ export default function CateringPage() {
 
               <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold">
                 <span className={ui.copperDot} aria-hidden="true" />
-                De Tafelaar x Jezza Cooks
+                Tafelaar Catering
               </div>
             </div>
 
