@@ -128,13 +128,8 @@ function AboutHeroBackground() {
         )}
       />
 
-      {/* Heel lichte curtain: foto blijft zichtbaar, tekst blijft leesbaar */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/15 to-background/55" />
-
-      {/* Subtiele focus achter de tekst (maakt het “in de foto” i.p.v. los erop) */}
       <div className="absolute inset-0 bg-[radial-gradient(700px_360px_at_50%_24%,rgba(0,0,0,0.35),transparent_70%)]" />
-
-      {/* Mini brand glow, niet schreeuwerig */}
       <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_18%_6%,hsla(var(--primary)/0.10),transparent_60%)]" />
     </div>
   );
@@ -180,6 +175,9 @@ export default function AboutPage() {
       },
     ],
   };
+
+  const storyImageSrc = aboutImage?.imageUrl || "/pics/aboutme.png";
+  const storyImageAlt = aboutImage?.description || "Jeremy Arrascaeta";
 
   return (
     <div className="relative">
@@ -281,72 +279,91 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* STORY */}
+      {/* STORY (aangepast) */}
       <section className="relative">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="grid gap-12 md:grid-cols-2 md:items-start">
-            {/* Image */}
+            {/* Image (premium, rustig, 1 laag) */}
             <div className="order-2 md:order-1">
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
-                {aboutImage ? (
-                  <div className="relative aspect-[4/3] md:aspect-[3/4]">
-                    <div className="absolute inset-0">
-                      <Image
-                        src={aboutImage.imageUrl}
-                        alt=""
-                        aria-hidden="true"
-                        fill
-                        className="object-cover blur-2xl scale-110 opacity-35"
-                        data-ai-hint={aboutImage.imageHint}
-                        priority
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent" />
-                    </div>
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card/40 shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
+                <div className="relative aspect-[4/5]">
+                  <Image
+                    src={storyImageSrc}
+                    alt={storyImageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    data-ai-hint={aboutImage?.imageHint}
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-background/20 to-transparent" />
+                  <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.10),transparent_60%)]" />
 
-                    <div className="relative h-full w-full p-4">
-                      <div className="relative h-full w-full">
-                        <Image
-                          src={aboutImage.imageUrl}
-                          alt={aboutImage.description}
-                          fill
-                          className="object-contain"
-                          data-ai-hint={aboutImage.imageHint}
-                          priority
-                        />
-                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background/65 to-transparent" />
+                  {/* In het kort */}
+                  <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-black/25 p-4 backdrop-blur-md">
+                    <div className="text-xs font-semibold uppercase tracking-widest text-foreground/70">
+                      In het kort
+                    </div>
+                    <div className="mt-3 grid grid-cols-3 gap-3 text-sm text-foreground/85">
+                      <div>
+                        <div className="font-headline text-lg font-bold text-primary">20+</div>
+                        <div className="text-foreground/70">jaar horeca</div>
+                      </div>
+                      <div>
+                        <div className="font-headline text-lg font-bold text-primary">5</div>
+                        <div className="text-foreground/70">landen</div>
+                      </div>
+                      <div>
+                        <div className="font-headline text-lg font-bold text-primary">1</div>
+                        <div className="text-foreground/70">focus: uitvoering</div>
                       </div>
                     </div>
                   </div>
-                ) : (
-                  <div className="aspect-[4/3] md:aspect-[3/4]" />
-                )}
+                </div>
               </div>
             </div>
 
-            {/* Text */}
+            {/* Text (strakker, minder CV) */}
             <div className="order-1 md:order-2">
               <h2 className="font-headline text-3xl md:text-4xl font-bold">Mijn verhaal</h2>
 
               <div className="mt-6 space-y-5 text-base md:text-lg leading-relaxed text-muted-foreground">
                 <p>
-                  Ik zit ruim 20 jaar in de horeca en begon onderaan. Daar leer je snel wat werkt in drukte en wat alleen mooi
-                  klinkt op papier. Kwaliteit is geen toeval. Het is ritme, afspraken en herhaling.
+                  Ik ben Jeremy. Ik heb ruim 20 jaar horeca gedaan aan de harde kant van de praktijk: prep, service, ritme en
+                  verantwoordelijkheid. Ik hou van kwaliteit, maar nog meer van systemen die je ook volhoudt als het druk is.
                 </p>
 
                 <p>
-                  In vier jaar tijd werkte ik in vijf Michelinster-keukens. Dat leerde me tempo, discipline en detail, maar vooral
-                  hoe je een standaard bouwt die elke service opnieuw haalbaar is.
+                  Ik heb gewerkt in high-end keukens en later ook operationele verantwoordelijkheid gedragen. Daar leer je één
+                  ding snel: het verschil zit niet in extra moeite, maar in duidelijke afspraken en herhaling.
                 </p>
 
                 <p>
-                  De afgelopen jaren werkte ik in Australië en droeg ik ook operationele verantwoordelijkheid. Denk aan planning,
-                  bestellingen, roosters en het strak organiseren van de dag. Minder ruis, meer uitvoering.
+                  Nu help ik restaurants en teams in Amersfoort en omgeving om chaos te vertalen naar een dagstructuur die werkt.
+                  Minder ruis, meer uitvoering. En dat merk je direct op de vloer.
                 </p>
 
-                <p>
-                  Nu ben ik terug in Nederland, in Amersfoort. Ik help restaurants en teams met stappen die je deze week al merkt.
-                  Geen rapporten voor in de la, maar afspraken die je kunt herhalen.
-                </p>
+                <div className="rounded-2xl border border-border bg-background/50 p-5">
+                  <div className="text-sm font-semibold text-foreground">Waar je mij voor inzet</div>
+                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      <span>Food cost, portionering en kaartkeuzes</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      <span>Prepstructuur, rolverdeling en serviceflow</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      <span>Teamtraining die blijft hangen</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                      <span>Websites die aanvragen helpen binnenhalen</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
