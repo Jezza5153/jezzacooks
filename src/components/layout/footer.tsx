@@ -9,7 +9,6 @@ export default function Footer() {
     company: [
       { href: "/about", label: "About" },
       { href: "/results", label: "Results" },
-      { href: "/insights", label: "Insights" },
       { href: "/contact", label: "Contact" },
       { href: "/free-diagnosis", label: "Free Diagnosis" },
     ],

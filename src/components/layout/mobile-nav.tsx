@@ -47,14 +47,6 @@ const groups: Group[] = [
     ],
   },
   {
-    title: "Inzichten",
-    links: [
-      { href: "/insights", label: "Alle inzichten" },
-      { href: "/insights/prime-cost-explained", label: "Prime cost uitgelegd" },
-      { href: "/insights/menu-engineering-chef-version", label: "Menu engineering (chef versie)" },
-    ],
-  },
-  {
     title: "Juridisch",
     links: [
       { href: "/privacy", label: "Privacy" },

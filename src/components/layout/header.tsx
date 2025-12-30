@@ -100,16 +100,6 @@ export default function Header() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Insights */}
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    asChild
-                    className={cn(triggerClass, isActive("/insights") && activeClass)}
-                  >
-                    <Link href="/insights">Inzichten</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
                 {/* Pricing */}
                 <NavigationMenuItem>
                   <NavigationMenuLink
