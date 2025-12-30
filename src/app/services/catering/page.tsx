@@ -9,7 +9,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CheckCircle, ArrowRight, Package, Users, Leaf, Clock } from "lucide-react";
+import {
+  CheckCircle,
+  ArrowRight,
+  Package,
+  Users,
+  Leaf,
+  Clock,
+} from "lucide-react";
 import CateringInquiryForm from "@/components/catering-inquiry-form";
 
 export const metadata: Metadata = {
@@ -42,13 +49,17 @@ type MenuSection = {
 };
 
 const ui = {
-  page: "relative bg-[#0B0F14] text-[#F3EDE3] pb-28",
+  // lighter “Night” so it feels less heavy (rest stays exactly the same)
+  page: "relative bg-[#0F141B] text-[#F3EDE3] pb-28",
   container: "container mx-auto px-4",
   sectionY: "py-12 md:py-20",
 
+  // same glow logic, plus a soft linen wash to lift the background a touch
   bgFX:
     "pointer-events-none absolute inset-0 -z-10 " +
     "bg-[radial-gradient(900px_460px_at_20%_10%,rgba(245,184,65,0.10),transparent_60%)] " +
+    "before:absolute before:inset-0 before:content-[''] " +
+    "before:bg-[linear-gradient(180deg,rgba(243,237,227,0.045),transparent_28%,transparent_72%,rgba(243,237,227,0.025))] " +
     "after:absolute after:inset-0 after:content-[''] " +
     "after:bg-[radial-gradient(900px_520px_at_85%_85%,rgba(216,198,174,0.10),transparent_62%)]",
 
@@ -85,10 +96,26 @@ const ui = {
 };
 
 const quickBullets = [
-  { icon: Users, title: "Bedrijven en teams", text: "Van vergaderlunch tot teamdag. Wij maken het makkelijk." },
-  { icon: Package, title: "Transportproof", text: "Strak verpakt, overzichtelijk geleverd, direct klaar om neer te zetten." },
-  { icon: Leaf, title: "Goede vegetarische keuzes", text: "Niet iets erbij, maar opties die echt kloppen." },
-  { icon: Clock, title: "Klaar om te serveren", text: "Geen gedoe op kantoor. Uitpakken en klaar." },
+  {
+    icon: Users,
+    title: "Bedrijven en teams",
+    text: "Van vergaderlunch tot teamdag. Wij maken het makkelijk.",
+  },
+  {
+    icon: Package,
+    title: "Transportproof",
+    text: "Strak verpakt, overzichtelijk geleverd, direct klaar om neer te zetten.",
+  },
+  {
+    icon: Leaf,
+    title: "Goede vegetarische keuzes",
+    text: "Niet iets erbij, maar opties die echt kloppen.",
+  },
+  {
+    icon: Clock,
+    title: "Klaar om te serveren",
+    text: "Geen gedoe op kantoor. Uitpakken en klaar.",
+  },
 ];
 
 const menu: MenuSection[] = [
@@ -180,13 +207,15 @@ const menu: MenuSection[] = [
     items: [
       {
         name: "Lunch Box – Classic",
-        description: "Vitello tonnato sandwich · kleine carpaccio salade · gevuld eitje · zoete bite",
+        description:
+          "Vitello tonnato sandwich · kleine carpaccio salade · gevuld eitje · zoete bite",
         price: "€ 14,50",
         allergens: "gluten · vis · eieren · lactose",
       },
       {
         name: "Lunch Box – Vegetarisch",
-        description: "Inari bao-style sandwich · bieten en geitenkaas bowl · peppadew met roomkaas · zoete bite",
+        description:
+          "Inari bao-style sandwich · bieden en geitenkaas bowl · peppadew met roomkaas · zoete bite",
         price: "€ 13,50",
         veg: true,
         allergens: "gluten · soja · eieren · lactose · noten",
@@ -288,9 +317,7 @@ function MenuAccordion({ sections }: { sections: MenuSection[] }) {
                     {section.title}
                   </div>
                   {section.note ? (
-                    <div className="mt-1 text-sm text-[#0B0F14]/65">
-                      {section.note}
-                    </div>
+                    <div className="mt-1 text-sm text-[#0B0F14]/65">{section.note}</div>
                   ) : null}
                 </div>
 
@@ -353,33 +380,25 @@ function MenuAccordion({ sections }: { sections: MenuSection[] }) {
   );
 }
 
-function StickyCtaBar({ toEmail, phone }: { toEmail: string; phone?: string }) {
+function StickyCtaBar({ phone }: { phone?: string }) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40">
       <div className="mx-auto max-w-6xl px-4 pb-4">
         <div className="rounded-3xl border border-white/10 bg-black/35 backdrop-blur-md px-4 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.55)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="text-sm text-white/80">
-              Korte aanvraag, snel voorstel.
-            </div>
+            <div className="text-sm text-white/80">Korte aanvraag, snel voorstel.</div>
 
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <Link href="#aanvraag" className={ui.ctaPrimary}>
                 Offerte aanvragen <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
 
-              <a
-                href={`mailto:${toEmail}`}
-                className={ui.ctaSecondary}
-              >
-                Mail
-              </a>
+              <Link href="/contact" className={ui.ctaSecondary}>
+                Contact
+              </Link>
 
               {phone ? (
-                <a
-                  href={`tel:${phone}`}
-                  className={ui.ctaSecondary}
-                >
+                <a href={`tel:${phone}`} className={ui.ctaSecondary}>
                   Bel
                 </a>
               ) : null}
@@ -392,9 +411,8 @@ function StickyCtaBar({ toEmail, phone }: { toEmail: string; phone?: string }) {
 }
 
 export default function CateringPage() {
-  // Vul deze twee in met jouw echte gegevens
-  const TO_EMAIL = "jouw-inbox@jezzacooks.com";
-  const PHONE = ""; // bijv. +31612345678, leeg laten als je het niet wil tonen
+  // Optioneel: vul dit in als je telefoon wil tonen. Leeg laten als je het niet wil tonen.
+  const PHONE = ""; // bijv. +31612345678
 
   return (
     <div className={ui.page}>
@@ -405,7 +423,8 @@ export default function CateringPage() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <div className="mx-auto flex flex-col items-center">
-              <div className="relative h-16 w-[260px] md:h-20 md:w-[320px]">
+              {/* Logo bigger */}
+              <div className="relative h-24 w-[384px] md:h-28 md:w-[504px]">
                 <Image
                   src="/pics/tafelaar-x-jezza-logo.png"
                   alt="Tafelaar Catering"
@@ -425,9 +444,11 @@ export default function CateringPage() {
               Kantoorlunch catering
             </h1>
 
-            <p className={`mt-4 text-base md:text-xl leading-relaxed ${ui.mutedOnNight} mx-auto max-w-3xl`}>
-              De Tafelaar op kantoor. Broodjes, bowls, wraps en lunchpakketten.
-              Strak verpakt, makkelijk uit te delen en gemaakt met onze vertrouwde smaken.
+            <p
+              className={`mt-4 text-base md:text-xl leading-relaxed ${ui.mutedOnNight} mx-auto max-w-3xl`}
+            >
+              De Tafelaar op kantoor. Broodjes, bowls, wraps en lunchpakketten. Strak verpakt,
+              makkelijk uit te delen en gemaakt met onze vertrouwde smaken.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
@@ -458,17 +479,20 @@ export default function CateringPage() {
 
                 <p className={`mt-3 leading-relaxed ${ui.mutedOnPaper}`}>
                   Geen gedoe, wel kwaliteit. Onze kantoorlunch is ontworpen om netjes te eten,
-                  makkelijk te verdelen en consistent te leveren. Perfect voor vergaderlunches, teamdagen en events.
+                  makkelijk te verdelen en consistent te leveren. Perfect voor vergaderlunches,
+                  teamdagen en events.
                 </p>
 
                 <p className={`mt-4 leading-relaxed ${ui.mutedOnPaper}`}>
-                  Na het bouwen van menu en keukenstructuur bij De Tafelaar besloten we de krachten te bundelen in catering.
-                  Jan brengt de nuchtere geen poeha stijl. Jezza Cooks brengt structuur en smaak.
-                  Samen leveren we iets dat simpel voelt, maar wel goed staat.
+                  Na het bouwen van menu en keukenstructuur bij De Tafelaar besloten we de krachten
+                  te bundelen in catering. Jan brengt de nuchtere geen poeha stijl. Jezza Cooks
+                  brengt structuur en smaak. Samen leveren we iets dat simpel voelt, maar wel goed
+                  staat.
                 </p>
 
                 <p className={`mt-4 text-xs ${ui.mutedOnPaper}`}>
-                  Tip: stuur datum, locatie, aantal personen en dieetwensen. Dan kunnen we snel schakelen.
+                  Tip: stuur datum, locatie, aantal personen en dieetwensen. Dan kunnen we snel
+                  schakelen.
                 </p>
               </div>
 
@@ -482,10 +506,7 @@ export default function CateringPage() {
 
           {/* Quick form anchor */}
           <div id="aanvraag" className="mt-10 scroll-mt-24">
-            <CateringInquiryForm
-              toEmail={TO_EMAIL}
-              phone={PHONE || undefined}
-            />
+            <CateringInquiryForm phone={PHONE || undefined} />
           </div>
 
           {/* Trust trio */}
@@ -519,9 +540,7 @@ export default function CateringPage() {
       <section id="menu" className={ui.container + " " + "pb-14 md:pb-24"}>
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-5xl font-bold">
-              Assortiment
-            </h2>
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">Assortiment</h2>
             <p className={`mt-3 ${ui.mutedOnNight} md:text-lg`}>
               Vaste prijzen, duidelijke keuzes. Openklappen per categorie.
             </p>
@@ -539,8 +558,8 @@ export default function CateringPage() {
                   Build your own lunch (bedrijven)
                 </h3>
                 <p className={`mt-3 leading-relaxed ${ui.mutedOnPaper}`}>
-                  Maak het makkelijk voor je team. Kies per persoon 1 basis en 1 extra erbij.
-                  Wij leveren het overzichtelijk en klaar om neer te zetten.
+                  Maak het makkelijk voor je team. Kies per persoon 1 basis en 1 extra erbij. Wij
+                  leveren het overzichtelijk en klaar om neer te zetten.
                 </p>
 
                 <ul className={`mt-5 space-y-3 ${ui.mutedOnPaper}`}>
@@ -565,11 +584,15 @@ export default function CateringPage() {
                 <div className="mt-4 space-y-3">
                   <div className="flex items-baseline justify-between gap-3">
                     <div className="font-semibold text-[#0B0F14]/85">Basis broodje of wrap</div>
-                    <div className="font-headline text-xl font-bold text-[#0B0F14]/95">€ 7,50</div>
+                    <div className="font-headline text-xl font-bold text-[#0B0F14]/95">
+                      € 7,50
+                    </div>
                   </div>
                   <div className="flex items-baseline justify-between gap-3">
                     <div className="font-semibold text-[#0B0F14]/85">Basis bowl</div>
-                    <div className="font-headline text-xl font-bold text-[#0B0F14]/95">€ 10,50</div>
+                    <div className="font-headline text-xl font-bold text-[#0B0F14]/95">
+                      € 10,50
+                    </div>
                   </div>
                 </div>
 
@@ -592,8 +615,8 @@ export default function CateringPage() {
                   Ook voor diners en events
                 </h3>
                 <p className={`mt-3 leading-relaxed ${ui.mutedOnPaper}`}>
-                  Verjaardag, babyshower of een avond waar je geen stress wil over eten.
-                  Wij nemen het over, brengen alles mee en zorgen dat het klopt.
+                  Verjaardag, babyshower of een avond waar je geen stress wil over eten. Wij nemen
+                  het over, brengen alles mee en zorgen dat het klopt.
                 </p>
 
                 <ul className={`mt-5 space-y-3 ${ui.mutedOnPaper}`}>
@@ -614,9 +637,9 @@ export default function CateringPage() {
                     Bespreek je event <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
 
-                  <a href={`mailto:${TO_EMAIL}`} className={ui.ctaSecondary}>
-                    Mail
-                  </a>
+                  <Link href="/contact" className={ui.ctaSecondary}>
+                    Contact
+                  </Link>
                 </div>
               </div>
 
@@ -627,9 +650,17 @@ export default function CateringPage() {
 
                 <div className="mt-4 space-y-4">
                   {[
-                    { n: "1", t: "Jij stuurt datum, locatie en aantallen", d: "Kort bericht is genoeg om te starten." },
+                    {
+                      n: "1",
+                      t: "Jij stuurt datum, locatie en aantallen",
+                      d: "Kort bericht is genoeg om te starten.",
+                    },
                     { n: "2", t: "Wij maken een voorstel", d: "Duidelijk overzicht met keuzes en planning." },
-                    { n: "3", t: "Levering of op locatie", d: "Strak geregeld, zodat jouw dag rustig blijft." },
+                    {
+                      n: "3",
+                      t: "Levering of op locatie",
+                      d: "Strak geregeld, zodat jouw dag rustig blijft.",
+                    },
                   ].map((s) => (
                     <div key={s.n} className="rounded-2xl border border-[#D8C6AE]/65 bg-[#F3EDE3] p-4">
                       <div className="flex items-start gap-3">
@@ -650,10 +681,10 @@ export default function CateringPage() {
                 </Link>
 
                 <p className={`mt-3 text-xs ${ui.mutedOnPaper}`}>
-                  Liever eerst kort afstemmen? Mail via{" "}
-                  <a href={`mailto:${TO_EMAIL}`} className={ui.microLink}>
-                    {TO_EMAIL}
-                  </a>
+                  Liever eerst kort afstemmen? Ga naar{" "}
+                  <Link href="/contact" className={ui.microLink}>
+                    contact
+                  </Link>
                   .
                 </p>
               </div>
@@ -662,9 +693,7 @@ export default function CateringPage() {
 
           {/* FAQ */}
           <div className="mx-auto mt-14 max-w-4xl">
-            <h2 className="text-center font-headline text-3xl md:text-4xl font-bold">
-              Vragen
-            </h2>
+            <h2 className="text-center font-headline text-3xl md:text-4xl font-bold">Vragen</h2>
             <p className={`mt-2 text-center ${ui.mutedOnNight}`}>
               Korte antwoorden, zodat je snel kunt plannen.
             </p>
@@ -687,7 +716,7 @@ export default function CateringPage() {
         </div>
       </section>
 
-      <StickyCtaBar toEmail={TO_EMAIL} phone={PHONE || undefined} />
+      <StickyCtaBar phone={PHONE || undefined} />
     </div>
   );
 }
