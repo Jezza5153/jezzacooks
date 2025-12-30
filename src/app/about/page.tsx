@@ -189,7 +189,19 @@ export default function AboutPage() {
 
       {/* HERO */}
       <section className="relative isolate overflow-hidden border-b border-border">
-        <AboutHeroBackground />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+          <Image
+            src="/pics/aboutme.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-80"
+            priority={false}
+          />
+
+          {/* heel lichte curtain zodat tekst leesbaar blijft, maar foto zichtbaar */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/15 to-background/55" />
+        </div>
 
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-4xl text-center">
@@ -295,6 +307,7 @@ export default function AboutPage() {
                     className="object-cover"
                     data-ai-hint={aboutImage?.imageHint}
                     priority
+                    unoptimized
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-background/20 to-transparent" />
                   <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.10),transparent_60%)]" />
