@@ -89,6 +89,18 @@
       "description": "Chef pointing at a whiteboard in a kitchen, explaining a new system.",
       "imageUrl": "/pics/consulting.jpg?v=2",
       "imageHint": "chef teaching"
+    },
+    {
+      "id": "results-hero",
+      "description": "Premium sfeerbeeld voor de resultatenpagina (hero achtergrond)",
+      "imageUrl": "/pics/results-hero.jpg",
+      "imageHint": "restaurant atmosphere"
+    },
+    {
+      "id": "results-proof",
+      "description": "Sfeerbeeld voor de resultatenpagina (proof strip / uitvoering in beeld)",
+      "imageUrl": "/pics/results-proof.jpg",
+      "imageHint": "kitchen team"
     }
   ]
 }
