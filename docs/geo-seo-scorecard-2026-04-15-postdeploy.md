@@ -293,9 +293,63 @@ The path to 95 runs through Tier 5A (code) + Tier 5B.4 (GBP verification). Every
 ## 10. Commit history
 
 ```
+f38774a Tier 5A: AVIF + tuned deviceSizes; add sizes to remaining fill Images
 0adfa13 Compress hero images, add SEO baseline harness, audit documentation
 3797a21 Add menu-engineering pillar, SEO/GEO service, portfolio, privacy pages
 8231b45 Add schema.org JSON-LD graph, sitemap, robots, OG image generator
 ```
 
-All three pushed to `origin/main` and auto-deployed by Vercel. Live at https://www.jezzacooks.com.
+All four pushed to `origin/main` and auto-deployed by Vercel. Live at https://www.jezzacooks.com.
+
+---
+
+## 11. Tier 5A follow-up deploy (`f38774a`, T+20 minutes)
+
+After writing sections 1–10, I inspected `next.config.ts` and found that the speculated `images: { unoptimized: true }` was **not present** — Next.js image optimization was already enabled and serving `/_next/image?url=…` URLs. The actual Tier 5A gap was smaller than predicted. Shipped as commit `f38774a`:
+
+### 11A. What changed
+
+1. **`next.config.ts` — AVIF + tuned device sizes**
+   ```ts
+   images: {
+     formats: ["image/avif", "image/webp"],
+     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+     minimumCacheTTL: 60 * 60 * 24 * 30,
+     remotePatterns: [/* unchanged */],
+   }
+   ```
+   Previously Next.js defaulted to `deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840]` — the 3840 variant is 4K-desktop-only and wastes CDN slots. Removed.
+
+2. **`src/components/websites/websites-hero.tsx`** — added `sizes="(max-width: 768px) 100vw, 50vw"` to the two blurred `aria-hidden` background Images (before/after preview).
+
+3. **`src/components/websites/results-slider.tsx`** — added `sizes="(min-width: 1024px) 60vw, 92vw"` to the blurred slider background.
+
+### 11B. AVIF delivery verification
+
+Measured against the newly-deployed `/_next/image?url=/pics/hero-home.jpg&w=1920&q=75`:
+
+| Accept header | Content-Type | Content-Length | vs JPEG baseline |
+|---|---|---:|---:|
+| (none) | `image/jpeg` | 85 343 B | baseline |
+| `image/webp,*/*` | `image/webp` | 62 818 B | **−26%** |
+| `image/avif,image/webp,*/*` | `image/avif` | 50 674 B | **−41%** |
+
+**41% smaller hero delivery on AVIF-capable browsers** (all modern mobile browsers). This feeds directly into mobile LCP — the next CrUX window (~4 weeks) will compound this with the earlier compression win.
+
+### 11C. Updated aggregate score
+
+No full re-measurement because SERP wouldn't have moved at T+20 minutes and Lab-metric PageSpeed scoring of AVIF would be within noise of the last run. The AVIF delivery is confirmed via content negotiation; the next monthly re-run will show the field-metric impact.
+
+**Final score, end of this session: 89.8 → ~90.5** (estimated from AVIF contribution to Technical category). The gap to 95 is now entirely off-site (GBP, earned media, reviews).
+
+### 11D. Dead code flagged (not deleted)
+
+`src/components/articles/article-page.tsx` — defines `ArticlePage` component but has zero imports anywhere in the codebase. Leftover from a prior "insight" section that was deleted. Flagged for a separate cleanup task; not in-scope for this commit.
+
+### 11E. Still verified live (no regressions from Tier 5A deploy)
+
+- All 16 routes: 200
+- sitemap.xml: 16 URLs
+- JSON-LD `@graph` injection: unchanged
+- AVIF/WebP content negotiation: working as configured
