@@ -1,0 +1,1074 @@
+{
+  "runAt": "2026-04-14T22:04:24.211Z",
+  "domain": "jezzacooks.com",
+  "source": "serper.dev + pagespeed",
+  "summary": {
+    "totalQueries": 30,
+    "rankedCount": 2,
+    "top10Count": 2,
+    "top3Count": 2,
+    "aioPresentCount": 0,
+    "aioCitedCount": 0,
+    "rankedPct": 7,
+    "top10Pct": 7,
+    "aioCitedPct": 0,
+    "pagespeed": {
+      "urlsTested": 8,
+      "runsTotal": 16,
+      "runsOk": 16,
+      "mobile": {
+        "performance": 90,
+        "seo": 100,
+        "accessibility": 96,
+        "bestPractices": 100,
+        "lcpMs": 3336,
+        "cls": 0.000010125,
+        "tbtMs": 35
+      },
+      "desktop": {
+        "performance": 99,
+        "seo": 100,
+        "accessibility": 96,
+        "bestPractices": 100,
+        "lcpMs": 855,
+        "cls": 0.000031125,
+        "tbtMs": 17
+      }
+    }
+  },
+  "results": [
+    {
+      "q": "jezza cooks",
+      "intent": "brand",
+      "position": 1,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "instagram.com",
+        "tiktok.com",
+        "tiktok.com"
+      ]
+    },
+    {
+      "q": "jezza cooks amersfoort",
+      "intent": "brand",
+      "position": 1,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "companyinfo.nl",
+        "oozo.nl",
+        "adhocdata.nl"
+      ]
+    },
+    {
+      "q": "jeremy arrascaeta chef",
+      "intent": "brand",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "nl.linkedin.com",
+        "instagram.com",
+        "facebook.com"
+      ]
+    },
+    {
+      "q": "chef jezz amersfoort",
+      "intent": "brand",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "instagram.com",
+        "ad.nl",
+        "socialdeal.nl"
+      ]
+    },
+    {
+      "q": "restaurant consultant amersfoort",
+      "intent": "commercial-local",
+      "note": "primary target",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "bonico.nl",
+        "facebook.com",
+        "hendriksensales.nl"
+      ]
+    },
+    {
+      "q": "horeca consultant amersfoort",
+      "intent": "commercial-local",
+      "note": "primary target",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "bonico.nl",
+        "facebook.com",
+        "anyconsultant.nl"
+      ]
+    },
+    {
+      "q": "menu engineering amersfoort",
+      "intent": "commercial-local",
+      "note": "open niche",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "horecaacademie.nl",
+        "nl.indeed.com",
+        "trestapasbar.nl"
+      ]
+    },
+    {
+      "q": "food cost controle amersfoort",
+      "intent": "commercial-local",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "magnet.me",
+        "vanmade.nl",
+        "nl.indeed.com"
+      ]
+    },
+    {
+      "q": "catering bedrijf amersfoort",
+      "intent": "commercial-local",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "kokcateringservice.nl",
+        "veenendaalcatering.nl",
+        "debuffettenboer.nl"
+      ]
+    },
+    {
+      "q": "private chef amersfoort",
+      "intent": "commercial-local",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "chefmaison.com",
+        "takeachef.com",
+        "bylaurens.nl"
+      ]
+    },
+    {
+      "q": "horeca consultancy nederland",
+      "intent": "commercial-national",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "consultancy.nl",
+        "horecaadviesbureau.nl",
+        "bonico.nl"
+      ]
+    },
+    {
+      "q": "restaurant consultant nederland",
+      "intent": "commercial-national",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "conceptional.nl",
+        "consultancy.nl",
+        "bonico.nl"
+      ]
+    },
+    {
+      "q": "horeca seo bureau",
+      "intent": "commercial-national",
+      "note": "GEO target",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "rimbu.nl",
+        "chefdigital.nl",
+        "visualdistrict.nl"
+      ]
+    },
+    {
+      "q": "horeca geo optimalisatie",
+      "intent": "commercial-national",
+      "note": "GEO target",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "adwiseacademy.nl",
+        "thefullybookers.com",
+        "horecava.nl"
+      ]
+    },
+    {
+      "q": "goedkope restaurant website",
+      "intent": "commercial-national",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "thefork.nl",
+        "spontaan.nl",
+        "groupon.nl"
+      ]
+    },
+    {
+      "q": "restaurant website laten maken",
+      "intent": "commercial-national",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "restaurantwebsitelatenmaken.nl",
+        "zenchef.com",
+        "thefullybookers.com"
+      ]
+    },
+    {
+      "q": "restaurant website 400 euro",
+      "intent": "commercial-national",
+      "note": "long-tail match",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "youtube.com",
+        "get-sides.nl",
+        "eatery.club"
+      ]
+    },
+    {
+      "q": "wat is generative engine optimization",
+      "intent": "informational",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "sageon.nl",
+        "searchflow.nl",
+        "baasenbaas.nl"
+      ]
+    },
+    {
+      "q": "ranken in chatgpt",
+      "intent": "informational",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "convident.nl",
+        "rankingmasters.nl",
+        "h1.nl"
+      ]
+    },
+    {
+      "q": "geciteerd worden door ai overviews",
+      "intent": "informational",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "mpowerdigital.nl",
+        "contentmattersrotterdam.nl",
+        "onlinemarketing.triplepro.nl"
+      ]
+    },
+    {
+      "q": "hoe verlaag ik food cost restaurant",
+      "intent": "problem",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "get.apicbase.com",
+        "theforkmanager.com",
+        "vandemoorteleprofessional.com"
+      ]
+    },
+    {
+      "q": "menukaart optimaliseren restaurant",
+      "intent": "problem",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "foodinspiration.com",
+        "get-sides.nl",
+        "blog.sitedish.nl"
+      ]
+    },
+    {
+      "q": "prep structuur keuken verbeteren",
+      "intent": "problem",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "francescakookt.nl",
+        "culinaireambiance.com",
+        "huishoudenoporde.nl"
+      ]
+    },
+    {
+      "q": "restaurant team training amersfoort",
+      "intent": "problem",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "hsn-horeca.nl",
+        "marienhof.nl",
+        "bzzzonderegasten.nl"
+      ]
+    },
+    {
+      "q": "bonico horeca alternatief",
+      "intent": "competitor",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "bonico.nl",
+        "instagram.com",
+        "facebook.com"
+      ]
+    },
+    {
+      "q": "horeca adviesbureau amersfoort",
+      "intent": "competitor",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "bonico.nl",
+        "towerhoreca.nl",
+        "facebook.com"
+      ]
+    },
+    {
+      "q": "shared dining restaurant amersfoort",
+      "intent": "portfolio-adjacent",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "indebuurt.nl",
+        "tafelaaramersfoort.nl",
+        "deprofessoramersfoort.nl"
+      ]
+    },
+    {
+      "q": "tafelaar amersfoort",
+      "intent": "portfolio-adjacent",
+      "note": "Jezza built the site",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "tafelaaramersfoort.nl",
+        "instagram.com",
+        "tripadvisor.nl"
+      ]
+    },
+    {
+      "q": "angler stirling kangaroo island dry age chef",
+      "intent": "press-adjacent",
+      "note": "AU history",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "agfg.com.au",
+        "indailysa.com.au",
+        "instagram.com"
+      ]
+    },
+    {
+      "q": "euro-toques young chef award 2018 bougainville",
+      "intent": "press-adjacent",
+      "position": null,
+      "aiOverviewCited": false,
+      "aiOverviewPresent": false,
+      "peopleAlsoAskMatched": 0,
+      "topCompetitors": [
+        "missethoreca.nl",
+        "youtube.com",
+        "euro-toques.ie"
+      ]
+    }
+  ],
+  "places": {
+    "horeca consultant amersfoort": {
+      "searchParameters": {
+        "q": "horeca consultant amersfoort",
+        "gl": "nl",
+        "hl": "nl",
+        "type": "places",
+        "num": 10,
+        "page": 1,
+        "engine": "google"
+      },
+      "places": [
+        {
+          "position": 1,
+          "title": "Bonico Horeca Consultancy",
+          "address": "Brilkruid 31, 3824 NH Amersfoort",
+          "latitude": 52.201412,
+          "longitude": 5.3842998,
+          "rating": 3.7,
+          "ratingCount": 3,
+          "category": "Management-consultant",
+          "phoneNumber": "06 83625210",
+          "website": "https://www.bonico.nl/",
+          "cid": "16927815079125392488"
+        }
+      ],
+      "credits": 1
+    },
+    "restaurant consultant amersfoort": {
+      "searchParameters": {
+        "q": "restaurant consultant amersfoort",
+        "gl": "nl",
+        "hl": "nl",
+        "type": "places",
+        "num": 10,
+        "page": 1,
+        "engine": "google"
+      },
+      "places": [
+        {
+          "position": 1,
+          "title": "Hospitality Group",
+          "address": "Nijverheidsweg-Noord 78, 3812 RT Amersfoort",
+          "latitude": 52.166595,
+          "longitude": 5.3675456,
+          "rating": 5,
+          "ratingCount": 6,
+          "category": "Consultant",
+          "phoneNumber": "033 462 5555",
+          "website": "http://www.hospitality-group.nl/",
+          "cid": "3596475653743124642"
+        },
+        {
+          "position": 2,
+          "title": "Bonico Horeca Consultancy",
+          "address": "Brilkruid 31, 3824 NH Amersfoort",
+          "latitude": 52.201412,
+          "longitude": 5.3842998,
+          "rating": 3.7,
+          "ratingCount": 3,
+          "category": "Management-consultant",
+          "phoneNumber": "06 83625210",
+          "website": "https://www.bonico.nl/",
+          "cid": "16927815079125392488"
+        },
+        {
+          "position": 3,
+          "title": "Restaurant Amicitia",
+          "address": "Stadsring 220, 3811 HS Amersfoort",
+          "latitude": 52.15322,
+          "longitude": 5.38564,
+          "rating": 4.8,
+          "ratingCount": 92,
+          "priceLevel": "€ 50-60",
+          "category": "Fusion-restaurant",
+          "phoneNumber": "033 479 5670",
+          "website": "https://restaurantamicitia.nl/",
+          "cid": "10852629254355189398"
+        },
+        {
+          "position": 4,
+          "title": "Van Voorst Consult - Kwaliteitsmanagement & Certificering",
+          "address": "Wiekenweg 30, 3815 KL Amersfoort",
+          "latitude": 52.164635,
+          "longitude": 5.427646,
+          "rating": 5,
+          "ratingCount": 21,
+          "category": "Management-consultant",
+          "phoneNumber": "033 700 9727",
+          "website": "https://www.vanvoorstconsult.nl/",
+          "cid": "3123842431105053547"
+        },
+        {
+          "position": 5,
+          "title": "Veganrevolutie",
+          "rating": 4.9,
+          "ratingCount": 154,
+          "category": "Gezondheidsconsulent",
+          "website": "https://www.veganrevolutie.nl/"
+        },
+        {
+          "position": 6,
+          "title": "Symbol BV",
+          "address": "Stationsplein 26, 3818 LE Amersfoort",
+          "latitude": 52.152634,
+          "longitude": 5.3740234,
+          "rating": 4.7,
+          "ratingCount": 21,
+          "category": "Consultant",
+          "phoneNumber": "033 203 0200",
+          "website": "https://www.symbol.nl/",
+          "cid": "9431112762142158406"
+        },
+        {
+          "position": 7,
+          "title": "Chiel Culinair BBQ & Catering",
+          "address": "De Zonnecel 20M, 3815 KN Amersfoort",
+          "latitude": 52.16938,
+          "longitude": 5.4276776,
+          "rating": 5,
+          "ratingCount": 121,
+          "category": "Catering",
+          "phoneNumber": "06 14166066",
+          "website": "http://chielculinair.nl/",
+          "cid": "9719322461072017541"
+        },
+        {
+          "position": 8,
+          "title": "Forvalue Vastgoedspecialisten | Horecamakelaar | Taxateur exploitatiegebonden vastgoed",
+          "address": "Stadsring 109, 3811 HP Amersfoort",
+          "latitude": 52.152416,
+          "longitude": 5.385898,
+          "rating": 5,
+          "ratingCount": 15,
+          "category": "Taxateur onroerend goed",
+          "phoneNumber": "033 800 3225",
+          "website": "http://www.forvalue.nl/",
+          "cid": "3592322745707097020"
+        },
+        {
+          "position": 9,
+          "title": "De Saffraan",
+          "address": "Kleine Koppel 3, 3812 PG Amersfoort",
+          "latitude": 52.160557,
+          "longitude": 5.3825,
+          "rating": 4.7,
+          "ratingCount": 239,
+          "priceLevel": "€ 100+",
+          "category": "Restaurant",
+          "phoneNumber": "033 448 1753",
+          "website": "http://desaffraan.nl/",
+          "cid": "14918943502110746460"
+        },
+        {
+          "position": 10,
+          "title": "Huischef",
+          "address": "Nijverheidsweg 16, 3762 ER Soest",
+          "latitude": 52.177685,
+          "longitude": 5.2788153,
+          "rating": 4.9,
+          "ratingCount": 98,
+          "category": "Catering",
+          "phoneNumber": "035 205 5045",
+          "website": "http://www.huischef.nl/",
+          "cid": "13687444623047818086"
+        }
+      ],
+      "credits": 1
+    },
+    "catering amersfoort": {
+      "searchParameters": {
+        "q": "catering amersfoort",
+        "gl": "nl",
+        "hl": "nl",
+        "type": "places",
+        "num": 10,
+        "page": 1,
+        "engine": "google"
+      },
+      "places": [
+        {
+          "position": 1,
+          "title": "Kok Cateringservice",
+          "address": "Nijverheidsweg-Noord 98S, 3812 PN Amersfoort",
+          "latitude": 52.16716,
+          "longitude": 5.361942,
+          "rating": 4.8,
+          "ratingCount": 41,
+          "category": "Catering",
+          "phoneNumber": "033 737 0015",
+          "website": "http://www.kokcateringservice.nl/",
+          "cid": "8048819298955968699"
+        },
+        {
+          "position": 2,
+          "title": "Chiel Culinair BBQ & Catering",
+          "address": "De Zonnecel 20M, 3815 KN Amersfoort",
+          "latitude": 52.16938,
+          "longitude": 5.4276776,
+          "rating": 5,
+          "ratingCount": 121,
+          "category": "Catering",
+          "phoneNumber": "06 14166066",
+          "website": "http://chielculinair.nl/",
+          "cid": "9719322461072017541"
+        },
+        {
+          "position": 3,
+          "title": "Mercuurs Traiteur & Catering",
+          "address": "Nijverheidsweg-Noord 94, 3812 PW Amersfoort",
+          "latitude": 52.167637,
+          "longitude": 5.3628683,
+          "rating": 4.6,
+          "ratingCount": 46,
+          "category": "Cateringgroothandel in voeding en dranken",
+          "phoneNumber": "033 465 0779",
+          "website": "http://www.mercuurs.nl/",
+          "cid": "15012890071524365616"
+        },
+        {
+          "position": 4,
+          "title": "Huischef",
+          "address": "Nijverheidsweg 16, 3762 ER Soest",
+          "latitude": 52.177685,
+          "longitude": 5.2788153,
+          "rating": 4.9,
+          "ratingCount": 98,
+          "category": "Catering",
+          "phoneNumber": "035 205 5045",
+          "website": "http://www.huischef.nl/",
+          "cid": "13687444623047818086"
+        },
+        {
+          "position": 5,
+          "title": "Warme Bakker de Graaf - Bakkerij & Catering",
+          "address": "Radonweg 14, 3812 RL Amersfoort",
+          "latitude": 52.169537,
+          "longitude": 5.34903,
+          "rating": 4.8,
+          "ratingCount": 109,
+          "category": "Catering",
+          "phoneNumber": "033 461 2352",
+          "website": "https://bakkerdegraaf.nl/",
+          "cid": "326010298930905814"
+        },
+        {
+          "position": 6,
+          "title": "Hakze Broodjeszaak en Catering",
+          "address": "Noordewierweg 158, 160, 3812 DP Amersfoort",
+          "latitude": 52.160812,
+          "longitude": 5.3589616,
+          "rating": 4.4,
+          "ratingCount": 447,
+          "category": "Catering",
+          "phoneNumber": "033 461 4845",
+          "website": "http://www.hakzecatering.nl/",
+          "cid": "14473993782412830957"
+        },
+        {
+          "position": 7,
+          "title": "Cateringevents",
+          "address": "Plantageweg 21C, 3833 AZ Leusden",
+          "latitude": 52.140957,
+          "longitude": 5.417977,
+          "rating": 5,
+          "ratingCount": 85,
+          "category": "Catering",
+          "phoneNumber": "033 465 5452",
+          "website": "https://www.cateringevents.nl/",
+          "cid": "567329712522999396"
+        },
+        {
+          "position": 8,
+          "title": "Casa d'Italia Amersfoort",
+          "address": "Leusderweg 218, 3817 KG Amersfoort",
+          "latitude": 52.14175,
+          "longitude": 5.379238,
+          "rating": 4.6,
+          "ratingCount": 109,
+          "category": "Catering",
+          "phoneNumber": "033 461 2713",
+          "website": "http://www.casaditalia.nl/",
+          "cid": "7765472363254113473"
+        },
+        {
+          "position": 9,
+          "title": "Sofi Catering",
+          "address": "Peter van Den Breemerweg 23, 3768 MP Soest",
+          "latitude": 52.166317,
+          "longitude": 5.3432817,
+          "rating": 4.8,
+          "ratingCount": 58,
+          "category": "Catering",
+          "phoneNumber": "033 433 0898",
+          "website": "https://www.soficatering.nl/",
+          "cid": "7372886000233368192"
+        },
+        {
+          "position": 10,
+          "title": "Entrecôte Catering en Events B.V.",
+          "address": "Kaliumweg 8a, 3812 PT Amersfoort",
+          "latitude": 52.16668,
+          "longitude": 5.365248,
+          "rating": 5,
+          "ratingCount": 3,
+          "category": "Catering",
+          "website": "https://www.entrecotecatering.nl/",
+          "cid": "8842747924610050052"
+        }
+      ],
+      "credits": 1
+    }
+  },
+  "pagespeed": [
+    {
+      "url": "https://jezzacooks.com/",
+      "strategy": "mobile",
+      "performance": 0.91,
+      "seo": 1,
+      "accessibility": 0.96,
+      "bestPractices": 1,
+      "lcpMs": 3181,
+      "cls": 0,
+      "tbtMs": 39,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/",
+      "strategy": "desktop",
+      "performance": 1,
+      "seo": 1,
+      "accessibility": 0.96,
+      "bestPractices": 1,
+      "lcpMs": 806.5,
+      "cls": 0.000083,
+      "tbtMs": 25,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/consulting",
+      "strategy": "mobile",
+      "performance": 0.88,
+      "seo": 1,
+      "accessibility": 0.96,
+      "bestPractices": 1,
+      "lcpMs": 3556,
+      "cls": 0,
+      "tbtMs": 90,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/consulting",
+      "strategy": "desktop",
+      "performance": 0.99,
+      "seo": 1,
+      "accessibility": 0.96,
+      "bestPractices": 1,
+      "lcpMs": 911,
+      "cls": 0,
+      "tbtMs": 6,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/catering",
+      "strategy": "mobile",
+      "performance": 0.88,
+      "seo": 1,
+      "accessibility": 0.9,
+      "bestPractices": 1,
+      "lcpMs": 3577,
+      "cls": 0,
+      "tbtMs": 57,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/catering",
+      "strategy": "desktop",
+      "performance": 1,
+      "seo": 1,
+      "accessibility": 0.87,
+      "bestPractices": 1,
+      "lcpMs": 786,
+      "cls": 0.000083,
+      "tbtMs": 12.5,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/websites",
+      "strategy": "mobile",
+      "performance": 0.88,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 3648.5,
+      "cls": 0,
+      "tbtMs": 33.5,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/websites",
+      "strategy": "desktop",
+      "performance": 0.98,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 1153,
+      "cls": 0,
+      "tbtMs": 8.5,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/seo-geo",
+      "strategy": "mobile",
+      "performance": 0.93,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 3031,
+      "cls": 0.000081,
+      "tbtMs": 12,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/services/seo-geo",
+      "strategy": "desktop",
+      "performance": 1,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 753,
+      "cls": 0.000083,
+      "tbtMs": 32,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/menu-engineering",
+      "strategy": "mobile",
+      "performance": 0.89,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 3481,
+      "cls": 0,
+      "tbtMs": 25.5,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/menu-engineering",
+      "strategy": "desktop",
+      "performance": 0.99,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 843.5,
+      "cls": 0,
+      "tbtMs": 28.5,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/about",
+      "strategy": "mobile",
+      "performance": 0.93,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 3106,
+      "cls": 0,
+      "tbtMs": 0,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/about",
+      "strategy": "desktop",
+      "performance": 0.99,
+      "seo": 1,
+      "accessibility": 1,
+      "bestPractices": 1,
+      "lcpMs": 893,
+      "cls": 0,
+      "tbtMs": 21,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/contact",
+      "strategy": "mobile",
+      "performance": 0.93,
+      "seo": 1,
+      "accessibility": 0.86,
+      "bestPractices": 1,
+      "lcpMs": 3106,
+      "cls": 0,
+      "tbtMs": 21,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    },
+    {
+      "url": "https://jezzacooks.com/contact",
+      "strategy": "desktop",
+      "performance": 1,
+      "seo": 1,
+      "accessibility": 0.86,
+      "bestPractices": 1,
+      "lcpMs": 691,
+      "cls": 0,
+      "tbtMs": 0,
+      "field": {
+        "overall": null,
+        "lcpMs": null,
+        "lcpCategory": null,
+        "inpMs": null,
+        "inpCategory": null,
+        "cls": null,
+        "clsCategory": null
+      }
+    }
+  ]
+}

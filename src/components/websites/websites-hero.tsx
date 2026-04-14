@@ -324,6 +324,7 @@ function PreviewCard({
               alt=""
               aria-hidden="true"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority
               className={cn(
                 "object-cover blur-2xl scale-110 opacity-0",
@@ -336,6 +337,7 @@ function PreviewCard({
               alt=""
               aria-hidden="true"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority
               className={cn(
                 "object-cover blur-2xl scale-110 opacity-0",

@@ -263,6 +263,7 @@ export default function ResultsSlider({ mode }: { mode: WebsitesMode }) {
                 alt=""
                 aria-hidden="true"
                 fill
+                sizes="(min-width: 1024px) 60vw, 92vw"
                 className={cn("object-cover blur-2xl scale-110 opacity-35")}
                 priority={false}
               />

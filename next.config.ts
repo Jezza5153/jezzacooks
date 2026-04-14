@@ -59,6 +59,16 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    // Prefer AVIF (better compression than webp) then fall back to webp.
+    // Next.js will transcode source JPEG/PNG through the sharp pipeline
+    // and serve whichever format the client advertises in Accept.
+    formats: ["image/avif", "image/webp"],
+    // Match the viewport widths we care about. The default includes 3840
+    // which is wasted bandwidth for the device sizes we serve.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Cache optimized variants on the CDN for 30 days.
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       {
         protocol: "https",
