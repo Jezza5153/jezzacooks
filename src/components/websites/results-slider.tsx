@@ -30,8 +30,8 @@ type CompareAsset = {
 
 const ASSETS: Record<WebsitesMode, CompareAsset> = {
   simple: {
-    beforeSrc: "/websites-demos/simple-before.webp",
-    afterSrc: "/websites-demos/simple-after.webp",
+    beforeSrc: "/websites-demos/simple-before.jpg",
+    afterSrc: "/websites-demos/simple-after.jpg",
     beforeAlt: "Before: onduidelijke horeca website met rommelige structuur",
     afterAlt: "After: snelle, duidelijke horeca website met heldere navigatie",
     headline: "Van druk naar duidelijk",
@@ -44,8 +44,8 @@ const ASSETS: Record<WebsitesMode, CompareAsset> = {
     ],
   },
   pro: {
-    beforeSrc: "/websites-demos/pro-before.webp",
-    afterSrc: "/websites-demos/pro-after.webp",
+    beforeSrc: "/websites-demos/pro-before.jpg",
+    afterSrc: "/websites-demos/pro-after.jpg",
     beforeAlt: "Before: standaard horeca website zonder duidelijke hiërarchie",
     afterAlt: "After: premium horeca website met duidelijke flow en duidelijke CTA’s",
     headline: "Van oké naar premium",
@@ -58,8 +58,8 @@ const ASSETS: Record<WebsitesMode, CompareAsset> = {
     ],
   },
   custom: {
-    beforeSrc: "/websites-demos/custom-before.webp",
-    afterSrc: "/websites-demos/custom-after.webp",
+    beforeSrc: "/websites-demos/custom-before.jpg",
+    afterSrc: "/websites-demos/custom-after.jpg",
     beforeAlt: "Before: generieke site zonder merkgevoel",
     afterAlt: "After: custom site met merkgevoel en high-end afwerking",
     headline: "Van website naar beleving",

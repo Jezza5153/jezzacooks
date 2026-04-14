@@ -78,16 +78,16 @@ const MODE_COPY: Record<
 
 const PREVIEW: Record<WebsitesMode, { before: string; after: string }> = {
   simple: {
-    before: "/websites-demos/simple-before.webp",
-    after: "/websites-demos/simple-after.webp",
+    before: "/websites-demos/simple-before.jpg",
+    after: "/websites-demos/simple-after.jpg",
   },
   pro: {
-    before: "/websites-demos/pro-before.webp",
-    after: "/websites-demos/pro-after.webp",
+    before: "/websites-demos/pro-before.jpg",
+    after: "/websites-demos/pro-after.jpg",
   },
   custom: {
-    before: "/websites-demos/custom-before.webp",
-    after: "/websites-demos/custom-after.webp",
+    before: "/websites-demos/custom-before.jpg",
+    after: "/websites-demos/custom-after.jpg",
   },
 };
 

@@ -14,7 +14,6 @@ export function Logo({ className }: { className?: string }) {
         height={32}
         className="h-8 w-auto"
         priority
-        unoptimized // Using unoptimized to prevent Next.js from altering the src path, which can help with stubborn caching.
       />
       <span className="text-xl font-bold tracking-tight">
         <span className="font-headline text-foreground">JEZZA COOKS</span>

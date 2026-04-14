@@ -9,14 +9,16 @@ import { ArrowRight, Check } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export const metadata: Metadata = {
-  title: "Resultaten | Jezza Cooks | Wat je kunt verwachten",
+  title: "Resultaten — wat je kunt verwachten van Jezza Cooks",
   description:
     "Wat je kunt verwachten van Jezza Cooks: meer grip op food cost en marge, rust in prep en service, en restaurant websites die je verhaal helder maken en aanvragen helpen binnenhalen.",
+  alternates: { canonical: "/results" },
   openGraph: {
     title: "Resultaten | Jezza Cooks",
     description:
       "Meer grip op je cijfers, rust op de vloer en een website die duidelijk verkoopt. Dit is wat we bouwen met systemen die je team kan uitvoeren.",
     type: "website",
+    url: "/results",
   },
 };
 

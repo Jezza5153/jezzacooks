@@ -1,4 +1,5 @@
 // src/app/pricing/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle, ShieldCheck, Clock, Mail } from "lucide-react";
 
@@ -7,13 +8,28 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import JsonLd from "@/components/seo/json-ld";
+import { buildBreadcrumbList, buildFaqPage } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Tarieven — consulting, catering, websites en SEO/GEO",
+  description:
+    "Transparante prijzen voor Jezza Cooks: restaurant consulting vanaf €450, catering vanaf €45 p.p., restaurant websites €400 eenmalig met optioneel €30/mnd onderhoud, en SEO + GEO optimalisatie €1.300/jaar of €150/mnd. Alle tarieven exclusief BTW.",
+  alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "Tarieven Jezza Cooks | Jezza Cooks",
+    description:
+      "Heldere prijzen voor consulting, catering, websites en SEO/GEO. Geen verrassingen.",
+    url: "/pricing",
+    type: "website",
+  },
+};
 
 type Tier = {
   title: string;
@@ -387,56 +403,64 @@ export default function PricingPage() {
 
   const websites: Tier[] = [
     {
-      title: "One-Page Booking Site",
-      kicker: "Snel live",
-      price: "€ 450",
-      cadence: "één pagina, eenmalig",
-      description:
-        "Eén pagina die vertrouwen opbouwt en mensen richting reserveren of contact stuurt. Clean en duidelijk.",
-      deliverables: [
-        "Sterke intro bovenaan, aanbod en vertrouwen",
-        "Duidelijke knop naar reserveren of contact",
-        "Menu highlights, locatie en openingstijden",
-        "Basis vindbaarheid op Google",
-      ],
-      features: [
-        "Mobile-first opzet",
-        "Duidelijke structuur zonder ruis",
-        "Snelle laadtijd",
-        "Echte horeca vibe, niet corporate",
-      ],
-      cta: "Start met gratis diagnose",
-      href: "/free-diagnosis?type=website&plan=one-page",
-      note: "Je betaalt voor duidelijkheid en conversie, niet voor een mooie poster-site.",
-    },
-    {
-      title: "Restaurant Site",
+      title: "Restaurant website",
       kicker: "Meest gekozen",
-      price: "€ 1.200",
-      cadence: "vijf pagina’s, extra pagina’s € 200 per stuk",
+      price: "€ 400",
+      cadence: "eenmalig, complete site",
       description:
-        "Vijf pagina’s die logisch lezen en direct richting actie sturen. Extra pagina’s kan altijd, als het echt nodig is.",
+        "Complete restaurant of horeca website, eenmaal betaald en klaar. Gebouwd voor conversie, lokaal SEO en AI citaties. Geen abonnementen waar je in vast zit.",
       deliverables: [
-        "Home, menu, over, contact, locatie en veelgestelde vragen",
-        "Tekststructuur die mensen naar actie stuurt",
-        "Meting aan zodat je ziet wat werkt",
-        "Google Bedrijfsprofiel en basis vindbaarheid op Google",
+        "Home, menu, over, contact, locatie en FAQ",
+        "Snelle moderne Next.js stack met schema.org markup",
+        "Google Bedrijfsprofiel koppeling en basis SEO",
+        "Tekststructuur die gasten richting reserveren of aanvraag stuurt",
       ],
       bestFor: [
-        "Je wilt een complete site die klopt voor gasten",
-        "Je wilt structuur, vertrouwen en duidelijke acties",
+        "Je wilt een complete site die past bij jouw merk",
+        "Je wilt een vaste prijs zonder maandelijkse lock-in",
       ],
-      outcomes: ["Meer aanvragen of reserveringen", "Site voelt professioneel en rustig"],
+      outcomes: [
+        "Meer directe reserveringen en aanvragen",
+        "Site die rankt in Google én geciteerd wordt door AI engines",
+      ],
       features: [
-        "Duidelijke opbouw per pagina",
-        "Goede knoppen op de juiste plekken",
-        "Geen onnodige ruis",
-        "Extra pagina’s alleen als het echt waarde toevoegt",
+        "Restaurant schema met openingstijden en reserveringsflow",
+        "Mobile-first, rustig en snel",
+        "Foto's, menu en locatie op de juiste plekken",
+        "Geen verborgen kosten",
       ],
       cta: "Start met gratis diagnose",
       href: "/free-diagnosis?type=website&plan=restaurant-site",
       popular: true,
-      note: "Als een extra pagina geen extra resultaat geeft, doen we het niet.",
+      note: "Eén prijs, één site. Geen verborgen kosten of upsells.",
+    },
+    {
+      title: "Maintenance & updates",
+      kicker: "Optioneel abonnement",
+      price: "€ 30",
+      cadence: "per maand, maandelijks opzegbaar",
+      description:
+        "Optioneel onderhoud voor je Jezza Cooks restaurant website. Kleine tekst- en menuwijzigingen, hosting check, security patches en snelle support.",
+      deliverables: [
+        "Onbeperkte kleine tekst- en menu-updates",
+        "Maandelijkse security en performance check",
+        "Prioritaire mail en WhatsApp support",
+        "Backup en uptime monitoring",
+      ],
+      bestFor: [
+        "Je wilt dat iemand de site voor je bijhoudt",
+        "Je verandert regelmatig je menukaart of openingstijden",
+      ],
+      outcomes: ["Site blijft actueel en snel", "Minder zorgen, meer tijd voor je zaak"],
+      features: [
+        "Alleen beschikbaar bij sites die Jezza Cooks heeft gebouwd",
+        "Geen minimum looptijd",
+        "Nieuwe features of pagina's aparte offerte",
+        "Je blijft eigenaar van je site",
+      ],
+      cta: "Vraag maintenance aan",
+      href: "/contact?service=websites&package=maintenance",
+      note: "Maakt alleen zin als je regelmatig wijzigingen hebt. Anders overbodig.",
     },
     {
       title: "Maatwerk website",
@@ -444,17 +468,17 @@ export default function PricingPage() {
       price: "Offerte",
       cadence: "op aanvraag",
       description:
-        "Voor speciale wensen, grotere sites of unieke opzet. We bespreken dit rustig via mail en maken heldere afspraken.",
+        "Voor multi-locatie, meertalige sites of speciale integraties zoals reserveringssystemen, POS koppelingen of loyalty programma's.",
       deliverables: [
-        "Offerte op basis van jouw doel en omvang",
-        "Duidelijke planning en afspraken vooraf",
+        "Offerte op basis van scope en complexiteit",
+        "Duidelijke planning en mijlpalen vooraf",
         "Geen verrassingen in kosten",
         "Eerst begrijpen, dan bouwen",
       ],
       features: [
         "Meerdere locaties of talen als dat nodig is",
-        "Extra pagina’s, maar alleen met reden",
-        "Koppelingen als het echt iets oplevert",
+        "POS/reservering/loyalty integraties",
+        "Custom booking flow (zoals boekeerlijk.nl)",
         "Je houdt controle over scope en planning",
       ],
       cta: "Mail voor offerte",
@@ -463,10 +487,111 @@ export default function PricingPage() {
     },
   ];
 
+  const seoGeo: Tier[] = [
+    {
+      title: "Jaarcontract",
+      kicker: "Meest gekozen",
+      price: "€ 1.300",
+      cadence: "ex BTW per jaar, eenmaal vooruit",
+      description:
+        "Volledige SEO en GEO (Generative Engine Optimization) voor 12 maanden. Technische audit, schema.org, content voor passage extraction, lokale signalen en maandelijkse rapportage.",
+      deliverables: [
+        "Schema.org implementatie en maandelijkse audit",
+        "Content herstructurering voor AI citaties",
+        "Google Business Profile en lokale NAP optimalisatie",
+        "Maandelijkse rapportage met drie prioriteiten",
+      ],
+      bestFor: [
+        "Restaurants en horecabedrijven die zichtbaar willen zijn in Google én ChatGPT",
+        "Lokale ondernemers in Amersfoort, Utrecht en omgeving",
+      ],
+      outcomes: [
+        "Hoger in Google lokaal pack en SERPs",
+        "Geciteerd in AI Overviews, ChatGPT en Perplexity",
+      ],
+      features: [
+        "Twaalf maanden volledige scope",
+        "Kwartaal strategie-sessies (60 min)",
+        "Onbeperkte on-page tweaks",
+        "€500 voordeliger dan maandelijks betalen",
+      ],
+      cta: "Start met gratis diagnose",
+      href: "/free-diagnosis?type=website&plan=seo-geo-year",
+      popular: true,
+      note: "Meeste klanten kiezen deze route — eenmaal betalen en klaar voor het jaar.",
+    },
+    {
+      title: "Maandcontract",
+      kicker: "Flexibel",
+      price: "€ 150",
+      cadence: "per maand, min. 3 maanden",
+      description:
+        "Dezelfde volledige scope als het jaarcontract maar maandelijks betaald. Ideaal om voorzichtig te beginnen en na drie maanden te beslissen.",
+      deliverables: [
+        "Identieke maandelijkse SEO + GEO scope",
+        "Minimale looptijd drie maanden",
+        "Maandelijkse factuur en rapportage",
+        "Upgrade naar jaarcontract met korting altijd mogelijk",
+      ],
+      bestFor: [
+        "Je wilt eerst zien hoe het werkt voor je vastlegt",
+        "Je hebt een kleinere site en wilt klein starten",
+      ],
+      outcomes: [
+        "Flexibiliteit zonder jaarcommitment",
+        "Volledige scope op maandbasis",
+      ],
+      features: [
+        "Geen lange lock-in na maand drie",
+        "Zelfde technische diepte als jaarcontract",
+        "Korting op upgrade bij overstap",
+        "Maandelijkse facturatie ex BTW",
+      ],
+      cta: "Start met gratis diagnose",
+      href: "/free-diagnosis?type=website&plan=seo-geo-monthly",
+      note: "Prijsverschil over 12 maanden: €500 extra ten opzichte van jaarcontract.",
+    },
+    {
+      title: "SEO/GEO + website bundel",
+      kicker: "Korting",
+      price: "Vanaf € 1.550",
+      cadence: "€400 site + €1.150 eerste jaar SEO/GEO",
+      description:
+        "Nieuwe website + eerste jaar SEO en GEO, samen afgenomen. €150 korting op het jaarcontract in het eerste jaar omdat ik de site zelf bouw en de basis al klopt.",
+      deliverables: [
+        "Complete restaurant website (normaal €400)",
+        "Eerste jaar SEO + GEO met €150 korting",
+        "Eén gesprek, één factuur, één contactpersoon",
+        "Schema en structuur meteen GEO-klaar bij launch",
+      ],
+      features: [
+        "Alles vanaf dag één correct ingericht",
+        "Geen dubbele audits of onboarding",
+        "Maintenance abonnement optioneel erbij",
+        "Best value voor nieuwe klanten",
+      ],
+      cta: "Vraag een voorstel",
+      href: "/contact?service=bundle",
+      note: "Alleen geldig voor nieuwe klanten die een site laten bouwen.",
+    },
+  ];
+
   const pricingFaqs = [
     {
       q: "Zijn prijzen inclusief btw?",
       a: "Nee, alle prijzen zijn exclusief btw. Je krijgt altijd vooraf een duidelijke bevestiging.",
+    },
+    {
+      q: "Wat kost een restaurant website bij Jezza Cooks?",
+      a: "Een complete restaurant website kost €400 eenmalig. Dat is home, menu, over, contact, locatie en FAQ met rijke schema.org markup, openingstijden en reserveringsflow. Onderhoud is optioneel voor €30 per maand maar alleen zinvol als je regelmatig menukaarten of openingstijden wijzigt.",
+    },
+    {
+      q: "Wat kost SEO en GEO optimalisatie per jaar?",
+      a: "SEO en GEO optimalisatie kost €1.300 ex BTW per jaar (eenmaal vooruit) of €150 per maand met minimum drie maanden. Beide tarieven dekken dezelfde scope: technische audit, schema.org, content voor passage extraction, Google Business Profile werk en maandelijkse rapportage. Het jaarcontract is €500 voordeliger.",
+    },
+    {
+      q: "Kan ik website en SEO/GEO samen afnemen?",
+      a: "Ja. De bundel is €400 voor de site plus €1.150 voor het eerste jaar SEO/GEO (€150 korting). Daarna €1.300 per jaar. Voordeel: alles wordt vanaf dag één correct ingericht, geen dubbele onboarding.",
     },
     {
       q: "Wat betekent ‘plus reiskosten’?",
@@ -477,17 +602,24 @@ export default function PricingPage() {
       a: "Omdat we eerst jouw situatie moeten snappen. Dan voorkom je dat je betaalt voor iets wat niet past.",
     },
     {
-      q: "Hoe werkt dat met extra pagina’s bij de restaurant site?",
-      a: "De restaurant site is vijf pagina’s. Extra pagina’s zijn € 200 per pagina, maar alleen als het echt waarde toevoegt.",
-    },
-    {
       q: "Werk je door heel Nederland?",
-      a: "Ja. Ik werk door heel Nederland. We stemmen vooraf af wat slim is voor planning en kosten.",
+      a: "Ja. Ik werk door heel Nederland. Amersfoort is thuis, maar consulting en web/SEO werk kan overal. We stemmen vooraf af wat slim is voor planning en reiskosten.",
     },
   ];
 
+  const pricingFaqSchema = buildFaqPage(
+    pricingFaqs.map((f) => ({ question: f.q, answer: f.a }))
+  );
+  const pricingBreadcrumbSchema = buildBreadcrumbList([
+    { name: "Home", item: "/" },
+    { name: "Tarieven", item: "/pricing" },
+  ]);
+
   return (
     <div className="relative">
+      <JsonLd data={pricingBreadcrumbSchema} id="schema-pricing-breadcrumb" />
+      <JsonLd data={pricingFaqSchema} id="schema-pricing-faq" />
+
       <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] bg-gradient-to-b from-primary/10 to-transparent" />
 
       <PageHeader
@@ -562,72 +694,134 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <Tabs defaultValue="consulting" className="w-full">
-            <div className="flex justify-center">
-              <TabsList className="h-11 rounded-full border border-border bg-card/40 p-1">
-                <TabsTrigger value="consulting" className="rounded-full px-6">
-                  Consulting
-                </TabsTrigger>
-                <TabsTrigger value="catering" className="rounded-full px-6">
-                  Catering
-                </TabsTrigger>
-                <TabsTrigger value="websites" className="rounded-full px-6">
-                  Websites
-                </TabsTrigger>
-              </TabsList>
+          {/* Jump-nav: quick access to each service group.
+              Rendered as anchor links so crawlers and AI engines can follow
+              them directly. No JS state — each section below is fully
+              server-rendered and SEO/GEO-indexable. */}
+          <nav
+            aria-label="Tarief-categorieën"
+            className="mx-auto mb-12 max-w-3xl"
+          >
+            <div className="flex flex-wrap justify-center gap-2 rounded-full border border-border bg-card/40 p-2">
+              <a
+                href="#consulting"
+                className="rounded-full px-5 py-2 text-sm font-medium text-muted-foreground hover:bg-background/40 hover:text-foreground"
+              >
+                Consulting
+              </a>
+              <a
+                href="#catering"
+                className="rounded-full px-5 py-2 text-sm font-medium text-muted-foreground hover:bg-background/40 hover:text-foreground"
+              >
+                Catering
+              </a>
+              <a
+                href="#websites"
+                className="rounded-full px-5 py-2 text-sm font-medium text-muted-foreground hover:bg-background/40 hover:text-foreground"
+              >
+                Websites
+              </a>
+              <a
+                href="#seo-geo"
+                className="rounded-full px-5 py-2 text-sm font-medium text-muted-foreground hover:bg-background/40 hover:text-foreground"
+              >
+                SEO &amp; GEO
+              </a>
             </div>
+          </nav>
 
-            <div className="mt-10">
-              <TabsContent value="consulting">
-                <PricingGrid tiers={consulting} />
-              </TabsContent>
-
-              <TabsContent value="catering">
-                <PricingGrid tiers={catering} />
-              </TabsContent>
-
-              <TabsContent value="websites">
-                <PricingGrid tiers={websites} />
-              </TabsContent>
-            </div>
-
-            <div className="mx-auto mt-14 max-w-3xl">
-              <h2 className="font-headline text-2xl md:text-3xl font-bold text-center">
-                Vragen over tarieven
+          {/* --- Consulting tiers --- */}
+          <section id="consulting" className="scroll-mt-24">
+            <div className="mx-auto mb-8 max-w-3xl text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Restaurant consulting
+              </div>
+              <h2 className="mt-2 font-headline text-3xl font-bold md:text-4xl">
+                Consulting tarieven
               </h2>
-              <p className="mt-2 text-center text-muted-foreground">
-                Korte antwoorden, zodat je snel kunt beslissen.
+              <p className="mt-3 text-muted-foreground leading-relaxed">
+                Menu engineering, food cost controle, prepstructuur, SOPs en
+                teamtraining. Vier pakketten — van snelle diagnose tot
+                maandcontract.
               </p>
-
-              <Accordion type="single" collapsible className="w-full mt-6">
-                {pricingFaqs.map((item, i) => (
-                  <AccordionItem value={`pricing-${i}`} key={item.q}>
-                    <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
-                      {item.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-base leading-relaxed">
-                      {item.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
             </div>
-          </Tabs>
+            <PricingGrid tiers={consulting} />
+          </section>
 
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                mainEntity: pricingFaqs.map((x) => ({
-                  "@type": "Question",
-                  name: x.q,
-                  acceptedAnswer: { "@type": "Answer", text: x.a },
-                })),
-              }),
-            }}
-          />
+          {/* --- Catering tiers --- */}
+          <section id="catering" className="mt-20 scroll-mt-24">
+            <div className="mx-auto mb-8 max-w-3xl text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Catering &amp; private chef
+              </div>
+              <h2 className="mt-2 font-headline text-3xl font-bold md:text-4xl">
+                Catering tarieven
+              </h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">
+                Chef-led diners, events en chef-support op locatie. Helder
+                vooraf wat je krijgt en wat het kost.
+              </p>
+            </div>
+            <PricingGrid tiers={catering} />
+          </section>
+
+          {/* --- Websites tiers --- */}
+          <section id="websites" className="mt-20 scroll-mt-24">
+            <div className="mx-auto mb-8 max-w-3xl text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Restaurant websites
+              </div>
+              <h2 className="mt-2 font-headline text-3xl font-bold md:text-4xl">
+                Website tarieven
+              </h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">
+                Complete restaurant website voor €400 eenmalig. Optioneel €30
+                per maand onderhoud. Geen lock-in, geen verborgen kosten.
+              </p>
+            </div>
+            <PricingGrid tiers={websites} />
+          </section>
+
+          {/* --- SEO/GEO tiers --- */}
+          <section id="seo-geo" className="mt-20 scroll-mt-24">
+            <div className="mx-auto mb-8 max-w-3xl text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                SEO &amp; GEO optimalisatie
+              </div>
+              <h2 className="mt-2 font-headline text-3xl font-bold md:text-4xl">
+                SEO + GEO tarieven
+              </h2>
+              <p className="mt-3 text-muted-foreground leading-relaxed">
+                Hoger in Google én geciteerd door ChatGPT, Perplexity en AI
+                Overviews. Jaarcontract €1.300 of maandcontract €150 — zelfde
+                scope, verschillende betaalritme.
+              </p>
+            </div>
+            <PricingGrid tiers={seoGeo} />
+          </section>
+
+          <div className="mx-auto mt-20 max-w-3xl">
+            <h2 className="font-headline text-2xl md:text-3xl font-bold text-center">
+              Vragen over tarieven
+            </h2>
+            <p className="mt-2 text-center text-muted-foreground">
+              Korte antwoorden, zodat je snel kunt beslissen.
+            </p>
+
+            <Accordion type="single" collapsible className="w-full mt-6">
+              {pricingFaqs.map((item, i) => (
+                <AccordionItem value={`pricing-${i}`} key={item.q}>
+                  <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-base leading-relaxed">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+
         </div>
       </section>
     </div>

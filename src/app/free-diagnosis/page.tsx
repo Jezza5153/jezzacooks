@@ -1,9 +1,24 @@
 
 // src/app/free-diagnosis/page.tsx
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import DiagnosisClientPage from "@/components/diagnosis-client-page";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHeader from "@/components/page-header";
+
+export const metadata: Metadata = {
+  title: "Gratis diagnose: website, consulting of catering",
+  description:
+    "Kies één route en krijg binnen 48 uur een concrete diagnose. Website quick scan, consulting diagnose of catering aanvraag. Chef-led, geen verplichting.",
+  alternates: { canonical: "/free-diagnosis" },
+  openGraph: {
+    title: "Gratis diagnose | Jezza Cooks",
+    description:
+      "Drie routes, één gratis diagnose. Website, consulting of catering — kies wat je nodig hebt en krijg binnen 48 uur een concrete reactie.",
+    type: "website",
+    url: "/free-diagnosis",
+  },
+};
 
 function DiagnosisPageSkeleton() {
   return (

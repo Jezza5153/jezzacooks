@@ -25,7 +25,7 @@ const diagnosisRoutes: LinkItem[] = [
 ];
 
 const quickLinks: LinkItem[] = [
-  { href: "/results", label: "Resultaten" },
+  { href: "/portfolio", label: "Portfolio" },
   { href: "/contact", label: "Contact" },
   { href: "/pricing", label: "Tarieven" },
 ];
@@ -36,21 +36,24 @@ const groups: Group[] = [
     links: [
       { href: "/services/consulting", label: "Restaurant consulting" },
       { href: "/services/catering", label: "Catering & private chef" },
-      { href: "/services/websites", label: "Horeca websites" },
+      { href: "/services/websites", label: "Restaurant websites (€400)" },
+      { href: "/services/seo-geo", label: "SEO & GEO optimalisatie" },
     ],
   },
   {
     title: "Over",
     links: [
       { href: "/about", label: "Over mij" },
+      { href: "/portfolio", label: "Portfolio & pers" },
+      { href: "/results", label: "Resultaten" },
       { href: "/faq", label: "Veelgestelde vragen" },
     ],
   },
   {
     title: "Juridisch",
     links: [
-      { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Voorwaarden" },
+      { href: "/privacy", label: "Privacyverklaring" },
     ],
   },
 ];

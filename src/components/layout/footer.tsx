@@ -1,25 +1,30 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { WHATSAPP_LINK } from "@/lib/config";
+import { SITE } from "@/lib/site-config";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   const footerLinks = {
     company: [
-      { href: "/about", label: "About" },
-      { href: "/results", label: "Results" },
+      { href: "/about", label: "Over Jezza" },
+      { href: "/portfolio", label: "Portfolio & pers" },
+      { href: "/results", label: "Resultaten" },
       { href: "/contact", label: "Contact" },
-      { href: "/free-diagnosis", label: "Free Diagnosis" },
+      { href: "/free-diagnosis", label: "Gratis diagnose" },
     ],
     services: [
-      { href: "/services/consulting", label: "Consulting" },
-      { href: "/services/catering", label: "Catering" },
-      { href: "/services/websites", label: "Websites" },
+      { href: "/services/consulting", label: "Restaurant consulting" },
+      { href: "/services/catering", label: "Catering & private chef" },
+      { href: "/services/websites", label: "Restaurant websites" },
+      { href: "/services/seo-geo", label: "SEO & GEO optimalisatie" },
+      { href: "/pricing", label: "Tarieven" },
     ],
     legal: [
-      { href: "/privacy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms of Service" },
+      { href: "/terms", label: "Voorwaarden" },
+      { href: "/privacy", label: "Privacyverklaring" },
+      { href: "/faq", label: "Veelgestelde vragen" },
     ],
   };
 
@@ -53,7 +58,7 @@ export default function Footer() {
 
           {/* Column 2: Company */}
           <div>
-            <h3 className="font-semibold text-foreground">Company</h3>
+            <h3 className="font-semibold text-foreground">Jezza Cooks</h3>
             <ul className="mt-4 space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
@@ -70,7 +75,7 @@ export default function Footer() {
 
           {/* Column 3: Services */}
           <div>
-            <h3 className="font-semibold text-foreground">Services</h3>
+            <h3 className="font-semibold text-foreground">Diensten</h3>
             <ul className="mt-4 space-y-2">
               {footerLinks.services.map((link) => (
                 <li key={link.href}>
@@ -85,9 +90,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Legal */}
+          {/* Column 4: Info */}
           <div>
-            <h3 className="font-semibold text-foreground">Legal</h3>
+            <h3 className="font-semibold text-foreground">Info</h3>
             <ul className="mt-4 space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
@@ -104,7 +109,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>© {year} JEZZA COOKS. All rights reserved. KvK: 12345678.</p>
+          <p>
+            © {year} {SITE.name.toUpperCase()}. All rights reserved.
+            {SITE.kvk ? ` KvK: ${SITE.kvk}.` : ""} Amersfoort, Nederland.
+          </p>
         </div>
       </div>
     </footer>

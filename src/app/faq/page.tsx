@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Accordion,
   AccordionContent,
@@ -5,6 +6,23 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PageHeader from "@/components/page-header";
+import JsonLd from "@/components/seo/json-ld";
+import { buildBreadcrumbList, buildFaqPage } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title:
+    "Veelgestelde vragen over horeca consultancy en restaurant consulting",
+  description:
+    "Antwoorden op de meest gestelde vragen over restaurant consulting, menu engineering, food cost controle, prepstructuur, teamtraining en restaurant websites. Praktisch, direct en zonder poeha.",
+  alternates: { canonical: "/faq" },
+  openGraph: {
+    title: "Veelgestelde vragen | Jezza Cooks",
+    description:
+      "Antwoorden op de meest gestelde vragen over restaurant consulting, menu engineering, food cost controle en restaurant websites.",
+    type: "website",
+    url: "/faq",
+  },
+};
 
 export default function FAQPage() {
   const faqs = [
@@ -82,7 +100,27 @@ export default function FAQPage() {
 
   return (
     <div>
-      <PageHeader title="Veelgestelde vragen" />
+      {/* FAQPage schema — this is the single biggest GEO win on the site.
+          AI engines and Google AI Overviews lift Q&A blocks preferentially
+          when the source page has valid FAQPage JSON-LD. */}
+      <JsonLd
+        data={buildFaqPage(
+          faqs.map((f) => ({ question: f.question, answer: f.answer }))
+        )}
+        id="schema-faq"
+      />
+      <JsonLd
+        data={buildBreadcrumbList([
+          { name: "Home", item: "/" },
+          { name: "Veelgestelde vragen", item: "/faq" },
+        ])}
+        id="schema-faq-breadcrumb"
+      />
+
+      <PageHeader
+        title="Veelgestelde vragen over horeca consultancy"
+        subtitle="Praktische antwoorden over restaurant consulting, menu engineering, food cost controle, teamtraining en restaurant websites."
+      />
       <div className="container mx-auto px-4 py-16 md:py-24 max-w-3xl">
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, i) => (

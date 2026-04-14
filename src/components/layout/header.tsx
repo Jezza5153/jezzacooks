@@ -60,13 +60,13 @@ export default function Header() {
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
-                {/* Results */}
+                {/* Portfolio */}
                 <NavigationMenuItem>
                   <NavigationMenuLink
                     asChild
-                    className={cn(triggerClass, isActive("/results") && activeClass)}
+                    className={cn(triggerClass, isActive("/portfolio") && activeClass)}
                   >
-                    <Link href="/results">Resultaten</Link>
+                    <Link href="/portfolio">Portfolio</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
@@ -76,23 +76,23 @@ export default function Header() {
                     Diensten
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="p-0">
-                    <div className="w-[680px] p-3">
+                    <div className="w-[720px] p-3">
                       <div className="rounded-2xl border border-white/10 bg-[hsla(var(--popover)/0.65)] backdrop-blur-xl shadow-[0_24px_70px_rgba(0,0,0,0.60)] overflow-hidden">
                         <div className="grid gap-2 p-3 md:grid-cols-2">
-                          <ListItem href="/services/consulting" title="Horeca consulting">
-                            Minder chaos, betere marge, heldere keuzes.
+                          <ListItem href="/services/consulting" title="Restaurant consulting">
+                            Menukaart, food cost, prep en teamtraining — minder chaos, betere marge.
                           </ListItem>
 
                           <ListItem href="/services/catering" title="Catering & private chef">
-                            Een avond die klopt. Van planning tot bord.
+                            Chef-led diners, events en kantoorlunch onder de Tafelaar vlag.
                           </ListItem>
 
-                          <ListItem href="/services/websites" title="Hospitality websites">
-                            Rustige sites die bezoekers naar boeken of aanvragen sturen.
+                          <ListItem href="/services/websites" title="Restaurant websites">
+                            €400 eenmalig. Complete sites met schema en reserveringsflow.
                           </ListItem>
 
-                          <ListItem href="/free-diagnosis" title="Gratis diagnose">
-                            Snel helder waar het lekt en wat het kost om het te fixen.
+                          <ListItem href="/services/seo-geo" title="SEO & GEO optimalisatie">
+                            €1.300/jr of €150/mnd. Zichtbaar in Google én ChatGPT, Perplexity en AI Overviews.
                           </ListItem>
                         </div>
                       </div>

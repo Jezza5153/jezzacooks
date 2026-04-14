@@ -5,16 +5,21 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import JsonLd from "@/components/seo/json-ld";
+import { buildBreadcrumbList } from "@/lib/schema";
+import { SITE } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Over mij | Jezza Cooks | Horeca consultant in Amersfoort",
+  title: "Over Jeremy Arrascaeta — chef en horeca consultant in Amersfoort",
   description:
-    "Jeremy Arrascaeta (Amersfoort). Horeca consultancy voor restaurants en teams: menukaart keuzes, food cost controle, prepstructuur, serviceflow, teamtraining en werkafspraken die je volhoudt in de drukte. Praktisch, zonder poeha. Ook restaurant websites die reserveringen en aanvragen opleveren.",
+    "Jeremy Arrascaeta (Chef Jezz): chef met 10+ jaar ervaring in Europa en Australië. Chef-kok bij De Tafelaar Amersfoort (Kamp 8) — genoemd in AD.nl, De Gelderlander en indebuurt.nl. Finalist Euro-Toques Young Chef Award 2018 bij Restaurant Bougainville Amsterdam. Dry-aging lead bij Angler Stirling in de Adelaide Hills, Zuid-Australië. Nu ook horeca consultant via Jezza Cooks — menu engineering, food cost, prepstructuur, serviceflow en teamtraining.",
+  alternates: { canonical: "/about" },
   openGraph: {
-    title: "Over mij | Jezza Cooks",
+    title: "Over Jeremy Arrascaeta | Jezza Cooks",
     description:
-      "Horeca consultant in Amersfoort. Structuur op papier en rust op de vloer met food cost, prepstructuur, serviceflow en teamtraining. Ook restaurant websites die je verhaal helder maken en aanzetten tot actie.",
-    type: "website",
+      "Chef-kok bij De Tafelaar Amersfoort en founder van Jezza Cooks horeca consultancy. 10+ jaar in keukens in Europa en Australië. Finalist Euro-Toques Young Chef Award. Ex-Angler Stirling dry-aging lead.",
+    type: "profile",
+    url: "/about",
   },
 };
 
@@ -70,43 +75,63 @@ const steps = [
 
 const experience = [
   {
-    period: "2024 - 2025",
-    role: "Sous Chef (Australië)",
+    period: "2025 – heden",
+    role: "Chef-kok · Restaurant De Tafelaar Amersfoort (Kamp 8)",
     bullets: [
-      "Bestelritme en minimum en maximum voorraad opgezet voor overzicht en rust",
-      "Menukaart scherper gemaakt op verkoop, marge en prepdruk",
-      "Prepplanning en dagstructuur gebouwd die het team kan volgen",
-      "Aansturing tijdens service: tempo, consistentie en controle op de pas",
+      "Chef-kok van shared-dining restaurant De Tafelaar aan de Kamp in het centrum van Amersfoort",
+      "Gefeatured in AD.nl (Algemeen Dagblad), De Gelderlander en indebuurt.nl Amersfoort — alle drie noemen Jeremy expliciet als chef-kok",
+      "Geïnterviewd in de Gooische Business podcast (februari 2026) samen met mede-oprichter Jan Molmans",
+      "Eerste gastchef-avond georganiseerd — publicatie in AD.nl regionale editie Amersfoort",
     ],
   },
   {
-    period: "2023 - 2024",
-    role: "Sous Chef (catering en volume)",
+    period: "2026 – heden",
+    role: "Oprichter & horeca consultant · Jezza Cooks (KvK 99547619, Amersfoort)",
     bullets: [
-      "Productieplanning en draaiboeken gemaakt voor events met volume",
-      "Mise en place structuur aangebracht zodat kwaliteit gelijk blijft",
-      "Inzet en roosters afgestemd op piekmomenten en werkdruk",
-      "Uitvoering bewaakt op timing, portionering en afwerking",
+      "Vier dienstlijnen onder één chef-led dak: consulting, catering, restaurant websites, SEO/GEO",
+      "Vijf live client builds: Tafelaar Amersfoort, Chef & Serve, Swimcoaching, BoekEerlijk, OffertesVoorJou",
+      "Menukaart keuzes, food cost controle en prepstructuur voor restaurants in Amersfoort en omgeving",
+      "Restaurant websites voor €400 eenmalig, schema.org ready en GEO-klaar",
     ],
   },
   {
-    period: "2020 - 2022",
-    role: "General Manager (high-end visrestaurant)",
+    period: "2020 – 2022",
+    role: "Dry-aging lead & sous chef · Angler Restaurant, Stirling (Adelaide Hills, AU)",
     bullets: [
-      "Omzet met 60% gegroeid in 2 jaar door betere gastflow en herhaalbezoek",
-      "Team aangestuurd op standaard: afspraken, training en een feedback ritme",
-      "Gestuurd op cijfers: omzet, marge, waste en planning zonder administratie-ellende",
-      "Concepten en samenwerkingen opgezet die echt gasten brachten",
+      "Dry-age programma opgezet voor hele vis: cured sashimi, fish sausages, barramundi crackling, carp bacon",
+      "Chef Sam Prance-Smith samen leiding over de pass en sourcing van lokale vissen van Kangaroo Island",
+      "Gefeatured in InDaily (2020) en Australian Good Food Guide (2020) over het fish dry-age programma",
+      "62-minuten video podcast interview (All The Gear But No Idea, ep 31, 2020) over seafood sustainability",
     ],
   },
   {
-    period: "2010 - 2019",
-    role: "Keukenrollen Europa (NL, BE, FR)",
+    period: "2019 – 2020",
+    role: "Head chef · Hanson Bay Sanctuary & Flinders Chase Café, Kangaroo Island (AU)",
+    bullets: [
+      "Keuken opgezet en team gebouwd op twee locaties op Kangaroo Island",
+      "Toerisme-volume keuken draaiende gehouden tijdens en na de 2019/2020 bushfires",
+      "Lokale seafood sourcing en menu engineering voor wisselende bezoekersvolumes",
+      "Doorgegroeid naar Angler Stirling na sluiting van locaties door de bushfires",
+    ],
+  },
+  {
+    period: "2018",
+    role: "Chef de partie · Restaurant Bougainville, Amsterdam",
+    bullets: [
+      "Finalist Euro-Toques Young Chef Award 2018 — jongste onder 25 jaar in de eindronde",
+      "Gefeatured in Misset Horeca en De RestaurantKrant over de Young Chef Award finale",
+      "High-end fine dining in het centrum van Amsterdam",
+      "Basis gelegd voor dry-aging en vis preparaties die later in Australië doorontwikkeld werden",
+    ],
+  },
+  {
+    period: "2004 – 2018",
+    role: "Keukenrollen Europa · NL, België, Frankrijk",
     bullets: [
       "Basis gebouwd: tempo, discipline, mise en place en verantwoordelijkheid per station",
-      "Partie gedraaid en collega's ingewerkt zodat service stabiel blijft",
-      "Recepturen en portionering strak gezet voor constante kwaliteit",
-      "Kwaliteit geborgd met simpele checks die je volhoudt in de drukte",
+      "Partie gedraaid in meerdere landen en keukenstijlen (Franse brigade, Nederlandse bistro, Belgische fine dining)",
+      "Recepturen en portionering strak gezet voor constante kwaliteit onder drukte",
+      "Drietalige werkvloer-ervaring: Nederlands, Engels, Frans",
     ],
   },
 ];
@@ -137,55 +162,20 @@ function AboutHeroBackground() {
 
 export default function AboutPage() {
   const aboutImage = PlaceHolderImages.find((p) => p.id === "about-jezza");
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        name: "Jeremy Arrascaeta",
-        jobTitle: "Horeca consultant",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Amersfoort",
-          addressCountry: "NL",
-        },
-        knowsAbout: [
-          "horeca consultancy",
-          "restaurant consulting",
-          "menu engineering",
-          "food cost controle",
-          "prepstructuur",
-          "serviceflow",
-          "teamtraining",
-          "werkafspraken",
-          "checklists",
-          "restaurant websites",
-          "website voor restaurant",
-        ],
-        sameAs: ["https://instagram.com/chefjezz"],
-      },
-      {
-        "@type": "ProfessionalService",
-        name: "Jezza Cooks",
-        areaServed: { "@type": "AdministrativeArea", name: "Amersfoort en omgeving" },
-        serviceType: ["Horeca consultancy", "Restaurant consulting", "Restaurant websites"],
-        description:
-          "Horeca consultancy en restaurant websites. Structuur op papier en rust op de vloer met menukaart keuzes, food cost controle, prepstructuur, serviceflow en teamtraining.",
-      },
-    ],
-  };
+  const breadcrumb = buildBreadcrumbList([
+    { name: "Home", item: "/" },
+    { name: "Over Jeremy", item: "/about" },
+  ]);
 
   const storyImageSrc = aboutImage?.imageUrl || "/pics/aboutme.png";
   const storyImageAlt = aboutImage?.description || "Jeremy Arrascaeta";
 
   return (
     <div className="relative">
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {/* Schema: breadcrumb only. Person + Organization + LocalBusiness
+          entities live in the global @graph (src/lib/schema.ts) — they're
+          referenced by @id from every page, no duplication needed here. */}
+      <JsonLd data={breadcrumb} id="schema-about-breadcrumb" />
 
       {/* HERO */}
       <section className="relative isolate overflow-hidden border-b border-border">
@@ -206,16 +196,20 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tight drop-shadow-[0_22px_70px_rgba(0,0,0,0.65)]">
-              Level up the chaos.
+              Over Jeremy Arrascaeta — horeca consultant in Amersfoort
             </h1>
 
             <p className="mt-4 text-lg md:text-2xl text-foreground/90 drop-shadow-[0_14px_40px_rgba(0,0,0,0.55)]">
-              Don&apos;t chase perfection. Chase improvement.
+              Chef Jezz. 10+ jaar in de keuken. Europa en Australië. Eén missie: structuur die je volhoudt in de drukte.
             </p>
 
             <p className="mt-6 text-base md:text-xl text-foreground/80 leading-relaxed drop-shadow-[0_12px_34px_rgba(0,0,0,0.50)]">
-              Ik help restaurants en horecateams om chaos om te zetten in structuur op papier, zodat je rust krijgt op de vloer.
-              Praktisch, uitvoerbaar en zonder poeha.
+              Ik ben Jeremy Arrascaeta (Amersfoort, NL). Chef met carrière in Europa en Australië. Chef-kok bij shared-dining
+              restaurant De Tafelaar aan de Kamp in het centrum van Amersfoort — gefeatured in AD.nl, De Gelderlander en
+              indebuurt.nl. Finalist Euro-Toques Young Chef Award 2018 bij Restaurant Bougainville Amsterdam. Daarna dry-aging
+              lead bij Angler Stirling in de Adelaide Hills (Zuid-Australië), waar ik bekend werd om het fish dry-age programma
+              met cured sashimi, fish sausages, barramundi crackling en carp bacon. Nu help ik restaurants en horecateams in
+              Amersfoort en omgeving om chaos om te zetten in structuur op papier — zodat je rust krijgt op de vloer.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
@@ -231,15 +225,19 @@ export default function AboutPage() {
             </div>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-foreground/70 drop-shadow-[0_10px_26px_rgba(0,0,0,0.45)]">
-              <span>20+ jaar horeca</span>
+              <span>10+ jaar horeca</span>
               <span className="opacity-70" aria-hidden="true">
                 •
               </span>
-              <span>Nederland, België, Frankrijk, Australië</span>
+              <span>Europa &amp; Australië</span>
               <span className="opacity-70" aria-hidden="true">
                 •
               </span>
-              <span>Chef + operatie + team</span>
+              <span>Chef-kok De Tafelaar</span>
+              <span className="opacity-70" aria-hidden="true">
+                •
+              </span>
+              <span>KvK 99547619</span>
             </div>
 
             <div
@@ -307,7 +305,7 @@ export default function AboutPage() {
                     className="object-cover"
                     data-ai-hint={aboutImage?.imageHint}
                     priority
-                    unoptimized
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-background/20 to-transparent" />
                   <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_20%_10%,hsla(var(--primary)/0.10),transparent_60%)]" />
@@ -319,16 +317,16 @@ export default function AboutPage() {
                     </div>
                     <div className="mt-3 grid grid-cols-3 gap-3 text-sm text-foreground/85">
                       <div>
-                        <div className="font-headline text-lg font-bold text-primary">20+</div>
-                        <div className="text-foreground/70">jaar horeca</div>
+                        <div className="font-headline text-lg font-bold text-primary">10+</div>
+                        <div className="text-foreground/70">jaar in high-end keukens</div>
+                      </div>
+                      <div>
+                        <div className="font-headline text-lg font-bold text-primary">9</div>
+                        <div className="text-foreground/70">press mentions NL + AU</div>
                       </div>
                       <div>
                         <div className="font-headline text-lg font-bold text-primary">5</div>
-                        <div className="text-foreground/70">landen</div>
-                      </div>
-                      <div>
-                        <div className="font-headline text-lg font-bold text-primary">1</div>
-                        <div className="text-foreground/70">focus: uitvoering</div>
+                        <div className="text-foreground/70">live clients</div>
                       </div>
                     </div>
                   </div>
@@ -342,13 +340,16 @@ export default function AboutPage() {
 
               <div className="mt-6 space-y-5 text-base md:text-lg leading-relaxed text-muted-foreground">
                 <p>
-                  Ik ben Jeremy. Ik heb ruim 20 jaar horeca gedaan aan de harde kant van de praktijk: prep, service, ritme en
-                  verantwoordelijkheid. Ik hou van kwaliteit, maar nog meer van systemen die je ook volhoudt als het druk is.
+                  Ik ben Jeremy. Ruim 10 jaar in high-end keukens en management — in Europa en Australië. Ik hou van kwaliteit,
+                  maar nog meer van systemen die je ook volhoudt als het druk is.
                 </p>
 
                 <p>
-                  Ik heb gewerkt in high-end keukens en later ook operationele verantwoordelijkheid gedragen. Daar leer je één
-                  ding snel: het verschil zit niet in extra moeite, maar in duidelijke afspraken en herhaling.
+                  Ik ben chef-kok bij restaurant De Tafelaar aan de Kamp in het centrum van Amersfoort (shared dining), en
+                  oprichter van Jezza Cooks horeca consultancy. Daarvoor dry-aging lead bij Angler Stirling in de Adelaide
+                  Hills, head chef op Kangaroo Island, en chef de partie bij Restaurant Bougainville Amsterdam — finalist
+                  Euro-Toques Young Chef Award 2018. Dat mix van high-end, tourism volume en dry-age programma heeft me één
+                  ding geleerd: het verschil zit niet in extra moeite, maar in duidelijke afspraken en herhaling.
                 </p>
 
                 <p>
