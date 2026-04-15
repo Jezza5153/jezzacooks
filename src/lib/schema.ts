@@ -19,6 +19,13 @@ const ORG_ID = `${SITE_URL}/#organization`;
 const LOCALBUSINESS_ID = `${SITE_URL}/#localbusiness`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 const PERSON_ID = `${SITE_URL}/#jeremy`;
+// Catering joint-venture entity. Separate FoodEstablishment sub-entity
+// because the catering operates from a different physical address (Kamp 8,
+// De Tafelaar) than the main Jezza Cooks consultancy (Nijkerkerstraat 3).
+// Models the real-world split: Jezza Cooks consultancy = Jeremy's office,
+// Tafelaar × Jezza Cooks Catering = joint venture with Jan Molmans at the
+// restaurant kitchen.
+const CATERING_ID = `${SITE_URL}/#catering`;
 
 // --- Primitive builders ------------------------------------------------------
 
@@ -274,6 +281,107 @@ export function buildLocalBusiness() {
   };
 }
 
+/**
+ * FoodEstablishment / CateringService sub-entity for the Tafelaar × Jezza
+ * Cooks Catering joint venture. Uses a different physical address than the
+ * main LocalBusiness because catering operates from the De Tafelaar
+ * restaurant kitchen at Kamp 8 — that's Jan Molmans's restaurant, where
+ * Jeremy also works as chef-kok. The @id is fragment-distinct from
+ * LOCALBUSINESS_ID so entity resolution doesn't collapse the two.
+ *
+ * This models the real business structure:
+ *   - Jezza Cooks consultancy (LocalBusiness at Nijkerkerstraat 3) = Jeremy's office
+ *   - Tafelaar × Jezza Cooks Catering (this entity at Kamp 8) = joint venture
+ *   - Both bill via Jezza Cooks KvK 99547619
+ *   - provider cross-link points back to the main LocalBusiness for billing
+ */
+export function buildCateringEntity() {
+  return {
+    "@type": ["FoodEstablishment", "CateringService"],
+    "@id": CATERING_ID,
+    name: "Tafelaar × Jezza Cooks Catering",
+    alternateName: "Jezza Cooks Catering Amersfoort",
+    url: `${SITE_URL}/services/catering`,
+    description:
+      "Tafelaar × Jezza Cooks Catering is een samenwerking tussen Jeremy Arrascaeta (Jezza Cooks) en Jan Molmans (eigenaar van shared-dining restaurant De Tafelaar). Kantoorlunch, diners en events in Amersfoort en omgeving, vanaf €7,50 per persoon, vanuit de volwaardige restaurantkeuken aan de Kamp 8 in de binnenstad van Amersfoort.",
+    image: `${SITE_URL}/pics/tafelaar-x-jezza-logo.png`,
+    telephone: SITE.contact.phone,
+    email: SITE.contact.email,
+    priceRange: "€€",
+    // Physical operating address — the De Tafelaar restaurant kitchen where
+    // the catering prep actually happens. Different from Jezza Cooks's
+    // registered billing address (Nijkerkerstraat 3).
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Kamp 8",
+      addressLocality: "Amersfoort",
+      addressRegion: "Utrecht",
+      postalCode: "3811 AR",
+      addressCountry: "NL",
+    },
+    // servesCuisine for LLMs: tells ChatGPT/Perplexity "this is what you
+    // get when you order catering from this entity"
+    servesCuisine: [
+      "Nederlands",
+      "European",
+      "Shared dining",
+      "Kantoorlunch",
+      "Event catering",
+    ],
+    hasMenu: `${SITE_URL}/services/catering#menu`,
+    acceptsReservations: true,
+    paymentAccepted: ["Cash", "Credit Card", "Invoice", "Bank Transfer"],
+    currenciesAccepted: "EUR",
+    areaServed: [
+      "Amersfoort",
+      "Binnenstad Amersfoort",
+      "Kamp Amersfoort",
+      "Soesterkwartier",
+      "Leusderkwartier",
+      "Vathorst",
+      "Valleipoort",
+      "Hoogland",
+      "Hooglanderveen",
+      "Utrecht",
+      "Hilversum",
+      "Soest",
+      "Leusden",
+      "Baarn",
+      "Bunschoten",
+      "Nijkerk",
+      "Barneveld",
+    ].map((name) => ({
+      "@type": "AdministrativeArea",
+      name,
+    })),
+    // Cross-link: the catering is PROVIDED BY the main Jezza Cooks
+    // LocalBusiness entity (that's where the KvK, billing and invoicing
+    // lives). This tells Google "these are linked entities, not competitors".
+    provider: { "@id": LOCALBUSINESS_ID },
+    // Second provider note: explicit mention of Jan Molmans as joint-venture
+    // partner via a nested PerformingGroup-style affiliation.
+    memberOf: {
+      "@type": "Organization",
+      name: "Restaurant De Tafelaar Amersfoort",
+      url: "https://www.tafelaaramersfoort.nl",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Kamp 8",
+        addressLocality: "Amersfoort",
+        postalCode: "3811 AR",
+        addressCountry: "NL",
+      },
+      founder: {
+        "@type": "Person",
+        name: "Jan Molmans",
+      },
+    },
+    // The person actually running the catering kitchen. Cross-link to
+    // the Person entity.
+    employee: { "@id": PERSON_ID },
+  };
+}
+
 export function buildPerson() {
   return {
     "@type": "Person",
@@ -379,6 +487,7 @@ export function buildGlobalGraph() {
     "@graph": [
       buildOrganization(),
       buildLocalBusiness(),
+      buildCateringEntity(),
       buildPerson(),
       buildWebSite(),
     ],

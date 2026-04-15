@@ -404,8 +404,8 @@ export default function ConsultingPage() {
 
       {/* VALUES */}
       <Section
-        title="Hoe ik werk"
-        subtitle="Kort en duidelijk. Dit is de basis van mijn aanpak."
+        title="Hoe werkt restaurant consulting bij Jezza Cooks?"
+        subtitle="Drie vaste stappen per traject. Kort en duidelijk — hier is de basis van de aanpak."
       >
         <div className="grid gap-6 md:grid-cols-3">
           {values.map((v) => (
@@ -425,8 +425,8 @@ export default function ConsultingPage() {
 
       {/* DELIVERABLES */}
       <Section
-        title="Wat je krijgt"
-        subtitle="Openklappen, scannen, door. Geen muur van tekst."
+        title="Wat krijg je bij een consulting traject?"
+        subtitle="Openklappen, scannen, door. Geen muur van tekst — concreet wat je terug krijgt per dagdeel."
         className="border-t border-border/60 bg-card/10"
       >
         <div className="mx-auto max-w-4xl">
@@ -477,11 +477,69 @@ export default function ConsultingPage() {
         </div>
       </Section>
 
+      {/* PRICING TABLE — static, server-rendered, GEO-extractable */}
+      <Section
+        title="Wat kost restaurant consulting bij Jezza Cooks?"
+        subtitle="Drie vaste tariefpunten in Amersfoort en omgeving. Eerlijke all-in prijzen, geen uurtje-factuurtje verrassingen, break-even meestal binnen 3-8 weken."
+        className="border-t border-border/60"
+      >
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-border/35">
+          <table className="w-full text-sm md:text-base">
+            <thead className="bg-card/30">
+              <tr>
+                <th className="px-4 py-3 text-left font-semibold">Traject</th>
+                <th className="px-4 py-3 text-left font-semibold">Inhoud</th>
+                <th className="px-4 py-3 text-left font-semibold">Duur</th>
+                <th className="px-4 py-3 text-right font-semibold">Prijs (excl. BTW)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/35">
+              <tr>
+                <td className="px-4 py-4 font-semibold text-foreground">Quick Scan</td>
+                <td className="px-4 py-4 text-foreground/85">
+                  3 uur meelopen tijdens prep + service, korte diagnose-rapportage met top-3 lekken en aanbevelingen.
+                </td>
+                <td className="px-4 py-4 text-foreground/85">1 dagdeel</td>
+                <td className="px-4 py-4 text-right font-semibold text-primary">€450</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-4 font-semibold text-foreground">Menu engineering / Food cost traject</td>
+                <td className="px-4 py-4 text-foreground/85">
+                  Volledige Kasavana-Smith analyse, recepten uitgeschreven, kostprijzen herberekend, kaart herontworpen, waste log ingevoerd. Zie de{" "}
+                  <Link href="/menu-engineering" className="underline decoration-primary/80 underline-offset-2 hover:text-primary">
+                    menu engineering gids
+                  </Link>
+                  {" "}en{" "}
+                  <Link href="/food-cost-controle" className="underline decoration-primary/80 underline-offset-2 hover:text-primary">
+                    food cost controle gids
+                  </Link>
+                  .
+                </td>
+                <td className="px-4 py-4 text-foreground/85">3 dagdelen</td>
+                <td className="px-4 py-4 text-right font-semibold text-primary">€897</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-4 font-semibold text-foreground">Offerte op maat</td>
+                <td className="px-4 py-4 text-foreground/85">
+                  Voor complexere operaties (2+ vestigingen, tasting menu, eigen bakkerij, seizoenswisselingen, teamtraining). Inclusief wekelijkse check-ins gedurende 4-6 weken.
+                </td>
+                <td className="px-4 py-4 text-foreground/85">Variabel</td>
+                <td className="px-4 py-4 text-right font-semibold text-primary">€1.500 – €3.500</td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="bg-card/20 px-4 py-4 text-xs text-muted-foreground md:text-sm">
+            Alle prijzen exclusief 21% BTW. Reiskosten binnen Amersfoort inbegrepen; buiten Amersfoort €0,21 per kilometer.
+            Facturering: 50% aanbetaling, 50% na oplevering. Break-even voor een regulier Nederlands restaurant ligt tussen 3 en 8 weken.
+          </div>
+        </div>
+      </Section>
+
       {/* FAQ */}
       <section className="py-12 md:py-20 border-t border-border/60 bg-card/10">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-center font-headline text-3xl md:text-4xl font-bold">
-            Veelgestelde vragen
+            Veelgestelde vragen over restaurant consulting
           </h2>
 
           <Accordion type="single" collapsible className="w-full mt-8">

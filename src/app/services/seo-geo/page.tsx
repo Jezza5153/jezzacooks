@@ -38,6 +38,7 @@ import {
 import { cn } from "@/lib/utils";
 import JsonLd from "@/components/seo/json-ld";
 import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schema";
+import { SITE } from "@/lib/site-config";
 
 export const dynamic = "force-static";
 
@@ -298,8 +299,8 @@ export default function SeoGeoPage() {
 
       {/* WHY GEO NOW — citable stats */}
       <Section
-        title="Waarom GEO optimalisatie nu belangrijk is"
-        subtitle="De zoekwereld is in twaalf maanden veranderd. Dit zijn de cijfers die je niet kunt negeren."
+        title="Waarom is GEO optimalisatie belangrijk in 2026?"
+        subtitle="De zoekwereld is in twaalf maanden veranderd: Google AI Overviews, ChatGPT Search en Perplexity citeren nu wie de beste passages schrijft, niet wie de meeste links heeft. Dit zijn de cijfers die je niet kunt negeren."
       >
         <div className="grid gap-5 md:grid-cols-3 max-w-5xl mx-auto">
           <StatBlock
@@ -345,8 +346,8 @@ export default function SeoGeoPage() {
 
       {/* WHAT YOU GET */}
       <Section
-        title="Wat er maandelijks gebeurt"
-        subtitle="Transparant, meetbaar en chef-geleid. Elke maand vier vaste blokken."
+        title="Wat gebeurt er elke maand in een SEO + GEO traject?"
+        subtitle="Transparant, meetbaar en chef-geleid. Elke maand vier vaste blokken voor Amersfoortse horecabedrijven en restaurants in de regio Utrecht."
         className="border-t border-border/60 bg-card/10"
       >
         <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
@@ -450,8 +451,8 @@ export default function SeoGeoPage() {
 
       {/* PRICING PANEL */}
       <Section
-        title="Tarieven zonder verrassingen"
-        subtitle="Twee smaken. Geen setup fee voor websites die ik zelf bouw."
+        title="Wat kost SEO en GEO optimalisatie voor een horecabedrijf?"
+        subtitle="Twee smaken: jaarlijks €1.300 excl. BTW of maandelijks €150 excl. BTW. Geen setup fee voor websites die ik zelf heb gebouwd. Alle tarieven voor restaurants en horecabedrijven in Amersfoort en omgeving."
       >
         <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
           <Card className={cn(cardBase, "h-full", cardHover)}>
@@ -647,8 +648,8 @@ export default function SeoGeoPage() {
 
       {/* AMERSFOORT FOCUS */}
       <Section
-        title="Waarom Amersfoort eerst"
-        subtitle="De lokale markt is grotendeels open voor horeca-gerichte optimalisatie."
+        title="Waarom richt ik me eerst op Amersfoort?"
+        subtitle="De lokale markt in Amersfoort (Binnenstad, Kamp, Soesterkwartier, Leusderkwartier, Vathorst, Valleipoort, Hoogland, Randenbroek) en de regio Utrecht is grotendeels open voor horeca-gerichte GEO optimalisatie. Geen enkel bureau claimt de niche — die openheid sluit binnen 12 maanden."
       >
         <div className="max-w-3xl mx-auto prose prose-invert prose-lg">
           <p className="text-muted-foreground leading-relaxed">
@@ -671,6 +672,27 @@ export default function SeoGeoPage() {
             Amersfoort-audit: lokaal pack status, bestaande rankings, gaps in
             content en de snelst bereikbare quick wins.
           </p>
+          <div className="mt-8 rounded-2xl border border-border/35 bg-background/20 p-5 md:p-6">
+            <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+              Werkgebied
+            </div>
+            <h3 className="mt-2 font-headline text-xl font-bold md:text-2xl">
+              Voor welke wijken en steden doe ik SEO + GEO?
+            </h3>
+            <p className="mt-3 text-muted-foreground leading-relaxed">
+              Standplaats is Amersfoort en ik werk in heel Amersfoort en
+              omgeving. Binnen Amersfoort: alle wijken — Binnenstad, Kamp,
+              Soesterkwartier, Leusderkwartier, Vathorst, Valleipoort,
+              Kattenbroek, Randenbroek, Hoogland, Hooglanderveen, Liendert,
+              Schothorst en Zielhorst. In de regio rond Amersfoort: Utrecht,
+              Hilversum, Soest, Leusden, Baarn, Bunschoten, Nijkerk en
+              Barneveld. Voor opdrachten verder weg (Zwolle, Apeldoorn,
+              Amsterdam, Rotterdam, Eindhoven) werk ik remote met één
+              fysieke kick-off op locatie. Jezza Cooks is gevestigd aan de
+              Nijkerkerstraat 3, 3821 CD Amersfoort (Valleipoort, KvK
+              99547619).
+            </p>
+          </div>
         </div>
       </Section>
 
@@ -678,7 +700,7 @@ export default function SeoGeoPage() {
       <section className="py-12 md:py-20 border-t border-border/60 bg-card/10">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-center font-headline text-3xl md:text-4xl font-bold">
-            Veelgestelde vragen over SEO en GEO
+            Veelgestelde vragen over SEO en GEO voor horeca
           </h2>
 
           <Accordion type="single" collapsible className="w-full mt-8">
@@ -693,6 +715,10 @@ export default function SeoGeoPage() {
               </AccordionItem>
             ))}
           </Accordion>
+
+          <p className="mt-12 text-center text-xs text-muted-foreground">
+            Laatst bijgewerkt: 15 april 2026 · Jezza Cooks SEO + GEO optimalisatie voor horeca in Amersfoort en omgeving · {SITE.name} KvK {SITE.kvk} · {SITE.address.streetAddress}, {SITE.address.postalCode} {SITE.address.addressLocality}
+          </p>
         </div>
       </section>
 

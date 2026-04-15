@@ -520,7 +520,7 @@ export default function CateringPage() {
                 </div>
 
                 <h2 className="mt-4 font-headline text-3xl md:text-4xl font-bold">
-                  Lunch die werkt op kantoor
+                  Hoe werkt een kantoorlunch van Tafelaar × Jezza Cooks?
                 </h2>
 
                 <p className={`mt-3 leading-relaxed ${ui.mutedOnPaper}`}>
@@ -595,9 +595,13 @@ export default function CateringPage() {
       <section id="menu" className={ui.container + " " + "pb-14 md:pb-24"}>
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
-            <h2 className="font-headline text-3xl md:text-5xl font-bold">Assortiment</h2>
+            <h2 className="font-headline text-3xl md:text-5xl font-bold">
+              Wat zit er in het catering assortiment?
+            </h2>
             <p className={`mt-3 ${ui.mutedOnNight} md:text-lg`}>
-              Vaste prijzen, duidelijke keuzes. Openklappen per categorie.
+              Vaste prijzen, duidelijke keuzes. Broodjes vanaf €7,50, bowls
+              vanaf €10,50, lunchpakketten vanaf €13,50. Openklappen per
+              categorie hieronder voor exacte menukeuzes en allergenen.
             </p>
           </div>
 
@@ -746,9 +750,92 @@ export default function CateringPage() {
             </div>
           </div>
 
+          {/* RICHTPRIJZEN table (server-rendered, GEO-extractable) */}
+          <div className="mx-auto mt-14 max-w-4xl">
+            <h2 className="text-center font-headline text-3xl md:text-4xl font-bold">
+              Wat kost catering in Amersfoort? Richtprijzen per type
+            </h2>
+            <p className={`mt-3 text-center ${ui.mutedOnNight} md:text-lg`}>
+              Vaste tarieven voor Amersfoort en omgeving. Levering binnen
+              Amersfoort centrum gratis vanaf 15 personen. Alle prijzen
+              exclusief 9% BTW op foodservice.
+            </p>
+            <div className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+              <table className="w-full text-sm md:text-base">
+                <thead className="bg-white/10 text-left">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">Type catering</th>
+                    <th className="px-4 py-3 font-semibold">Minimum</th>
+                    <th className="px-4 py-3 font-semibold">Aanlooptijd</th>
+                    <th className="px-4 py-3 text-right font-semibold">Prijs p.p.</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/10">
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Kantoorlunch — broodjes / wraps</td>
+                    <td className="px-4 py-4 text-white/80">10 pers.</td>
+                    <td className="px-4 py-4 text-white/80">48 uur</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">vanaf €7,50</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Kantoorlunch — bowls</td>
+                    <td className="px-4 py-4 text-white/80">10 pers.</td>
+                    <td className="px-4 py-4 text-white/80">48 uur</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">vanaf €10,50</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Lunchpakket vegetarisch</td>
+                    <td className="px-4 py-4 text-white/80">10 pers.</td>
+                    <td className="px-4 py-4 text-white/80">48 uur</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">€13,50</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Lunchpakket classic</td>
+                    <td className="px-4 py-4 text-white/80">10 pers.</td>
+                    <td className="px-4 py-4 text-white/80">48 uur</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">€14,50</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Lunchpakket premium</td>
+                    <td className="px-4 py-4 text-white/80">10 pers.</td>
+                    <td className="px-4 py-4 text-white/80">48 uur</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">€18,50</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Diner / event — family style</td>
+                    <td className="px-4 py-4 text-white/80">8 pers.</td>
+                    <td className="px-4 py-4 text-white/80">5 werkdagen</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">€28 – €45</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Diner / event — chef op locatie</td>
+                    <td className="px-4 py-4 text-white/80">20 pers.</td>
+                    <td className="px-4 py-4 text-white/80">10 werkdagen</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">€45 – €55</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-4 font-medium">Groot event (80 – 150+ pers.)</td>
+                    <td className="px-4 py-4 text-white/80">80 pers.</td>
+                    <td className="px-4 py-4 text-white/80">3-4 weken</td>
+                    <td className="px-4 py-4 text-right font-semibold text-primary">offerte op maat</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className={`px-4 py-4 text-xs ${ui.mutedOnNight} md:text-sm`}>
+                Levering gratis binnen Amersfoort centrum vanaf 15 personen.
+                Randwijken Amersfoort (Vathorst, Hoogland, Hooglanderveen):
+                €15 bezorgkosten. Buurgemeentes (Soest, Leusden, Baarn,
+                Bunschoten, Nijkerk, Barneveld): €20 – €35 afhankelijk van
+                afstand. Facturering 25% aanbetaling, 75% na oplevering.
+              </div>
+            </div>
+          </div>
+
           {/* FAQ */}
           <div className="mx-auto mt-14 max-w-4xl">
-            <h2 className="text-center font-headline text-3xl md:text-4xl font-bold">Vragen</h2>
+            <h2 className="text-center font-headline text-3xl md:text-4xl font-bold">
+              Veelgestelde vragen over Tafelaar × Jezza Cooks Catering
+            </h2>
             <p className={`mt-2 text-center ${ui.mutedOnNight}`}>
               Korte antwoorden, zodat je snel kunt plannen.
             </p>

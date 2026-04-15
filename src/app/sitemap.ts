@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services/websites", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services/seo-geo", changeFrequency: "monthly", priority: 0.95 },
     { path: "/menu-engineering", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/food-cost-controle", changeFrequency: "monthly", priority: 0.95 },
     { path: "/portfolio", changeFrequency: "monthly", priority: 0.9 },
     { path: "/pricing", changeFrequency: "monthly", priority: 0.8 },
     { path: "/results", changeFrequency: "monthly", priority: 0.7 },

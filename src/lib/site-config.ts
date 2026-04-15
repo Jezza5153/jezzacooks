@@ -71,13 +71,31 @@ export const SITE = {
     longitude: 5.3878,
   },
 
-  // Service area — used for LocalBusiness.areaServed.
+  // Service area — used for LocalBusiness.areaServed. Kept in sync with
+  // the cities/wijken that actually appear in service-page copy. Zwolle
+  // and Apeldoorn were previously listed here but barely appeared in
+  // content, which looked spammy to validators. Now mirrors the real
+  // werkgebied: Amersfoort + all buurgemeenten + core regional cities.
   areaServed: [
     "Amersfoort",
+    "Binnenstad Amersfoort",
+    "Kamp Amersfoort",
+    "Soesterkwartier",
+    "Leusderkwartier",
+    "Vathorst",
+    "Valleipoort",
+    "Kattenbroek",
+    "Randenbroek",
+    "Hoogland",
+    "Hooglanderveen",
     "Utrecht",
-    "Zwolle",
     "Hilversum",
-    "Apeldoorn",
+    "Soest",
+    "Leusden",
+    "Baarn",
+    "Bunschoten",
+    "Nijkerk",
+    "Barneveld",
     "Nederland",
   ],
 

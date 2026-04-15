@@ -29,19 +29,19 @@ import {
 export const dynamic = "force-static";
 
 const DATE_PUBLISHED = "2026-04-14";
-const DATE_MODIFIED = "2026-04-14";
-const WORD_COUNT = 3200;
+const DATE_MODIFIED = "2026-04-15";
+const WORD_COUNT = 3600;
 
 export const metadata: Metadata = {
   title:
-    "Menu engineering uitgelegd — stars, plowhorses, food cost | Jezza Cooks",
+    "Menu engineering Amersfoort — stars, plowhorses, food cost gids | Jezza Cooks",
   description:
-    "Complete gids menu engineering voor restaurants: wat het is, de Kasavana-Smith matrix (stars, plowhorses, puzzles, dogs), food cost berekening, prijspsychologie en praktijkvoorbeelden. Door Jeremy Arrascaeta, chef-kok De Tafelaar Amersfoort.",
+    "Complete gids menu engineering voor restaurants in Amersfoort en heel Nederland: de Kasavana-Smith matrix (stars, plowhorses, puzzles, dogs), food cost berekening, prijspsychologie en praktijkvoorbeelden. Door Jeremy Arrascaeta — chef-kok bij De Tafelaar Amersfoort en horeca consultant bij Jezza Cooks. Inclusief lokale klantcase Chef & Serve.",
   alternates: { canonical: "/menu-engineering" },
   openGraph: {
-    title: "Menu engineering uitgelegd — complete gids voor restaurants",
+    title: "Menu engineering Amersfoort — complete gids voor restaurants",
     description:
-      "Wat is menu engineering? Hoe bereken je het? Welke food cost werkt? Complete gids met de Kasavana-Smith matrix, praktijkvoorbeeld en Nederlandse benchmarks — door een chef die zelf service draait.",
+      "Wat is menu engineering? Hoe bereken je het? Welke food cost werkt in Nederland? Complete gids met de Kasavana-Smith matrix, praktijkvoorbeeld, Amersfoortse klantcase en Nederlandse benchmarks — door een chef die zelf service draait.",
     url: "/menu-engineering",
     type: "article",
     publishedTime: DATE_PUBLISHED,
@@ -50,6 +50,7 @@ export const metadata: Metadata = {
   },
   keywords: [
     "menu engineering",
+    "menu engineering Amersfoort",
     "menu engineering uitleg",
     "menu engineering matrix",
     "stars plowhorses puzzles dogs",
@@ -60,6 +61,8 @@ export const metadata: Metadata = {
     "Kasavana Smith matrix",
     "restaurant menu analyse",
     "prijspsychologie menukaart",
+    "horeca consultant Amersfoort",
+    "restaurant consultant Amersfoort",
   ],
 };
 
@@ -68,25 +71,26 @@ export const metadata: Metadata = {
 const articleSchema = buildArticle({
   slug: "menu-engineering",
   headline:
-    "Menu engineering uitgelegd — stars, plowhorses, food cost en de complete gids voor restaurants",
+    "Menu engineering uitgelegd — stars, plowhorses, food cost en de complete gids voor Amersfoort en heel Nederland",
   description:
-    "Complete Nederlandstalige gids menu engineering voor horeca-ondernemers: de Kasavana-Smith matrix, food cost berekening, prijspsychologie en praktijkvoorbeelden. Door chef-kok en horeca consultant Jeremy Arrascaeta.",
+    "Complete Nederlandstalige gids menu engineering voor horeca-ondernemers in Amersfoort en de regio Utrecht: de Kasavana-Smith matrix, food cost berekening, prijspsychologie, praktijkvoorbeelden en een lokale klantcase (Chef & Serve). Door chef-kok en horeca consultant Jeremy Arrascaeta.",
   image: "/pics/service-consulting.jpg",
   datePublished: DATE_PUBLISHED,
   dateModified: DATE_MODIFIED,
   keywords: [
     "menu engineering",
+    "menu engineering Amersfoort",
     "food cost",
     "menukaart analyse",
     "restaurant marge",
-    "horeca consulting",
+    "horeca consulting Amersfoort",
   ],
   about: [
     "Menu engineering",
     "Food cost percentage",
     "Restaurant menu optimization",
     "Kasavana-Smith matrix",
-    "Horeca consulting",
+    "Horeca consulting Amersfoort",
   ],
   wordCount: WORD_COUNT,
 });
@@ -118,6 +122,14 @@ const faqs = [
   {
     q: "Kan ik menu engineering doen zonder dure software?",
     a: "Ja. Voor de meeste zelfstandige restaurants is een simpele spreadsheet (Google Sheets of Excel) voldoende. Kolommen: gerecht, verkoopprijs, kostprijs, aantal verkocht afgelopen 30 dagen, omzet, winst per gerecht, winst totaal. Daarna twee extra kolommen: populariteit-index (gerecht-verkoop gedeeld door gemiddelde verkoop × 100) en contributiemarge-index (winst per gerecht gedeeld door gemiddelde winst × 100). Alles boven 100 op beide assen is een star, hoge popularity + lage marge is plowhorse, lage popularity + hoge marge is puzzle, lage op beide is dog. Dedicated software (Apicbase, Delicious Data, MarginEdge) wordt interessant vanaf 3+ vestigingen of bij een menu van 60+ items omdat handmatig bijhouden dan te tijdrovend wordt. Voor een gemiddeld Nederlands restaurant met 25-40 items werkt een spreadsheet prima — mits je de discipline hebt om 'm elke maand bij te werken.",
+  },
+  {
+    q: "Werk je als menu engineer ook in Amersfoort en de regio Utrecht?",
+    a: "Ja — standplaats is Amersfoort en het werkgebied is heel Amersfoort en omgeving. Dat betekent alle wijken (Binnenstad, Kamp, Soesterkwartier, Leusderkwartier, Vathorst, Valleipoort, Kattenbroek, Randenbroek, Hoogland, Liendert, Schothorst, Zielhorst), plus Utrecht, Hilversum, Soest, Leusden, Baarn, Bunschoten, Nijkerk en Barneveld. Buiten die regio (Zwolle, Apeldoorn, Amsterdam, Rotterdam, Eindhoven) werk ik remote met één fysieke kick-off op locatie. Jezza Cooks is gevestigd aan de Nijkerkerstraat 3, 3821 CD Amersfoort (Valleipoort, KvK 99547619) en ik draai zelf elke week service als chef-kok bij shared-dining restaurant De Tafelaar aan de Kamp 8 in de binnenstad — het restaurant van partner Jan Molmans. Een volledig menu engineering traject in Amersfoort kost €897 excl. BTW (3 dagdelen); een enkele Quick Scan begint bij €450. Binnen 2 weken inplanbaar.",
+  },
+  {
+    q: "Wat kost menu engineering voor een restaurant in Amersfoort?",
+    a: "Voor een compleet menu engineering traject reken ik €897 excl. BTW voor 3 dagdelen: diagnose (alle recepten uitschrijven op grammage, kostprijzen berekenen, matrix invullen), herontwerp (dogs schrappen, plowhorses fixen, stars bovenaan zetten, prijspsychologie toepassen) en borging (receptuur vastleggen, waste-log invoeren, kostprijs-check in wekelijkse prep meeting). Een enkele Quick Scan van één dagdeel (3 uur meelopen op de vloer + korte rapportage) begint bij €450 excl. BTW — handig als diagnose voordat je beslist of een volledig traject zinnig is. Voor restaurants met een seizoenskaart of complexe operatie (2+ vestigingen, tasting menu, eigen bakkerij) maken we een offerte op maat die meestal tussen €1.500 en €3.500 uitkomt. Break-even voor een regulier Amersfoorts restaurant ligt tussen 3 en 8 weken na oplevering. Alle prijzen exclusief reiskosten binnen Amersfoort; buiten Amersfoort rekenen we €0,21 per km.",
   },
 ];
 
@@ -301,8 +313,13 @@ export default function MenuEngineeringPage() {
                 </a>
               </li>
               <li>
+                <a className="hover:text-primary" href="#menu-engineering-amersfoort">
+                  9. Menu engineering in Amersfoort
+                </a>
+              </li>
+              <li>
                 <a className="hover:text-primary" href="#faq">
-                  9. Veelgestelde vragen
+                  10. Veelgestelde vragen
                 </a>
               </li>
             </ol>
@@ -788,15 +805,123 @@ export default function MenuEngineeringPage() {
               <p className="text-sm text-muted-foreground md:text-base">
                 Totale investering: €897 excl. BTW over 3 dagdelen. Break-even
                 in week 1 van de nieuwe kaart. Dit is een representatief
-                geanonimiseerd voorbeeld — niet elke zaak haalt 6 procentpunten
-                in 6 weken, maar 2-4 procentpunten is bij bijna elk regulier
-                restaurant haalbaar.
+                geanonimiseerd voorbeeld (periode januari – maart 2026) —
+                niet elke zaak haalt 6 procentpunten in 6 weken, maar 2-4
+                procentpunten is bij bijna elk regulier restaurant haalbaar.
               </p>
             </div>
           </div>
         </section>
 
-        {/* --- Section 9: FAQ --- */}
+        {/* --- Section 9: Menu engineering in Amersfoort (local anchor) --- */}
+        <section id="menu-engineering-amersfoort" className="py-12 md:py-16">
+          <div className="container mx-auto max-w-3xl px-4">
+            <h2 className="font-headline text-3xl font-bold md:text-4xl">
+              Menu engineering in Amersfoort — hoe het lokaal werkt
+            </h2>
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-foreground/90 md:text-lg">
+              <p>
+                Menu engineering in Amersfoort werkt exact hetzelfde als
+                elders in Nederland — het is rekenwerk, geen cultuur — maar
+                de Amersfoortse horeca heeft drie eigenheden die de uitvoering
+                beïnvloeden. <strong>Eén:</strong> de stad heeft een sterk
+                gemengde gastenmix (kantoorlunch, stadsbezoek, lokale vaste
+                gasten), wat betekent dat plowhorses vaak in de lunch zitten
+                en stars in het diner — je kan dus niet met één gemiddelde
+                werken. <strong>Twee:</strong> Amersfoort heeft relatief veel
+                shared-dining en bistro-concepten (Kamp, Soesterkwartier,
+                Leusderkwartier), waar porties gedeeld worden en de
+                klassieke 130-gram-protein-hoofdgerecht-regel niet opgaat.{" "}
+                <strong>Drie:</strong> de inkoopprijzen voor verse vis en
+                groente via lokale leveranciers (Van de Koolwijk, Kaasboerij,
+                Nico Beekhuizen) zijn consistent lager dan via nationale
+                ketens — je moet dus rekenen met je eigen werkelijke
+                kostprijs, niet met een branche-gemiddelde uit een boek.
+              </p>
+              <p>
+                Ik werk als horeca consultant in heel Amersfoort en omgeving:
+                alle wijken (Binnenstad, Kamp, Soesterkwartier,
+                Leusderkwartier, Vathorst, Valleipoort, Kattenbroek,
+                Randenbroek, Hoogland, Liendert, Schothorst, Zielhorst),
+                plus Utrecht, Hilversum, Soest, Leusden, Baarn, Bunschoten,
+                Nijkerk en Barneveld. Op locatie werk ik het liefst — in 2
+                uur prep meelopen zie je méér dan in 5 uur vergaderen over
+                Excel.
+              </p>
+
+              <div className="my-8 rounded-2xl border border-primary/35 bg-primary/5 p-5 md:p-6">
+                <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                  Klantcase Amersfoort — Chef &amp; Serve
+                </div>
+                <h3 className="mt-3 font-headline text-xl font-bold md:text-2xl">
+                  Maarten Hogeveen, Chef &amp; Serve — menukaart
+                  professionalisering
+                </h3>
+                <p className="mt-3 text-foreground/90">
+                  Chef &amp; Serve is een private-chef en catering service
+                  geleid door <strong>Maarten Hogeveen</strong>, gevestigd
+                  binnen het Amersfoort-Utrecht werkgebied. Ik heb voor Chef
+                  &amp; Serve de menustructuur, kostprijsberekening en
+                  receptuur-SOPs opgezet, plus de website en SEO/GEO
+                  optimalisatie. Dezelfde 5-stappen methodiek uit sectie 3
+                  hierboven — alleen toegepast op een private-chef portfolio
+                  in plaats van een vaste à la carte kaart.{" "}
+                  <a
+                    href="https://chefandserve.nl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+                  >
+                    chefandserve.nl
+                  </a>
+                  {" "}is de resulterende site — een van de 5 live client
+                  builds in{" "}
+                  <Link href="/portfolio" className="underline decoration-primary/60 underline-offset-2 hover:text-primary">
+                    het Jezza Cooks portfolio
+                  </Link>
+                  .
+                </p>
+              </div>
+
+              <p>
+                Naast Chef &amp; Serve draai ik zelf elke week service als
+                chef-kok bij shared-dining restaurant <strong>De Tafelaar</strong>{" "}
+                aan de Kamp 8 in de binnenstad van Amersfoort — het restaurant
+                van <strong>Jan Molmans</strong>, waar ik het menu en de
+                keukenstructuur heb opgezet. Dat betekent dat ik de lokale
+                inkoop, de Amersfoortse gastenvolumes en de zondagavond-prep
+                ritmiek van dichtbij ken. Als horeca consultant kom ik niet
+                uit een adviesbureau in Utrecht — ik sta elke week op de
+                brander in dezelfde stad waar mijn klanten zitten.
+              </p>
+
+              <p>
+                Voor een volledig menu engineering traject in Amersfoort reken
+                ik €897 excl. BTW (3 dagdelen: diagnose, herontwerp, borging).
+                Dat is hetzelfde tarief als het landelijke praktijkvoorbeeld
+                hierboven — geen lokale toeslag of korting. Voor een enkele
+                Quick Scan (één dagdeel, 3 uur meelopen + rapport) begin ik
+                bij €450 excl. BTW. Beide trajecten kan ik binnen 2 weken
+                inplannen. De meeste Amersfoortse restaurants verdienen het
+                investeringsbedrag terug binnen 3 tot 8 weken.
+              </p>
+
+              <div className="mt-8">
+                <Link
+                  href="/services/consulting"
+                  className={cn(
+                    buttonVariants({ variant: "default", size: "lg" }),
+                    "font-semibold",
+                  )}
+                >
+                  Bekijk restaurant consulting Amersfoort
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- Section 10: FAQ --- */}
         <section id="faq" className="py-12 md:py-16">
           <div className="container mx-auto max-w-3xl px-4">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">

@@ -494,6 +494,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pillar gidsen band — links to the two long-form Dutch guides */}
+      <section className="border-t border-border/40 bg-card/10 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="font-headline text-primary text-sm font-bold tracking-widest uppercase">
+              Gidsen & kennis
+            </p>
+            <h2 className="mt-3 font-headline text-3xl md:text-4xl font-bold">
+              Wat leer je gratis op jezzacooks.com?
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+              Twee volledige Nederlandstalige gidsen uit mijn dagelijkse
+              praktijk als chef-kok en horeca consultant — geen theorie uit
+              een cursusboek, maar wat ik zelf elke week toepas bij De
+              Tafelaar Amersfoort en mijn consulting klanten.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+            <Link
+              href="/menu-engineering"
+              className="group rounded-2xl border border-border/35 bg-background/20 p-6 transition hover:border-primary/50 hover:bg-background/30"
+            >
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Pillar gids · 12 min
+              </div>
+              <h3 className="mt-3 font-headline text-2xl font-bold md:text-3xl">
+                Menu engineering gids
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                Wat is menu engineering? De Kasavana-Smith matrix (stars,
+                plowhorses, puzzles, dogs), food cost berekening per
+                gerecht, prijspsychologie en een praktijkcase van 32% naar
+                26% food cost in 6 weken. Inclusief Amersfoort-sectie met
+                Chef &amp; Serve case study.
+              </p>
+              <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                Lees de menu engineering gids <ArrowRight className="h-4 w-4" />
+              </div>
+            </Link>
+
+            <Link
+              href="/food-cost-controle"
+              className="group rounded-2xl border border-primary/35 bg-primary/5 p-6 transition hover:border-primary/60 hover:bg-primary/10"
+            >
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Pillar gids · 11 min · nieuw
+              </div>
+              <h3 className="mt-3 font-headline text-2xl font-bold md:text-3xl">
+                Food cost controle gids
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                Wat is food cost controle? De formule, benchmarks per
+                Nederlands segment, de 6 lekken waar food cost stuk gaat,
+                een wekelijkse controle-routine van 30 minuten, een waste
+                log template en een praktijkcase van 33% naar 27% in 4
+                weken — uit een Amersfoortse bistro.
+              </p>
+              <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                Lees de food cost gids <ArrowRight className="h-4 w-4" />
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Waarom Amersfoort — local SEO + GEO signals band */}
       <section className="border-t border-border/40 py-16 md:py-24">
         <div className="container mx-auto px-4">
@@ -505,16 +571,19 @@ export default function Home() {
               Waarom Amersfoort?
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-              Jezza Cooks is gevestigd aan de Nijkerkerstraat 3 in het
-              Valleipoort gebied van Amersfoort — KvK 99547619. Ik ben zelf
-              chef-kok bij shared-dining restaurant De Tafelaar aan de Kamp 8
-              in het centrum van Amersfoort, dus ik draai elke week service
-              in dezelfde stad waar mijn consulting-klanten zitten. Dat is
-              het verschil tussen "ik adviseer horeca" en "ik sta zelf in de
-              keuken". Werkgebied: Amersfoort (centrum, Binnenstad, Kamp,
-              Soesterkwartier, Leusderkwartier, Valleipoort, Vathorst),
-              Utrecht, Zwolle, Hilversum, Apeldoorn, en heel het midden van
-              Nederland voor grotere trajecten.
+              Jezza Cooks is gevestigd aan de Nijkerkerstraat 3, 3821 CD
+              Amersfoort — in het Valleipoort gebied, KvK 99547619. Ik ben
+              zelf chef-kok bij shared-dining restaurant De Tafelaar aan de
+              Kamp 8 in de binnenstad van Amersfoort (het restaurant van
+              partner Jan Molmans), dus ik draai elke week service in
+              dezelfde stad waar mijn consulting-klanten zitten. Dat is het
+              verschil tussen "ik adviseer horeca" en "ik sta zelf in de
+              keuken". Werkgebied: heel Amersfoort en alle wijken
+              (Binnenstad, Kamp, Soesterkwartier, Leusderkwartier, Vathorst,
+              Valleipoort, Kattenbroek, Randenbroek, Hoogland,
+              Hooglanderveen, Liendert, Schothorst, Zielhorst), plus
+              Utrecht, Hilversum, Soest, Leusden, Baarn, Bunschoten,
+              Nijkerk en Barneveld.
             </p>
           </div>
 

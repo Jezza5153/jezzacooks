@@ -187,6 +187,34 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* WERKGEBIED — neighborhood coverage for local SEO passage extraction */}
+      <section className="container mx-auto px-4 pt-10">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-border bg-card/20 p-6 md:p-8">
+          <h2 className="font-headline text-2xl font-bold md:text-3xl">
+            In welke wijken en steden werkt Jezza Cooks?
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-foreground/85 md:text-lg">
+            Standplaats is Amersfoort en het werkgebied is heel Amersfoort
+            en omgeving. Binnen Amersfoort werk ik in alle wijken:{" "}
+            <strong>Binnenstad, Kamp, Soesterkwartier, Leusderkwartier,
+            Vathorst, Valleipoort, Kattenbroek, Randenbroek, Hoogland,
+            Hooglanderveen, Liendert, Schothorst</strong> en Zielhorst.
+            Daarnaast werk ik in de regio rond Amersfoort:{" "}
+            <strong>Utrecht, Hilversum, Soest, Leusden, Baarn, Bunschoten,
+            Nijkerk</strong> en <strong>Barneveld</strong>. Voor
+            consulting-opdrachten verder weg (Zwolle, Apeldoorn, Amsterdam,
+            Rotterdam, Eindhoven) werk ik remote met één fysieke kick-off
+            bij jou op locatie. Website- en SEO/GEO-projecten zijn 100%
+            remote uit te voeren. Jezza Cooks is geregistreerd bij de Kamer
+            van Koophandel onder nummer 99547619 als eenmanszaak, gevestigd
+            aan de <strong>Nijkerkerstraat 3, 3821 CD Amersfoort</strong>{" "}
+            (Valleipoort). Ik draai daarnaast elke week service als chef-kok
+            bij shared-dining restaurant De Tafelaar aan de Kamp 8 in de
+            binnenstad — het restaurant van partner Jan Molmans.
+          </p>
+        </div>
+      </section>
+
       <div className="container mx-auto px-4 py-16 md:py-24 max-w-2xl">
         <Suspense fallback={<ContactFormSkeleton />}>
           <ContactForm />

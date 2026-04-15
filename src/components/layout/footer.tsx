@@ -21,10 +21,15 @@ export default function Footer() {
       { href: "/services/seo-geo", label: "SEO & GEO optimalisatie" },
       { href: "/pricing", label: "Tarieven" },
     ],
+    guides: [
+      { href: "/menu-engineering", label: "Menu engineering gids" },
+      { href: "/food-cost-controle", label: "Food cost controle gids" },
+      { href: "/portfolio", label: "Portfolio & klantcases" },
+      { href: "/faq", label: "Veelgestelde vragen" },
+    ],
     legal: [
       { href: "/terms", label: "Voorwaarden" },
       { href: "/privacy", label: "Privacyverklaring" },
-      { href: "/faq", label: "Veelgestelde vragen" },
     ],
   };
 
@@ -90,10 +95,20 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Info */}
+          {/* Column 4: Guides (pillar content for GEO discoverability) */}
           <div>
-            <h3 className="font-semibold text-foreground">Info</h3>
+            <h3 className="font-semibold text-foreground">Gidsen & info</h3>
             <ul className="mt-4 space-y-2">
+              {footerLinks.guides.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
                   <Link

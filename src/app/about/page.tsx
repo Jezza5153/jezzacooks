@@ -4,10 +4,42 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import JsonLd from "@/components/seo/json-ld";
-import { buildBreadcrumbList } from "@/lib/schema";
+import { buildBreadcrumbList, buildFaqPage } from "@/lib/schema";
 import { SITE } from "@/lib/site-config";
+
+// FAQ section for passage extraction. Each answer is 130-167 words,
+// Q-format headings, GEO-optimized for queries like "wie is Jeremy
+// Arrascaeta", "chef-kok Amersfoort", "horeca consultant Amersfoort".
+const aboutFaqs = [
+  {
+    q: "Wie is Jeremy Arrascaeta (Chef Jezz)?",
+    a: "Jeremy Arrascaeta — bijnaam Chef Jezz — is chef-kok bij shared-dining restaurant De Tafelaar aan de Kamp 8 in de binnenstad van Amersfoort en founder van Jezza Cooks horeca consultancy (KvK 99547619, Nijkerkerstraat 3, 3821 CD Amersfoort). Hij heeft 10+ jaar gedraaid in high-end keukens in Europa en Australië. Finalist Euro-Toques Young Chef Award 2018 namens Restaurant Bougainville Amsterdam. Dry-aging lead bij Angler Restaurant Stirling in de Adelaide Hills, Zuid-Australië (2020-2022), waar hij bekend werd om het fish dry-age programma met cured sashimi, fish sausages, barramundi crackling en carp bacon — gefeatured in InDaily SA, Australian Good Food Guide, Broadsheet Adelaide en Aquna. Daarvoor head chef op Kangaroo Island bij Hanson Bay Sanctuary en Flinders Chase Café tijdens de 2019/2020 bushfires. Sinds 2025 terug in Nederland. Gefeatured in AD.nl Amersfoort, De Gelderlander, indebuurt.nl en de Gooische Business podcast.",
+  },
+  {
+    q: "Wat doet Jezza Cooks precies?",
+    a: "Jezza Cooks biedt vier diensten onder één chef-led dak. (1) Restaurant consulting — menu engineering, food cost controle, prepstructuur, SOPs en teamtraining, vanaf €450 per dagdeel (Quick Scan) tot €897 voor een volledig traject van 3 dagdelen. (2) Tafelaar × Jezza Cooks Catering — kantoorlunch, diners en events in Amersfoort en omgeving, vanaf €7,50 per persoon, een samenwerking met Jan Molmans (eigenaar De Tafelaar). (3) Restaurant websites — eenmalig €400 of €400 + €30 per maand voor onderhoud, inclusief schema.org JSON-LD en reserveringsflow. (4) SEO + GEO optimalisatie — €1.300 excl. BTW per jaar of €150 per maand, gericht op vindbaarheid in Google én citation visibility in ChatGPT, Perplexity en Google AI Overviews. Alle diensten chef-led door Jeremy zelf, standplaats Amersfoort, werkgebied heel midden Nederland.",
+  },
+  {
+    q: "Waar werk je als horeca consultant?",
+    a: "Standplaats is Amersfoort en het werkgebied is heel Amersfoort en omgeving. Dat betekent alle wijken: Binnenstad, Kamp, Soesterkwartier, Leusderkwartier, Vathorst, Valleipoort, Kattenbroek, Randenbroek, Hoogland, Hooglanderveen, Liendert, Schothorst en Zielhorst. Daarnaast werk ik in de regio rond Amersfoort: Utrecht, Hilversum, Soest, Leusden, Baarn, Bunschoten, Nijkerk en Barneveld. Voor opdrachten buiten dat gebied (Zwolle, Apeldoorn, Amsterdam, Rotterdam, Eindhoven) werk ik remote met één fysieke kick-off bij jou op locatie. Op locatie werk ik het liefst — in 2 uur prep meelopen zie je méér dan in 5 uur vergaderen over Excel. Jezza Cooks is geregistreerd aan de Nijkerkerstraat 3, 3821 CD Amersfoort (Valleipoort, KvK 99547619). Ik draai daarnaast elke week service als chef-kok bij De Tafelaar aan de Kamp 8 in de binnenstad.",
+  },
+  {
+    q: "Waarom een chef als consultant in plaats van een adviesbureau?",
+    a: "Omdat ik zelf elke week op de brander sta. Ik ben niet een ex-chef die 5 jaar geleden uit de keuken is gestapt en sindsdien PowerPoints maakt — ik draai vandaag nog service als chef-kok bij De Tafelaar Amersfoort (shared dining, Kamp 8). Een generiek adviesbureau stuurt je een rapport en een Excel. Ik loop met je mee in prep, ik lees jullie bonnen tijdens service, en ik train je team op de vloer in plaats van in een vergaderruimte. Mijn 10+ jaar in high-end keukens in Europa en Australië (finalist Euro-Toques Young Chef Award 2018, dry-aging lead bij Angler Stirling) betekent dat ik het vak van binnenuit ken — niet uit een cursusboek. Dat is het verschil tussen \"advies\" en \"het werkt maandag al\". Bovendien: als ik iets voorschrijf dat in jullie keuken niet werkt, kom ik terug en fix ik het.",
+  },
+  {
+    q: "Welke opleidingen en certificaten heb je?",
+    a: "Opgeleid aan Hotelschool Ter Duinen in Koksijde (België) — één van de oudste en hoogst aangeschreven hotelscholen in de Benelux. Daarna leerjaren in high-end keukens door heel Europa (inclusief Restaurant Bougainville Amsterdam waar ik als young chef finalist werd van de Euro-Toques Award 2018). Vervolgens emigratie naar Australië en dry-aging specialisatie bij Angler Restaurant Stirling in de Adelaide Hills, onder hoofdchef Sam Prance-Smith. HACCP-gecertificeerd, ervaring met allergenen en dieetmanagement. Naast de keuken-kant ben ik ook vakinhoudelijk bezig met de zakelijke kant van horeca: menu engineering op basis van de Kasavana-Smith matrix, food cost analyse, prepstructuur, SOPs en teamcoaching. In Nederland ben ik geregistreerd bij de Kamer van Koophandel onder nummer 99547619 als eenmanszaak Jezza Cooks (januari 2026).",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Over Jeremy Arrascaeta — chef en horeca consultant in Amersfoort",
@@ -528,6 +560,40 @@ export default function AboutPage() {
               Bekijk restaurant websites
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ — passage-extractable Q&A about Jeremy + Jezza Cooks */}
+      <section className="border-t border-border py-16 md:py-24">
+        <JsonLd data={buildFaqPage(aboutFaqs.map((f) => ({ question: f.q, answer: f.a })))} id="schema-about-faq" />
+        <div className="container mx-auto max-w-3xl px-4">
+          <div className="text-center">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">
+              Veelgestelde vragen over Jeremy en Jezza Cooks
+            </h2>
+            <p className="mt-4 text-base text-muted-foreground md:text-lg">
+              Wie ik ben, waar ik werk en wat je kunt verwachten als je met
+              mij samenwerkt.
+            </p>
+          </div>
+          <div className="mt-10 rounded-2xl border border-border/35 bg-background/25 p-4 md:p-6">
+            <Accordion type="single" collapsible>
+              {aboutFaqs.map((f, i) => (
+                <AccordionItem key={f.q} value={`about-faq-${i}`} className="border-border/35">
+                  <AccordionTrigger className="text-left font-semibold text-base hover:no-underline md:text-lg">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base leading-relaxed text-foreground/85 md:text-lg">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+
+          <p className="mt-10 text-center text-xs text-muted-foreground">
+            Laatst bijgewerkt: 15 april 2026 · {SITE.name} KvK {SITE.kvk} · {SITE.address.streetAddress}, {SITE.address.postalCode} {SITE.address.addressLocality} ({SITE.address.neighborhood})
+          </p>
         </div>
       </section>
 

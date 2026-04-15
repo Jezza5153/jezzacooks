@@ -181,6 +181,39 @@ export default function PortfolioPage() {
         </div>
       </section>
 
+      {/* CLIENTS OVERVIEW — passage-extractable summary for GEO */}
+      <section className="border-b border-border/40 bg-background/10 py-14 md:py-20">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="font-headline text-3xl md:text-4xl font-bold">
+            Welke klanten heeft Jezza Cooks? De 5 live projecten in één
+            overzicht
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+            Jezza Cooks heeft op 2026-04-15 vijf live client projecten in
+            productie: twee platforms die van nul zijn gebouwd, drie
+            restaurant / hospitality sites met SEO + GEO optimalisatie, en
+            één joint venture waar Jezza Cooks zowel het product als de
+            online zichtbaarheid levert. <strong>BoekEerlijk</strong>{" "}
+            (boekeerlijk.nl) is een SaaS platform voor eerlijke
+            horeca-boekhouding gebouwd vanaf scratch.{" "}
+            <strong>OffertesVoorJou</strong> (offertesvoorjou.nl) is een
+            Nederlands matchingsplatform voor offerteaanvragen, ook vanaf
+            scratch gebouwd. <strong>Chef &amp; Serve</strong>{" "}
+            (chefandserve.nl) is de private-chef en catering service van
+            Maarten Hogeveen — volledige website, menustructuur en SEO/GEO.{" "}
+            <strong>Swimcoaching.nl</strong> is een landelijk
+            zwem-coaching netwerk met SEO optimalisatie voor lokale intents.
+            En <strong>De Tafelaar Amersfoort</strong>{" "}
+            (tafelaaramersfoort.nl) is het shared-dining restaurant van
+            partner Jan Molmans aan de Kamp 8 in de binnenstad van
+            Amersfoort — waar Jeremy zelf chef-kok is en waar de catering
+            samenwerking vandaan komt. Vier van de vijf sites hebben
+            schema.org JSON-LD, Core Web Vitals groen en meetbare
+            conversieverbetering sinds oplevering.
+          </p>
+        </div>
+      </section>
+
       {/* CLIENT CASES — grouped by category */}
       {[...grouped.entries()].map(([category, items]) => (
         <section

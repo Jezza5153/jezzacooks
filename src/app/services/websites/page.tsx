@@ -150,12 +150,18 @@ export default function WebsitesPage() {
               Transparante prijzen
             </div>
             <h2 className="mt-3 font-headline text-3xl font-bold md:text-5xl">
-              Vanaf €400 eenmalig. Geen verborgen kosten.
+              Wat kost een restaurant website laten maken?
             </h2>
             <p className="mt-4 text-base text-muted-foreground md:text-lg">
-              Eén prijs voor een complete restaurant website. Optioneel €30 per
-              maand voor hosting, security en kleine content-aanpassingen — of
-              je doet het zelf.
+              Eenmalig €400 voor een complete restaurant website — geen
+              verborgen kosten, geen lock-in contract. Optioneel €30 per maand
+              voor hosting, security updates en kleine content-aanpassingen,
+              of je doet dat zelf. Voor horecabedrijven in Amersfoort en
+              omgeving is dat tarief inclusief intake op locatie, oplevering
+              binnen 2 weken en één ronde tekstuele revisies. Een extra
+              reservering per week van gemiddeld €65 verdient de investering
+              binnen 7 weken terug — daarna is elke directe boeking pure
+              marge die niet via Bookings.com of TheFork wegvloeit.
             </p>
           </div>
 
@@ -208,6 +214,68 @@ export default function WebsitesPage() {
             extra reservering van gemiddeld €65 per week verdient de €400
             website in 7 weken terug. Daarna is elke boeking pure marge.
           </div>
+        </div>
+      </section>
+
+      {/* --- Feature comparison table (GEO-extractable) --- */}
+      <section className="border-t border-border/60 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Wat zit erin
+            </div>
+            <h2 className="mt-3 font-headline text-3xl font-bold md:text-5xl">
+              Wat zit er in een Jezza Cooks restaurant website?
+            </h2>
+            <p className="mt-4 text-base text-muted-foreground md:text-lg">
+              Per tier precies wat je krijgt. Alle tiers starten bij €400
+              eenmalig — de verschillen zitten in onderhoud, reserveringsflow
+              en maatwerk.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border border-border/35">
+            <table className="w-full text-sm md:text-base">
+              <thead className="bg-card/30">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold">Functie</th>
+                  <th className="px-4 py-3 text-center font-semibold">€400 eenmalig</th>
+                  <th className="px-4 py-3 text-center font-semibold">€400 + €30/mnd</th>
+                  <th className="px-4 py-3 text-center font-semibold">Maatwerk</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/35">
+                {[
+                  { f: "Complete restaurant website (hero, menukaart, over, contact)", a: "✓", b: "✓", c: "✓" },
+                  { f: "Mobile-first responsive design", a: "✓", b: "✓", c: "✓" },
+                  { f: "Core Web Vitals geoptimaliseerd (groen op PageSpeed)", a: "✓", b: "✓", c: "✓" },
+                  { f: "Schema.org JSON-LD (Restaurant, OpeningHours, Menu, FAQ)", a: "✓", b: "✓", c: "✓" },
+                  { f: "Hosting + security updates", a: "zelf regelen", b: "✓", c: "✓" },
+                  { f: "Maandelijkse kleine content-aanpassingen", a: "—", b: "✓", c: "✓" },
+                  { f: "Reserveringsflow integratie (TheFork, Resengo, TableBooker)", a: "losse koppel €150", b: "inbegrepen", c: "✓" },
+                  { f: "Meertalig (NL/EN)", a: "—", b: "los €250", c: "✓" },
+                  { f: "Eigen fotografie (halve dag op locatie)", a: "—", b: "—", c: "✓" },
+                  { f: "Uitgebreide menukaart met filtering + allergenen", a: "—", b: "—", c: "✓" },
+                  { f: "Blog / events / nieuwsberichten module", a: "—", b: "—", c: "✓" },
+                  { f: "Doorlooptijd", a: "2 weken", b: "2 weken + maandelijks onderhoud", c: "4-6 weken" },
+                  { f: "Prijs", a: "€400 eenmalig", b: "€400 + €30/mnd", c: "€1.200 – €2.500 op maat" },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-background/10" : ""}>
+                    <td className="px-4 py-3 font-medium text-foreground">{row.f}</td>
+                    <td className="px-4 py-3 text-center text-foreground/85">{row.a}</td>
+                    <td className="px-4 py-3 text-center text-foreground/85">{row.b}</td>
+                    <td className="px-4 py-3 text-center text-foreground/85">{row.c}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-xs text-muted-foreground md:text-sm">
+            Alle prijzen exclusief 21% BTW. Voor horecabedrijven in Amersfoort
+            en omgeving (Binnenstad, Kamp, Soesterkwartier, Vathorst, Hoogland,
+            Leusderkwartier) inclusief intake op locatie. Buiten Amersfoort
+            intake via video call.
+          </p>
         </div>
       </section>
 
