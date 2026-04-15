@@ -560,6 +560,123 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Verifieerbaar bij derden — third-party validation strip.
+          Addresses the "self-published claims" weakness by anchoring
+          credibility to external sources: Trustoo reviews for De Tafelaar
+          (the restaurant where Jeremy is chef), KvK handelsregister, 8
+          press URLs (4 NL, 4 AU). */}
+      <section className="border-t border-border/40 bg-card/10 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="font-headline text-primary text-sm font-bold tracking-widest uppercase">
+              Verifieerbaar bij derden
+            </p>
+            <h2 className="mt-3 font-headline text-3xl md:text-4xl font-bold">
+              Geen zelf-gepubliceerde claims — hier zijn de externe bronnen
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+              De Tafelaar Amersfoort — het restaurant aan de Kamp 8 waar
+              Jeremy chef-kok is — heeft{" "}
+              <a
+                href="https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+              >
+                <strong>9.8 / 10 op 96 reviews bij Trustoo</strong>
+              </a>
+              , is TOP PRO 2026, Leermeester-gecertificeerd en lid van
+              Koninklijke Horeca Nederland. De catering-tak Tafelaar ×
+              Jezza Cooks werkt vanuit dezelfde keuken met dezelfde chef en
+              dezelfde kwaliteitsdiscipline. Jezza Cooks als eenmanszaak
+              staat geregistreerd bij de Kamer van Koophandel onder KvK
+              nummer 99547619.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 max-w-5xl mx-auto md:grid-cols-4">
+            <a
+              href="https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl border border-primary/40 bg-primary/10 p-5 text-center transition hover:border-primary/60 hover:bg-primary/20"
+            >
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Trustoo
+              </div>
+              <div className="mt-2 font-headline text-3xl font-bold text-primary">
+                9.8
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                op 96 reviews
+              </div>
+              <div className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-primary">
+                TOP PRO 2026
+              </div>
+            </a>
+
+            <a
+              href="https://www.kvk.nl/zoeken/?source=handelsregister&q=99547619"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl border border-border/40 bg-background/15 p-5 text-center transition hover:border-primary/40 hover:bg-background/25"
+            >
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                KvK
+              </div>
+              <div className="mt-2 font-headline text-3xl font-bold">
+                99547619
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                Handelsregister
+              </div>
+              <div className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                Verifieer bij KvK
+              </div>
+            </a>
+
+            <div className="rounded-2xl border border-border/40 bg-background/15 p-5 text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                NL pers
+              </div>
+              <div className="mt-2 font-headline text-3xl font-bold">
+                4
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                publicaties sinds 2025
+              </div>
+              <div className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                AD · Gelderlander · indebuurt · Gooische
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-border/40 bg-background/15 p-5 text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                AU pers
+              </div>
+              <div className="mt-2 font-headline text-3xl font-bold">
+                4
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                publicaties 2020-2021
+              </div>
+              <div className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                InDaily · AGFG · Broadsheet · Aquna
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/about#verifieerbaar"
+              className={cn(buttonVariants({ variant: "outline" }), "font-semibold")}
+            >
+              Alle bronnen op /about bekijken <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Waarom Amersfoort — local SEO + GEO signals band */}
       <section className="border-t border-border/40 py-16 md:py-24">
         <div className="container mx-auto px-4">

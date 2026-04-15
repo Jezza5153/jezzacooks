@@ -359,11 +359,21 @@ export function buildCateringEntity() {
     // lives). This tells Google "these are linked entities, not competitors".
     provider: { "@id": LOCALBUSINESS_ID },
     // Second provider note: explicit mention of Jan Molmans as joint-venture
-    // partner via a nested PerformingGroup-style affiliation.
+    // partner via a nested PerformingGroup-style affiliation. The
+    // aggregateRating is attached HERE (to the restaurant Organization),
+    // NOT to the Jezza Cooks catering entity itself — schema.org rules
+    // require that aggregateRating belongs to the entity being rated.
+    // The reviews are genuine third-party data from trustoo.nl verified
+    // 2026-04-15. De Tafelaar B.V. Trustoo profile:
+    //   https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/
+    // Scale: Trustoo uses 1-10, schema.org expects bestRating explicit.
     memberOf: {
-      "@type": "Organization",
+      "@type": ["Organization", "Restaurant"],
+      "@id": `${SITE_URL}/#de-tafelaar-restaurant`,
       name: "Restaurant De Tafelaar Amersfoort",
+      legalName: "Tafelaar Amersfoort B.V.",
       url: "https://www.tafelaaramersfoort.nl",
+      telephone: "+31637232397",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Kamp 8",
@@ -375,6 +385,36 @@ export function buildCateringEntity() {
         "@type": "Person",
         name: "Jan Molmans",
       },
+      // aggregateRating for the restaurant (NOT for Jezza Cooks — that
+      // would be attribution fraud). Source: Trustoo.nl verified listing.
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "9.8",
+        bestRating: "10",
+        worstRating: "1",
+        reviewCount: "96",
+        // sameAs the source so validators can verify the claim
+        url: "https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/",
+      },
+      // Third-party awards on the restaurant (adds credence to the
+      // catering joint venture indirectly).
+      award: [
+        "Trustoo TOP PRO 2026",
+        "Trustoo Top Score",
+      ],
+      // KHN membership + Leermeester certification visible on Trustoo
+      memberOf: [
+        {
+          "@type": "Organization",
+          name: "Koninklijke Horeca Nederland",
+          url: "https://www.khn.nl",
+        },
+      ],
+      sameAs: [
+        "https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/",
+        "https://www.instagram.com/tafelaaramersfoort/",
+        "https://www.tafelaaramersfoort.nl",
+      ],
     },
     // The person actually running the catering kitchen. Cross-link to
     // the Person entity.

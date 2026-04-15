@@ -563,6 +563,138 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* TIMELINE + THIRD-PARTY VERIFICATION — addresses the GPT
+          caution that "credibility points are still self-published claims"
+          by anchoring the story to verifiable external sources: Trustoo,
+          press URLs, KvK. Also reconciles the 2019 (digital builder) vs
+          2026 (Jezza Cooks eenmanszaak) timeline that GPT flagged. */}
+      <section
+        id="verifieerbaar"
+        className="scroll-mt-24 border-t border-border bg-card/10 py-16 md:py-24"
+      >
+        <div className="container mx-auto max-w-3xl px-4">
+          <div className="text-center">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">
+              Verifieerbaar bij derden — geen zelf-gepubliceerde claims
+            </h2>
+            <p className="mt-4 text-base text-muted-foreground md:text-lg">
+              Alles wat hier staat kun je bij externe bronnen nalopen. Hier
+              zijn de links.
+            </p>
+          </div>
+
+          {/* Verification grid */}
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            <a
+              href="https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-2xl border border-primary/30 bg-primary/5 p-6 transition hover:border-primary/60 hover:bg-primary/10"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                    Trustoo
+                  </div>
+                  <div className="mt-2 font-headline text-xl font-bold">
+                    9.8 / 10 · 96 reviews
+                  </div>
+                </div>
+                <div className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-widest text-primary">
+                  TOP PRO 2026
+                </div>
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                De Tafelaar Amersfoort B.V. (Kamp 8) — het restaurant waar
+                Jeremy chef-kok is. KHN-lid, Leermeester gecertificeerd.
+                Klik door voor de volledige reviews.
+              </p>
+            </a>
+
+            <a
+              href="https://www.kvk.nl/zoeken/?source=handelsregister&q=99547619"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-2xl border border-border/40 bg-background/20 p-6 transition hover:border-primary/40 hover:bg-background/30"
+            >
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Kamer van Koophandel
+              </div>
+              <div className="mt-2 font-headline text-xl font-bold">
+                KvK 99547619
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Jezza Cooks eenmanszaak, gevestigd aan de Nijkerkerstraat 3,
+                3821 CD Amersfoort (Valleipoort). Publiek opvraagbaar bij
+                kvk.nl.
+              </p>
+            </a>
+
+            <div className="rounded-2xl border border-border/40 bg-background/20 p-6">
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                NL pers (4 bronnen)
+              </div>
+              <div className="mt-2 font-headline text-base font-bold">
+                AD.nl · De Gelderlander · indebuurt.nl · Gooische Business Podcast
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                4 Nederlandse pers-vermeldingen sinds de opening van De
+                Tafelaar in 2025-2026 waarin Jeremy expliciet als chef-kok
+                wordt genoemd. Alle vier inline gelinkt in de bio hieronder.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/40 bg-background/20 p-6">
+              <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                AU pers (4 bronnen)
+              </div>
+              <div className="mt-2 font-headline text-base font-bold">
+                InDaily SA · AGFG · Broadsheet · Aquna
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                4 Australische publicaties die Jeremy's werk bij Angler
+                Restaurant Stirling (Adelaide Hills, 2020-2022) hebben
+                gecoverd voor het fish dry-age programma.
+              </p>
+            </div>
+          </div>
+
+          {/* Timeline reconciliation — addresses the 2019/2026 conflict */}
+          <div className="mt-10 rounded-2xl border border-border/40 bg-background/15 p-6 md:p-8">
+            <h3 className="font-headline text-xl font-bold md:text-2xl">
+              De tijdlijn: waarom zie je soms "2019" en soms "2026"?
+            </h3>
+            <p className="mt-4 text-base leading-relaxed text-foreground/85 md:text-lg">
+              Jeremy Arrascaeta draait al <strong>10+ jaar mee in
+              professionele keukens</strong> — sinds ongeveer 2015, met
+              stappen door Europa en Australië (Bougainville Amsterdam,
+              Angler Stirling, Hanson Bay). Parallel aan de chef-carrière
+              bouwt Jeremy sinds <strong>2019</strong> digitale platforms
+              voor horeca en dienstverlening — waaronder{" "}
+              <a
+                href="https://offertesvoorjou.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                offertesvoorjou.nl
+              </a>
+              {" "}(ruim 7 jaar in productie). <strong>Jezza Cooks</strong>{" "}
+              als formele eenmanszaak (KvK 99547619) is geregistreerd in{" "}
+              <strong>januari 2026</strong> — nieuw als fiscale entiteit,
+              maar bouwend op die 10+ jaar kook-ervaring én 7+ jaar
+              digitaal bouw-ervaring. Als je dus op een andere platform
+              "opgericht 2019" of "7 jaar ervaring" ziet, dan refereert
+              dat aan de platform-kant (OffertesVoorJou) of aan een eerder
+              werkvehikel — niet aan de Jezza Cooks eenmanszaak die je op
+              deze site ziet. Alle drie de tijdlijnen kloppen. Samen
+              geven ze het volledige plaatje: chef-kok sinds 2015, digital
+              builder sinds 2019, formele eenmanszaak sinds januari 2026.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ — passage-extractable Q&A about Jeremy + Jezza Cooks */}
       <section className="border-t border-border py-16 md:py-24">
         <JsonLd data={buildFaqPage(aboutFaqs.map((f) => ({ question: f.q, answer: f.a })))} id="schema-about-faq" />

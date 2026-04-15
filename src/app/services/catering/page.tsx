@@ -644,8 +644,45 @@ export default function CateringPage() {
             ))}
           </div>
 
+          {/* VERIFIED THIRD-PARTY REVIEWS — De Tafelaar Trustoo profile */}
+          <div className="mx-auto mt-14 max-w-5xl rounded-3xl border border-primary/40 bg-primary/10 p-6 md:p-8">
+            <div className="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-6">
+              <div className="flex flex-col items-center rounded-2xl border border-primary/40 bg-background/20 px-6 py-4 text-center">
+                <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                  Trustoo verified
+                </div>
+                <div className="mt-2 font-headline text-4xl font-bold text-primary">
+                  9.8<span className="text-xl text-white/60">/10</span>
+                </div>
+                <div className="mt-1 text-xs text-white/70">op 96 reviews</div>
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="font-headline text-lg font-bold md:text-xl">
+                  Echte third-party reviews via De Tafelaar Amersfoort
+                </h3>
+                <p className={`mt-2 text-sm leading-relaxed ${ui.mutedOnNight} md:text-base`}>
+                  De catering werkt vanuit de keuken van shared-dining
+                  restaurant <strong>De Tafelaar</strong> aan de Kamp 8 —
+                  het restaurant van partner Jan Molmans, waar Jeremy zelf
+                  chef-kok is. Dat restaurant heeft{" "}
+                  <a
+                    href="https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+                  >
+                    <strong>9.8 van 10 op 96 reviews bij Trustoo</strong>
+                  </a>
+                  , is TOP PRO 2026, Leermeester-gecertificeerd en lid van
+                  Koninklijke Horeca Nederland. De catering-tak werkt met
+                  dezelfde chef, dezelfde keuken en dezelfde kwaliteitsbar.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* CREDIBILITY STRIP — press + stats */}
-          <div className="mx-auto mt-14 max-w-5xl rounded-3xl border border-primary/25 bg-primary/5 p-6 md:p-8">
+          <div className="mx-auto mt-6 max-w-5xl rounded-3xl border border-primary/25 bg-primary/5 p-6 md:p-8">
             <div className="text-center">
               <div className="text-xs font-semibold uppercase tracking-widest text-primary">
                 Gefeatured in
