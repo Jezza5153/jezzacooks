@@ -23,25 +23,64 @@ import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schem
 import { SITE } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Tafelaar × Jezza Cooks Catering Amersfoort — Kantoorlunch, diners & events",
+  title: "Catering Amersfoort — Tafelaar × Jezza Cooks | Kantoorlunch, diners & events door een chef-kok",
   description:
-    "Tafelaar × Jezza Cooks Catering: een samenwerking tussen Jeremy Arrascaeta (Jezza Cooks) en Jan Molmans (eigenaar shared-dining restaurant De Tafelaar, Kamp 8 Amersfoort). Kantoorlunch (broodjes, wraps, bowls, lunchpakketten vanaf €7,50), diners voor verjaardagen en babyshowers, events voor 10 tot 150+ personen, vanuit de volwaardige restaurantkeuken van De Tafelaar in de binnenstad.",
+    "Chef-led catering in Amersfoort door Tafelaar × Jezza Cooks Catering: een samenwerking tussen Jeremy Arrascaeta (chef-kok, 10+ jaar high-end keukens in Europa en Australië, finalist Euro-Toques Young Chef Award 2018, dry-aging lead bij Angler Stirling) en Jan Molmans (eigenaar shared-dining restaurant De Tafelaar, Kamp 8 Amersfoort). Kantoorlunch vanaf €7,50 p.p., diners voor verjaardagen en babyshowers, private chef events, bruiloftscatering en zakelijke events voor 10 tot 150+ personen. Vanuit een volwaardige restaurantkeuken in de binnenstad van Amersfoort. Levering in alle wijken: Binnenstad, Kamp, Soesterkwartier, Vathorst, Hoogland, Leusderkwartier, Valleipoort.",
   alternates: { canonical: "/services/catering" },
   openGraph: {
-    title: "Tafelaar × Jezza Cooks Catering Amersfoort",
+    title: "Catering Amersfoort — Tafelaar × Jezza Cooks Catering",
     description:
-      "Samenwerking tussen Jezza Cooks en De Tafelaar Amersfoort (Jan Molmans × Jeremy Arrascaeta). Kantoorlunch, diners en events voor 10 tot 150+ personen, vanuit de keuken aan de Kamp 8.",
+      "Chef-led catering Amersfoort door Jeremy Arrascaeta (chef-kok De Tafelaar, ex-Angler Stirling, Euro-Toques finalist) en Jan Molmans (eigenaar De Tafelaar). Kantoorlunch, diners, bruiloften, private chef events. Gefeatured in AD.nl, De Gelderlander, indebuurt.nl.",
     type: "website",
     url: "/services/catering",
   },
+  keywords: [
+    "catering amersfoort",
+    "kantoorlunch amersfoort",
+    "bedrijfscatering amersfoort",
+    "diner catering amersfoort",
+    "private chef amersfoort",
+    "bruiloftscatering amersfoort",
+    "babyshower catering amersfoort",
+    "verjaardag diner amersfoort",
+    "event catering amersfoort",
+    "chef op locatie amersfoort",
+    "catering kamp amersfoort",
+    "catering binnenstad amersfoort",
+    "catering vathorst",
+    "catering soest",
+    "catering leusden",
+    "Tafelaar Jezza Cooks catering",
+    "chef kok catering amersfoort",
+    "restaurant catering amersfoort",
+    "shared dining catering",
+  ],
 };
 
 const cateringServiceSchema = buildServicePage({
   slug: "catering",
   name: "Tafelaar × Jezza Cooks Catering Amersfoort",
   description:
-    "Chef-led catering in Amersfoort en omgeving als samenwerking tussen Jezza Cooks (Jeremy Arrascaeta) en shared-dining restaurant De Tafelaar (Jan Molmans, Kamp 8 Amersfoort). Kantoorlunch, borrel, diners voor verjaardagen, babyshowers en events, vanuit de volwaardige restaurantkeuken van De Tafelaar. Jeremy is 10+ jaar chef in high-end keukens in Europa en Australië (Bougainville Amsterdam, Angler Stirling, Hanson Bay) en is zelf chef-kok in de keuken.",
-  areaServed: ["Amersfoort", "Utrecht", "Hilversum", "Apeldoorn", "Zwolle"],
+    "Chef-led catering in Amersfoort en omgeving als samenwerking tussen Jezza Cooks (Jeremy Arrascaeta) en shared-dining restaurant De Tafelaar (Jan Molmans, Kamp 8 Amersfoort). Kantoorlunch, borrel, diners voor verjaardagen, babyshowers, bruiloften, private chef events en zakelijke catering, vanuit de volwaardige restaurantkeuken van De Tafelaar. Jeremy Arrascaeta is 10+ jaar chef in high-end keukens in Europa en Australië (Bougainville Amsterdam, Angler Stirling, Hanson Bay), finalist Euro-Toques Young Chef Award 2018, en is zelf chef-kok in de De Tafelaar keuken. Gefeatured in AD.nl Amersfoort, De Gelderlander en indebuurt.nl.",
+  areaServed: [
+    "Amersfoort",
+    "Binnenstad Amersfoort",
+    "Kamp Amersfoort",
+    "Soesterkwartier",
+    "Leusderkwartier",
+    "Vathorst",
+    "Valleipoort",
+    "Hoogland",
+    "Hooglanderveen",
+    "Utrecht",
+    "Hilversum",
+    "Soest",
+    "Leusden",
+    "Baarn",
+    "Bunschoten",
+    "Nijkerk",
+    "Barneveld",
+  ],
 });
 
 const cateringBreadcrumbSchema = buildBreadcrumbList([
@@ -279,6 +318,22 @@ const faqs = [
   {
     q: "Doen jullie ook diners, verjaardagen en private chef events?",
     a: "Ja. Naast kantoorlunch doen we diners voor verjaardagen, babyshowers, jubilea, bruiloften en private chef-events waar je geen stress wil over eten. We komen op locatie (bij jou thuis, op kantoor, of in een zaaltje), brengen alles mee en zorgen dat het klopt — van menu-ontwerp en inkoop tot service en opruimen. Het aanbod varieert van een 3-gangen family-style diner voor 8 tot 20 personen, via een buffet- of receptieformule voor 20 tot 60, tot volledig private chef events met Jeremy zelf aan het fornuis. Omdat we werken vanuit een volwaardige restaurantkeuken (De Tafelaar, Kamp 8 Amersfoort — het restaurant van partner Jan Molmans) kunnen we ook lastige technieken aan: dry-age, sous-vide en finishing op open vuur zijn gewoon onderdeel van het aanbod. Vertel ons datum, aantal en idee — dan maken we een voorstel dat klopt.",
+  },
+  {
+    q: "Welke ervaring heeft de chef achter de catering?",
+    a: "De chef is Jeremy Arrascaeta (Chef Jezz), 10+ jaar actief in high-end keukens in Europa en Australië. Finalist Euro-Toques Young Chef Award 2018 namens Restaurant Bougainville Amsterdam. Daarna dry-aging lead bij Angler Restaurant Stirling in de Adelaide Hills (2020-2022) — gecoverd in InDaily, Australian Good Food Guide, Broadsheet Adelaide en Aquna voor het fish dry-age programma (cured sashimi, fish sausages, barramundi crackling, carp bacon). Daarvoor head chef op Kangaroo Island bij Hanson Bay Sanctuary en Flinders Chase Café tijdens de 2019/2020 bushfires. Sinds 2025 terug in Nederland als chef-kok bij shared-dining restaurant De Tafelaar Amersfoort (Kamp 8), waar hij het menu en de keukenstructuur heeft opgezet. Dat betekent: je catering wordt niet uitbesteed aan een anonieme prep-keuken — de chef met 10+ jaar high-end ervaring staat zelf achter het fornuis en haalt de inkoop persoonlijk. Gefeatured in AD.nl Amersfoort, De Gelderlander en indebuurt.nl.",
+  },
+  {
+    q: "Kan ik Jeremy inhuren als private chef bij mij thuis in Amersfoort?",
+    a: "Ja, private chef thuis in Amersfoort en omgeving is onderdeel van het aanbod. Jeremy komt naar jouw keuken (of een geleende locatie) en kookt een 5- of 7-gangen tasting menu voor 6 tot 14 gasten. Vanaf €55 per persoon exclusief inkoop (inkoop wordt apart afgerekend op kostprijs, zonder opslag). Inclusief: menu-ontwerp op basis van dieetwensen en seizoen, inkoop bij lokale leveranciers in Amersfoort, transport van apparatuur, service aan tafel en afbouw. Dry-age, sous-vide en open vuur finishing zijn standaard technieken — geen upgrade. Werkgebied voor private chef diners: heel Amersfoort en alle wijken, plus Utrecht, Hilversum, Soest, Leusden, Baarn, Bunschoten, Nijkerk en Barneveld. Voor opdrachten verder weg (Amsterdam, Rotterdam, Zwolle, Apeldoorn) rekenen we een reistoeslag en minimum van 10 gasten. Aanvragen minimaal 14 dagen vooraf. Betalingsvoorwaarden: 25% aanbetaling bij bevestiging, 75% na afloop van het diner.",
+  },
+  {
+    q: "Waar kan ik eerder werk van de chef zien of lezen?",
+    a: "Vier Australische publicaties hebben het Angler Stirling dry-age programma van Jeremy uitgebreid gecoverd en zijn allemaal nog live te lezen. InDaily SA deed een feature over het fish-and-chip concept (\"Stirling's new fish and chip restaurant is catching on\", augustus 2020). Australian Good Food Guide interviewde chef Sam Prance-Smith waarin Jeremy als dry-aging lead wordt genoemd (\"Oh my cod: this chef really knows seafood\"). Broadsheet Adelaide plaatste een Angler Stirling gerecht op hun \"Favourite Adelaide Dishes 2021\" lijst. Aquna (murray cod leverancier) publiceerde een proefervaring specifiek over Jeremy's cured sashimi. In Nederland zijn AD.nl Amersfoort, De Gelderlander en indebuurt.nl aan de slag gegaan met de nieuwe chef-rol bij De Tafelaar aan de Kamp in 2025-2026, plus een interview in de Gooische Business podcast op Spotify. Alle 8 bronnen zijn inline gelinkt op de over-pagina (/about) en vind je ook in het portfolio met klikbare links.",
+  },
+  {
+    q: "Hoe verhoudt Tafelaar × Jezza Cooks Catering zich tot andere Amersfoortse caterings?",
+    a: "De Amersfoortse catering markt bestaat grofweg uit drie types aanbieders: (1) sandwich-services en bakkerijen die een lunch-catering tak hebben aangebouwd, (2) traditionele event caterers die vooral bruiloften en bedrijfsfeesten doen, en (3) restaurants die soms 'op afspraak' catering accepteren. Wij zijn een vierde categorie: een chef-led joint venture die vanuit een volwaardige restaurantkeuken werkt met dezelfde kwaliteit en discipline als het shared-dining restaurant zelf. De meest relevante vergelijking: andere caterers werken vanuit een flex-keuken of kant-en-klaar fabriek waar de chef niet per se in staat. Bij ons is Jeremy Arrascaeta de chef die elke week service draait in dezelfde keuken — geen afstand tussen wie het bedenkt en wie het kookt. Dat betekent ook een kortere lijn (één-op-één met de chef, geen verkoopafdeling), hogere techniek-baseline (dry-age, sous-vide, open vuur zijn gewoon onderdeel) en lagere variatie in het bord (dezelfde mise en place als het restaurant). Voor simpele broodjes voor 10 personen maakt dat weinig verschil — daar zijn we prima in prijs. Voor een diner waar iemand echt moet koken maakt het het hele verschil.",
   },
 ];
 
@@ -587,6 +642,282 @@ export default function CateringPage() {
                 <p className={`mt-3 leading-relaxed ${ui.mutedOnNight}`}>{x.body}</p>
               </div>
             ))}
+          </div>
+
+          {/* CREDIBILITY STRIP — press + stats */}
+          <div className="mx-auto mt-14 max-w-5xl rounded-3xl border border-primary/25 bg-primary/5 p-6 md:p-8">
+            <div className="text-center">
+              <div className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Gefeatured in
+              </div>
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm font-semibold">
+                <a
+                  href="https://www.ad.nl/amersfoort/uittip-restaurant-de-tafelaar-organiseert-eerste-gastchef-avond~a88c021a/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline decoration-primary/60 decoration-2 underline-offset-4"
+                >
+                  AD.nl Amersfoort
+                </a>
+                <span className="text-white/30">·</span>
+                <a
+                  href="https://www.gelderlander.nl/amersfoort/jan-opent-nu-echt-restaurant-de-tafelaar-in-amersfoort~a5c0f1d0/265507710/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline decoration-primary/60 decoration-2 underline-offset-4"
+                >
+                  De Gelderlander
+                </a>
+                <span className="text-white/30">·</span>
+                <a
+                  href="https://indebuurt.nl/amersfoort/nieuws/nieuw-in/jan-opent-nu-echt-restaurant-de-tafelaar-in-amersfoort~343981/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline decoration-primary/60 decoration-2 underline-offset-4"
+                >
+                  indebuurt.nl
+                </a>
+                <span className="text-white/30">·</span>
+                <a
+                  href="https://www.indailysa.com.au/news/archive/2020/08/19/stirlings-new-fish-and-chip-restaurant-is-catching-on"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline decoration-primary/60 decoration-2 underline-offset-4"
+                >
+                  InDaily SA
+                </a>
+                <span className="text-white/30">·</span>
+                <a
+                  href="https://www.agfg.com.au/article/oh-my-cod-this-chef-really-knows-seafood-we-talk-to-sam-prancesmith-from-angler-stirling"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline decoration-primary/60 decoration-2 underline-offset-4"
+                >
+                  Australian Good Food Guide
+                </a>
+                <span className="text-white/30">·</span>
+                <a
+                  href="https://www.broadsheet.com.au/adelaide/food-and-drink/article/broadsheets-favourite-adelaide-dishes-2021"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline decoration-primary/60 decoration-2 underline-offset-4"
+                >
+                  Broadsheet Adelaide
+                </a>
+              </div>
+            </div>
+            <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-5">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+                <div className="font-headline text-2xl font-bold text-primary md:text-3xl">10+</div>
+                <div className="mt-1 text-xs text-white/70">Jaar high-end keukens</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+                <div className="font-headline text-2xl font-bold text-primary md:text-3xl">4</div>
+                <div className="mt-1 text-xs text-white/70">Landen gewerkt</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+                <div className="font-headline text-2xl font-bold text-primary md:text-3xl">2018</div>
+                <div className="mt-1 text-xs text-white/70">Finalist Euro-Toques Young Chef</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
+                <div className="font-headline text-2xl font-bold text-primary md:text-3xl">Angler</div>
+                <div className="mt-1 text-xs text-white/70">Dry-aging lead Stirling, SA</div>
+              </div>
+              <div className="col-span-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-center md:col-span-1">
+                <div className="font-headline text-2xl font-bold text-primary md:text-3xl">2025</div>
+                <div className="mt-1 text-xs text-white/70">Chef-kok De Tafelaar Amersfoort</div>
+              </div>
+            </div>
+          </div>
+
+          {/* CHEF BIO SECTION — passage-extractable 140-word block for
+              "chef catering amersfoort" / "private chef amersfoort" queries */}
+          <div className={ui.paperSoft + " mt-10 p-7 md:p-10"}>
+            <div className="max-w-3xl">
+              <div className={ui.pill}>
+                De chef <span className={ui.copperDot} aria-hidden="true" />
+                wie staat er in de keuken
+              </div>
+              <h2 className="mt-4 font-headline text-3xl md:text-4xl font-bold">
+                Wie is de chef achter Tafelaar × Jezza Cooks Catering?
+              </h2>
+              <p className={`mt-4 leading-relaxed ${ui.mutedOnPaper}`}>
+                De chef in de keuken is <strong>Jeremy Arrascaeta</strong>{" "}
+                (Chef Jezz) — chef-kok bij shared-dining restaurant{" "}
+                <strong>De Tafelaar</strong> aan de Kamp 8 in de binnenstad
+                van Amersfoort, 10+ jaar gedraaid in high-end keukens in
+                Europa en Australië. Finalist Euro-Toques Young Chef Award
+                2018 namens Restaurant Bougainville Amsterdam. Daarna
+                dry-aging lead bij{" "}
+                <a
+                  href="https://www.indailysa.com.au/news/archive/2020/08/19/stirlings-new-fish-and-chip-restaurant-is-catching-on"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+                >
+                  Angler Restaurant Stirling
+                </a>{" "}
+                in de Adelaide Hills, Zuid-Australië — waar hij bekend werd
+                om het fish dry-age programma met cured sashimi, fish
+                sausages, barramundi crackling en carp bacon (gecoverd in{" "}
+                <a
+                  href="https://www.agfg.com.au/article/oh-my-cod-this-chef-really-knows-seafood-we-talk-to-sam-prancesmith-from-angler-stirling"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+                >
+                  Australian Good Food Guide
+                </a>
+                ,{" "}
+                <a
+                  href="https://www.broadsheet.com.au/adelaide/food-and-drink/article/broadsheets-favourite-adelaide-dishes-2021"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+                >
+                  Broadsheet Adelaide
+                </a>{" "}
+                en{" "}
+                <a
+                  href="https://aquna.com/what-does-aquna-murray-cod-actually-taste-like/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+                >
+                  Aquna
+                </a>
+                ). Daarvoor head chef op Kangaroo Island bij Hanson Bay
+                Sanctuary en Flinders Chase Café tijdens de 2019/2020
+                bushfires. Sinds 2025 terug in Nederland als chef-kok bij
+                De Tafelaar. Dat chef-kok-DNA zit in elke box die we
+                uitleveren: restaurant-techniek, restaurant-sanitatie,
+                restaurant-discipline — alleen dan verpakt voor jouw
+                kantoor of event.
+              </p>
+            </div>
+          </div>
+
+          {/* DIFFERENTIATION SECTION — targets "waarom [x] catering" +
+              passage extraction for "beste catering amersfoort" */}
+          <div className={ui.paperSoft + " mt-8 p-7 md:p-10"}>
+            <div className="max-w-3xl">
+              <div className={ui.pill}>
+                Anders dan andere <span className={ui.copperDot} aria-hidden="true" />
+                wat maakt ons catering anders
+              </div>
+              <h2 className="mt-4 font-headline text-3xl md:text-4xl font-bold">
+                Waarom Tafelaar × Jezza Cooks Catering in plaats van een
+                generieke Amersfoortse caterer?
+              </h2>
+              <p className={`mt-4 leading-relaxed ${ui.mutedOnPaper}`}>
+                De meeste Amersfoortse catering bedrijven werken vanuit een
+                flex-keuken, een sandwich-fabriek of een bakkerij die er een
+                catering tak bij heeft. Wij werken vanuit een{" "}
+                <strong>volwaardige restaurantkeuken</strong> aan de Kamp 8
+                in de binnenstad — de keuken van shared-dining restaurant De
+                Tafelaar, waar Jeremy als chef-kok elke week service draait.
+                Dat betekent drie concrete voordelen voor jou.{" "}
+                <strong>Eén:</strong> technieken die andere caterers niet
+                kunnen leveren — dry-age, sous-vide, finishing op open vuur,
+                cured sashimi op niveau — horen hier gewoon bij het aanbod.{" "}
+                <strong>Twee:</strong> sanitatie en allergenen-discipline
+                vertalen 1-op-1 uit een restaurant waar elke dienst
+                geïnspecteerd wordt, naar een catering box die je
+                veilig kunt uitdelen zonder stress.{" "}
+                <strong>Drie:</strong> door de lokale inkoop-relaties van De
+                Tafelaar (Van de Koolwijk voor groente, Nico Beekhuizen voor
+                vlees, Vishandel Sperling voor vis) eten jouw gasten
+                dezelfde grondstoffen die het restaurant zelf serveert —
+                niet een trap lager. En omdat Jeremy zelf in de keuken staat,
+                heb je een één-op-één lijn met de chef, niet met een
+                verkoopafdeling.
+              </p>
+            </div>
+          </div>
+
+          {/* EVENT USE CASES — 5 passage blocks targeting specific intent
+              queries + local landmarks for Amersfoort geo signals */}
+          <div className={ui.paperSoft + " mt-8 p-7 md:p-10"}>
+            <div className="max-w-4xl">
+              <div className={ui.pill}>
+                Voor welke events <span className={ui.copperDot} aria-hidden="true" />
+                van kantoorlunch tot bruiloft
+              </div>
+              <h2 className="mt-4 font-headline text-3xl md:text-4xl font-bold">
+                Voor welke events doen we catering in Amersfoort?
+              </h2>
+              <p className={`mt-3 leading-relaxed ${ui.mutedOnPaper}`}>
+                Vijf hoofdcategorieën, elk met een eigen aanpak. Vertel ons
+                wat voor event je organiseert — we plannen vanaf daar terug.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className={ui.paperInset + " p-5"}>
+                  <h3 className="font-headline text-lg font-bold">
+                    Kantoorlunch Amersfoort (zakelijk)
+                  </h3>
+                  <p className={`mt-2 text-sm leading-relaxed ${ui.mutedOnPaper} md:text-base`}>
+                    Broodjes, wraps, bowls en lunchpakketten vanaf €7,50 p.p.,
+                    voor 10 tot 150+ personen. Levering vanaf onze keuken aan
+                    de Kamp, binnen 10 minuten bij de meeste kantoren in
+                    Amersfoort centrum, Soesterkwartier, Leusderkwartier en
+                    Valleipoort. Strak verpakt, makkelijk uit te delen,
+                    allergenen duidelijk gelabeld.
+                  </p>
+                </div>
+                <div className={ui.paperInset + " p-5"}>
+                  <h3 className="font-headline text-lg font-bold">
+                    Verjaardagsdiner of jubileum
+                  </h3>
+                  <p className={`mt-2 text-sm leading-relaxed ${ui.mutedOnPaper} md:text-base`}>
+                    Family-style diner voor 8 tot 20 personen vanaf €28 p.p.,
+                    op locatie geserveerd (thuis, kantoor, of locatie naar
+                    keuze in Amersfoort en omgeving). Inclusief opbouw,
+                    service en opruim. Menu op maat afgestemd op dieetwensen
+                    en thema.
+                  </p>
+                </div>
+                <div className={ui.paperInset + " p-5"}>
+                  <h3 className="font-headline text-lg font-bold">
+                    Babyshower / baby-welkom
+                  </h3>
+                  <p className={`mt-2 text-sm leading-relaxed ${ui.mutedOnPaper} md:text-base`}>
+                    Lunchpakket of finger food voor 10 tot 30 gasten,
+                    geleverd strak verpakt of uitgestald op tafel. Vaak
+                    vegetarisch-zwaar met veel kleur. Levering binnen heel
+                    Amersfoort (Binnenstad, Kamp, Soesterkwartier, Vathorst,
+                    Hoogland, Valleipoort) vanaf €13,50 p.p.
+                  </p>
+                </div>
+                <div className={ui.paperInset + " p-5"}>
+                  <h3 className="font-headline text-lg font-bold">
+                    Bruiloftscatering (intieme bruiloft)
+                  </h3>
+                  <p className={`mt-2 text-sm leading-relaxed ${ui.mutedOnPaper} md:text-base`}>
+                    Voor intieme bruiloften tot 60 gasten in Amersfoort en
+                    omgeving — 3-gangen family-style of buffet met chef op
+                    locatie. Vanaf €45 p.p. inclusief serviesgoed en
+                    presentatiematerialen. Voor grotere bruiloften stellen
+                    we een offerte op maat met meerdere service momenten.
+                  </p>
+                </div>
+                <div className={ui.paperInset + " p-5 md:col-span-2"}>
+                  <h3 className="font-headline text-lg font-bold">
+                    Private chef event — Jeremy thuis aan het fornuis
+                  </h3>
+                  <p className={`mt-2 text-sm leading-relaxed ${ui.mutedOnPaper} md:text-base`}>
+                    Voor het écht speciale diner: Jeremy Arrascaeta komt naar
+                    jouw keuken (of geleende locatie) en kookt een 5- of
+                    7-gangen tasting menu voor 6 tot 14 gasten. Vanaf €55
+                    p.p. exclusief inkoop. Inclusief menu-ontwerp, inkoop
+                    bij lokale leveranciers in Amersfoort, service en
+                    afbouw. Dry-age, sous-vide en finishing op open vuur
+                    zijn gewoon onderdeel van het aanbod — niet een upgrade.
+                    Voor jouw thuis in Amersfoort, Utrecht, Hilversum, Soest,
+                    Leusden, Baarn of elders in de regio.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
