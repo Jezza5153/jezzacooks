@@ -108,8 +108,8 @@ export const SITE = {
       slug: "catering",
       name: "Catering & private chef",
       shortDescription:
-        "Chef-led diners, kantoorlunch en events onder de Tafelaar Catering vlag. Amersfoort en omgeving.",
-      priceLabel: "Op maat",
+        "Chef-led kantoorlunch, diners en events in Amersfoort en omgeving. Van 10 tot 150+ personen, vanaf €7,50 p.p.",
+      priceLabel: "Vanaf €7,50 p.p.",
     },
     {
       slug: "websites",

@@ -37,9 +37,9 @@ export default function ServicesPage() {
     {
       title: "Catering & private chef",
       description:
-        "Chef-led diners, kantoorlunch en events in Amersfoort en omgeving onder de Tafelaar Catering vlag. Seizoensmenu's, strakke timing en een ervaring waar gasten over praten.",
+        "Chef-led kantoorlunch, diners en events in Amersfoort en omgeving. Door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort, 10+ jaar high-end keukens). Seizoensmenu's, strakke timing en een ervaring waar gasten over praten.",
       link: "/services/catering",
-      priceLabel: "Vanaf €45 p.p.",
+      priceLabel: "Vanaf €7,50 p.p.",
       image: PlaceHolderImages.find((p) => p.id === "service-catering"),
     },
     {

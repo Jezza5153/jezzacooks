@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import type { ComponentType } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Accordion,
   AccordionContent,
@@ -23,14 +22,14 @@ import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schem
 import { SITE } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Catering Amersfoort — Kantoorlunch, diners & events door Tafelaar",
+  title: "Catering Amersfoort — Kantoorlunch, diners & events door Jezza Cooks",
   description:
-    "Chef-led catering in Amersfoort vanuit restaurant De Tafelaar (Kamp 8, binnenstad). Jezza Cooks × Tafelaar Catering: kantoorlunch (broodjes, wraps, bowls, lunchpakketten vanaf €7,50), diners voor verjaardagen en babyshowers, events voor 10 tot 150+ personen. Nuchter, strak verpakt en makkelijk uit te delen.",
+    "Chef-led catering in Amersfoort door Jezza Cooks: kantoorlunch (broodjes, wraps, bowls, lunchpakketten vanaf €7,50), diners voor verjaardagen en babyshowers, events voor 10 tot 150+ personen. Door Jeremy Arrascaeta, chef-kok bij De Tafelaar Amersfoort met 10+ jaar high-end keukens in Europa en Australië. Nuchter, strak verpakt en makkelijk uit te delen.",
   alternates: { canonical: "/services/catering" },
   openGraph: {
-    title: "Catering Amersfoort — Tafelaar × Jezza Cooks",
+    title: "Catering Amersfoort — Jezza Cooks",
     description:
-      "Kantoorlunch, diners en events vanuit restaurant De Tafelaar aan de Kamp in het centrum van Amersfoort. Van 10 tot 150+ personen. Chef-led door Jeremy Arrascaeta.",
+      "Kantoorlunch, diners en events in Amersfoort en omgeving. Van 10 tot 150+ personen. Chef-led door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort).",
     type: "website",
     url: "/services/catering",
   },
@@ -38,9 +37,9 @@ export const metadata: Metadata = {
 
 const cateringServiceSchema = buildServicePage({
   slug: "catering",
-  name: "Catering Amersfoort — Tafelaar × Jezza Cooks",
+  name: "Catering Amersfoort — Jezza Cooks",
   description:
-    "Chef-led catering in Amersfoort en omgeving vanuit restaurant De Tafelaar aan de Kamp (binnenstad Amersfoort). Kantoorlunch, borrel, diners voor verjaardagen, babyshowers en events. Door Jeremy Arrascaeta (chef-kok De Tafelaar Amersfoort).",
+    "Chef-led catering in Amersfoort en omgeving door Jezza Cooks: kantoorlunch, borrel, diners voor verjaardagen, babyshowers en events. Door Jeremy Arrascaeta, chef-kok bij De Tafelaar Amersfoort met 10+ jaar high-end keukens in Europa en Australië (Bougainville Amsterdam, Angler Stirling, Hanson Bay).",
   areaServed: ["Amersfoort", "Utrecht", "Hilversum", "Apeldoorn", "Zwolle"],
 });
 
@@ -254,15 +253,15 @@ const menu: MenuSection[] = [
 const faqs = [
   {
     q: "Voor hoeveel personen kan ik catering bestellen in Amersfoort?",
-    a: "Tafelaar × Jezza Cooks Catering levert voor 10 tot 150+ personen in Amersfoort en omgeving. Voor kleinere groepen (10-30 personen) leveren we binnen 48 uur na bevestiging; voor middelgrote groepen (30-80 personen) vragen we 5 werkdagen om in te kopen, te prepareren en te verpakken; voor grotere groepen (80-150+) werken we met een langere aanlooptijd en vaste menu-keuzes om kwaliteit en timing te garanderen. Voor events groter dan 150 personen stellen we altijd een persoonlijke offerte op — meestal met meerdere leveringsmomenten of een chef op locatie. Vertel ons het aantal, de datum, het tijdstip en de locatie in je aanvraag, dan komen we binnen 24 uur terug met een voorstel. Minimum order voor kantoorlunch: 10 personen binnen Amersfoort en 15 personen buiten.",
+    a: "Jezza Cooks Catering levert voor 10 tot 150+ personen in Amersfoort en omgeving. Voor kleinere groepen (10-30 personen) leveren we binnen 48 uur na bevestiging; voor middelgrote groepen (30-80 personen) vragen we 5 werkdagen om in te kopen, te prepareren en te verpakken; voor grotere groepen (80-150+) werken we met een langere aanlooptijd en vaste menu-keuzes om kwaliteit en timing te garanderen. Voor events groter dan 150 personen stellen we altijd een persoonlijke offerte op — meestal met meerdere leveringsmomenten of een chef op locatie. Vertel ons het aantal, de datum, het tijdstip en de locatie in je aanvraag, dan komen we binnen 24 uur terug met een voorstel. Minimum order voor kantoorlunch: 10 personen binnen Amersfoort en 15 personen buiten.",
   },
   {
-    q: "Wat kost catering bij Tafelaar × Jezza Cooks?",
+    q: "Wat kost catering bij Jezza Cooks?",
     a: "Kantoorlunch begint bij €7,50 per persoon voor broodjes en wraps, en €10,50 per persoon voor bowls. Lunchpakketten (sandwich + salad + bite + dessert) zijn €13,50 vegetarisch, €14,50 classic en €18,50 premium. Alle prijzen exclusief BTW (9% op foodservice). Voor diners en events maken we een offerte op maat — meestal tussen €28 en €55 per persoon afhankelijk van menu, gangen en of we op locatie serveren of strak verpakt leveren. Levering binnen Amersfoort centrum is gratis vanaf 15 personen; daarbuiten rekenen we €15 tot €35 afhankelijk van afstand. Annulering tot 14 dagen vóór het event is kosteloos; tussen 14 en 7 dagen rekenen we 50% en binnen 7 dagen 100% van het offertebedrag. Facturering: 25% aanbetaling, 75% na oplevering.",
   },
   {
     q: "Kunnen jullie rekening houden met dieetwensen, allergenen en vegetarische opties?",
-    a: "Ja, volledig. Elke menukaart staat met duidelijke allergenen vermeld (gluten, lactose, eieren, vis, soja, noten, sesam) zodat je team direct ziet wat ze kunnen pakken. Vegetarische opties zijn geen afterthought — Bieten en Geitenkaas Bowl, Inari Power Bowl, Veggie Meatball Wrap zijn kern-items. Voor veganistisch, glutenvrij, halal of specifieke intoleranties (lactose, ei, soja) maken we individuele varianten die we persoonlijk labelen per gast. Als je een deelnemerslijst hebt met namen en dieetwensen, verwerken we dat rechtstreeks in de verpakking zodat niemand hoeft te zoeken. Bij Build Your Own Lunch krijgen grote groepen met veel dieetwensen een overzicht per persoon, wat stress op de dag voorkomt. HACCP conform. Alle keukenhandelingen vinden plaats in de keuken van restaurant De Tafelaar aan de Kamp 8 in het centrum van Amersfoort.",
+    a: "Ja, volledig. Elke menukaart staat met duidelijke allergenen vermeld (gluten, lactose, eieren, vis, soja, noten, sesam) zodat je team direct ziet wat ze kunnen pakken. Vegetarische opties zijn geen afterthought — Bieten en Geitenkaas Bowl, Inari Power Bowl, Veggie Meatball Wrap zijn kern-items. Voor veganistisch, glutenvrij, halal of specifieke intoleranties (lactose, ei, soja) maken we individuele varianten die we persoonlijk labelen per gast. Als je een deelnemerslijst hebt met namen en dieetwensen, verwerken we dat rechtstreeks in de verpakking zodat niemand hoeft te zoeken. Bij Build Your Own Lunch krijgen grote groepen met veel dieetwensen een overzicht per persoon, wat stress op de dag voorkomt. Volledig HACCP-conform: Jeremy runt elke week service als chef-kok bij De Tafelaar Amersfoort, dus dezelfde sanitatie-, temperatuur- en allergenendiscipline uit een restaurantkeuken vertaalt zich direct naar de catering.",
   },
   {
     q: "Hoe wordt catering in Amersfoort geleverd — op locatie of strak verpakt?",
@@ -270,11 +269,11 @@ const faqs = [
   },
   {
     q: "Welke wijken en steden leveren jullie catering?",
-    a: "Bezorggebied is heel Amersfoort en alle wijken (Binnenstad, Kamp, Soesterkwartier, Leusderkwartier, Vathorst, Valleipoort, Kattenbroek, Randenbroek, Hoogland, Liendert, Schothorst, Zielhorst), plus Soest, Leusden, Baarn, Bunschoten, Nijkerk en Barneveld. Voor Utrecht, Hilversum, Apeldoorn en Zwolle leveren we op afspraak met een aangepaste levertijd en minimumafname vanaf 20 personen. Binnen Amersfoort centrum (postcodes 3811, 3812, 3813) en de meeste woonwijken is de bezorging gratis vanaf 15 personen; voor randwijken zoals Vathorst, Hoogland en Hooglanderveen rekenen we €15 bezorgkosten, en voor buurgemeentes €20 tot €35 afhankelijk van afstand. Keukenbasis is restaurant De Tafelaar aan de Kamp 8, 3811 AR Amersfoort — dus vanaf de Koppelpoort rijden we in minder dan 10 minuten naar de meeste kantoorlocaties in de stad.",
+    a: "Bezorggebied is heel Amersfoort en alle wijken (Binnenstad, Kamp, Soesterkwartier, Leusderkwartier, Vathorst, Valleipoort, Kattenbroek, Randenbroek, Hoogland, Liendert, Schothorst, Zielhorst), plus Soest, Leusden, Baarn, Bunschoten, Nijkerk en Barneveld. Voor Utrecht, Hilversum, Apeldoorn en Zwolle leveren we op afspraak met een aangepaste levertijd en minimumafname vanaf 20 personen. Binnen Amersfoort centrum (postcodes 3811, 3812, 3813) en de meeste woonwijken is de bezorging gratis vanaf 15 personen; voor randwijken zoals Vathorst, Hoogland en Hooglanderveen rekenen we €15 bezorgkosten, en voor buurgemeentes €20 tot €35 afhankelijk van afstand. Jezza Cooks is gevestigd aan de Nijkerkerstraat 3, 3816 LD Amersfoort (Valleipoort) — centraal gelegen voor bezorging naar de meeste Amersfoortse kantoorlocaties binnen 15 minuten rijden.",
   },
   {
     q: "Doen jullie ook diners, verjaardagen en private chef events?",
-    a: "Ja. Naast kantoorlunch doen we diners voor verjaardagen, babyshowers, jubilea, bruiloften en private chef-events waar je geen stress wil over eten. We komen op locatie (bij jou thuis, op kantoor, of in een zaaltje), brengen alles mee en zorgen dat het klopt — van menu-ontwerp en inkoop tot service en opruimen. Het aanbod varieert van een 3-gangen family-style diner voor 8 tot 20 personen, via een buffet- of receptieformule voor 20 tot 60, tot volledig private chef events met Jeremy zelf aan het fornuis. De samenwerking met restaurant De Tafelaar (Kamp 8, Amersfoort) geeft ons toegang tot een volwaardige restaurantkeuken, wat betekent dat we ook lastige technieken (dry-age, sous-vide, finishing op open vuur) kunnen leveren op locatie. Vertel ons datum, aantal en idee — dan maken we een voorstel dat klopt.",
+    a: "Ja. Naast kantoorlunch doen we diners voor verjaardagen, babyshowers, jubilea, bruiloften en private chef-events waar je geen stress wil over eten. We komen op locatie (bij jou thuis, op kantoor, of in een zaaltje), brengen alles mee en zorgen dat het klopt — van menu-ontwerp en inkoop tot service en opruimen. Het aanbod varieert van een 3-gangen family-style diner voor 8 tot 20 personen, via een buffet- of receptieformule voor 20 tot 60, tot volledig private chef events met Jeremy zelf aan het fornuis. Omdat Jeremy 10+ jaar in high-end keukens heeft gedraaid (dry-aging lead bij Angler Stirling in de Adelaide Hills, finalist Euro-Toques Young Chef 2018 namens Bougainville Amsterdam) kunnen we ook lastige technieken aan: dry-age, sous-vide en finishing op open vuur zijn gewoon onderdeel van het aanbod. Vertel ons datum, aantal en idee — dan maken we een voorstel dat klopt.",
   },
 ];
 
@@ -456,36 +455,24 @@ export default function CateringPage() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <div className="mx-auto flex flex-col items-center">
-              {/* Logo bigger */}
-              <div className="relative h-24 w-[384px] md:h-28 md:w-[504px]">
-                <Image
-                  src="/pics/tafelaar-x-jezza-logo.png"
-                  alt="Tafelaar Catering"
-                  fill
-                  sizes="(max-width: 768px) 384px, 504px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-
-              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold">
                 <span className={ui.copperDot} aria-hidden="true" />
-                Tafelaar Catering
+                Jezza Cooks Catering
               </div>
             </div>
 
             <h1 className="mt-5 font-headline text-4xl md:text-6xl font-bold tracking-tight">
-              Catering Amersfoort — vanuit De Tafelaar, Kamp 8
+              Catering Amersfoort — chef-led door Jezza Cooks
             </h1>
 
             <p
               className={`mt-4 text-base md:text-xl leading-relaxed ${ui.mutedOnNight} mx-auto max-w-3xl`}
             >
-              Kantoorlunch, diners en events vanuit restaurant <strong>De Tafelaar</strong> aan
-              de <strong>Kamp 8 in het centrum van Amersfoort</strong>. Chef-led door Jeremy
-              Arrascaeta (chef-kok De Tafelaar, 10+ jaar high-end keukens in Europa en Australië).
-              Broodjes, bowls, wraps en lunchpakketten vanaf €7,50. Strak verpakt, makkelijk uit
-              te delen, van 10 tot 150+ personen.
+              Kantoorlunch, diners en events in <strong>Amersfoort en omgeving</strong>. Chef-led
+              door Jeremy Arrascaeta — chef-kok bij <strong>De Tafelaar Amersfoort</strong>, 10+
+              jaar high-end keukens in Europa en Australië. Broodjes, bowls, wraps en
+              lunchpakketten vanaf €7,50. Strak verpakt, makkelijk uit te delen, van 10 tot 150+
+              personen.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
@@ -521,13 +508,15 @@ export default function CateringPage() {
                 </p>
 
                 <p className={`mt-4 leading-relaxed ${ui.mutedOnPaper}`}>
-                  Na het bouwen van menu en keukenstructuur bij <strong>De Tafelaar Amersfoort</strong>
-                  {" "}(shared-dining restaurant aan de Kamp 8, binnenstad) besloten we de krachten
-                  te bundelen in catering. Jan Molmans brengt de nuchtere geen-poeha stijl. Jeremy
-                  Arrascaeta (Jezza Cooks) brengt de chef-kok routine en de structuur — 10+ jaar
-                  in high-end keukens in Europa en Australië, inclusief dry-aging lead bij Angler
-                  Stirling in de Adelaide Hills. Samen leveren we iets dat simpel voelt, maar wel
-                  strak staat. Gefeatured in AD.nl, De Gelderlander en indebuurt.nl Amersfoort.
+                  Achter Jezza Cooks Catering staat Jeremy Arrascaeta — chef-kok bij
+                  {" "}<strong>De Tafelaar Amersfoort</strong> (shared-dining restaurant aan de
+                  Kamp in de binnenstad) en 10+ jaar in high-end keukens in Europa en Australië,
+                  inclusief dry-aging lead bij Angler Stirling in de Adelaide Hills en finalist
+                  Euro-Toques Young Chef 2018 namens Restaurant Bougainville Amsterdam. Die
+                  restaurant-routine en -discipline zit ingebakken in elk bestelling die we
+                  uitdoen: strakke timing, consistente porties, duidelijke allergenen en geen
+                  verrassingen op de dag zelf. Gefeatured in AD.nl, De Gelderlander en
+                  indebuurt.nl Amersfoort.
                 </p>
 
                 <p className={`mt-4 text-xs ${ui.mutedOnPaper}`}>
@@ -754,9 +743,9 @@ export default function CateringPage() {
             </div>
 
             <p className={`mt-10 text-center text-xs ${ui.mutedOnNight}`}>
-              Laatst bijgewerkt: 14 april 2026 · Catering vanuit restaurant De Tafelaar, Kamp 8,
-              3811 AR Amersfoort · {SITE.name} KvK {SITE.kvk} · {SITE.contact.phoneDisplay} ·{" "}
-              {SITE.contact.email}
+              Laatst bijgewerkt: 15 april 2026 · Jezza Cooks Catering · Chef-led door Jeremy
+              Arrascaeta (chef-kok bij De Tafelaar Amersfoort) · {SITE.name} KvK {SITE.kvk} ·{" "}
+              {SITE.contact.phoneDisplay} · {SITE.contact.email}
             </p>
           </div>
         </div>

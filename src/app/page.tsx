@@ -20,12 +20,12 @@ import { SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Horeca consultancy, catering, restaurant websites en SEO/GEO",
   description:
-    "Chef-led horeca specialist in Amersfoort. Restaurant consulting, catering onder de Tafelaar vlag, restaurant websites voor €400 en SEO + GEO optimalisatie vanaf €150 per maand. Zichtbaar in Google én ChatGPT, Perplexity en AI Overviews.",
+    "Chef-led horeca specialist in Amersfoort. Restaurant consulting vanaf €450, catering vanaf €7,50 p.p., restaurant websites voor €400 en SEO + GEO optimalisatie vanaf €150 per maand. Door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort, 10+ jaar high-end keukens). Zichtbaar in Google én ChatGPT, Perplexity en AI Overviews.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Jezza Cooks | Level up the chaos",
     description:
-      "Vier diensten, één operator: consulting, catering, websites en SEO/GEO. Chef-led door Jeremy Arrascaeta (chef-kok De Tafelaar Amersfoort), 10+ jaar high-end keukens in Europa en Australië. Amersfoort en heel Nederland.",
+      "Vier diensten, één operator: consulting, catering, websites en SEO/GEO. Chef-led door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort), 10+ jaar high-end keukens in Europa en Australië. Amersfoort en heel Nederland.",
     type: "website",
     url: "/",
   },
@@ -46,10 +46,10 @@ export default function Home() {
     {
       title: "Catering & Private Chef",
       description:
-        "Chef-led diners voor events en privé. Seizoensmenu’s, strakke timing en een ervaring waar gasten over praten.",
+        "Chef-led kantoorlunch, diners en events in Amersfoort en omgeving. Seizoensmenu's, strakke timing en een ervaring waar gasten over praten.",
       link: "/services/catering",
       image: PlaceHolderImages.find((p) => p.id === "service-catering"),
-      priceLabel: "Vanaf €45 p.p.",
+      priceLabel: "Vanaf €7,50 p.p.",
     },
     {
       title: "Restaurant Websites",
