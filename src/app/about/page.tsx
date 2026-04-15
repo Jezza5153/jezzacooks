@@ -204,12 +204,76 @@ export default function AboutPage() {
             </p>
 
             <p className="mt-6 text-base md:text-xl text-foreground/80 leading-relaxed drop-shadow-[0_12px_34px_rgba(0,0,0,0.50)]">
-              Ik ben Jeremy Arrascaeta (Amersfoort, NL). Chef met carrière in Europa en Australië. Chef-kok bij shared-dining
-              restaurant De Tafelaar aan de Kamp in het centrum van Amersfoort — gefeatured in AD.nl, De Gelderlander en
-              indebuurt.nl. Finalist Euro-Toques Young Chef Award 2018 bij Restaurant Bougainville Amsterdam. Daarna dry-aging
-              lead bij Angler Stirling in de Adelaide Hills (Zuid-Australië), waar ik bekend werd om het fish dry-age programma
-              met cured sashimi, fish sausages, barramundi crackling en carp bacon. Nu help ik restaurants en horecateams in
-              Amersfoort en omgeving om chaos om te zetten in structuur op papier — zodat je rust krijgt op de vloer.
+              Ik ben Jeremy Arrascaeta (Amersfoort, NL). Chef met carrière in Europa en Australië.
+              Chef-kok bij shared-dining restaurant De Tafelaar aan de Kamp in het centrum van
+              Amersfoort — gefeatured in{" "}
+              <a
+                href="https://www.ad.nl/amersfoort/uittip-restaurant-de-tafelaar-organiseert-eerste-gastchef-avond~a88c021a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                AD.nl
+              </a>
+              ,{" "}
+              <a
+                href="https://www.gelderlander.nl/amersfoort/jan-opent-nu-echt-restaurant-de-tafelaar-in-amersfoort~a5c0f1d0/265507710/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                De Gelderlander
+              </a>{" "}
+              en{" "}
+              <a
+                href="https://indebuurt.nl/amersfoort/nieuws/nieuw-in/jan-opent-nu-echt-restaurant-de-tafelaar-in-amersfoort~343981/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                indebuurt.nl
+              </a>
+              . Finalist Euro-Toques Young Chef Award 2018 bij Restaurant Bougainville Amsterdam.
+              Daarna dry-aging lead bij{" "}
+              <a
+                href="https://www.indailysa.com.au/news/archive/2020/08/19/stirlings-new-fish-and-chip-restaurant-is-catching-on"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                Angler Stirling
+              </a>{" "}
+              in de Adelaide Hills (Zuid-Australië), waar ik bekend werd om het fish dry-age
+              programma met cured sashimi, fish sausages, barramundi crackling en carp bacon —
+              gecoverd in{" "}
+              <a
+                href="https://www.agfg.com.au/article/oh-my-cod-this-chef-really-knows-seafood-we-talk-to-sam-prancesmith-from-angler-stirling"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                Australian Good Food Guide
+              </a>
+              ,{" "}
+              <a
+                href="https://www.broadsheet.com.au/adelaide/food-and-drink/article/broadsheets-favourite-adelaide-dishes-2021"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                Broadsheet Adelaide
+              </a>{" "}
+              en{" "}
+              <a
+                href="https://aquna.com/what-does-aquna-murray-cod-actually-taste-like/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-primary/80 decoration-2 underline-offset-4 hover:text-primary"
+              >
+                Aquna
+              </a>
+              . Nu help ik restaurants en horecateams in Amersfoort en omgeving om chaos om te
+              zetten in structuur op papier — zodat je rust krijgt op de vloer.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">

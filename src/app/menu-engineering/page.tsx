@@ -434,8 +434,8 @@ export default function MenuEngineeringPage() {
                 om in twee indices. Hieronder de 5 stappen die je 1-op-1 kunt
                 volgen met je eigen verkoopdata uit je POS-systeem. Voor een
                 gemiddeld Nederlands restaurant met 25-40 menu-items kost de
-                hele oefening ongeveer 3 uur per kwartaal — dat is de best
-                bestede 3 uur van je kwartaal, gegarandeerd.
+                hele oefening ongeveer 3 uur per kwartaal — zelden weggegooide
+                tijd, zeker niet als je food cost boven de 30% zit.
               </p>
             </div>
 

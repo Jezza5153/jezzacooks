@@ -316,7 +316,10 @@ export function buildPerson() {
         addressLocality: "Koksijde",
         addressCountry: "BE",
       },
-      url: "https://www.hotelschoolterduinen.be",
+      // hotelschoolterduinen.be resolves NXDOMAIN in DNS (verified 2026-04-15
+      // by Agent E audit). URL field dropped rather than guessing at a
+      // successor domain — the @type + name + address is enough for entity
+      // resolution and a broken URL is worse than no URL for E-E-A-T.
     },
     award: [
       "Finalist Euro-Toques Young Chef Award 2018 (Restaurant Bougainville, Amsterdam)",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type React from "react";
 import { Suspense } from "react";
 import Link from "next/link";
-import { Mail, MessageCircle, MapPin, Clock, Instagram } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Clock, Instagram, Phone } from "lucide-react";
 
 import { ContactForm } from "@/components/contact-form";
 import PageHeader from "@/components/page-header";
@@ -89,6 +89,25 @@ export default function ContactPage() {
             </div>
 
             <div className="flex items-start gap-3">
+              <Phone className="mt-0.5 h-5 w-5 text-primary shrink-0" />
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Telefoon
+                </dt>
+                <dd>
+                  {/* tel: link so mobile clicks dial directly. SITE.contact.phone
+                      is the +31... E.164 form used by schema and tel: URIs. */}
+                  <a
+                    href={`tel:${SITE.contact.phone}`}
+                    className="text-foreground hover:text-primary"
+                  >
+                    {SITE.contact.phoneDisplay}
+                  </a>
+                </dd>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
               <MessageCircle className="mt-0.5 h-5 w-5 text-primary shrink-0" />
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -111,11 +130,16 @@ export default function ContactPage() {
               <MapPin className="mt-0.5 h-5 w-5 text-primary shrink-0" />
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Werkgebied
+                  Bezoekadres
                 </dt>
                 <dd className="text-foreground">
-                  {SITE.address.addressLocality}, {SITE.address.addressRegion},{" "}
-                  Nederland
+                  {SITE.address.streetAddress}
+                  <br />
+                  {SITE.address.postalCode} {SITE.address.addressLocality}
+                  <br />
+                  <span className="text-xs text-muted-foreground">
+                    {SITE.address.neighborhood}, Nederland · KvK {SITE.kvk}
+                  </span>
                 </dd>
               </div>
             </div>
