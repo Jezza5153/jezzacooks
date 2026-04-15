@@ -32,7 +32,7 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "Jezza Cooks",
-    url: "https://jezzacooks.com/websites",
+    url: "https://www.jezzacooks.com/websites",
     description:
       "Jezza Cooks bouwt conversiegerichte horeca websites: rustig, snel, toegankelijk en SEO-klaar. Focus op reserveringen, aanvragen en vertrouwen.",
     areaServed: "NL",

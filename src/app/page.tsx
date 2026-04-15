@@ -20,12 +20,12 @@ import { SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Horeca consultancy, catering, restaurant websites en SEO/GEO",
   description:
-    "Chef-led horeca specialist in Amersfoort. Restaurant consulting vanaf €450, catering vanaf €7,50 p.p., restaurant websites voor €400 en SEO + GEO optimalisatie vanaf €150 per maand. Door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort, 10+ jaar high-end keukens). Zichtbaar in Google én ChatGPT, Perplexity en AI Overviews.",
+    "Chef-led horeca specialist in Amersfoort. Restaurant consulting vanaf €450, Tafelaar × Jezza Cooks Catering vanaf €7,50 p.p. (samenwerking met restaurant De Tafelaar aan de Kamp 8), restaurant websites voor €400 en SEO + GEO optimalisatie vanaf €150 per maand. Door Jeremy Arrascaeta (chef-kok bij De Tafelaar, 10+ jaar high-end keukens). Zichtbaar in Google én ChatGPT, Perplexity en AI Overviews.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Jezza Cooks | Level up the chaos",
     description:
-      "Vier diensten, één operator: consulting, catering, websites en SEO/GEO. Chef-led door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort), 10+ jaar high-end keukens in Europa en Australië. Amersfoort en heel Nederland.",
+      "Vier diensten, één operator: consulting, Tafelaar × Jezza Cooks catering, websites en SEO/GEO. Chef-led door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort), 10+ jaar high-end keukens in Europa en Australië. Amersfoort en heel Nederland.",
     type: "website",
     url: "/",
   },
@@ -44,9 +44,9 @@ export default function Home() {
       priceLabel: "Vanaf €450 / dagdeel",
     },
     {
-      title: "Catering & Private Chef",
+      title: "Tafelaar × Jezza Cooks Catering",
       description:
-        "Chef-led kantoorlunch, diners en events in Amersfoort en omgeving. Seizoensmenu's, strakke timing en een ervaring waar gasten over praten.",
+        "Samenwerking met shared-dining restaurant De Tafelaar (Jan Molmans, Kamp 8 Amersfoort). Kantoorlunch, diners en events vanuit een volwaardige restaurantkeuken. Strakke timing, chef-led door Jeremy.",
       link: "/services/catering",
       image: PlaceHolderImages.find((p) => p.id === "service-catering"),
       priceLabel: "Vanaf €7,50 p.p.",

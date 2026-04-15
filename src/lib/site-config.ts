@@ -8,7 +8,13 @@
 // TODO(jezza): fields marked with "FIXME" are placeholders. Replace them with
 // the real values from your KvK registration before going live.
 
-export const SITE_URL = "https://jezzacooks.com" as const;
+// Canonical host is the www subdomain because that's where Vercel actually
+// serves 200s. The apex jezzacooks.com 307s here. Every canonical tag,
+// og:url, sitemap entry, robots.txt Host directive and JSON-LD @id is built
+// off this constant — so flipping apex→www here propagates everywhere and
+// is what makes Google Search Console actually accept the sitemap (a sitemap
+// verified property www.jezzacooks.com cannot contain jezzacooks.com URLs).
+export const SITE_URL = "https://www.jezzacooks.com" as const;
 
 export const SITE = {
   url: SITE_URL,
@@ -106,9 +112,9 @@ export const SITE = {
     },
     {
       slug: "catering",
-      name: "Catering & private chef",
+      name: "Tafelaar × Jezza Cooks Catering",
       shortDescription:
-        "Chef-led kantoorlunch, diners en events in Amersfoort en omgeving. Van 10 tot 150+ personen, vanaf €7,50 p.p.",
+        "Samenwerking tussen Jezza Cooks en restaurant De Tafelaar (Jan Molmans, Kamp 8 Amersfoort). Kantoorlunch, diners en events, van 10 tot 150+ personen, vanaf €7,50 p.p.",
       priceLabel: "Vanaf €7,50 p.p.",
     },
     {

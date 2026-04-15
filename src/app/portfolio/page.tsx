@@ -284,14 +284,16 @@ export default function PortfolioPage() {
             <p>
               Sinds 2025 terug in Nederland als chef-kok bij shared-dining
               restaurant De Tafelaar aan de Kamp in het centrum van
-              Amersfoort — gefeatured in AD.nl, De Gelderlander, indebuurt.nl
-              en de Gooische Business podcast. Parallel aan die chef-job
-              draait hij Jezza Cooks: chef-led restaurant consultancy,
-              catering voor kantoorlunch, diners en events, restaurant
-              websites (€400 per site) en SEO + GEO optimalisatie
-              (€1.300/jaar of €150/mnd). Dat maakt hem een van de weinige
-              operators in Nederland die tegelijk de keuken, de vloer en de
-              zoekmachines begrijpt.
+              Amersfoort (eigenaar Jan Molmans) — gefeatured in AD.nl, De
+              Gelderlander, indebuurt.nl en de Gooische Business podcast.
+              Parallel aan die chef-job draait Jeremy Jezza Cooks: chef-led
+              restaurant consultancy, restaurant websites (€400 per site) en
+              SEO + GEO optimalisatie (€1.300/jaar of €150/mnd). Met Jan
+              Molmans runt hij daarnaast Tafelaar × Jezza Cooks Catering —
+              een aparte cateringtak voor kantoorlunch, diners en events
+              vanuit de restaurantkeuken aan de Kamp 8. Dat maakt hem een
+              van de weinige operators in Nederland die tegelijk de keuken,
+              de vloer en de zoekmachines begrijpt.
             </p>
           </div>
 

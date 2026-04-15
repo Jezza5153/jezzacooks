@@ -35,9 +35,9 @@ export default function ServicesPage() {
       image: PlaceHolderImages.find((p) => p.id === "service-consulting"),
     },
     {
-      title: "Catering & private chef",
+      title: "Tafelaar × Jezza Cooks Catering",
       description:
-        "Chef-led kantoorlunch, diners en events in Amersfoort en omgeving. Door Jeremy Arrascaeta (chef-kok bij De Tafelaar Amersfoort, 10+ jaar high-end keukens). Seizoensmenu's, strakke timing en een ervaring waar gasten over praten.",
+        "Chef-led kantoorlunch, diners en events in Amersfoort en omgeving. Een samenwerking tussen Jezza Cooks en restaurant De Tafelaar (Jan Molmans, Kamp 8). Vanuit een volwaardige restaurantkeuken, seizoensmenu's en strakke timing — chef-led door Jeremy (10+ jaar high-end keukens).",
       link: "/services/catering",
       priceLabel: "Vanaf €7,50 p.p.",
       image: PlaceHolderImages.find((p) => p.id === "service-catering"),
