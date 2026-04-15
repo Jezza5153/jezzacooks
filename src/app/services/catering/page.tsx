@@ -23,14 +23,14 @@ import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schem
 import { SITE } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Catering Amersfoort — Tafelaar × Jezza Cooks | Kantoorlunch, diners & events door een chef-kok",
+  title: "Catering Amersfoort — Tafelaar × Jezza Cooks | Kantoorlunch, diners, grote events door een restaurantteam",
   description:
-    "Chef-led catering in Amersfoort door Tafelaar × Jezza Cooks Catering: een samenwerking tussen Jeremy Arrascaeta (chef-kok, 10+ jaar high-end keukens in Europa en Australië, finalist Euro-Toques Young Chef Award 2018, dry-aging lead bij Angler Stirling) en Jan Molmans (eigenaar shared-dining restaurant De Tafelaar, Kamp 8 Amersfoort). Kantoorlunch vanaf €7,50 p.p., diners voor verjaardagen en babyshowers, private chef events, bruiloftscatering en zakelijke events voor 10 tot 150+ personen. Vanuit een volwaardige restaurantkeuken in de binnenstad van Amersfoort. Levering in alle wijken: Binnenstad, Kamp, Soesterkwartier, Vathorst, Hoogland, Leusderkwartier, Valleipoort.",
+    "Chef-led catering in Amersfoort door Tafelaar × Jezza Cooks Catering: een samenwerking tussen Jeremy Arrascaeta (chef-kok, 10+ jaar high-end keukens, finalist Euro-Toques Young Chef 2018, dry-aging lead Angler Stirling) en Jan Molmans (eigenaar De Tafelaar, Kamp 8). Niet een solo chef, maar een volwaardig restaurantteam (10 medewerkers) met restaurant-grade HACCP en backup-chef op stand-by. Kantoorlunch vanaf €7,50 p.p., diners, bruiloften, zakelijke events voor 10 tot 150+ personen. Vanuit de keuken van shared-dining restaurant De Tafelaar (Trustoo 9.8/10, TOP PRO 2026, KHN-lid).",
   alternates: { canonical: "/services/catering" },
   openGraph: {
     title: "Catering Amersfoort — Tafelaar × Jezza Cooks Catering",
     description:
-      "Chef-led catering Amersfoort door Jeremy Arrascaeta (chef-kok De Tafelaar, ex-Angler Stirling, Euro-Toques finalist) en Jan Molmans (eigenaar De Tafelaar). Kantoorlunch, diners, bruiloften, private chef events. Gefeatured in AD.nl, De Gelderlander, indebuurt.nl.",
+      "Chef-led catering Amersfoort door een volwaardig restaurantteam van 10, niet één solo chef. Restaurant De Tafelaar (Trustoo 9.8/96 reviews, TOP PRO 2026, KHN-lid) + Jezza Cooks (Euro-Toques finalist, ex-Angler Stirling). Kantoorlunch, diners, bruiloften, zakelijke events tot 150+ personen. Backup-chef, restaurant-HACCP.",
     type: "website",
     url: "/services/catering",
   },
@@ -38,13 +38,21 @@ export const metadata: Metadata = {
     "catering amersfoort",
     "kantoorlunch amersfoort",
     "bedrijfscatering amersfoort",
+    "zakelijke catering amersfoort",
+    "bedrijfsfeest catering amersfoort",
+    "groot event catering amersfoort",
+    "grote events catering amersfoort",
+    "event catering 150 personen",
+    "high-end catering amersfoort",
+    "restaurant catering amersfoort",
+    "professionele catering amersfoort",
     "diner catering amersfoort",
     "private chef amersfoort",
     "bruiloftscatering amersfoort",
     "babyshower catering amersfoort",
     "verjaardag diner amersfoort",
-    "event catering amersfoort",
     "chef op locatie amersfoort",
+    "catering met service staff amersfoort",
     "catering kamp amersfoort",
     "catering binnenstad amersfoort",
     "catering vathorst",
@@ -52,8 +60,9 @@ export const metadata: Metadata = {
     "catering leusden",
     "Tafelaar Jezza Cooks catering",
     "chef kok catering amersfoort",
-    "restaurant catering amersfoort",
     "shared dining catering",
+    "KHN lid catering amersfoort",
+    "HACCP catering amersfoort",
   ],
 };
 
@@ -334,6 +343,30 @@ const faqs = [
   {
     q: "Hoe verhoudt Tafelaar × Jezza Cooks Catering zich tot andere Amersfoortse caterings?",
     a: "De Amersfoortse catering markt bestaat grofweg uit drie types aanbieders: (1) sandwich-services en bakkerijen die een lunch-catering tak hebben aangebouwd, (2) traditionele event caterers die vooral bruiloften en bedrijfsfeesten doen, en (3) restaurants die soms 'op afspraak' catering accepteren. Wij zijn een vierde categorie: een chef-led joint venture die vanuit een volwaardige restaurantkeuken werkt met dezelfde kwaliteit en discipline als het shared-dining restaurant zelf. De meest relevante vergelijking: andere caterers werken vanuit een flex-keuken of kant-en-klaar fabriek waar de chef niet per se in staat. Bij ons is Jeremy Arrascaeta de chef die elke week service draait in dezelfde keuken — geen afstand tussen wie het bedenkt en wie het kookt. Dat betekent ook een kortere lijn (één-op-één met de chef, geen verkoopafdeling), hogere techniek-baseline (dry-age, sous-vide, open vuur zijn gewoon onderdeel) en lagere variatie in het bord (dezelfde mise en place als het restaurant). Voor simpele broodjes voor 10 personen maakt dat weinig verschil — daar zijn we prima in prijs. Voor een diner waar iemand echt moet koken maakt het het hele verschil.",
+  },
+  {
+    q: "Hoeveel mensen lopen er voor een event van 80 tot 150 personen?",
+    a: "Voor grote events leunen we op het volledige team van De Tafelaar Amersfoort — 10 vaste medewerkers plus een oproepnetwerk in de Amersfoortse horeca. Concrete team-opbouw per event-grootte: 50 personen = Jeremy (chef) + 2 keuken/service medewerkers. 80 personen = Jeremy + 3 medewerkers. 100 personen = Jeremy + 4 medewerkers. 120-150 personen = Jeremy, Jan Molmans (mede-eigenaar en senior-chef) en 4-5 keuken- en service-medewerkers. Voor events boven 150 personen plannen we altijd een gezamenlijke brief-meeting 10 dagen vooraf en maken we een named staff-lijst zodat jouw event manager weet wie er komt. Alle keukenstaf is Leermeester-gecertificeerd en KHN-geregistreerd via De Tafelaar's KHN-lidmaatschap. Service-staf is het vaste team dat 5 diensten per week in het restaurant draait — niet inhuurkrachten van een uitzendbureau. Dat is precies het verschil tussen een founder-led bedrijf met een restaurantteam achter zich en een solo-freelance chef.",
+  },
+  {
+    q: "Wat gebeurt er als de chef ziek is op de dag van het event?",
+    a: "Backup-chef op stand-by. Dat is ingebouwd in elke event-afspraak boven 30 personen — als Jeremy onverhoopt uitvalt op de dag zelf (ziek, persoonlijke crisis, reis geannuleerd) stapt Jan Molmans of een andere senior-chef uit het De Tafelaar team in. Dit is het operationele voordeel van een restaurant-verankerde catering versus een solo-freelancer: er is altijd een tweede lijn binnen 5 minuten loopafstand aan de Kamp 8. Voor events boven 100 personen maken we de backup-afspraak expliciet op naam in het contract — je weet vooraf wie de backup is en hoe die gecontacteerd wordt. Voor kleinere events (< 30 personen) is de backup-route het normale De Tafelaar chef-rooster; dat is minder formeel maar in de praktijk nog nooit gefaald omdat het restaurant 7 dagen per week open is en er altijd 2-3 chefs beschikbaar zijn. We hebben nooit een event moeten annuleren wegens chef-ziekte — en de rede is precies dit: geen single point of failure.",
+  },
+  {
+    q: "Wie runt de service op locatie bij een event — een echte chef of uitzendkrachten?",
+    a: "Op locatie wordt de service altijd geleid door een vaste medewerker van De Tafelaar of door Jeremy zelf — nooit door anonieme uitzendkrachten of cateringfreelancers die je pas op de dag zelf ontmoet. Voor events tot 60 personen staat Jeremy zelf achter de pass en is hij tegelijk het aanspreekpunt voor jou als opdrachtgever. Voor events van 60 tot 150 personen loopt Jeremy de keuken en neemt Jan Molmans of een senior medewerker de vloer. Voor events boven 150 personen krijg je een vast event-leider aangewezen (Jeremy of Jan) die het hele evenement aan stuurt — die persoon is jouw one-point-of-contact van aanvraag tot afbouw. In alle gevallen is minimaal één persoon op locatie KHN-geregistreerd en Leermeester-gecertificeerd. Je krijgt 3 werkdagen voor je event een named team-lijst met functies en contactnummers zodat je weet wie wat doet.",
+  },
+  {
+    q: "Wat is de exacte setup- en afbouwtijd voor 50, 100 en 150 personen?",
+    a: "Richtlijnen per event-grootte (deze worden altijd per event geconcretiseerd op basis van je locatie, toegankelijkheid en gewenste service-start). <strong>50 personen:</strong> setup 60-90 minuten voor service-start, afbouw 45 minuten na laatste hap. <strong>100 personen:</strong> setup 90-120 minuten, afbouw 60 minuten. <strong>150 personen:</strong> setup 150 minuten minimum, afbouw 75-90 minuten, plus 30 minuten team-briefing vooraf. Voor een bruiloft of high-stakes zakelijk diner rekenen we altijd 30 minuten buffer bovenop deze tijden — nooit krap plannen. We komen altijd minimaal 20 minuten voor de setup-start aan op locatie om de ruimte te checken (stroom, water, vloerruimte, afvoer, toegang) en eventuele problemen te melden voor de gast-aankomst. Als het gaat om een bedrijfspand of hotel waar wij niet eerder zijn geweest, plannen we een site-visit vooraf — standaard inbegrepen voor events vanaf 80 personen, optioneel daaronder.",
+  },
+  {
+    q: "Hoe gaan jullie om met late headcount-wijzigingen?",
+    a: "Tot 72 uur voor het event kunnen we het aantal naar boven of beneden bijstellen met maximaal 15% zonder extra kosten. Van 72 tot 24 uur voor het event is een verhoging van maximaal 10% mogelijk mits de ingrediënten in de standaard-inkoop zitten (bij premium items zoals zeevruchten of specialty vlees niet altijd, dat hangt af van de voorraad bij onze leveranciers in Amersfoort). Verlagingen binnen 24 uur worden in rekening gebracht tegen 50% van de afgesproken prijs voor de geannuleerde plekken — redelijk omdat wij al ingekocht en geprepareerd hebben. Binnen 12 uur is verhoging of verlaging niet meer mogelijk behalve in echte noodgevallen; daar communiceren we live. Voor grote events (100+) maken we standaard 5% extra borden (op ons kosten) als buffer tegen last-minute extra gasten — 'walk-in buffer' heet dat in de horeca. Voor kleinere events (< 50) rekenen we met 2 buffer-borden. Dat betekent: als er op de dag zelf een paar extra mensen aanschuiven, kunnen we dat meestal opvangen zonder drama.",
+  },
+  {
+    q: "Wat gebeurt er als een gast op het laatste moment een allergie of dieetwens meldt?",
+    a: "Allergenen worden per gast op naam gelabeld — niet per batch. Standaard werkwijze: je levert minimaal 48 uur voor het event een deelnemerslijst met dieetwensen en allergieën aan (formulier of e-mail volstaat). Wij prepareren dan named portions waarbij het eten van de allergie-gast expliciet gescheiden wordt bereid met eigen snijplanken, eigen pan en eigen bestek — HACCP-protocol precies zoals in het shared-dining restaurant. Op locatie krijgt elke allergie-gast een persoonlijk gelabeld bord zodat er geen verwarring kan ontstaan bij de uitgave. Last-minute meldingen (< 24 uur voor het event) kunnen we opvangen voor de 7 meest voorkomende allergieën (gluten, lactose, eieren, vis, noten, soja, sesam) omdat we daar standaard mise en place voor draaien. Voor zeldzame allergieën (sulfiet, tarwe, kiwi, specifieke kruiden) hebben we liever 48 uur zodat we de inkoop kunnen aanpassen. Halal en koosjer zijn mogelijk met 5 werkdagen aanlooptijd omdat de inkoop van vlees dan via een gespecialiseerde leverancier loopt. Vegetarisch, veganistisch en glutenvrij zijn standaard op het menu en nooit een extra belasting voor de keuken.",
   },
 ];
 
@@ -953,6 +986,131 @@ export default function CateringPage() {
                     Leusden, Baarn of elders in de regio.
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* BIG EVENTS + OPERATIONAL SECTION — addresses the classic
+              procurement question: "what if the chef gets sick the
+              morning of our 150-person event?" The answer is that we
+              are a joint venture with a 10-person restaurant team, not
+              a solo operator. */}
+          <div className={ui.paperSoft + " mt-8 p-7 md:p-10"}>
+            <div className="max-w-3xl">
+              <div className={ui.pill}>
+                Grote events &amp; procurement-grade <span className={ui.copperDot} aria-hidden="true" />
+                niet een solo chef
+              </div>
+              <h2 className="mt-4 font-headline text-3xl md:text-4xl font-bold">
+                Kunnen jullie ook grote en high-risk events aan?
+              </h2>
+              <p className={`mt-4 leading-relaxed ${ui.mutedOnPaper}`}>
+                Ja — en dat is precies waarom Tafelaar × Jezza Cooks Catering
+                een samenwerking is en geen solo-aanbod. Voor events tot
+                150+ personen, bedrijfsfeesten, bruiloften of high-risk
+                zakelijke diners leunen we op het <strong>volledige team
+                van De Tafelaar</strong>: 10 medewerkers, een draaiende
+                restaurantkeuken die 5 diensten per week runt, en
+                Leermeester-gecertificeerde keukenstaf. Dat lost meteen de
+                drie klassieke zorgen op bij het boeken van catering bij
+                een founder-led bedrijf:
+              </p>
+              <ul className="mt-5 space-y-3 text-foreground/85 md:text-lg">
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/45 bg-primary/10 text-xs font-bold text-primary">
+                    1
+                  </span>
+                  <span>
+                    <strong>Staffing diepte</strong> — voor een event van 50
+                    personen draaien standaard Jeremy + 2 mensen uit het De
+                    Tafelaar team. Voor 100 personen: Jeremy + 3. Voor 150+:
+                    Jeremy, Jan Molmans en minimaal 4 keuken- en
+                    service-medewerkers. We kunnen flexibel opschalen omdat
+                    het restaurant 10 vaste krachten heeft plus een
+                    oproepnetwerk in Amersfoort.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/45 bg-primary/10 text-xs font-bold text-primary">
+                    2
+                  </span>
+                  <span>
+                    <strong>Backup-chef op stand-by</strong> — als Jeremy op
+                    de dag zelf uitvalt (ziek, persoonlijke crisis, reis
+                    geannuleerd) stapt Jan Molmans of een andere
+                    restaurant-chef uit het De Tafelaar team in. Dat is het
+                    voordeel van een restaurant-verankerde operatie versus
+                    een solo-freelancer: er is altijd een tweede lijn. Geen
+                    event zonder backup-chef afspraak vooraf.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/45 bg-primary/10 text-xs font-bold text-primary">
+                    3
+                  </span>
+                  <span>
+                    <strong>Restaurant-grade HACCP en allergenenbeleid</strong>{" "}
+                    — niet een flex-catering sanitatie-standaard, maar de
+                    dagelijkse discipline van een shared-dining restaurant
+                    dat elke dienst geïnspecteerd wordt. Allergenen
+                    worden per gast gelabeld, niet per batch. Koelketens
+                    gemonitord met logboeken, niet op gevoel.
+                  </span>
+                </li>
+              </ul>
+              <div className="mt-6 grid gap-3 text-sm md:grid-cols-2 md:text-base">
+                <div className={ui.paperInset + " p-4"}>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-[#C65A2E]">
+                    Externe validatie
+                  </div>
+                  <p className={`mt-2 ${ui.mutedOnPaper}`}>
+                    De Tafelaar Amersfoort B.V. heeft{" "}
+                    <a
+                      href="https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+                    >
+                      <strong>9.8/10 op 96 reviews bij Trustoo</strong>
+                    </a>
+                    , <strong>TOP PRO 2026</strong> badge,{" "}
+                    <strong>Leermeester-certificering</strong> en is lid van{" "}
+                    <strong>Koninklijke Horeca Nederland (KHN)</strong>. Dat
+                    zijn geen zelf-gepubliceerde claims — ze zijn
+                    allemaal op trustoo.nl te verifiëren.
+                  </p>
+                </div>
+                <div className={ui.paperInset + " p-4"}>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-[#C65A2E]">
+                    Response tijd
+                  </div>
+                  <p className={`mt-2 ${ui.mutedOnPaper}`}>
+                    Gemiddelde reactietijd op nieuwe aanvragen:{" "}
+                    <strong>onder 1 uur</strong> (Trustoo verified). Voor
+                    grote events krijg je binnen 24 uur na je aanvraag een
+                    concreet voorstel met menu-opties, team-opbouw,
+                    setup-tijdlijn, bezorgmomenten, allergieprocedure en
+                    backup-plan.
+                  </p>
+                </div>
+              </div>
+
+              <p className={`mt-5 text-sm ${ui.mutedOnPaper} md:text-base`}>
+                <strong>Exacte details per event-grootte</strong> (50 / 100 /
+                150+ personen, setup-tijden, service-staff, backup-afspraken,
+                allergenenprocedure, late headcount-wijzigingen) staan in de
+                operationele FAQ onderaan deze pagina — antwoord per vraag,
+                niet één vaag blok. Precies de details die procurement en
+                event managers nodig hebben voor ze tekenen.
+              </p>
+
+              <div className="mt-6">
+                <Link
+                  href="#faq"
+                  className={ui.ctaPrimary + " font-semibold"}
+                >
+                  Ga naar operationele FAQ <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>

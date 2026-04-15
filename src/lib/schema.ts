@@ -374,6 +374,17 @@ export function buildCateringEntity() {
       legalName: "Tafelaar Amersfoort B.V.",
       url: "https://www.tafelaaramersfoort.nl",
       telephone: "+31637232397",
+      // foundingDate + numberOfEmployees sourced from the Trustoo
+      // verified profile (trustoo.nl/utrecht/amersfoort/catering/
+      // tafelaar-amersfoort-bv). Adds procurement-relevant signals to
+      // the schema so "how big is their team" is answerable by AI
+      // crawlers — relevant for the "can they handle big events?"
+      // intent that procurement teams have when booking catering.
+      foundingDate: "2025-03-26",
+      numberOfEmployees: {
+        "@type": "QuantitativeValue",
+        value: 10,
+      },
       address: {
         "@type": "PostalAddress",
         streetAddress: "Kamp 8",
