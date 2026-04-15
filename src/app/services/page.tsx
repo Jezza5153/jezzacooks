@@ -74,6 +74,19 @@ export default function ServicesPage() {
       />
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
+          {/* H2 section heading — required so the page doesn't jump from h1
+              (PageHeader) straight to h3 (CardTitle renders as <h3>). Also
+              gives the service grid a passage-extractable intro for GEO. */}
+          <div className="max-w-3xl mx-auto text-center mb-10 md:mb-14">
+            <h2 className="font-headline text-2xl md:text-3xl font-bold">
+              De vier diensten in één oogopslag
+            </h2>
+            <p className="mt-3 text-muted-foreground text-base md:text-lg leading-relaxed">
+              Consulting vanaf €450, Tafelaar × Jezza Cooks Catering vanaf €7,50 p.p., restaurant
+              websites voor €400 eenmalig en SEO + GEO optimalisatie vanaf €150 per maand. Vier
+              losse trajecten, één chef-led dak in Amersfoort.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service) => (
               <Card

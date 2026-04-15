@@ -245,6 +245,7 @@ export default function MenuEngineeringPage() {
                 alt="Menu engineering — restaurant menukaart analyse door Jeremy Arrascaeta, chef-kok en horeca consultant in Amersfoort"
                 fill
                 priority
+                fetchPriority="high"
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 className="object-cover"
               />

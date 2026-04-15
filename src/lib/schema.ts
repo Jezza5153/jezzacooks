@@ -48,28 +48,38 @@ function buildSameAs() {
   // All third-party profiles, press mentions, and client footers that name or
   // link to Jezza Cooks / Jeremy Arrascaeta. AI answer engines use sameAs to
   // resolve the entity across the web — the more verifiable links, the higher
-  // the trust signal.
-  return [
-    SITE.contact.instagram,
-    SITE.founder.linkedin,
-    SITE.founder.youtubeInterview,
-    ...SITE.press.map((p) => p.url),
-    // Third-party client sites that credit Jezza Cooks in their footer:
-    "https://offertesvoorjou.nl",
-    "https://www.boekeerlijk.nl",
-  ].filter(Boolean);
+  // the trust signal. Deduped because the founder.youtubeInterview URL is
+  // also present as a press entry (Gooische Business YouTube interview).
+  return Array.from(
+    new Set(
+      [
+        SITE.contact.instagram,
+        SITE.founder.linkedin,
+        SITE.founder.youtubeInterview,
+        ...SITE.press.map((p) => p.url),
+        // Third-party client sites that credit Jezza Cooks in their footer:
+        "https://offertesvoorjou.nl",
+        "https://www.boekeerlijk.nl",
+      ].filter(Boolean),
+    ),
+  );
 }
 
 function buildPersonSameAs() {
   // Person-level sameAs — the founder's own verifiable third-party profiles
   // and press attributions. This is what AI engines follow to resolve "who is
-  // Jeremy Arrascaeta".
-  return [
-    SITE.founder.linkedin,
-    SITE.founder.youtubeInterview,
-    SITE.contact.instagram,
-    ...SITE.press.map((p) => p.url),
-  ].filter(Boolean);
+  // Jeremy Arrascaeta". Deduped to avoid the youtubeInterview appearing twice
+  // (once as founder.youtubeInterview, once inside the press[] array).
+  return Array.from(
+    new Set(
+      [
+        SITE.founder.linkedin,
+        SITE.founder.youtubeInterview,
+        SITE.contact.instagram,
+        ...SITE.press.map((p) => p.url),
+      ].filter(Boolean),
+    ),
+  );
 }
 
 function buildHasOccupation() {
@@ -96,8 +106,18 @@ function buildHasOccupation() {
       "@type": "Occupation",
       name: "Horeca consultant & founder",
       occupationLocation: {
-        "@type": "City",
-        name: "Amersfoort",
+        // schema.org City was not a valid top-level type for occupationLocation
+        // in the 2026-04-15 validator run (returned "City is not a valid type
+        // for this property"). Use Place, the canonical geographic supertype,
+        // with addressLocality on its nested PostalAddress instead.
+        "@type": "Place",
+        name: "Amersfoort, Netherlands",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Amersfoort",
+          addressRegion: "Utrecht",
+          addressCountry: "NL",
+        },
       },
       estimatedSalary: undefined,
       responsibilities:
@@ -300,6 +320,34 @@ export function buildPerson() {
     },
     award: [
       "Finalist Euro-Toques Young Chef Award 2018 (Restaurant Bougainville, Amsterdam)",
+    ],
+    // hasCredential = machine-readable credential marker for E-E-A-T. Schema.org
+    // EducationalOccupationalCredential is what Google's quality rater guidelines
+    // (2024 update) match on for YMYL-adjacent niches like business consulting.
+    // Each credential links the award to the issuing organization.
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        name: "Finalist Euro-Toques Young Chef Award 2018",
+        credentialCategory: "award",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "Euro-Toques Nederland",
+          url: "https://www.euro-toques.nl",
+        },
+        about: "High-end restaurant kitchen — competitie voor young chefs tot 30 jaar, genomineerd vanuit Restaurant Bougainville Amsterdam.",
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        name: "Dry-aging lead, Angler Restaurant Stirling",
+        credentialCategory: "professionalExperience",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "Angler Restaurant Stirling",
+          url: "https://www.anglerrestaurant.com.au",
+        },
+        about: "Ontwikkeling en leiding van het fish dry-age programma (cured sashimi, fish sausages, barramundi crackling, carp bacon, carp burger) in de Adelaide Hills, 2020-2022. Gefeatured in InDaily, Australian Good Food Guide, Broadsheet Adelaide en Aquna.",
+      },
     ],
     sameAs: buildPersonSameAs(),
   };
