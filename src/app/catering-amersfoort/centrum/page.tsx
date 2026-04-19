@@ -22,9 +22,9 @@ import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schem
 import { Bike, Clock, MapPin, UtensilsCrossed } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Catering Amersfoort Centrum | Binnenstad Office Lunch | Tafelaar × Jezza Cooks",
+  title: "Catering Amersfoort Centrum | Binnenstad Lunch | Tafelaar × Jezza",
   description:
-    "Catering in Amersfoort centrum en binnenstad: office lunch vanaf €7,50 p.p., 5 minuten vanuit onze restaurantkeuken op Kamp 8. Voetgangersgebied, smalle straatjes — wij kennen de routes.",
+    "Catering in Amersfoort centrum/binnenstad vanaf €7,50 p.p. 5 min vanaf Kamp 8, bakfiets voor voetgangerszone. Wij kennen de routes.",
   alternates: { canonical: "/catering-amersfoort/centrum" },
   openGraph: {
     title: "Catering Amersfoort Centrum — Binnenstad Office Lunch",
@@ -205,6 +205,8 @@ export default function CateringCentrumPage() {
             <Link href="/services/catering" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Alle cateringopties</Link>
             <Link href="/catering-amersfoort/de-brand" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Brand</Link>
             <Link href="/catering-amersfoort/de-hoef" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Hoef</Link>
+            <Link href="/catering-amersfoort/vathorst" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Vathorst</Link>
+            <Link href="/catering-amersfoort/de-wieken" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Wieken</Link>
             <Link href="/catering-amersfoort/prijzen" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Prijzen 2026</Link>
             <a href="https://www.tafelaaramersfoort.nl" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>
               Restaurant De Tafelaar →

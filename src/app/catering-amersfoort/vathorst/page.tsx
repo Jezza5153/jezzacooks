@@ -22,9 +22,9 @@ import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schem
 import { Package, Sparkles, Truck, UtensilsCrossed } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Catering Vathorst Amersfoort | Kantoor & Retail Events | Tafelaar × Jezza Cooks",
+  title: "Catering Vathorst Amersfoort | Office & Retail Events | Tafelaar",
   description:
-    "Catering in Vathorst: office lunch vanaf €7,50 p.p., retail events en store openings. Bereid in onze restaurantkeuken op Kamp 8, 12 min rijden.",
+    "Catering Vathorst: office lunch vanaf €7,50 p.p., retail events en store openings. Restaurantkeuken Kamp 8, 12 min rijden.",
   alternates: { canonical: "/catering-amersfoort/vathorst" },
   openGraph: {
     title: "Catering Vathorst — Office Lunch & Retail Events",
@@ -189,6 +189,29 @@ export default function CateringVathorstPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
+          <Card className="rounded-2xl border p-6 sm:p-8">
+            <h2 className="font-headline text-2xl sm:text-3xl tracking-tight mb-4">
+              Prijzen voor catering in Vathorst
+            </h2>
+            <div className="space-y-3 text-muted-foreground leading-relaxed">
+              <ul className="space-y-1 text-sm">
+                <li><strong className="text-foreground">€7,50 p.p.</strong> — Sandwich of wrap (office lunch, vanaf 10 personen)</li>
+                <li><strong className="text-foreground">€10,50 p.p.</strong> — Salad bowl</li>
+                <li><strong className="text-foreground">€13,50–€18,50 p.p.</strong> — Office Lunch Box (Veggie / Classic / Premium)</li>
+                <li><strong className="text-foreground">€15–€25 p.p.</strong> — Walk-around borrelhapjes voor retail events (30+ gasten)</li>
+                <li><strong className="text-foreground">€45–€65 p.p.</strong> — Walking dinner (50–150 gasten, 5–7 gangen)</li>
+                <li><strong className="text-foreground">€65+ p.p.</strong> — Chef-led live cooking station</li>
+              </ul>
+              <p className="text-xs">
+                Alle prijzen inclusief bezorging in Vathorst (~12 min vanaf Kamp 8), exclusief BTW bij
+                zakelijke factuur. Volledige prijsgids:{" "}
+                <Link href="/catering-amersfoort/prijzen" className="underline hover:text-foreground">wat kost catering in Amersfoort</Link>.
+              </p>
+            </div>
+          </Card>
+        </section>
+
+        <section className="max-w-3xl mx-auto mb-12">
           <Card className="rounded-2xl border p-6 sm:p-8 bg-primary/5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
@@ -232,6 +255,8 @@ export default function CateringVathorstPage() {
             <Link href="/services/catering" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Alle cateringopties</Link>
             <Link href="/catering-amersfoort/de-hoef" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Hoef</Link>
             <Link href="/catering-amersfoort/de-wieken" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Wieken</Link>
+            <Link href="/catering-amersfoort/de-brand" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Brand</Link>
+            <Link href="/catering-amersfoort/centrum" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Centrum</Link>
             <Link href="/catering-amersfoort/prijzen" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Prijzen 2026</Link>
           </div>
         </section>

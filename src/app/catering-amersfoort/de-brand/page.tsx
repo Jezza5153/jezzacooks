@@ -20,9 +20,9 @@ import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schem
 import { Hotel, ShoppingBag, Truck, UtensilsCrossed } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Catering De Brand Amersfoort | Retail & Hotel Catering | Tafelaar × Jezza Cooks",
+  title: "Catering De Brand Amersfoort | Retail & Hotel | Tafelaar × Jezza",
   description:
-    "Catering op De Brand Amersfoort: office lunch, retail training en hotel group catering. Vanaf €7,50 p.p., bereid in restaurantkeuken Kamp 8 — 8 min rijden.",
+    "Catering op De Brand: office lunch, retail training en hotel group catering vanaf €7,50 p.p. Restaurantkeuken Kamp 8, 8 min rijden.",
   alternates: { canonical: "/catering-amersfoort/de-brand" },
   openGraph: {
     title: "Catering De Brand — Retail & Hotel Catering Amersfoort",
@@ -167,6 +167,29 @@ export default function CateringDeBrandPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
+          <Card className="rounded-2xl border p-6 sm:p-8">
+            <h2 className="font-headline text-2xl sm:text-3xl tracking-tight mb-4">
+              Prijzen voor catering op De Brand
+            </h2>
+            <div className="space-y-3 text-muted-foreground leading-relaxed">
+              <ul className="space-y-1 text-sm">
+                <li><strong className="text-foreground">€7,50 p.p.</strong> — Sandwich of wrap (office lunch, vanaf 10 personen)</li>
+                <li><strong className="text-foreground">€10,50 p.p.</strong> — Salad bowl</li>
+                <li><strong className="text-foreground">€13,50–€18,50 p.p.</strong> — Office Lunch Box (3 tiers)</li>
+                <li><strong className="text-foreground">€35–€55 p.p.</strong> — Full Day Retail Training (ontbijt + bite + lunch + borrel)</li>
+                <li><strong className="text-foreground">€20–€35 p.p.</strong> — Conference breakfast-cart of lunch-break-box (hotel overloop)</li>
+                <li><strong className="text-foreground">€45 p.p.</strong> — Walking dinner / Chef's Choice</li>
+              </ul>
+              <p className="text-xs">
+                Alle prijzen inclusief bezorging op De Brand (~8 min vanaf Kamp 8), exclusief BTW. Voor
+                spoedorders tot 48u vooraf geen extra toeslag door de korte route. Volledige prijsgids:{" "}
+                <Link href="/catering-amersfoort/prijzen" className="underline hover:text-foreground">wat kost catering in Amersfoort</Link>.
+              </p>
+            </div>
+          </Card>
+        </section>
+
+        <section className="max-w-3xl mx-auto mb-12">
           <Card className="rounded-2xl border p-6 sm:p-8 bg-primary/5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
@@ -201,6 +224,8 @@ export default function CateringDeBrandPage() {
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/services/catering" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Alle cateringopties</Link>
             <Link href="/catering-amersfoort/de-hoef" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Hoef</Link>
+            <Link href="/catering-amersfoort/vathorst" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Vathorst</Link>
+            <Link href="/catering-amersfoort/de-wieken" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Wieken</Link>
             <Link href="/catering-amersfoort/centrum" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Amersfoort Centrum</Link>
             <Link href="/catering-amersfoort/prijzen" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Prijzen 2026</Link>
           </div>

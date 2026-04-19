@@ -21,9 +21,9 @@ import { buildBreadcrumbList, buildFaqPage, buildServicePage } from "@/lib/schem
 import { Briefcase, Building2, Clock, UtensilsCrossed } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Catering De Wieken Amersfoort | Corporate Lunch & Directieborrel | Tafelaar × Jezza Cooks",
+  title: "Catering De Wieken Amersfoort | Corporate Lunch | Tafelaar × Jezza",
   description:
-    "Catering op bedrijventerrein De Wieken Amersfoort: corporate lunch, directieborrels en board meetings. Vanaf €7,50 p.p., bereid in restaurantkeuken Kamp 8.",
+    "Corporate catering op De Wieken: executive lunch, directieborrels en board meetings. Vanaf €7,50 p.p., restaurantkeuken Kamp 8.",
   alternates: { canonical: "/catering-amersfoort/de-wieken" },
   openGraph: {
     title: "Catering De Wieken — Corporate Lunch Amersfoort",
@@ -163,6 +163,29 @@ export default function CateringDeWiekenPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
+          <Card className="rounded-2xl border p-6 sm:p-8">
+            <h2 className="font-headline text-2xl sm:text-3xl tracking-tight mb-4">
+              Prijzen voor corporate catering op De Wieken
+            </h2>
+            <div className="space-y-3 text-muted-foreground leading-relaxed">
+              <ul className="space-y-1 text-sm">
+                <li><strong className="text-foreground">€13,50–€14,50 p.p.</strong> — Office Lunch Box (Veggie / Classic)</li>
+                <li><strong className="text-foreground">€18,50 p.p.</strong> — Premium Lunch Box (wrap + salade + charcuterie/kaas + dessert), board meeting-waardig</li>
+                <li><strong className="text-foreground">€45 p.p.</strong> — Chef's Choice arrangement (directieborrel of board dinner, 7+ personen)</li>
+                <li><strong className="text-foreground">+€28 p.p.</strong> — Bijpassend wijnarrangement</li>
+                <li><strong className="text-foreground">€15–€25 p.p.</strong> — Kwartaalborrel met charcuterie, kaas, warme hapjes</li>
+                <li><strong className="text-foreground">€45/uur p/p</strong> — Service-medewerkers op locatie (min. 3 uur)</li>
+              </ul>
+              <p className="text-xs">
+                Alle prijzen inclusief bezorging op De Wieken (~10 min vanaf Kamp 8), exclusief BTW bij
+                zakelijke factuur. Zie{" "}
+                <Link href="/catering-amersfoort/prijzen" className="underline hover:text-foreground">de volledige prijsgids</Link>.
+              </p>
+            </div>
+          </Card>
+        </section>
+
+        <section className="max-w-3xl mx-auto mb-12">
           <Card className="rounded-2xl border p-6 sm:p-8 bg-primary/5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
@@ -200,6 +223,8 @@ export default function CateringDeWiekenPage() {
             <Link href="/services/catering" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Alle cateringopties</Link>
             <Link href="/catering-amersfoort/de-hoef" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Hoef</Link>
             <Link href="/catering-amersfoort/vathorst" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Vathorst</Link>
+            <Link href="/catering-amersfoort/de-brand" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>De Brand</Link>
+            <Link href="/catering-amersfoort/centrum" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Centrum</Link>
             <Link href="/catering-amersfoort/prijzen" className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}>Prijzen 2026</Link>
           </div>
         </section>

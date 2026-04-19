@@ -434,10 +434,15 @@ export function buildCateringEntity() {
     // catering service on tafelaaramersfoort.nl" and "the catering service
     // on jezzacooks.com" as ONE entity. The tafelaar Restaurant entity
     // reciprocally sameAs's back to this page.
+    //
+    // NOTE: we deliberately do NOT sameAs the tafelaar #restaurant entity
+    // here — that would conflate the Jezza Cooks catering (this entity)
+    // with De Tafelaar as an organization, which is already modeled
+    // separately via `memberOf` above. sameAs points ONLY to catering
+    // entities, not to the restaurant organization itself.
     sameAs: [
       "https://www.tafelaaramersfoort.nl/catering",
       "https://www.tafelaaramersfoort.nl/catering#service",
-      "https://www.tafelaaramersfoort.nl/#restaurant",
     ],
   };
 }

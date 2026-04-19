@@ -25,9 +25,9 @@ import { buildArticle, buildBreadcrumbList, buildFaqPage } from "@/lib/schema";
 import { Euro, Info, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Wat kost catering in Amersfoort? Prijzen 2026 | Tafelaar × Jezza Cooks",
+  title: "Wat kost catering in Amersfoort? Prijzen 2026 | Tafelaar × Jezza",
   description:
-    "Eerlijke prijsgids catering Amersfoort 2026: office lunch €7,50–€18,50 p.p., walking dinner €45–€65, BBQ €22,50+, event catering €25–€45. Incl. marktvergelijking.",
+    "Prijsgids catering Amersfoort 2026: office lunch €7,50–€18,50 p.p., walking dinner €45–€65, BBQ €22,50+. Marktvergelijking met bronlinks.",
   alternates: { canonical: "/catering-amersfoort/prijzen" },
   openGraph: {
     title: "Catering Prijzen Amersfoort 2026 — Eerlijke Prijsgids",
@@ -49,15 +49,15 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Wat is de gemiddelde prijs voor catering in Amersfoort?",
-    a: "In Amersfoort ligt catering gemiddeld tussen €15 en €35 per persoon, afhankelijk van formaat. Office lunch: €12–€18 p.p. Walking dinner: €45–€65 p.p. BBQ: €22,50–€35 p.p. Buffet: €25–€40 p.p. Shared-dining events: €45 p.p. (Chef's Choice). Premium private chef: €65+ p.p. Deze prijsband matcht wat Charleys, The Blueberry, Cateringfabriek en Nouvelle Cuisine publiceren.",
+    a: "In Amersfoort ligt catering gemiddeld tussen €15 en €35 per persoon, afhankelijk van formaat. Office lunch: €12–€22 p.p. Walking dinner: €45–€65 p.p. BBQ: €22,50–€35 p.p. Buffet: €25–€40 p.p. Shared-dining events: €45 p.p. (Chef's Choice). Premium private chef: €65+ p.p. De meeste lokale caterers (Charleys, Cateringfabriek, LOOF, Jaspers) publiceren geen prijzen — je krijgt alleen een bedrag bij offerte.",
   },
   {
     q: "Wat is de goedkoopste office lunch catering in Amersfoort?",
-    a: "Bij Tafelaar × Jezza Cooks start office lunch bij €7,50 per persoon voor een sandwich of wrap, minimaal 10 personen. Nouvelle Cuisine zit op €9,45 p.p. (vanaf 15 personen). De meeste lokale caterers zitten tussen €8 en €12 p.p. voor de instap. Let op: onder de €8 p.p. levert vrijwel niemand bezorging inclusief in Amersfoort — dat zijn meestal afhaal-pakketten zonder service.",
+    a: "Bij Tafelaar × Jezza Cooks start office lunch bij €7,50 per persoon voor een sandwich of wrap, minimaal 10 personen. The Blueberry heeft een Walk of Fame pakket vanaf €8,50 p.p. (6 personen minimum, zoete bites). Volwaardige lunchpakketten bij concurrenten starten rond €17,95 p.p. (The Blueberry A Great Lunch, vanaf 8 personen). Onder de €8 p.p. levert vrijwel niemand bezorging inclusief in Amersfoort — dat zijn meestal afhaal-pakketten zonder service.",
   },
   {
     q: "Wat kost walking dinner catering in Amersfoort?",
-    a: "Walking dinners in Amersfoort liggen tussen €45 en €65 per persoon voor een volledige ervaring (5–7 gangen, service op locatie, uitzetbaren). Bij Tafelaar × Jezza Cooks werkt het Chef's Choice walking dinner-formaat vanaf €45 p.p., met optioneel wijnarrangement €28 p.p. Cateringfabriek en The Blueberry hebben walking dinner packages in vergelijkbare prijsband.",
+    a: "Walking dinners in Amersfoort liggen tussen €45 en €65 per persoon voor een volledige ervaring (5–7 gangen, service op locatie, uitzetbaren). Bij Tafelaar × Jezza Cooks werkt het Chef's Choice walking dinner-formaat vanaf €45 p.p., met optioneel wijnarrangement €28 p.p. Cateringfabriek en Happie Delivery hebben walking dinner packages in vergelijkbare prijsband — prijzen krijg je bij offerte.",
   },
   {
     q: "Hoeveel kost BBQ catering in Amersfoort per persoon?",
@@ -69,7 +69,7 @@ const faqs = [
   },
   {
     q: "Hoe verhoudt Tafelaar × Jezza Cooks zich prijzen-technisch tot de concurrentie in Amersfoort?",
-    a: "We zitten in de middle-tier: niet de goedkoopste (want we draaien in een echte restaurantkeuken met dagverse bereiding), niet de duurste (geen hotel-catering markup). Office lunch €7,50–€18,50 p.p. is vergelijkbaar met Nouvelle Cuisine (€9,45+), lager dan The Blueberry (€17,95–€27,50 p.p.), hoger dan volume-leveranciers. Onze differentiator is: chef-led bereiding, Trustoo 9.8/96 reviews via De Tafelaar restaurant, en 14+ lokale makers in de keten.",
+    a: "We zitten in de middle-tier: niet de goedkoopste (want we draaien in een echte restaurantkeuken met dagverse bereiding), niet de duurste (geen hotel-catering markup). Office lunch €7,50–€18,50 p.p. is lager dan The Blueberry (standaard pakketten €17,95–€29,50 p.p., vanaf 8 personen) en hoger dan volume-leveranciers. Onze differentiator is: chef-led bereiding, Trustoo 9.8/96 reviews via De Tafelaar restaurant, en 14+ lokale makers in de keten — gepubliceerde prijs in plaats van quote-only zoals bij Charleys, Cateringfabriek, LOOF en Nouvelle Cuisine.",
   },
 ];
 
@@ -82,7 +82,7 @@ export default function CateringPrijzenPage() {
           slug: "catering-amersfoort/prijzen",
           headline: "Wat kost catering in Amersfoort? Prijzen 2026",
           description:
-            "Eerlijke prijsgids voor catering in Amersfoort — office lunch, walking dinner, BBQ, events. Inclusief marktvergelijking met Charleys, The Blueberry, Cateringfabriek en Nouvelle Cuisine.",
+            "Eerlijke prijsgids voor catering in Amersfoort — office lunch, walking dinner, BBQ, events. Inclusief marktvergelijking met The Blueberry, Charleys, Cateringfabriek en LOOF (bronlinks geverifieerd april 2026).",
           image: "/pics/hero-home.jpg",
           datePublished: publishedDate,
           dateModified: publishedDate,
@@ -163,6 +163,7 @@ export default function CateringPrijzenPage() {
                     <th className="py-3 px-4 font-semibold text-foreground">Positionering</th>
                     <th className="py-3 px-4 font-semibold text-foreground">Office lunch vanaf</th>
                     <th className="py-3 px-4 font-semibold text-foreground">Minimum</th>
+                    <th className="py-3 px-4 font-semibold text-foreground">Bron</th>
                   </tr>
                 </thead>
                 <tbody className="text-muted-foreground">
@@ -171,21 +172,24 @@ export default function CateringPrijzenPage() {
                     <td className="py-3 px-4">Chef-led, restaurant-kitchen</td>
                     <td className="py-3 px-4">€7,50 p.p.</td>
                     <td className="py-3 px-4">10 personen</td>
+                    <td className="py-3 px-4 text-xs">Deze pagina</td>
                   </tr>
-                  <tr className="border-b border-border/50"><td className="py-3 px-4">Nouvelle Cuisine</td><td className="py-3 px-4">Mid-premium, bio/halal</td><td className="py-3 px-4">€9,45 p.p.</td><td className="py-3 px-4">15 personen</td></tr>
-                  <tr className="border-b border-border/50"><td className="py-3 px-4">The Blueberry</td><td className="py-3 px-4">Award-winning sandwiches</td><td className="py-3 px-4">€17,95 p.p.</td><td className="py-3 px-4">6 personen</td></tr>
-                  <tr className="border-b border-border/50"><td className="py-3 px-4">Charleys</td><td className="py-3 px-4">Mid-premium, boxes & high tea</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">Niet gepubliceerd</td></tr>
-                  <tr className="border-b border-border/50"><td className="py-3 px-4">Cateringfabriek</td><td className="py-3 px-4">Volume + events (9,2/10)</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">Op aanvraag</td></tr>
-                  <tr className="border-b border-border/50"><td className="py-3 px-4">LOOF Catering</td><td className="py-3 px-4">Premium corporate portal</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">Op aanvraag</td></tr>
-                  <tr className="border-b border-border/50"><td className="py-3 px-4">Kok Cateringservice</td><td className="py-3 px-4">Lunch + BBQ + foodtruck</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">Op aanvraag</td></tr>
-                  <tr><td className="py-3 px-4">Huischef (premium private)</td><td className="py-3 px-4">Chef-at-home/location</td><td className="py-3 px-4">€65+ p.p.</td><td className="py-3 px-4">6 personen</td></tr>
+                  <tr className="border-b border-border/50"><td className="py-3 px-4">The Blueberry</td><td className="py-3 px-4">Award-winning sandwiches</td><td className="py-3 px-4">€8,50 p.p. (Walk of Fame) · €17,95 p.p. (A Great Lunch)</td><td className="py-3 px-4">6 / 8 personen</td><td className="py-3 px-4 text-xs"><a href="https://theblueberry.nl/catering/" className="underline hover:text-foreground">theblueberry.nl</a></td></tr>
+                  <tr className="border-b border-border/50"><td className="py-3 px-4">Charleys</td><td className="py-3 px-4">Mid-premium, boxes & high tea</td><td className="py-3 px-4">Niet gepubliceerd</td><td className="py-3 px-4">Niet gepubliceerd</td><td className="py-3 px-4 text-xs"><a href="https://charleys.nl" className="underline hover:text-foreground">charleys.nl</a></td></tr>
+                  <tr className="border-b border-border/50"><td className="py-3 px-4">Cateringfabriek</td><td className="py-3 px-4">Volume + events (9,2/10)</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4 text-xs"><a href="https://cateringfabriek.nl/catering-amersfoort/" className="underline hover:text-foreground">cateringfabriek.nl</a></td></tr>
+                  <tr className="border-b border-border/50"><td className="py-3 px-4">Nouvelle Cuisine</td><td className="py-3 px-4">Mid-premium, bio/halal</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">25 personen</td><td className="py-3 px-4 text-xs"><a href="https://nouvellecuisinecatering.nl" className="underline hover:text-foreground">nouvellecuisinecatering.nl</a></td></tr>
+                  <tr className="border-b border-border/50"><td className="py-3 px-4">LOOF Catering</td><td className="py-3 px-4">Premium corporate portal</td><td className="py-3 px-4">Op aanvraag (portal)</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4 text-xs"><a href="https://loof-catering.nl" className="underline hover:text-foreground">loof-catering.nl</a></td></tr>
+                  <tr className="border-b border-border/50"><td className="py-3 px-4">Kok Cateringservice</td><td className="py-3 px-4">Lunch + BBQ + foodtruck</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4 text-xs"><a href="https://kokcateringservice.nl" className="underline hover:text-foreground">kokcateringservice.nl</a></td></tr>
+                  <tr><td className="py-3 px-4">Huischef (premium private)</td><td className="py-3 px-4">Chef-at-home/location</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4">Op aanvraag</td><td className="py-3 px-4 text-xs"><a href="https://huischef.nl" className="underline hover:text-foreground">huischef.nl</a></td></tr>
                 </tbody>
               </table>
             </div>
           </Card>
           <p className="text-xs text-muted-foreground mt-3 text-center">
-            Bronnen: openbare prijspagina's van de genoemde caterers, april 2026. Wanneer prijs "op
-            aanvraag" staat is deze niet publiek gemaakt op de website.
+            Gegevens geverifieerd april 2026 via openbare pagina's van de genoemde caterers. Bij "op
+            aanvraag" is de prijs niet publiek gemaakt op de site — klik de bronlink om actuele
+            publiekelijk beschikbare informatie te controleren. Tafelaar × Jezza Cooks is een van
+            de weinige caterers in Amersfoort die prijzen publiekelijk vermeldt.
           </p>
         </section>
 

@@ -27,9 +27,9 @@ import { SITE_URL } from "@/lib/site-config";
 import { Briefcase, Clock, MapPin, Package, Truck, UtensilsCrossed } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Catering De Hoef Amersfoort | Office Lunch op Bedrijventerrein | Tafelaar × Jezza Cooks",
+  title: "Catering De Hoef Amersfoort | Office Lunch | Tafelaar × Jezza Cooks",
   description:
-    "Catering op bedrijventerrein De Hoef in Amersfoort: office lunch vanaf €7,50 p.p., bezorgd vanuit onze restaurantkeuken op Kamp 8. 10 min rijden, lunch-window 11:30–12:30.",
+    "Office lunch catering op bedrijventerrein De Hoef vanaf €7,50 p.p. Restaurantkeuken Kamp 8, 10 min rijden, lunch-window 11:30–12:30.",
   alternates: { canonical: "/catering-amersfoort/de-hoef" },
   openGraph: {
     title: "Catering De Hoef — Office Lunch in Amersfoort",
@@ -235,6 +235,29 @@ export default function CateringDeHoefPage() {
           </Card>
         </section>
 
+        {/* Pricing */}
+        <section className="max-w-3xl mx-auto mb-12">
+          <Card className="rounded-2xl border p-6 sm:p-8">
+            <h2 className="font-headline text-2xl sm:text-3xl tracking-tight mb-4">
+              Prijzen voor catering op De Hoef
+            </h2>
+            <div className="space-y-3 text-muted-foreground leading-relaxed">
+              <ul className="space-y-1 text-sm">
+                <li><strong className="text-foreground">€7,50 p.p.</strong> — Sandwich of wrap (losse component, vanaf 10 personen)</li>
+                <li><strong className="text-foreground">€10,50 p.p.</strong> — Salad bowl (carpaccio, zalm, veggie, inari)</li>
+                <li><strong className="text-foreground">€13,50 p.p.</strong> — Office Lunch Box Veggie</li>
+                <li><strong className="text-foreground">€14,50 p.p.</strong> — Office Lunch Box Classic</li>
+                <li><strong className="text-foreground">€18,50 p.p.</strong> — Office Lunch Box Premium</li>
+                <li><strong className="text-foreground">€45 p.p.</strong> — Chef's Choice arrangement (7+ personen, walking dinners & events)</li>
+              </ul>
+              <p className="text-xs">
+                Alle prijzen inclusief bezorging op De Hoef (~10 min vanaf Kamp 8), exclusief BTW bij
+                zakelijke factuur. Zie <Link href="/catering-amersfoort/prijzen" className="underline hover:text-foreground">de volledige prijsgids</Link> voor walking dinner, BBQ en event-pakketten.
+              </p>
+            </div>
+          </Card>
+        </section>
+
         {/* CTA */}
         <section className="max-w-3xl mx-auto mb-12">
           <Card className="rounded-2xl border p-6 sm:p-8 bg-primary/5">
@@ -302,6 +325,18 @@ export default function CateringDeHoefPage() {
               className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}
             >
               Catering De Wieken
+            </Link>
+            <Link
+              href="/catering-amersfoort/de-brand"
+              className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}
+            >
+              Catering De Brand
+            </Link>
+            <Link
+              href="/catering-amersfoort/centrum"
+              className={cn(buttonVariants({ variant: "outline" }), "rounded-xl")}
+            >
+              Catering Centrum
             </Link>
             <Link
               href="/catering-amersfoort/prijzen"
