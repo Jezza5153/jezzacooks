@@ -21,7 +21,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services/consulting", changeFrequency: "monthly", priority: 0.95 },
-    { path: "/services/catering", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/services/catering", changeFrequency: "monthly", priority: 0.95 },
+    // Neighborhood / bedrijventerrein catering landing pages — no competitor
+    // in the SERP has these yet, so they're a greenfield long-tail play.
+    { path: "/catering-amersfoort/de-hoef", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/catering-amersfoort/vathorst", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/catering-amersfoort/de-wieken", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/catering-amersfoort/de-brand", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/catering-amersfoort/centrum", changeFrequency: "monthly", priority: 0.85 },
+    // Pillar article — AI citation magnet for "wat kost catering amersfoort".
+    { path: "/catering-amersfoort/prijzen", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services/websites", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services/seo-geo", changeFrequency: "monthly", priority: 0.95 },
     { path: "/menu-engineering", changeFrequency: "monthly", priority: 0.9 },

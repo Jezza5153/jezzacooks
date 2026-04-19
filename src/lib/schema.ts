@@ -430,6 +430,15 @@ export function buildCateringEntity() {
     // The person actually running the catering kitchen. Cross-link to
     // the Person entity.
     employee: { "@id": PERSON_ID },
+    // Cross-domain sameAs. AI answer engines use this to resolve "the
+    // catering service on tafelaaramersfoort.nl" and "the catering service
+    // on jezzacooks.com" as ONE entity. The tafelaar Restaurant entity
+    // reciprocally sameAs's back to this page.
+    sameAs: [
+      "https://www.tafelaaramersfoort.nl/catering",
+      "https://www.tafelaaramersfoort.nl/catering#service",
+      "https://www.tafelaaramersfoort.nl/#restaurant",
+    ],
   };
 }
 
