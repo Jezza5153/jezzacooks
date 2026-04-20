@@ -46,7 +46,7 @@ export default function Home() {
     {
       title: "Tafelaar × Jezza Cooks Catering",
       description:
-        "Samenwerking met shared-dining restaurant De Tafelaar (Jan Molmans, Kamp 8 Amersfoort). Kantoorlunch, diners en events vanuit een volwaardige restaurantkeuken. Strakke timing, chef-led door Jeremy.",
+        "Samenwerking met restaurant De Tafelaar (Kamp 8 Amersfoort, 9.8/10 op 96 reviews bij Trustoo). Niet een solo chef — een 10-persoons restaurantteam met backup-chef op stand-by. Kantoorlunch, diners, bruiloften, bedrijfsfeesten voor 10 tot 150+ personen.",
       link: "/services/catering",
       image: PlaceHolderImages.find((p) => p.id === "service-catering"),
       priceLabel: "Vanaf €7,50 p.p.",

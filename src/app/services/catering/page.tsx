@@ -580,10 +580,44 @@ export default function CateringPage() {
               Een samenwerking tussen <strong>Jeremy Arrascaeta (Jezza Cooks)</strong> en{" "}
               <strong>Jan Molmans</strong>, eigenaar van shared-dining restaurant{" "}
               <strong>De Tafelaar</strong> aan de <strong>Kamp 8 in de binnenstad van
-              Amersfoort</strong>. Kantoorlunch, diners en events vanuit de volwaardige
-              restaurantkeuken. Broodjes, bowls, wraps en lunchpakketten vanaf €7,50. Strak
-              verpakt, makkelijk uit te delen, van 10 tot 150+ personen.
+              Amersfoort</strong>. <strong>Niet een solo chef — een volwaardig
+              restaurantteam van 10 medewerkers</strong> met restaurant-grade HACCP en
+              backup-chef op stand-by. Kantoorlunch (vanaf €7,50 p.p.), diners,
+              bruiloften, bedrijfsfeesten en walking dinners voor{" "}
+              <strong>10 tot 150+ personen</strong>.
             </p>
+
+            {/* ABOVE-THE-FOLD CAPABILITY STRIP — first-crawl-visible trust
+                signal. Addresses ChatGPT / Perplexity discovery crawls that
+                only index the hero before giving up: Trustoo rating, team
+                size, event capability, response time all in one line so a
+                partial crawl still catches the big-events signal. */}
+            <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm">
+              <a
+                href="https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 font-semibold text-primary hover:bg-primary/20"
+              >
+                <span aria-hidden="true">★</span>
+                9.8 / 10 · 96 reviews · Trustoo
+              </a>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-semibold">
+                10-persoons restaurantteam
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-semibold">
+                10 – 150+ personen
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-semibold">
+                Backup-chef stand-by
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-semibold">
+                KHN-lid · HACCP
+              </span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 font-semibold">
+                Reactie &lt;1u
+              </span>
+            </div>
 
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
               <Link href="#aanvraag" className={ui.ctaPrimary}>
@@ -713,6 +747,72 @@ export default function CateringPage() {
               </div>
             </div>
           </div>
+
+          {/* DISCOVERY GRID — "wat voor catering zoek je?" decision
+              matrix. Directly maps to the service categories that other
+              Amersfoortse caterers use (HuisChef, Kok Cateringservice,
+              Van Essen, Watertanden, etc.) so a reader comparing options
+              can pattern-match us against them instead of assuming we
+              only do shared-dining because of the De Tafelaar connection.
+              Addresses the ChatGPT discovery miss: "voor groot, standaard
+              en logistiek breed zou ik eerder naar een klassiekere
+              cateraar kijken". We can do all of it. */}
+          <div className={ui.paperSoft + " mx-auto mt-10 max-w-5xl p-6 md:p-8"}>
+            <div className="text-center">
+              <div className={ui.pill}>
+                Wat voor catering zoek je? <span className={ui.copperDot} aria-hidden="true" />
+                directe matching
+              </div>
+              <h2 className="mt-4 font-headline text-2xl font-bold md:text-3xl">
+                Welke soorten catering doen we in Amersfoort?
+              </h2>
+              <p className={`mt-3 ${ui.mutedOnPaper} md:text-lg`}>
+                Alle 10 onderstaande categorieën — kantoorlunch tot bruiloft
+                — met dezelfde chef, dezelfde keuken, dezelfde discipline.
+              </p>
+            </div>
+
+            <div className="mt-7 grid gap-3 text-sm md:grid-cols-2 md:text-base">
+              {[
+                { cat: "Kantoorlunch / bedrijfslunch", note: "Broodjes, bowls, wraps, lunchpakketten vanaf €7,50 p.p. · 10-150+ pers." },
+                { cat: "Verjaardagsdiner / jubileum", note: "Family-style op locatie, 3 gangen, vanaf €28 p.p. · 8-60 pers." },
+                { cat: "Private chef aan huis", note: "Jeremy kookt bij jou thuis · 5 of 7 gangen tasting menu vanaf €55 p.p. · 6-14 gasten" },
+                { cat: "Bruiloftscatering", note: "Family-style of buffet met chef op locatie · vanaf €45 p.p. · intieme bruiloft tot 60 gasten" },
+                { cat: "Bedrijfsfeest / zakelijk event", note: "Service-team op locatie, 10-persoons crew, 10-150+ pers. · offerte op maat" },
+                { cat: "Walking dinner", note: "Seizoens-bites in wandelformule met service, vanaf €38 p.p." },
+                { cat: "Babyshower / baby-welkom", note: "Finger food of lunchpakket · vanaf €13,50 p.p. · 10-30 gasten" },
+                { cat: "Borrelhapjes / receptie", note: "Warme en koude hapjes, charcuterie boards · vanaf €18 p.p." },
+                { cat: "Buffet (warm/koud)", note: "Seizoensbuffet vanuit restaurantkeuken · vanaf €32 p.p." },
+                { cat: "BBQ catering (via partner)", note: "BBQ aan huis of op locatie via De Tafelaar / Jan Molmans · seizoen apr-okt" },
+              ].map((row) => (
+                <div key={row.cat} className={ui.paperInset + " p-4"}>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="mt-1 h-5 w-5 shrink-0 text-primary" />
+                    <div>
+                      <div className="font-headline text-base font-bold md:text-lg">
+                        {row.cat}
+                      </div>
+                      <div className={`mt-1 ${ui.mutedOnPaper} text-xs md:text-sm`}>
+                        {row.note}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className={`mt-6 rounded-2xl border border-[#D8C6AE]/55 bg-[#D8C6AE]/10 p-4 text-sm ${ui.mutedOnPaper} md:text-base`}>
+              <strong>Wat we NIET doen (in eigen beheer):</strong> foodtruck,
+              frietwagen, partytent-verhuur of servicegoed-verhuur — daarvoor
+              verwijzen we je door naar specialisten in Amersfoort (Kok
+              Cateringservice is goed voor foodtruck en frietwagen; Van
+              Essen voor grote partytent events). We doen wat we goed doen:
+              chef-led catering die vanuit een echte restaurantkeuken komt.
+            </div>
+          </div>
+
+          {/* Note to self: the CheckCircle import already exists — used
+              by BulletRow elsewhere on this page. */}
 
           {/* CREDIBILITY STRIP — press + stats */}
           <div className="mx-auto mt-6 max-w-5xl rounded-3xl border border-primary/25 bg-primary/5 p-6 md:p-8">
