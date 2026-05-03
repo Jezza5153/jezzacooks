@@ -858,6 +858,22 @@ export default function CateringPage() {
               ))}
             </div>
 
+            {/* Inline cross-link to the dedicated kantoorlunch-amersfoort
+                landing — Tier 5H attackable-query target. */}
+            <p className={`mt-6 text-center text-sm ${ui.mutedOnPaper} md:text-base`}>
+              Specifiek op zoek naar lunch op kantoor?{" "}
+              <Link
+                href="/services/catering/kantoorlunch-amersfoort"
+                className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+              >
+                <strong>
+                  Bekijk de aparte kantoorlunch Amersfoort pagina
+                </strong>
+              </Link>
+              {" "}met alle 13 wijken bezorgtijden, het 4-stappen
+              bestelproces en 6 specifieke kantoorlunch FAQs.
+            </p>
+
             <div className={`mt-6 rounded-2xl border border-[#D8C6AE]/55 bg-[#D8C6AE]/10 p-4 text-sm ${ui.mutedOnPaper} md:text-base`}>
               <strong>Wat we NIET doen (in eigen beheer):</strong> foodtruck,
               frietwagen, partytent-verhuur of servicegoed-verhuur — daarvoor

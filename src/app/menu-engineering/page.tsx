@@ -825,8 +825,12 @@ export default function MenuEngineeringPage() {
                 elders in Nederland — het is rekenwerk, geen cultuur — maar
                 de Amersfoortse horeca heeft drie eigenheden die de uitvoering
                 beïnvloeden. <strong>Eén:</strong> de stad heeft een sterk
-                gemengde gastenmix (kantoorlunch, stadsbezoek, lokale vaste
-                gasten), wat betekent dat plowhorses vaak in de lunch zitten
+                gemengde gastenmix ({" "}
+                <Link href="/services/catering/kantoorlunch-amersfoort" className="underline decoration-primary/80 underline-offset-4 hover:text-primary">
+                  kantoorlunch
+                </Link>
+                , stadsbezoek, lokale vaste gasten), wat betekent dat
+                plowhorses vaak in de lunch zitten
                 en stars in het diner — je kan dus niet met één gemiddelde
                 werken. <strong>Twee:</strong> Amersfoort heeft relatief veel
                 shared-dining en bistro-concepten (Kamp, Soesterkwartier,

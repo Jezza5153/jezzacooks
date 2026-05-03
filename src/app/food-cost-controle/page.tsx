@@ -549,10 +549,13 @@ export default function FoodCostControlePage() {
                 de klassieke "130g protein hoofdgerecht" benchmark niet
                 opgaat. Je rekent met totale tafel-kostprijs, niet met
                 portie-kostprijs. <strong>Drie:</strong> de gastenmix is
-                sterk gemengd (kantoorlunch, stadsbezoekers, vaste lokalen)
-                wat betekent dat wekelijkse variance-analyse per daggedeelte
-                moet — lunch en diner hebben verschillende food cost
-                profielen.
+                sterk gemengd ({" "}
+                <Link href="/services/catering/kantoorlunch-amersfoort" className="underline decoration-primary/80 underline-offset-4 hover:text-primary">
+                  kantoorlunch
+                </Link>
+                , stadsbezoekers, vaste lokalen) wat betekent dat
+                wekelijkse variance-analyse per daggedeelte moet — lunch en
+                diner hebben verschillende food cost profielen.
               </p>
               <p>
                 Ik werk als horeca consultant in heel Amersfoort en
