@@ -48,8 +48,14 @@ const PAGESPEED_URLS = [
   "/services/websites",
   "/services/seo-geo",
   "/menu-engineering",
+  "/food-cost-controle",
   "/about",
   "/contact",
+  // Tier 5H attackable-query landings — added 2026-04-15 so monthly
+  // baselines capture CWV + ranking impact on the new pages.
+  "/services/catering/kantoorlunch-amersfoort",
+  "/services/catering/private-chef-amersfoort",
+  "/services/websites/restaurant-website-laten-maken",
 ] as const;
 
 // --- Query set: mix of brand, commercial, local, and GEO intents ------------
