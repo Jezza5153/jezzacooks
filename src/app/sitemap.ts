@@ -22,6 +22,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services/consulting", changeFrequency: "monthly", priority: 0.95 },
     { path: "/services/catering", changeFrequency: "monthly", priority: 0.95 },
+    // Service-line catering landings — Tier 5H attackable-query targets.
+    // /kantoorlunch-amersfoort rides the tafelaaramersfoort.nl #1 ranking
+    // for the head term via partner-restaurant cross-link.
+    { path: "/services/catering/kantoorlunch-amersfoort", changeFrequency: "monthly", priority: 0.95 },
     // Neighborhood / bedrijventerrein catering landing pages — no competitor
     // in the SERP has these yet, so they're a greenfield long-tail play.
     { path: "/catering-amersfoort/de-hoef", changeFrequency: "monthly", priority: 0.85 },

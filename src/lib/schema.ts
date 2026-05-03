@@ -282,8 +282,8 @@ export function buildLocalBusiness() {
 }
 
 /**
- * FoodEstablishment / CateringService sub-entity for the Tafelaar × Jezza
- * Cooks Catering joint venture. Uses a different physical address than the
+ * FoodEstablishment / Service sub-entity for the Tafelaar × Jezza Cooks
+ * Catering joint venture. Uses a different physical address than the
  * main LocalBusiness because catering operates from the De Tafelaar
  * restaurant kitchen at Kamp 8 — that's Jan Molmans's restaurant, where
  * Jeremy also works as chef-kok. The @id is fragment-distinct from
@@ -294,10 +294,19 @@ export function buildLocalBusiness() {
  *   - Tafelaar × Jezza Cooks Catering (this entity at Kamp 8) = joint venture
  *   - Both bill via Jezza Cooks KvK 99547619
  *   - provider cross-link points back to the main LocalBusiness for billing
+ *
+ * Tier 5H schema fix: the previous multi-type used a non-canonical
+ * "CateringService" string. schema.org has no top-level CateringService
+ * primitive — the canonical pattern is FoodEstablishment for the physical
+ * kitchen location plus Service with serviceType: "Catering" for the
+ * service itself. We use both: FoodEstablishment for entity-level location
+ * and operational data, Service with explicit serviceType so validators
+ * and LLM parsers correctly identify the offering.
  */
 export function buildCateringEntity() {
   return {
-    "@type": ["FoodEstablishment", "CateringService"],
+    "@type": ["FoodEstablishment", "Service"],
+    serviceType: "Catering",
     "@id": CATERING_ID,
     name: "Tafelaar × Jezza Cooks Catering",
     alternateName: "Jezza Cooks Catering Amersfoort",

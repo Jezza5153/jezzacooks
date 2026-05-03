@@ -115,7 +115,11 @@ type MenuSection = {
   highlight?: boolean;
 };
 
-const ui = {
+// Exported so child catering landing pages (kantoorlunch-amersfoort,
+// private-chef-amersfoort) can import and render visually consistent
+// with the parent catering page without cloning Tailwind class strings.
+// Refactored as part of Tier 5H prep so new landing pages can reuse.
+export const ui = {
   // lighter “Night” so it feels less heavy (rest stays exactly the same)
   page: "relative bg-[#0F141B] text-[#F3EDE3] pb-28",
   container: "container mx-auto px-4",
@@ -711,8 +715,61 @@ export default function CateringPage() {
             ))}
           </div>
 
+          {/* PARTNER RESTAURANT CALLOUT — explicit deep cross-link to
+              tafelaaramersfoort.nl. The catering joint venture rides the
+              partner restaurant's local SEO footprint (live #1 ranking
+              for "kantoorlunch amersfoort" head term). Honest framing:
+              partner restaurant, not subsidiary. */}
+          <div className="mx-auto mt-14 max-w-5xl rounded-3xl border border-white/15 bg-white/5 p-6 md:p-8">
+            <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
+              <div className="flex shrink-0 flex-col items-center rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center">
+                <div className="text-[10px] font-semibold uppercase tracking-widest text-white/60">
+                  Ons partner-restaurant
+                </div>
+                <div className="mt-1 font-headline text-xl font-bold">
+                  De Tafelaar
+                </div>
+                <div className="mt-0.5 text-xs text-white/60">
+                  Kamp 8, Amersfoort
+                </div>
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="font-headline text-lg font-bold md:text-xl">
+                  De catering werkt vanuit een echte restaurantkeuken
+                </h3>
+                <p className={`mt-2 text-sm leading-relaxed ${ui.mutedOnNight} md:text-base`}>
+                  Tafelaar × Jezza Cooks Catering is een samenwerking met{" "}
+                  <a
+                    href="https://www.tafelaaramersfoort.nl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-primary decoration-2 underline-offset-4 hover:opacity-80"
+                  >
+                    <strong>tafelaaramersfoort.nl</strong>
+                  </a>{" "}
+                  — het shared-dining restaurant aan de Kamp 8 waar Jeremy
+                  chef-kok is. We werken vanuit hun volwaardige restaurantkeuken,
+                  met dezelfde leveranciers (Van de Koolwijk, Kaasboerij, Nico
+                  Beekhuizen) en dezelfde discipline. Klik door naar het
+                  restaurant voor menu, openingstijden en reserveringen ter
+                  plaatse.
+                </p>
+              </div>
+              <div className="shrink-0">
+                <a
+                  href="https://www.tafelaaramersfoort.nl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={ui.ctaSecondary + " text-xs"}
+                >
+                  Bezoek De Tafelaar
+                </a>
+              </div>
+            </div>
+          </div>
+
           {/* VERIFIED THIRD-PARTY REVIEWS — De Tafelaar Trustoo profile */}
-          <div className="mx-auto mt-14 max-w-5xl rounded-3xl border border-primary/40 bg-primary/10 p-6 md:p-8">
+          <div className="mx-auto mt-6 max-w-5xl rounded-3xl border border-primary/40 bg-primary/10 p-6 md:p-8">
             <div className="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-6">
               <div className="flex flex-col items-center rounded-2xl border border-primary/40 bg-background/20 px-6 py-4 text-center">
                 <div className="text-xs font-semibold uppercase tracking-widest text-primary">
