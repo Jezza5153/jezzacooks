@@ -199,6 +199,199 @@ Aangezien er nu een grote credibility-gap is ("alles is self-published" per GPT)
 
 ---
 
-**End of OV profile correction document.**
+**End of OV profile correction document (sections 1-5).**
 
 Canonical source-of-truth on jezzacooks.com is in `src/lib/site-config.ts` — dat bestand is de single source of truth voor NAP, prijzen en services. Als iets op dit document afwijkt van `site-config.ts`, **wint site-config.ts altijd**.
+
+---
+
+## 6. Tier 5H — 5-platform priority list (start same day as code task #1)
+
+**Date freshness rule**: re-verify every live third-party fact (Trustoo review count, GBP category labels, profile URLs, phone numbers, redirects, platform availability) **on the execution date**, NOT the 2026-04-15 audit baseline. Live data drifts.
+
+### Pre-work — review-count verification (mandatory before any platform listing)
+
+Open `https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/` in browser. Note the live review count for De Tafelaar Amersfoort B.V. — log it as "Trustoo verified <count> on <ISO date>". Possible values:
+- If count = 96 → no schema change needed (matches our committed value in `src/lib/schema.ts` `buildCateringEntity().memberOf.aggregateRating.reviewCount`)
+- If count differs → only update schema IF (a) the count is also visibly shown on the Jezza Cooks page next to the badge, (b) clearly attributed to De Tafelaar/Trustoo, AND (c) you re-validate the schema at validator.schema.org afterwards.
+- Treat `aggregateRating` here as **entity clarity, not a guaranteed Google review rich-result lever**. Google's review-snippet rules disallow self-controlled aggregation of third-party reviews.
+
+### Photo assets — production URLs + upload assets
+
+`/public/pics/` is a build path, not a usable URL. Each platform needs ONE of: a live absolute URL OR a local file upload.
+
+- **Live URL pattern after deploy**: `https://www.jezzacooks.com/pics/<filename>`
+- **Local upload fallback**: copy from `public/pics/` to a folder you can drag-drop into the platform UI
+
+**Suggested 10 photo set** (file → caption — both go on the platform):
+1. `hero-home.jpg` → "Jezza Cooks chef-led catering en consultancy in Amersfoort"
+2. `about-jezza.jpg` → "Chef Jeremy Arrascaeta, founder Jezza Cooks"
+3. `service-catering.jpg` → "Tafelaar × Jezza Cooks Catering — kantoorlunch en events"
+4. `service-consulting.jpg` → "Restaurant consulting — menu engineering en food cost"
+5. `consulting.jpg` → "Chef-led horeca consulting op locatie"
+6. `service-websites.jpg` → "Restaurant websites en SEO/GEO"
+7. `tafelaar-x-jezza-logo.png` → "Joint venture Tafelaar × Jezza Cooks"
+8. `results-hero.jpg` → "Catering events Amersfoort"
+9. (kitchen action shot if available)
+10. (chef-at-work shot if available)
+
+---
+
+### Priority 1 — Google Business Profile (Jezza Cooks, independent listing)
+
+**Effort**: ~30 min · **Compliance gates**: GBP service-area config + address-hidden + live category-label confirmation
+
+**GBP compliance gate — must clear BEFORE creating the listing**:
+
+For Jezza Cooks, **service-area business mode is the correct option** (consultancy + catering delivered on-site, customers don't visit the office).
+
+Setup steps:
+1. Verify business at `business.google.com` with the real address (Google requires this for verification): **Nijkerkerstraat 3, 3821 CD Amersfoort**.
+2. After verification completes, switch listing to "service area" mode and **hide the address publicly**.
+3. Set service areas: Amersfoort + Soest, Leusden, Baarn, Bunschoten, Nijkerk, Barneveld, Utrecht, Hilversum.
+4. **Confirm exact category labels inside the GBP UI at setup time** — category names can differ by locale and availability. Suggested labels below are the most likely matches at audit time; the live GBP category dropdown is authoritative.
+5. Do NOT create a duplicate / near-duplicate of De Tafelaar's GBP. Categories, description, phone, website, and service model must clearly separate the two entities.
+
+**Copy-paste block** (verify everything on execution date):
+
+```
+Business name: Jezza Cooks
+Primary category: Catering food and drink supplier  (verify in UI dropdown)
+Secondary category: Hospitality consultant  (verify in UI dropdown — labels may differ)
+Phone: +31 6 34127992
+Website: https://www.jezzacooks.com  (NOT the apex; that 307s to www)
+Hours (availability, not walk-in): Maandag tot en met vrijdag, 09:00 – 18:00 (op afspraak)
+Service-area: Amersfoort, Soest, Leusden, Baarn, Bunschoten, Nijkerk, Barneveld, Utrecht, Hilversum
+
+Description (750 char):
+Jezza Cooks is een chef-led horeca consultancy en catering service in Amersfoort, opgericht door Jeremy Arrascaeta — chef-kok bij shared-dining restaurant De Tafelaar (Kamp 8, Amersfoort), 10+ jaar ervaring in high-end keukens in Europa en Australië, finalist Euro-Toques Young Chef Award 2018 namens Restaurant Bougainville Amsterdam, dry-aging lead bij Angler Restaurant Stirling Adelaide Hills. Vier diensten: restaurant consulting (menu engineering, food cost controle), Tafelaar × Jezza Cooks Catering (kantoorlunch vanaf €7,50 p.p., diners, bruiloften, events 10-150+ personen), restaurant websites (€400 eenmalig met schema.org JSON-LD), SEO + GEO optimalisatie (€1.300/jaar of €150/mnd). Gevestigd Nijkerkerstraat 3, 3821 CD Amersfoort. KvK 99547619.
+
+Photos: upload 10-photo set above (live URLs after deploy or local files)
+```
+
+**Phone disambiguation**: Jezza Cooks +31 6 34127992 must NOT be confused with De Tafelaar +31 6 37232397 (different business entities).
+
+---
+
+### Priority 2 — Trustoo (Jezza Cooks Catering as service line of De Tafelaar's verified profile)
+
+**Effort**: ~15 min · **Compliance gate**: re-verify live review count first; do not claim a number you haven't just verified
+
+**Setup approach**: rather than creating a fully independent Jezza Cooks Trustoo listing (which would require its own review history), apply for "Tafelaar × Jezza Cooks Catering" as a service-line addition under De Tafelaar's existing verified profile. Trustoo allows associated brands.
+
+**Copy-paste block**:
+
+```
+Service line name: Tafelaar × Jezza Cooks Catering
+Parent profile: De Tafelaar Amersfoort B.V. (existing, verified)
+Categories: Catering, Bedrijfscatering, Private chef
+KvK: 99547619 (Jezza Cooks eenmanszaak — not De Tafelaar B.V.)
+Service area tags: Amersfoort + Utrecht/Hilversum/Soest/Leusden/Baarn/Bunschoten/Nijkerk/Barneveld
+Disclosure (REQUIRED to avoid duplicate flag): "Catering joint venture met De Tafelaar Amersfoort. Gefactureerd via Jezza Cooks (KvK 99547619). Werkt vanuit dezelfde keuken aan de Kamp 8."
+Description (200-400 char):
+Chef-led catering in Amersfoort: kantoorlunch vanaf €7,50 p.p., diners, bruiloften, private chef, events 10-150+ personen. Door Jeremy Arrascaeta (chef-kok bij De Tafelaar, 10+ jaar high-end ervaring) en Jan Molmans (eigenaar De Tafelaar). Vanuit de keuken aan de Kamp 8.
+Website: https://www.jezzacooks.com/services/catering
+```
+
+If Trustoo doesn't allow a service-line model, fall back to creating an independent Jezza Cooks Trustoo profile (full setup, will start with 0 reviews — but the directory presence itself helps discovery).
+
+---
+
+### Priority 3 — Eventplanner.net (B2B event-planner discovery)
+
+**Effort**: ~15 min · **Compliance gate**: De Tafelaar already listed (verify on execution date); add Jezza Cooks as catering-add-on or independent profile
+
+**Copy-paste block**:
+
+```
+Business name: Tafelaar × Jezza Cooks Catering
+Categories: Catering, Bedrijfscatering, Wedding catering, Private chef
+Service area: Amersfoort + 30 km
+Capacity: 10-150+ personen
+Description (~500 char):
+Chef-led catering en private chef service in Amersfoort en omgeving. Joint venture tussen Jezza Cooks (Jeremy Arrascaeta, chef-kok bij De Tafelaar Amersfoort, finalist Euro-Toques Young Chef Award 2018) en restaurant De Tafelaar (Jan Molmans). Diensten: kantoorlunch (vanaf €7,50 p.p.), diners (vanaf €28 p.p.), private chef thuis (vanaf €55 p.p.), bedrijfsfeest 10-150+ personen, bruiloftscatering. Restaurant-grade HACCP, 10-persoons team, backup-chef op stand-by. Vanuit de keuken van shared-dining restaurant De Tafelaar (Kamp 8, Amersfoort) — Trustoo TOP PRO 2026, KHN-lid.
+
+Reuse 6 event use cases from /services/catering "Welke soorten catering doen we in Amersfoort?" grid:
+- Kantoorlunch (zakelijk)
+- Verjaardagsdiner / jubileum
+- Babyshower / baby-welkom
+- Bruiloftscatering (intieme bruiloft tot 60 gasten)
+- Bedrijfsfeest / zakelijk event (10-150+)
+- Private chef event (Jeremy thuis aan het fornuis)
+
+Website: https://www.jezzacooks.com/services/catering
+Photos: upload set (see Photo assets section)
+```
+
+---
+
+### Priority 4 — Meetings.nl (bundled venue + catering)
+
+**Effort**: ~25 min · **Compliance gate**: De Tafelaar already listed; relationship must be honestly disclosed
+
+**Setup approach**: contact Meetings.nl support (or use admin self-service if available) to add "Tafelaar × Jezza Cooks Catering" as a service add-on under De Tafelaar's existing venue listing. Avoids duplicate listing flag.
+
+**Copy-paste block**:
+
+```
+Service add-on under: De Tafelaar Amersfoort (existing venue listing)
+Service name: Tafelaar × Jezza Cooks Catering
+Capacity: 10-150+ personen
+Pricing: vanaf €7,50 p.p. (kantoorlunch) tot €55 p.p. (private chef diner)
+Description (~300 char):
+In-house catering door Jezza Cooks (Jeremy Arrascaeta, chef-kok bij De Tafelaar). Beschikbaar voor events op locatie of bij gastenuitbreiding van het venue zelf. Restaurant-grade HACCP, KHN-lid, Trustoo TOP PRO 2026.
+Bookable: Ja — minimum 10 personen, lead-time 48 uur (kantoorlunch) tot 14 dagen (private chef)
+Website: https://www.jezzacooks.com/services/catering
+```
+
+---
+
+### Priority 5 — Eet.nu (catering-only listing)
+
+**Effort**: ~10 min · **Compliance gate**: confirm catering listing format is supported (Eet.nu was originally restaurant-focused; verify on execution date)
+
+**Copy-paste block**:
+
+```
+Listing type: Catering (verify availability on execution date)
+Business name: Jezza Cooks Catering
+Description (~100 char):
+Chef-led catering Amersfoort. Kantoorlunch v.a. €7,50, diners, private chef. Vanuit De Tafelaar.
+Website: https://www.jezzacooks.com/services/catering
+Phone: +31 6 34127992
+Service area: Amersfoort + omgeving
+```
+
+---
+
+## 7. Verification checklist (Tier 5H section)
+
+**On execution date, before starting any platform**:
+- [ ] Re-fetch `https://trustoo.nl/utrecht/amersfoort/catering/tafelaar-amersfoort-bv/` and note live review count
+- [ ] Re-fetch `https://www.jezzacooks.com/` and confirm 200 OK + canonical URL is www subdomain
+- [ ] Pull canonical NAP from `src/lib/site-config.ts` (single source of truth)
+- [ ] Save 10-photo set as `https://www.jezzacooks.com/pics/<filename>` URLs (or local copies)
+
+**After each platform completes**:
+- [ ] Profile shows correct trade name (Jezza Cooks)
+- [ ] KvK 99547619 visible
+- [ ] Phone +31 6 34127992 (NOT De Tafelaar's +31 6 37232397)
+- [ ] Website link is `https://www.jezzacooks.com` (NOT apex)
+- [ ] Address Nijkerkerstraat 3, 3821 CD Amersfoort
+- [ ] Categories match the suggested labels (or note if locale labels differ)
+- [ ] If platform shows reviews → verify count matches what we re-verified at start of session
+
+**At T+7 days post-platform-setup**:
+- [ ] Re-run `npx tsx scripts/seo-baseline.ts` — capture impression delta in next month's baseline
+- [ ] Run LLM read-back tests:
+  - ChatGPT: "leuke catering amersfoort" — does Jezza Cooks now appear in first-pass list?
+  - Perplexity: "horeca consultant Amersfoort menu engineering"
+  - Google AI Mode: "catering Amersfoort tot 150 personen"
+- [ ] Check Google Search Console: are the new Tier 5H URLs indexed? Submit any missing.
+
+---
+
+**End of OV correction + Tier 5H 5-platform priority document.**
+
+Source of truth: `src/lib/site-config.ts`. If anything in this document conflicts with `site-config.ts`, **`site-config.ts` always wins**. Re-verify all live third-party data on execution date.
+
